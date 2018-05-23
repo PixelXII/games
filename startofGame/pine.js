@@ -15,9 +15,7 @@ function doAction() {
 		inElement.value = "";
 		if(command == 'start' || command == 'Start') {
 			game.start()
-		} else if(command == 'help' || command == 'help') {
-			help()
-	   }
+		} 
 		console.log('doAction() done');
 	} catch {
 		console.error('doAction() failed.')
@@ -36,10 +34,6 @@ var game = new Object();
 
 game.start = function() {
 	printOut("Pine is a text-based rpg, like <a href='https://zorkonline.net'>Zork</a>. Enjoy the game! Type 'help' for help.")
-}
-
- function help() {
-	output = "The way this game works is you give me a command, and I will execute it. Try playing <a href='https://zorkonline.net'>Zork</a> to get a feel for the commands and the way the game works."
 }
 
 game.first = function() {
