@@ -26,11 +26,7 @@ var game = new Object();
 
 game.start = function() {
 	output = "WELCOME TO PINE!!!"
-	setTimeout(printOut("Pine is a text-based rpg, like <a href='https://zorkonline.net'>Zork</a>."), 5000);
-	setTimeout(printOut("Don't kill me for copying Zork."), 5000);
-	setTimeout(printOut("Enjoy the game! Type 'help' for help."), 500);
-	setTimeout(game.first, 5000);
-}
+	setTimeout(printOut("Pine is a text-based rpg, like <a href='https://zorkonline.net'>Zork</a>. Enjoy the game! Type 'help' for help."), 5000);
 		
 game.first = function() {}
 		   
