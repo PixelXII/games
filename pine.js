@@ -21,7 +21,7 @@ function doAction() {
 
 inElement.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
-      doAction()
+	    doAction();
     }
 });
 
