@@ -10,8 +10,13 @@ function printOut(mess) {
 }
 
 function doAction() {
+	try {
 	command = inElement.value;
 	printOut(command);
+	console.log('doAction() done');
+	} catch {
+	console.error('doAction() failed.')
+	}	
 }
 
 inElement.addEventListener("keydown", function (e) {
