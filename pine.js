@@ -11,6 +11,7 @@ function printOut(mess) {
 
 function doAction() {
   inElement.submit;
+  inElement.reset()
   console.log('done');
   action = inElement.value;
 }
