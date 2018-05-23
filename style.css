@@ -16,24 +16,10 @@ html, body {
     font-size:24px;
 }
 
-.border {
-    border : 1px solid white;
-}
-
-#container {
-    height:100%;
-    border-collapse:collapse;
-    }
-
-.foot {
-    display : table-row;
-    vertical-align : bottom;
-    height : 1px;
-}
-
 #input {
   border:2px solid black;
   padding:2px;
+  margin-left:3px;
   height:50px;
   width:300px;
   outline:none;
