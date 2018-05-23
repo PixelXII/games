@@ -1,8 +1,10 @@
 // Technical things -- getting the output in the right place, setting event listeners etc
 var output = "type start to begin"
 var command;
+var note;
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
+var noteElem = document.getElementById('note');
 setInterval(printOut(output), 100)
 
 function printOut(mess) {
@@ -34,12 +36,12 @@ var game = new Object();
 
 game.start = function() {
 	output = "WELCOME TO PINE!!!"
-	setTimeout(printOut("Pine is a text-based rpg, like <a href='https://zorkonline.net'>Zork</a>. Enjoy the game! Type 'help' for help."), 5000);
-	game.first()
+	setTimeout(printOut("Pine is a text-based rpg, like <a href='https://zorkonline.net'>Zork</a>. Enjoy the game!"), 5000);
+	setTimeout(function() {game.first()}, 5000);
 }
 		
 game.first = function() {
-	output = "game written by kai wildberger"
+	noteElem.innerHTML = "game written by kai wildberger"
 	setTimeout(function() { printOut('You are standing at the entrance to a tunnel which leads under a road. Behind you, to the north, is a trail leading to the nearby town.'); }, 5000);
 	setTimeout(function() { printOut('You can see a dried-up streambed on the other side of the tunnel.'); }, 5000);	
 }
