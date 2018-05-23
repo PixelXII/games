@@ -12,7 +12,6 @@ function printOut(mess) {
 function doAction() {
 	action = inElement.value;
 	printOut(action);
-	setInterval(printOut(output), 100)
 }
 
 inElement.addEventListener("keydown", function (e) {
