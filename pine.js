@@ -1,5 +1,5 @@
 // Technical things -- getting the output in the right place, setting event listeners etc
-var output;
+var output = 'pine'
 var action;
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
