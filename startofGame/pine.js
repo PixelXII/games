@@ -12,7 +12,11 @@ function printOut(mess) {
 function doAction() {
 	try {
 	command = inElement.value;
-	printOut(command);
+	if(command == 'start' || command == 'Start') {
+		game.start()
+	} else {
+		printOut(command)
+	}
 	console.log('doAction() done');
 	} catch {
 	console.error('doAction() failed.')
