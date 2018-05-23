@@ -1,9 +1,10 @@
 var output;
 var action;
 var aElement = document.getElementById('input');
+var oElement = document.getElementById('out');
 
 function printOut(mess) {
-  aElement.innerHTML = mess
+  oElement.innerHTML = mess
 }
 
 function doAction() {
