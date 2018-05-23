@@ -42,8 +42,8 @@ game.start = function() {
 		
 game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
-	setTimeout(function() { printOut('You are standing at the entrance to a tunnel which leads under a road. Behind you, to the north, is a trail leading to the nearby town.'); }, 50000);
-	setTimeout(function() { printOut('You can see a dried-up streambed on the other side of the tunnel.'); }, 5000);	
+	setTimeout(function() { output = 'You are standing at the entrance to a tunnel which leads under a road. Behind you, to the north, is a trail leading to the nearby town.'; }, 5000);
+	setTimeout(function() { output = 'You can see a dried-up streambed on the other side of the tunnel.'; }, 5000);	
 }
 		   
 game.move = function() {
