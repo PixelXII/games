@@ -1,15 +1,21 @@
 var output;
 var action;
-var aElement = document.getElementById('input');
-var oElement = document.getElementById('out');
+var inElement = document.getElementById('input');
+var outElement = document.getElementById('out');
 
 function printOut(mess) {
-  oElement.innerHTML = mess
+  outElement.innerHTML = mess
 }
 
 function doAction() {
-  aElement.submit;
+  inElement.submit;
   console.log('done');
-  action = document.getElementById('input').value;
+  action = inElement.value;
   setInterval(printOut(action), 100)
 }
+
+inElement.addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) {
+      doAction()
+    }
+});
