@@ -26,7 +26,7 @@ function doAction() {
 
 inElement.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
-      setTimeout(doAction(), 500);
+      doAction()
     }
 });
 
