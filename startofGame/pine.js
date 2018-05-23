@@ -12,6 +12,7 @@ function printOut(mess) {
 function doAction() {
 	try {
 	command = inElement.value;
+	inElement.value = "";
 	if(command == 'start' || command == 'Start') {
 		game.start()
 	} else if(command == 'help' || command == 'help') {
