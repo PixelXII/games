@@ -8,12 +8,6 @@ function printOut(mess) {
   outElement.innerHTML = mess
 }
 
-if(action != null) {
-	setInterval(printOut(action), 100)
-} else {
-	action = "pine"
-	setInterval(printOut(action), 100)
-}
 
 function doAction() {
   inElement.submit;
