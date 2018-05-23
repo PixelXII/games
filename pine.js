@@ -1,27 +1,24 @@
 // Technical things -- getting the output in the right place, setting event listeners etc
-var output = 'pine'
+var output = "pine"
 var action;
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
+setInterval(printOut(output), 100)
 
 function printOut(mess) {
   outElement.innerHTML = mess
 }
 
 function doAction() {
-	try {
-  	   inElement.submit;
-  	   inElement.reset()
- 	   console.log('done');
-   	   action = inElement.value;
-	} catch {
- 	   console.error('doAction() failed.')
-	}
+  inElement.submit;
+  inElement.reset()
+  console.log('done');
+  action = inElement.value;
 }
 
 inElement.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
-	    doAction();
+      setTimeout(doAction(), 500);
     }
 });
 
@@ -50,3 +47,4 @@ game.move = function() {
         console.log('You move ' + five + ' steps ' + direction + '.');
 	}
 }
+
