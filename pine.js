@@ -1,5 +1,34 @@
+var game = new Object();
+var output;
+var actionElement = document.getElementById('input');
+var outputHasChanged = function() {
+	var testVariable = null;
+	var output = testVariable;
+	if(testVariable != output) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function backOut(mess) {
+	actionElement.innerText = mess;
+}
+
+setInterval(function() { 
+	actionElement.innerText = output;
+}, 10);
+
+if(outputHasChanged == true) {
+	backOut(output);
+}
+
+game.start = function() {
+	output = "WELCOME TO PINE!!!"
+	
+		
+
 game.move = function() {
-  var actionElement = document.getElementById('input');
     if(value.inlcudes('move') || value.includes('walk') || value.includes('step')) {
 		if(action.charAt(6) != ' ') {
 			var five = action.charAt(5)+action.charAt(6);
