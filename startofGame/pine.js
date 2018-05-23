@@ -35,17 +35,17 @@ inElement.addEventListener("keydown", function (e) {
 var game = new Object();
 
 game.start = function() {
-	setTimeout(printOut("Pine is a text-based RPG, like <a href='https://zorkonline.net'>Zork</a>. Enjoy the game!"), 5000);
+	setTimeout(printOut("Pine is a text-based RPG, like <a href='www.zorkonline.net'>Zork</a>. Enjoy the game!"), 5000);
 	setTimeout(function() {game.first()}, 5000);
 }
 		
 game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
-	setTimeout(function() { output = 'You are standing at the entrance to a tunnel which leads under a road. Behind you, to the north, is a trail leading to the nearby town.'; }, 5000);
-	setTimeout(function() { output = 'You can see a dried-up streambed on the other side of the tunnel.'; }, 5000);	
+	setTimeout(function { output = 'You are standing at the entrance to a tunnel which leads under a road. Behind you, to the north, is a trail leading to the nearby town.'; }, 5000);
+	setTimeout(function { output = 'You can see a dried-up streambed on the other side of the tunnel.'; }, 5000);	
 }
 		   
-game.move = function() {
+game.move = function(action) {
     if(action.inlcudes('move') || action.includes('walk') || action.includes('step')) {
 		if(action.charAt(6) != ' ') {
 			var five = action.charAt(5)+action.charAt(6);
