@@ -1,5 +1,6 @@
 var game = new Object();
 var output;
+var action;
 var actionElement = document.getElementById('input');
 var outputHasChanged = function() {
 	var testVariable = null;
@@ -40,7 +41,7 @@ game.start = function() {
 		
 
 game.move = function() {
-    if(value.inlcudes('move') || value.includes('walk') || value.includes('step')) {
+    if(action.inlcudes('move') || action.includes('walk') || action.includes('step')) {
 		if(action.charAt(6) != ' ') {
 			var five = action.charAt(5)+action.charAt(6);
         } else {
