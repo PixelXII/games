@@ -10,7 +10,6 @@ function printOut(mess) {
 }
 
 function doAction() {
-	inElement.submit()
 	action = inElement.value;
 	printOut(action);
 }
