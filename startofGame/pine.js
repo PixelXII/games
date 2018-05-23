@@ -19,7 +19,6 @@ function doAction() {
 			game.help()
 	   }
 		console.log('doAction() done');
-	}
 	} catch {
 		console.error('doAction() failed.')
 	}	
