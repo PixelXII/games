@@ -64,4 +64,3 @@ game.move = function() {
 		
         console.log('You move ' + five + ' steps ' + direction + '.');
 		}
-	}
