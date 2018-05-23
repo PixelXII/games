@@ -29,3 +29,7 @@ html, body {
   width:300px;
   outline:none;
 }
+
+a {
+    color:black;
+}
