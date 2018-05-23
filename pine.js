@@ -61,10 +61,10 @@ game.move = function() {
     if(action.inlcudes('move') || action.includes('walk') || action.includes('step')) {
 		if(action.charAt(6) != ' ') {
 			var five = action.charAt(5)+action.charAt(6);
-        } else {
+       		 } else {
         	var five = action.charAt(5);
-        }
+      		  }
 		
         console.log('You move ' + five + ' steps ' + direction + '.');
+		}
 	}
-}
