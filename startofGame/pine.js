@@ -33,11 +33,6 @@ inElement.addEventListener("keydown", function (e) {
 var game = new Object();
 
 game.start = function() {
-	printOut("Pine is a text-based RPG, like <a href='https://zorkonline.net'>Zork</a>. Enjoy the game!")
-	setTimeout(function() { game.first(); }, 5000);
-}
-
-game.first = function() {
 	output = "game written by kai wildberger"
 	setTimeout(function() { printOut('You are standing at the entrance to a tunnel which leads under a road. Behind you, to the north, is a trail leading to the nearby town.'); }, 5000);
 	setTimeout(function() { printOut('You can see a dried-up streambed on the other side of the tunnel.'); }, 5000);	
