@@ -15,6 +15,10 @@ function backOut(mess) {
 	actionElement.innerText = mess;
 }
 
+function changeOut(str) {
+	document.getElementById('out').innerHTMl = str
+}
+
 setInterval(function() { 
 	actionElement.innerText = output;
 }, 10);
@@ -25,7 +29,8 @@ if(outputHasChanged == true) {
 
 game.start = function() {
 	output = "WELCOME TO PINE!!!"
-	
+	setTimeout(changeOut("Pine is a text-based rpg, like <a href='https://zorkonline.net'>Zork</a>."), 5000);
+}
 		
 
 game.move = function() {
