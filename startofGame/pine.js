@@ -35,8 +35,7 @@ inElement.addEventListener("keydown", function (e) {
 var game = new Object();
 
 game.start = function() {
-	output = "WELCOME TO PINE!!!"
-	setTimeout(printOut("Pine is a text-based rpg, like <a href='https://zorkonline.net'>Zork</a>. Enjoy the game!"), 5000);
+	setTimeout(printOut("Pine is a text-based RPG, like <a href='https://zorkonline.net'>Zork</a>. Enjoy the game!"), 5000);
 	setTimeout(function() {game.first()}, 5000);
 }
 		
