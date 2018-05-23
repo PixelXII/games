@@ -10,9 +10,9 @@ function printOut(mess) {
 }
 
 function doAction() {
-  inElement.submit;
-  console.log('done');
-  action = inElement.value;
+	inElement.submit()
+	action = inElement.value;
+	printOut(action);
 }
 
 inElement.addEventListener("keydown", function (e) {
