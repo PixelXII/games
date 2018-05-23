@@ -15,6 +15,12 @@ function backOut(mess) {
 	actionElement.innerText = mess;
 }
 
+function doAction() {
+  actionElement.submit;
+  var action = actionElement.value;
+  game.move()
+}
+
 function changeOut(str) {
 	document.getElementById('out').innerHTMl = str
 }
@@ -45,8 +51,4 @@ game.move = function() {
 	}
 }
 
-function doAction() {
-  actionElement.submit;
-  var action = actionElement.value;
-  game.move()
-}
+
