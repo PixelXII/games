@@ -10,10 +10,14 @@ function printOut(mess) {
 }
 
 function doAction() {
-  inElement.submit;
-  inElement.reset()
-  console.log('done');
-  action = inElement.value;
+	try {
+  	   inElement.submit;
+  	   inElement.reset()
+ 	   console.log('done');
+   	   action = inElement.value;
+	} catch {
+ 	   console.error('doAction() failed.')
+	}
 }
 
 inElement.addEventListener("keydown", function (e) {
