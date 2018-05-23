@@ -3,7 +3,6 @@ var output = "pine"
 var action;
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
-setInterval(printOut(output), 100)
 
 function printOut(mess) {
   outElement.innerHTML = mess
@@ -22,7 +21,7 @@ function doAction() {
 
 inElement.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
-      setTimeout(doAction(), 500);
+      doAction()
     }
 });
 
