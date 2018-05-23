@@ -1,38 +1,29 @@
-var game = new Object();
+// Technical things -- getting the output in the right place, setting event listeners etc
 var output;
 var action;
-var actionElement = document.getElementById('input');
-var outputHasChanged = function() {
-	var testVariable = null;
-	var output = testVariable;
-	if(testVariable != output) {
-		return false;
-	} else {
-		return true;
-	}
-}
+var inElement = document.getElementById('input');
+var outElement = document.getElementById('out');
 
-function backOut(mess) {
-	actionElement.innerText = mess;
+function printOut(mess) {
+  outElement.innerHTML = mess
 }
 
 function doAction() {
-  actionElement.submit;
-  var action = actionElement.value;
-  game.move()
+  inElement.submit;
+  console.log('done');
+  action = inElement.value;
+  setInterval(printOut(action), 100)
 }
 
-function changeOut(str) {
-	document.getElementById('out').innerHTMl = str
-}
+inElement.addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) {
+      doAction()
+    }
+});
 
-setInterval(function() { 
-	actionElement.innerText = output;
-}, 10);
+// The actual game
 
-if(outputHasChanged == true) {
-	backOut(output);
-}
+var game = new Object();
 
 game.start = function() {
 	output = "WELCOME TO PINE!!!"
