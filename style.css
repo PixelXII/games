@@ -25,7 +25,7 @@ html, body {
   outline:none;
 }
 
-#input::before {
+#inputD::before {
   content:">";
   color:black;
 }
