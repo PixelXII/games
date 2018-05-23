@@ -3,7 +3,7 @@ var output = "pine"
 var action;
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
-setInterval(printOut(output), 100)
+setInterval(printOut(action), 100)
 
 function printOut(mess) {
   outElement.innerHTML = mess
@@ -20,6 +20,7 @@ inElement.addEventListener("keydown", function (e) {
       doAction()
     }
 });
+
 
 // The actual game
 
