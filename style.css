@@ -25,6 +25,11 @@ html, body {
   outline:none;
 }
 
+#input::before {
+  content:">";
+  color:black;
+}
+
 a {
     color:black;
 }
