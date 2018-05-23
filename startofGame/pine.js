@@ -39,7 +39,7 @@ game.start = function() {
 }
 
 game.help = function() {
-	output = "The way this game works is you give me a command, and I will execute it. Try playing <a href='https://zorkonline.net'>Zork</a> to get a feel for the commands and the way the game works.");
+	output = "The way this game works is you give me a command, and I will execute it. Try playing <a href='https://zorkonline.net'>Zork</a> to get a feel for the commands and the way the game works."
 }
 
 game.first = function() {
