@@ -25,11 +25,6 @@ html, body {
   outline:none;
 }
 
-#inputD::before {
-  content:">";
-  color:black;
-}
-
 a {
     color:black;
 }
