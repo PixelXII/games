@@ -33,7 +33,7 @@ inElement.addEventListener("keydown", function (e) {
 var game = new Object();
 
 game.start = function() {
-	printOut("Pine is a text-based rpg, like <a href='https://zorkonline.net'>Zork</a>. Enjoy the game!")
+	printOut("Pine is a text-based RPG, like <a href='https://zorkonline.net'>Zork</a>. Enjoy the game!")
 	setTimeout(function() { game.first(); }, 5000);
 }
 
