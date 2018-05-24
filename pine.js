@@ -104,3 +104,5 @@ game.move = function(action, direction, array) {
 			searchArr(commArr, array);
         	console.log('You move ' + five + ' steps ' + direction + '.');
 	}
+    }
+}
