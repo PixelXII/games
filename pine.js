@@ -36,12 +36,12 @@ inElement.addEventListener("keydown", function (e) {
 
 var game = new Object();
 
-var game.start = function() {
+game.start = function() {
 	setTimeout(printOut("Pine is a text-based RPG, like <a href='http://zorkonline.net'>Zork</a>. Enjoy the game!"), 5000);
 	setTimeout(function() {game.first()}, 5000);
 }
 		
-var game.first = function() {
+game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
 	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, to the north, is a trail leading to the nearby town.',
 		'You can see a dried-up streambed on the other side of the tunnel.')
@@ -51,7 +51,7 @@ var slice = function(command, start, end) {
 	return command.slice(start, end)
 }
 
-var game.look = function(action, rightMess, leftMess, behMess, foMess) {
+game.look = function(action, rightMess, leftMess, behMess, foMess) {
 	if(action.includes('look ') || action.includes('Look ')) {
 		if(action.includes('right')) {
 			return rightMess;
@@ -65,7 +65,7 @@ var game.look = function(action, rightMess, leftMess, behMess, foMess) {
 	}
 }
 
-var game.move = function(action) {
+game.move = function(action) {
     if(action.inlcudes('move') || action.includes('walk') || action.includes('step')) {
 		if(action.charAt(6) != ' ') {
 			var five = action.charAt(5)+action.charAt(6);
