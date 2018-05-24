@@ -93,7 +93,7 @@ var searchArr = function (haystack, arr) {
 
 game.move = function(action, direction) {
 	var type;
-    if(action.inlcudes('move') || action.includes('walk') || action.includes('step') || action.includes('go to') {
+    if(action.inlcudes('move') || action.includes('walk') || action.includes('step') || action.includes('go to')) {
 	    		var commArr = action.split(" ");
 	    		if(commArr[2] > 0) {
 				type="5 steps"
