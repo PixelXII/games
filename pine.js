@@ -87,12 +87,11 @@ game.first = function() {
 
 
 game.move = function(action) {
-    if(action.inlcudes('move') || action.includes('walk') || action.includes('step')) {
-		if(action.charAt(6) != ' ') {
-			var five = action.charAt(5)+action.charAt(6);
-       		 } else {
-        	var five = action.charAt(5);
-      		  }
+    if(action.inlcudes('move') || action.includes('walk') || action.includes('step') || action.includes('go to') {
+		if(action.includes('go to') {
+	    		var commArr = action.split(" ");
+    		}
+		
 		
         console.log('You move ' + five + ' steps ' + direction + '.');
 		}
