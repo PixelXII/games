@@ -97,8 +97,8 @@ inElement.addEventListener("keydown", function (e) {
 var game = new Object();
 
 game.start = function() {
-	printOut('<h1>START</h1>');
-	setTimeout(function() {printOut("<h2>COMMANDS:</h2> <br> <br> 'move' to move <br> 'look' to look"); } , 5000);
+	noteElem.innerHTML = '<h1>START</h1>'
+	setTimeout(function() {printOut("<h2>COMMANDS:</h2> <br> <br> 'move' to move <br> 'look' to look"); noteElem.innerHTML = "";} , 5000);
 	setTimeout(function() {game.first()}, 5000);
 }
 
