@@ -31,7 +31,8 @@ function doAction() {
 								 "Behind you is a cement block with a ladder leading down into it.", 
 								 "In front of you is the tunnel.")
 			out2.innerHTML = ""
-		}
+		} else {
+			outElement.innerHTML = "I don't understand what you mean."
 		console.log('doAction() done');
 	} catch {
 		console.error('doAction() failed.')
