@@ -57,13 +57,15 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 			return rightMess;
 		} else if(action.includes('left')) {
 			return leftMess;
-		} else if(action.includes('backwards') || action.includes('behind me')) {
+		} else if(action.includes('backwards') || action.includes('behind me') || action.includes('behind') || action.includes(' back')) {
 			  return behMess;
 		} else if(action.includes('forward') || action.includes('ahead')) {
 			return foMess;
 		}
 	}
 }
+
+setTimeout(function() { outElement.innerHTML = game.look(command, "To your right, there is a massive tree. It looks like it has been there for hundreds of years.", "To your left, there is a pile of rocks and sticks, presumably dumped off the road.", "Behind you is a cement block with a ladder leading down into it.", "In front of you is the tunnel.")
 
 game.move = function(action) {
     if(action.inlcudes('move') || action.includes('walk') || action.includes('step')) {
