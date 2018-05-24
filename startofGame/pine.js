@@ -4,11 +4,15 @@ var command;
 var note;
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
+var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
 setInterval(printOut(output), 100)
 
-function printOut(mess) {
+function printOut(mess, mess2) {
   outElement.innerHTML = mess
+  if(mess2 != null) {
+	  out2.innerHTMl = mess2;
+  }
 }
 
 function doAction() {
@@ -41,14 +45,8 @@ game.start = function() {
 		
 game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
-	function tunnel() { 
-		output = 'You are standing at the entrance to a tunnel which leads under a road. Behind you, to the north, is a trail leading to the nearby town.';
-	}
-	function stream() { 
-		output = 'You can see a dried-up streambed on the other side of the tunnel.';
-	}
-	setTimeout(tunnel(), 5000);
-	setTimeout(stream(), 5000);	
+	printOut('You are standing at the entrance to a tunnel which leads under a road. Behind you, to the north, is a trail leading to the nearby town.',
+		'You can see a dried-up streambed on the other side of the tunnel.')
 }
 		   
 game.move = function(action) {
