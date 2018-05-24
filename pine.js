@@ -23,19 +23,21 @@ function doAction() {
 		inElement.value = "";
 		if(command == 'start' || command == 'Start') {
 			game.start()
-		} 
-		if(noteElem.innerHTML == "game written by kai wildberger") {
+		} else if(noteElem.innerHTML == "game written by kai wildberger") {
+			if(command.includes('look')) {
 			outElement.innerHTML = game.look(command, 
 						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
 						"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
 						"Behind you is a cement block with a ladder leading down into it.", 
 						"In front of you is the tunnel.")
 			out2.innerHTML = ""
+			} else if(command.includes('move')) {
 			outElement.innerHTML = game.move(command, 
 						"You cannot move into the tree.",
 						"You step over the sticks and rocks. <br> <br> [You have missed the point entirely.]",
 						"You walk behind you to the cement cube.",
 						"You walk ahead to the dried stream. You see a cave on the side of the canyon.")
+			}
 		} else {
 			outElement.innerHTML = "I don't understand what you mean."
 		}
