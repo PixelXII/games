@@ -43,8 +43,8 @@ function doAction() {
 						"You step over the sticks and rocks. <br> <br> [You have missed the point entirely.]",
 								 "sticks",
 						"You walk up the trail.",
-								 "trail"
-						"You walk ahead to the dried stream. You can see a cave on the side of the canyon."
+								 "trail",
+						"You walk ahead to the dried stream. You can see a cave on the side of the canyon.",
 								"stream")
 				out2.innerHTML = ""
 			}
