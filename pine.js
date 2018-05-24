@@ -37,6 +37,7 @@ function doAction() {
 						"You step over the sticks and rocks. <br> <br> [You have missed the point entirely.]",
 						"You walk behind you to the cement cube.",
 						"You walk ahead to the dried stream. You see a cave on the side of the canyon.")
+				out2.innerHTML = ""
 			}
 		} else {
 			outElement.innerHTML = "I don't understand what you mean."
