@@ -77,7 +77,7 @@ function doAction() {
 			firstPlace()
 		} else if(place == 'canyon') {
 			canyonPlace()
-		} else {
+		} else if(outElement.innerHTML == 'undefined') {
 			outElement.innerHTML = "I don't understand what you mean."
 		}
 			console.log('doAction() done');
