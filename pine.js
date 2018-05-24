@@ -14,6 +14,9 @@ function printOut(mess, mess2) {
 	  out2.innerHTML = mess2;
   }
 }
+var slice = function(command, start, end) {
+	return command.slice(start, end)
+}
 function doAction() {
 	try {
 		command = inElement.value;
@@ -59,24 +62,16 @@ game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
 	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, to the north, is a trail leading to the nearby town.',
 		'You can see a dried-up streambed on the other side of the tunnel.')
-	inElement.addEventListener('doAction', function() {
-	if(command.includes('look ') || command.includes('Look ')) {
+		if(command.includes('look ') || command.includes('Look ')) {
 		outElement.innerHTML = game.look(command, 
 						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
 						"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
 								 "Behind you is a cement block with a ladder leading down into it.", 
 								 "In front of you is the tunnel.")
-		}
 	}
 }
-		   
-var slice = function(command, start, end) {
-	return command.slice(start, end)
-}
 
 
-
-	
 
 game.move = function(action) {
     if(action.inlcudes('move') || action.includes('walk') || action.includes('step')) {
