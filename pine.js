@@ -30,6 +30,7 @@ function doAction() {
 						"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
 								 "Behind you is a cement block with a ladder leading down into it.", 
 								 "In front of you is the tunnel.")
+			out2.innerHTML = ""
 		}
 		console.log('doAction() done');
 	} catch {
