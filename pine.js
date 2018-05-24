@@ -116,7 +116,7 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 
 game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
-	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, to the north, is a trail leading to the nearby town.',
+	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, to the north, is a steep rock face.',
 		'You can see a dried-up streambed on the other side of the tunnel.')
 		if(command.includes('look ') || command.includes('Look ')) {
 			try {
@@ -132,21 +132,15 @@ game.first = function() {
 	}
 }
 
-var searchArr = function (haystack, arr) {
-    	return arr.some(function (v) {
-        return haystack.indexOf(v) >= 0;
-    });
-};
-
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
-	if(action.includes('move ') || action.includes('step ') || action.includes('go ') || action.includes('walk ')) {
+	if(action.includes('move ') || action.includes('step') || action.includes('go') || action.includes('walk')) {
 		if(action.includes('right')) {
 			place = rightLoc
 			return right;
 		} else if(action.includes('left')) {
 			place = leftLoc
 			return left;
-		} else if(action.includes('backwards') || action.includes('behind me') || action.includes('behind') || action.includes(' back')) {
+		} else if(action.includes('backwards') || action.includes('behind me') || action.includes('behind') || action.includes('back')) {
 			place = backLoc
 			return back;
 		} else if(action.includes('forward') || action.includes('ahead')) {
