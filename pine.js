@@ -14,7 +14,6 @@ function printOut(mess, mess2) {
 	  out2.innerHTML = mess2;
   }
 }
-
 function doAction() {
 	try {
 		command = inElement.value;
@@ -27,7 +26,6 @@ function doAction() {
 		console.error('doAction() failed.')
 	}	
 }
-
 inElement.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
       doAction()
@@ -38,18 +36,36 @@ inElement.addEventListener("keydown", function (e) {
 
 var game = new Object();
 
-game.start = function() {
+var game.start = function() {
 	setTimeout(printOut("Pine is a text-based RPG, like <a href='http://zorkonline.net'>Zork</a>. Enjoy the game!"), 5000);
 	setTimeout(function() {game.first()}, 5000);
 }
 		
-game.first = function() {
+var game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
 	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, to the north, is a trail leading to the nearby town.',
 		'You can see a dried-up streambed on the other side of the tunnel.')
 }
 		   
-game.move = function(action) {
+var slice = function(command, start, end) {
+	return command.slice(start, end)
+}
+
+var game.look = function(action, rightMess, leftMess, behMess, foMess) {
+	if(action.includes('look ') || action.includes('Look ')) {
+		if(action.includes('right')) {
+			return rightMess;
+		} else if(action.includes('left')) {
+			return leftMess;
+		} else if(action.includes('backwards') || action.includes('behind me')) {
+			  return behMess;
+		} else if(action.includes('forward') || action.includes('ahead')) {
+			return foMess;
+		}
+	}
+}
+
+var game.move = function(action) {
     if(action.inlcudes('move') || action.includes('walk') || action.includes('step')) {
 		if(action.charAt(6) != ' ') {
 			var five = action.charAt(5)+action.charAt(6);
