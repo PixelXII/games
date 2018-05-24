@@ -25,7 +25,11 @@ function doAction() {
 			game.start()
 		} 
 		if(noteElem.innerHTML == "game written by kai wildberger") {
-			console.log("")
+			outElement.innerHTML = game.look(command, 
+						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
+						"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
+								 "Behind you is a cement block with a ladder leading down into it.", 
+								 "In front of you is the tunnel.")
 		}
 		console.log('doAction() done');
 	} catch {
