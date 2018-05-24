@@ -72,7 +72,7 @@ function doAction() {
 	try {
 		command = inElement.value;
 		inElement.value = "";
-		if(command == 'start' || command == 'Start') {
+		if(command == 'start' || command == 'Start' || command.includes('help') || command.includes('Help')) {
 			game.start()
 		} else if(place == 'first') {
 			firstPlace()
@@ -116,7 +116,7 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 }
 
 game.first = function() {
-	noteElem.innerHTML = "game written by kai wildberger"
+	noteElem.innerHTML = "game written by kai wildberger <br> <br> type 'help' for help"
 	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, to the north, is a steep rock face.',
 		'You can see a dried-up streambed on the other side of the tunnel.')
 		if(command.includes('look ') || command.includes('Look ')) {
