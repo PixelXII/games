@@ -63,11 +63,16 @@ game.first = function() {
 	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, to the north, is a trail leading to the nearby town.',
 		'You can see a dried-up streambed on the other side of the tunnel.')
 		if(command.includes('look ') || command.includes('Look ')) {
-		outElement.innerHTML = game.look(command, 
+			try {
+			outElement.innerHTML = game.look(command, 
 						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
 						"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
 								 "Behind you is a cement block with a ladder leading down into it.", 
 								 "In front of you is the tunnel.")
+				console.log('game.look() succeeded.')
+			} catch {
+				console.error('Excecution of game.look() failed.');
+		}
 	}
 }
 
