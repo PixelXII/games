@@ -40,16 +40,6 @@ game.start = function() {
 	setTimeout(printOut("Pine is a text-based RPG, like <a href='http://zorkonline.net'>Zork</a>. Enjoy the game!"), 5000);
 	setTimeout(function() {game.first()}, 5000);
 }
-		
-game.first = function() {
-	noteElem.innerHTML = "game written by kai wildberger"
-	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, to the north, is a trail leading to the nearby town.',
-		'You can see a dried-up streambed on the other side of the tunnel.')
-}
-		   
-var slice = function(command, start, end) {
-	return command.slice(start, end)
-}
 
 game.look = function(action, rightMess, leftMess, behMess, foMess) {
 	if(action.includes('look ') || action.includes('Look ')) {
@@ -65,7 +55,26 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 	}
 }
 
-setTimeout(function() { outElement.innerHTML = game.look(command, "To your right, there is a massive tree. It looks like it has been there for hundreds of years.", "To your left, there is a pile of rocks and sticks, presumably dumped off the road.", "Behind you is a cement block with a ladder leading down into it.", "In front of you is the tunnel.")
+game.first = function() {
+	noteElem.innerHTML = "game written by kai wildberger"
+	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, to the north, is a trail leading to the nearby town.',
+		'You can see a dried-up streambed on the other side of the tunnel.')
+	if(command.includes('look ') || command.includes('Look ')) {
+	outElement.innerHTML = game.look(command, 
+					"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
+					"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
+							 "Behind you is a cement block with a ladder leading down into it.", 
+							 "In front of you is the tunnel.")
+}
+}
+		   
+var slice = function(command, start, end) {
+	return command.slice(start, end)
+}
+
+
+
+	
 
 game.move = function(action) {
     if(action.inlcudes('move') || action.includes('walk') || action.includes('step')) {
