@@ -24,7 +24,7 @@ function doAction() {
 		inElement.value = "";
 		if(command == 'start' || command == 'Start') {
 			game.start()
-		} else if(location == 'start'") {
+		} else if(location == 'start') {
 			if(command.includes('look')) {
 			outElement.innerHTML = game.look(command, 
 						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
