@@ -24,6 +24,9 @@ function doAction() {
 		if(command == 'start' || command == 'Start') {
 			game.start()
 		} 
+		if(noteElem.innerHTML == "game written by kai wildberger") {
+			console.log("")
+		}
 		console.log('doAction() done');
 	} catch {
 		console.error('doAction() failed.')
