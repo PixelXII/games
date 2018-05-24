@@ -86,4 +86,3 @@ game.move = function(action) {
 		
         console.log('You move ' + five + ' steps ' + direction + '.');
 		}
-}
