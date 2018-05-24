@@ -65,6 +65,7 @@ function canyonPlace() {
 								"stream")
 				out2.innerHTML = ""
 			}
+	noteElem.innerHTML = ""
 }	
 
 function doAction() {
