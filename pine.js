@@ -48,10 +48,10 @@ function firstPlace() {
 function canyonPlace() {
 	if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
-						"To your right, there is a steep gorge wall. <br> A massive boulder perches on the edge of a tree stump.", 
-						"To your left, there is a tree on the canyon wall, precariously leaning over the gorge. <br> A cave opens up about halfway up the wall of the canyon. You can see marks where people before you have climbed up the wall.", 
-						"Behind you is the tunnel", 
-						"In front of you is the dried-up stream. Many rocks and sticks are haphazardly strewed across the streambed.")
+						"To your right, there is a steep gorge wall. <br><br> A massive boulder perches on the edge of a tree stump.", 
+						"To your left, there is a tree on the canyon wall, precariously leaning over the gorge. <br><br> A cave opens up about halfway up the wall of the canyon. You can see marks where people before you have climbed up the wall.", 
+						"Behind you is the tunnel.", 
+						"In front of you is the dried-up stream. Many rocks and sticks are haphazardly strewn across the streambed.")
 			out2.innerHTML = ""
 			} else if(command.includes('move')) {
 				outElement.innerHTML = game.move(command, 
