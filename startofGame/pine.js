@@ -11,7 +11,7 @@ setInterval(printOut(output), 100)
 function printOut(mess, mess2) {
   outElement.innerHTML = mess
   if(mess2 != null) {
-	  out2.innerHTMl = mess2;
+	  out2.innerHTML = mess2;
   }
 }
 
