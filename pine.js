@@ -2,7 +2,7 @@
 var output = "type start to begin"
 var command = null;
 var note;
-var location = 'first'
+var place = 'first'
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
@@ -24,11 +24,10 @@ function doAction() {
 		inElement.value = "";
 		if(command == 'start' || command == 'Start') {
 			game.start()
-		} else if(location == 'first') {
+		} else if(place == 'first') {
 			if(command.includes('look')) {
 			outElement.innerHTML = game.look(command, 
 						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
-						
 						"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
 						"Behind you is the trail leading to the town.", 
 						"In front of you is the tunnel.")
@@ -40,9 +39,13 @@ function doAction() {
 				}
 				outElement.innerHTML = game.move(command, 
 						"You cannot move into the tree.",
+								 "first",
 						"You step over the sticks and rocks. <br> <br> [You have missed the point entirely.]",
-						"You walk behind you to the cement cube.",
-						"You walk ahead to the dried stream. You can see a cave on the side of the canyon.")
+								 "sticks",
+						"You walk up the trail.",
+								 "trail"
+						"You walk ahead to the dried stream. You can see a cave on the side of the canyon."
+								"stream")
 				out2.innerHTML = ""
 			}
 		} else {
@@ -109,16 +112,16 @@ var searchArr = function (haystack, arr) {
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
 	if(action.includes('move ') || action.includes('step ') || action.includes('go ') || action.includes('walk ')) {
 		if(action.includes('right')) {
-			eval(rightLoc)
+			place = rightLoc
 			return right;
 		} else if(action.includes('left')) {
-			eval(leftLoc)
+			place = leftLoc
 			return left;
 		} else if(action.includes('backwards') || action.includes('behind me') || action.includes('behind') || action.includes(' back')) {
-			eval(backLoc)  
+			place = backLoc
 			return back;
 		} else if(action.includes('forward') || action.includes('ahead')) {
-			eval(forLoc)
+			place = forLoc
 			return forward;
 		}
 		
