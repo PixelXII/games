@@ -20,7 +20,7 @@ var slice = function(command, start, end) {
 }
 
 function firstPlace() {
-	if(command.includes('walk through tunnel') || command.includes('walk down tunnel')) {
+	if(command.includes('walk through tunnel') || command.includes('walk down tunnel') || command.includes('walk through the tunnel')) {
 					outElement.innerHTML = "You walk ahead to the dried stream. You can see a cave on the side of the canyon.";
 					place = 'canyon';
 					out2.innerHTML = ""
