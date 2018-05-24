@@ -28,6 +28,7 @@ function doAction() {
 			if(command.includes('look')) {
 			outElement.innerHTML = game.look(command, 
 						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
+						
 						"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
 						"Behind you is the trail leading to the town.", 
 						"In front of you is the tunnel.")
@@ -105,35 +106,21 @@ var searchArr = function (haystack, arr) {
     });
 };
 
-
-/* game.move = function(action, direction, array) {
-	var type;
-    if(action.inlcudes('move') || action.includes('walk') || action.includes('step') || action.includes('go to')) {
-	    		var commArr = action.split(" ");
-	    		if(commArr[2] > 0) {
-				type="5 steps"
-			} else if(commArr[2] == 'to' || commArr[2].includes(' over ')) {
-				type="destination"
-			}
-		if(type === "destination") {
-			searchArr(commArr, array);
-        	console.log('You move ' + five + ' steps ' + direction + '.');
-	}
-    }
-}
-
-*/
-
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
 	if(action.includes('move ') || action.includes('step ') || action.includes('go ') || action.includes('walk ')) {
 		if(action.includes('right')) {
+			eval(rightLoc)
 			return right;
 		} else if(action.includes('left')) {
+			eval(leftLoc)
 			return left;
 		} else if(action.includes('backwards') || action.includes('behind me') || action.includes('behind') || action.includes(' back')) {
-			  return back;
+			eval(backLoc)  
+			return back;
 		} else if(action.includes('forward') || action.includes('ahead')) {
+			eval(forLoc)
 			return forward;
 		}
+		
 	}
 }
