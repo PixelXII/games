@@ -23,6 +23,7 @@ function firstPlace() {
 	if(command.includes('walk through tunnel') || command.includes('walk down tunnel')) {
 					outElement.innerHTML = "You walk ahead to the dried stream. You can see a cave on the side of the canyon.";
 					place = 'canyon';
+					out2.innerHTML = ""
 				} else if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
 						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
