@@ -18,25 +18,19 @@ function printOut(mess, mess2) {
 var slice = function(command, start, end) {
 	return command.slice(start, end)
 }
-function doAction() {
-	try {
-		command = inElement.value;
-		inElement.value = "";
-		if(command == 'start' || command == 'Start') {
-			game.start()
-		} else if(place == 'first') {
-			if(command.includes('look')) {
-			outElement.innerHTML = game.look(command, 
+
+function firstPlace() {
+	if(command.includes('walk through tunnel') || command.includes('walk down tunnel')) {
+					outElement.innerHTML = "You walk ahead to the dried stream. You can see a cave on the side of the canyon.";
+					place = 'canyon';
+				} else if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
 						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
 						"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
-						"Behind you is the trail leading to the town.", 
+						"Behind you is a steep rock face that looks almost impossible to climb.", 
 						"In front of you is the tunnel.")
 			out2.innerHTML = ""
 			} else if(command.includes('move')) {
-				if(command.includes('walk up trail') || command.includes('walk down trail')) {
-					outElement.innerHTML = "You walk up the trail to the town.";
-					location = 'trail';
-				}
 				outElement.innerHTML = game.move(command, 
 						"You cannot move into the tree.",
 								 "first",
@@ -45,9 +39,43 @@ function doAction() {
 						"You walk up the trail.",
 								 "trail",
 						"You walk ahead to the dried stream. You can see a cave on the side of the canyon.",
+								"canyon")
+				out2.innerHTML = ""
+			}
+}
+
+function canyonPlace() {
+	if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
+						"To your right, there is a steep gorge wall. <br> A massive boulder perches on the edge of a tree stump.", 
+						"To your left, there is a tree on the canyon wall, precariously leaning over the gorge. <br> A cave opens up about halfway up the wall of the canyon. You can see marks where people before you have climbed up the wall.", 
+						"Behind you is the tunnel", 
+						"In front of you is the dried-up stream. Many rocks and sticks are haphazardly strewed across the streambed.")
+			out2.innerHTML = ""
+			} else if(command.includes('move')) {
+				outElement.innerHTML = game.move(command, 
+						"You cannot move into the stump.",
+								 "canyon",
+						"You cannot move into the canyon wall.",
+								 "canyon",
+						"You walk through the tunnel, back to where you began.",
+								 "first",
+						"You step slowly over the sticks, rocks, and fallen logs that litter the streambed.",
 								"stream")
 				out2.innerHTML = ""
 			}
+	
+
+function doAction() {
+	try {
+		command = inElement.value;
+		inElement.value = "";
+		if(command == 'start' || command == 'Start') {
+			game.start()
+		} else if(place == 'first') {
+			firstPlace()
+		} else if(place == 'canyon') {
+			canyonPlace()
 		} else {
 			outElement.innerHTML = "I don't understand what you mean."
 		}
