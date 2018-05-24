@@ -45,7 +45,7 @@ game.start = function() {
 		
 game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
-	printOut('You are standing at the entrance to a tunnel which leads under a road. Behind you, to the north, is a trail leading to the nearby town.',
+	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, to the north, is a trail leading to the nearby town.',
 		'You can see a dried-up streambed on the other side of the tunnel.')
 }
 		   
