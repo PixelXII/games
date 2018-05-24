@@ -84,15 +84,24 @@ game.first = function() {
 	}
 }
 
+var searchArr = function (haystack, arr) {
+    	return arr.some(function (v) {
+        return haystack.indexOf(v) >= 0;
+    });
+};
 
 
-game.move = function(action) {
+game.move = function(action, direction) {
+	var type;
     if(action.inlcudes('move') || action.includes('walk') || action.includes('step') || action.includes('go to') {
-		if(action.includes('go to') {
 	    		var commArr = action.split(" ");
-    		}
-		
-		
-        console.log('You move ' + five + ' steps ' + direction + '.');
-		}
-}
+	    		if(commArr[2] > 0) {
+				type="5 steps"
+			} else if(commArr[2] == 'to' || commArr[2].includes(' over ')) {
+				type="destination"
+			}
+		if(type === "destination") {
+			searchArr(commArr, 
+        	console.log('You move ' + five + ' steps ' + direction + '.');
+	}
+				  }
