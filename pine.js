@@ -28,12 +28,18 @@ function doAction() {
 			outElement.innerHTML = game.look(command, 
 						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
 						"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
-								 "Behind you is a cement block with a ladder leading down into it.", 
-								 "In front of you is the tunnel.")
+						"Behind you is a cement block with a ladder leading down into it.", 
+						"In front of you is the tunnel.")
 			out2.innerHTML = ""
+			outElement.innerHTML = game.move(command, 
+						"You cannot move into the tree.",
+						"You step over the sticks and rocks. <br> <br> [You have missed the point entirely.]",
+						"You walk behind you to the cement cube.",
+						"You walk ahead to the dried stream. You see a cave on the side of the canyon.")
 		} else {
 			outElement.innerHTML = "I don't understand what you mean."
-		console.log('doAction() done');
+		}
+			console.log('doAction() done');
 	} catch {
 		console.error('doAction() failed.')
 	}	
@@ -92,7 +98,7 @@ var searchArr = function (haystack, arr) {
 };
 
 
-game.move = function(action, direction, array) {
+/* game.move = function(action, direction, array) {
 	var type;
     if(action.inlcudes('move') || action.includes('walk') || action.includes('step') || action.includes('go to')) {
 	    		var commArr = action.split(" ");
@@ -106,4 +112,20 @@ game.move = function(action, direction, array) {
         	console.log('You move ' + five + ' steps ' + direction + '.');
 	}
     }
+}
+
+*/
+
+game.move = function(action, right, left, back, forward) {
+	if(action.includes('move ') || action.includes('step ') || action.includes('go ') || action.includes('walk ')) {
+		if(action.includes('right')) {
+			return right;
+		} else if(action.includes('left')) {
+			return left;
+		} else if(action.includes('backwards') || action.includes('behind me') || action.includes('behind') || action.includes(' back')) {
+			  return back;
+		} else if(action.includes('forward') || action.includes('ahead')) {
+			return forward;
+		}
+	}
 }
