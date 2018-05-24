@@ -2,7 +2,7 @@
 var output = "type start to begin"
 var command = null;
 var note;
-var location = 'start'
+var location = 'first'
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
@@ -24,7 +24,7 @@ function doAction() {
 		inElement.value = "";
 		if(command == 'start' || command == 'Start') {
 			game.start()
-		} else if(location == 'start') {
+		} else if(location == 'first') {
 			if(command.includes('look')) {
 			outElement.innerHTML = game.look(command, 
 						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
