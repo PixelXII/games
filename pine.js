@@ -91,7 +91,7 @@ var searchArr = function (haystack, arr) {
 };
 
 
-game.move = function(action, direction) {
+game.move = function(action, direction, array) {
 	var type;
     if(action.inlcudes('move') || action.includes('walk') || action.includes('step') || action.includes('go to')) {
 	    		var commArr = action.split(" ");
@@ -101,7 +101,7 @@ game.move = function(action, direction) {
 				type="destination"
 			}
 		if(type === "destination") {
-			searchArr(commArr, 
+			searchArr(commArr, array);
         	console.log('You move ' + five + ' steps ' + direction + '.');
 	}
 				  }
