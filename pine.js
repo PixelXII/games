@@ -150,8 +150,8 @@ function cavePlace() {
 								 "cavern",
 						"You chicken out and stand on the ledge again.",
 								 "ledge",
-						"You continue on, despite the ominous feeling in your gut.",
-								"caveTwo")
+						"You continue on, despite the ominous feeling in your gut. <br> After walking down for some time, you eventually reach a flat surface. <br> Flickering light illuminates the cavern.",
+								"deep")
 			} else if(command.includes('walk')) {
 				out2.innerHTML = "There is not enough headroom to walk."
 			}
@@ -175,27 +175,6 @@ function cavernPlace() {
 								 "deep",
 						"You feel a nasty push from behind as you take a step forward. <br> The push is enough to send you flying, and, as you land, your head hits a stone and you black out. <br> <br> <br> END OF GAME <br> [You were pushed too hard]",
 								"reset")
-			}
-}
-
-function cave2() {
-	 if(command.includes('look')) {
-					outElement.innerHTML = game.look(command, 
-						"To your right is the wall of the passageway.", 
-						"To your left is the wall of the passageway.", 
-						"Behind you is the opening at the very start of the cave.", 
-						"In front of you are more stairs leading down.")
-			out2.innerHTML = ""
-			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
-				outElement.innerHTML = game.move(command, 
-						"You cannot walk through walls.",
-								 "caveTwo",
-						"You cannot walk through walls.",
-								 "caveTwo",
-						"Your better senses tell you to leave the cave completely.",
-								 "cave",
-						"You decide to take a risk and walk down the rest of the stairs. <br> <br> Eventually, the stairs end and you find yourself in a very large space.",
-								"deep")
 			}
 }
 
@@ -243,8 +222,6 @@ function doAction() {
 			cavePlace()
 		} else if(place == 'cavern') {
 			cavernPlace()
-		} else if(place == 'caveTwo') {
-			cave2()
 		} else if(place == 'deep') {
 			deep()
 		} else if(place == 'hole') {
