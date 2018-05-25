@@ -28,7 +28,7 @@ function firstPlace() {
 					outElement.innerHTML = game.look(command, 
 						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
 						"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
-						"Behind you is a steep rock face that looks almost impossible to climb.", 
+						"Behind you is a steep rock face that looks impossible to climb.", 
 						"In front of you is the tunnel.")
 			out2.innerHTML = ""
 			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
@@ -58,7 +58,7 @@ function canyonPlace() {
 							j = false;
 						}
 					} else {
-						printOut('You climb up the rock slowly. When you reach the small ledge at the top, you can see farther into the cave.');
+						printOut('You climb up the rock slowly. When you reach the small ledge at the top, you can see farther into the cave. <br> <br> The entrance is grand and open, but as it goes farther in, the ceiling and walls close in tighter.');
 						place = "ledge"
 					}	
 	} else if(command.includes('look')) {
