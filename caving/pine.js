@@ -264,6 +264,7 @@ game.reset = function() {
 
 game.end = function() {
 	printOut('END OF GAME <br> ------------------------------<br> You have reached the end of this adventure. <br> <br> Game written by Kai Wildberger, age 12, grade 6 <br> <br> <br> <br> May 24th, 2018');
+	inElement.style.display = "none"
 }
 
 game.start = function() {
