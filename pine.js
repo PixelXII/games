@@ -169,11 +169,11 @@ function cavernPlace() {
 				outElement.innerHTML = game.move(command, 
 						"You step to the right, and then feel yourself falling. <br> <br> <br> END OF GAME <br> [You fell from a high hight]",
 								 "reset",
-						"You step to the left, and then feel yourself slowly sinking. You realize, too late, that you have stepped into a puddle of quicksand. <br> <br> <br> END OF GAME <br> [You drowned in quicksand]",
+						"You step to the left, and then feel yourself slowly sinking. <br> You realize, too late, that you have stepped into a puddle of quicksand. <br> <br> <br> END OF GAME <br> [You drowned in quicksand]",
 								 "reset",
 						"As you cautiously step back to the stalagtite, you feel the earth below you give a great shake, and then fall, bringing you down into the bowels of the earth. <br> You feel as though you are in a very large opening.",
 								 "deep",
-						"You feel a nasty push from behind as you take a step forward. The push is enough to send you flying, and, as you land, your head hits a stone and you black out. <br> <br> <br> END OF GAME <br> [You were pushed too hard]",
+						"You feel a nasty push from behind as you take a step forward. <br> The push is enough to send you flying, and, as you land, your head hits a stone and you black out. <br> <br> <br> END OF GAME <br> [You were pushed too hard]",
 								"reset")
 			}
 }
