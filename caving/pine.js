@@ -278,7 +278,7 @@ game.start = function() {
 
 game.look = function(action, rightMess, leftMess, behMess, foMess) {
 	if(action.includes('look ') || action.includes('Look ')) {
-		var array = [rightMess, leftMess, behMess, foMess);
+		var array = [rightMess, leftMess, behMess, foMess]
 		if(action.includes('right')) {
 			return rightMess;
 		} else if(action.includes('left')) {
