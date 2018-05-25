@@ -134,7 +134,7 @@ function streamPlace() {
 function cavePlace() {
 	if(command.includes('down') && command.includes('stairs')) {
 		printOut('You walk down the stairs.') 
-		place == 'deep'
+		place = 'deep'
 	} else if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
 						"To your right there is a stalagmite. There seems to be a swarm of creatures around it.", 
