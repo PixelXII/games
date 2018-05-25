@@ -46,14 +46,29 @@ function firstPlace() {
 }
 
 function canyonPlace() {
-	if(command.includes('look')) {
+	if(command.includes('climb') && command.includes('rock') || command.includes('wall')) {
+					var rand = Math.random();
+					var fall = false;
+					if(rand > 0.7) {
+						if(fall === false) {
+							outElement.innerHTML = "You climb up the rock face, slowly but surely. Suddenly, you slip and fall back down to the streambed."
+							fall = true;
+						} else {
+							outElement.innerHTML = "You climb up the rock face, a little slower this time after your fall. Once again, you tumble down the rock face and land on the streambed."
+							j = false;
+						}
+					} else {
+						printOut('You climb up the rock slowly. When you reach the small ledge at the top, you can see farther into the cave.');
+						place = "ledge"
+					}	
+	} else if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
 						"To your right, there is a steep gorge wall. <br><br> A massive boulder perches on the edge of a tree stump.", 
 						"To your left, there is a tree on the canyon wall, precariously leaning over the gorge. <br><br> A cave opens up about halfway up the wall of the canyon. You can see marks where people before you have climbed up the wall.", 
 						"Behind you is the tunnel.", 
 						"In front of you is the dried-up stream. Many rocks and sticks are haphazardly strewn across the streambed.")
-			out2.innerHTML = ""
-			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+						out2.innerHTML = ""
+	} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
 						"You cannot move into the stump.",
 								 "canyon",
