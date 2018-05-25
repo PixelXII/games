@@ -130,7 +130,7 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 }
 
 game.first = function() {
-	noteElem.innerHTML = "game written by kai wildberger <br> <br> type 'help' for help"
+	noteElem.innerHTML = "game written by kai wildberger"
 	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, to the north, is a steep rock face.',
 		'You can see a dried-up streambed on the other side of the tunnel.')
 		if(command.includes('look ') || command.includes('Look ')) {
