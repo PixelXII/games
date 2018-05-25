@@ -57,7 +57,7 @@ function climbWall() {
 		j = false;
 	}
 	} else {
-		printOut('You climb up the rock slowly. When you reach the small ledge at the top, you can see farther into the cave. <br> <br> The entrance is grand and open, but as it goes farther in, the ceiling and walls close in tighter.');
+		printOut('You climb up the rock slowly. When you reach the small ledge at the top, you can see farther into the cave. <br> <br> The entrance is grand and open, but as it goes farther in, the ceiling and walls close in tighter. <br> A little farther in the cave, you can see the beginnings of a staircase.');
 		place = "ledge"
 	}	
 }
@@ -150,7 +150,7 @@ function cavePlace() {
 								 "cavern",
 						"You chicken out and stand on the ledge again.",
 								 "ledge",
-						"You continue on, despite the ominous feeling in your gut. <br> After walking down for some time, you eventually reach a flat surface. <br> Flickering light illuminates the cavern.",
+						"You continue on, despite the ominous feeling in your gut. <br> After walking down the stairs for some time, you eventually reach a flat surface. <br> Flickering light illuminates the cavern.",
 								"deep")
 			} else if(command.includes('walk')) {
 				out2.innerHTML = "There is not enough headroom to walk."
