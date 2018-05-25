@@ -31,14 +31,14 @@ function firstPlace() {
 						"Behind you is a steep rock face that looks almost impossible to climb.", 
 						"In front of you is the tunnel.")
 			out2.innerHTML = ""
-			} else if(command.includes('move')) {
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
 						"You cannot move into the tree.",
 								 "first",
-						"You step over the sticks and rocks. <br> <br> [You have missed the point entirely.]",
-								 "sticks",
-						"You walk up the trail.",
-								 "trail",
+						"There is too much debris to climb on top of the pile.",
+								 "first",
+						"You cannot climb the rock.",
+								 "first",
 						"You walk ahead to the dried stream. You can see a cave on the side of the canyon.",
 								"canyon")
 				out2.innerHTML = ""
@@ -53,7 +53,7 @@ function canyonPlace() {
 						"Behind you is the tunnel.", 
 						"In front of you is the dried-up stream. Many rocks and sticks are haphazardly strewn across the streambed.")
 			out2.innerHTML = ""
-			} else if(command.includes('move')) {
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
 						"You cannot move into the stump.",
 								 "canyon",
