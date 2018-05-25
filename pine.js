@@ -48,7 +48,7 @@ function firstPlace() {
 function climbWall() {
 	var rand = Math.random();
 	var fall = false;
-	if(rand > 0.5) {
+	if(rand > 0.6) {
 	if(fall === false) {
 	outElement.innerHTML = "You climb up the rock face, slowly but surely. Suddenly, you slip and fall back down to the streambed."
 	fall = true;
