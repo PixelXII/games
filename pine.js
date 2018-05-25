@@ -129,6 +129,7 @@ function streamPlace() {
 					"You take off your clothes and take a dip in the beautiful blue water. <br><br> You misjudged the depth of the pool, and out of the darkness below comes an immense creature. <br> You scream as it drags you below, but no one can hear you. <br> <br> <br> END OF GAME <br> [You were eaten]",
 								"reset")
 			}
+}
 
 function doAction() {
 	try {
