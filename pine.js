@@ -264,6 +264,7 @@ game.end = function() {
 }
 
 game.start = function() {
+	inElement.style.display = "none"
 	printOut("<h2>COMMANDS:</h2> <br> <br> 'move' to move <br> 'look' to look")
 	setTimeout(function() {game.first()}, 5000);
 }
@@ -283,6 +284,7 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 }
 
 game.first = function() {
+	inElement.style.display = "block"
 	noteElem.innerHTML = "game written by kai wildberger"
 	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, is a steep rock face.',
 		'You can see a dried-up streambed on the other side of the tunnel.')
