@@ -45,22 +45,26 @@ function firstPlace() {
 			}
 }
 
+function climbWall() {
+	var rand = Math.random();
+	var fall = false;
+	if(rand > 0.7) {
+	if(fall === false) {
+	outElement.innerHTML = "You climb up the rock face, slowly but surely. Suddenly, you slip and fall back down to the streambed."
+	fall = true;
+	} else {
+		outElement.innerHTML = "You climb up the rock face, a little slower this time after your fall. Once again, you tumble down the rock face and land on the streambed."
+		j = false;
+	}
+	} else {
+		printOut('You climb up the rock slowly. When you reach the small ledge at the top, you can see farther into the cave. <br> <br> The entrance is grand and open, but as it goes farther in, the ceiling and walls close in tighter.');
+		place = "ledge"
+	}	
+}
+
 function canyonPlace() {
 	if(command.includes('climb') && command.includes('rock') || command.includes('wall')) {
-					var rand = Math.random();
-					var fall = false;
-					if(rand > 0.7) {
-						if(fall === false) {
-							outElement.innerHTML = "You climb up the rock face, slowly but surely. Suddenly, you slip and fall back down to the streambed."
-							fall = true;
-						} else {
-							outElement.innerHTML = "You climb up the rock face, a little slower this time after your fall. Once again, you tumble down the rock face and land on the streambed."
-							j = false;
-						}
-					} else {
-						printOut('You climb up the rock slowly. When you reach the small ledge at the top, you can see farther into the cave. <br> <br> The entrance is grand and open, but as it goes farther in, the ceiling and walls close in tighter.');
-						place = "ledge"
-					}	
+		climbWall()
 	} else if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
 						"To your right, there is a steep gorge wall. <br><br> A massive boulder perches on the edge of a tree stump.", 
@@ -72,7 +76,7 @@ function canyonPlace() {
 				outElement.innerHTML = game.move(command, 
 						"You cannot move into the stump.",
 								 "canyon",
-						"You cannot move into the canyon wall.",
+						"You cannot <i>walk</i> up the side of the rock.",
 								 "canyon",
 						"You walk through the tunnel, back to where you began.",
 								 "first",
