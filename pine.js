@@ -86,6 +86,30 @@ function canyonPlace() {
 			}
 }	
 
+function ledgePlace() {
+	if(command.includes('climb') && command.includes('down')) {
+					outElement.innerHTML = "You climb back down the rock face, with some difficulty.";
+					place = 'canyon';
+				} else if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
+						"To your right there is a madrone tree. Its roots look worn, and its bark is peeling.", 
+						"To your left, a sheer drop cuts into the ledge. Looking down, you can see a sharp rock, waiting for something to impale. <br> <br> You decide to step away from the drop-off.", 
+						"Behind you is the rock face you climbed.", 
+						"In front of you is the cave entrance.")
+			out2.innerHTML = ""
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+				outElement.innerHTML = game.move(command, 
+						"You cannot move into the tree.",
+								 "ledge",
+						"You tell yourself that nothing matters and hurl yourself at the rock below. <br> <br> <br> END OF GAME <br> [You killed yourself]",
+								 "reset",
+						"You cannot <i>walk</i> down a rock face.",
+								 "ledge",
+						"You push ahead and make your way into the cave.",
+								"cave")
+			}
+}
+
 function doAction() {
 	try {
 		command = inElement.value;
@@ -96,6 +120,12 @@ function doAction() {
 			firstPlace()
 		} else if(place == 'canyon') {
 			canyonPlace()
+		} else if(place == 'ledge') {
+			ledgePlace()
+		} else if(place == 'reset') {
+			game.reset()
+		} else if(place == 'stream') {
+			streamPlace()
 		} else if(outElement.innerHTML == 'undefined') {
 			outElement.innerHTML = "I don't understand what you mean."
 		}
