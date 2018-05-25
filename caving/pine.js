@@ -279,6 +279,8 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 			  return behMess;
 		} else if(action.includes('forward') || action.includes('ahead')) {
 			return foMess;
+		} else {
+			return "I don't understand what you mean."
 		}
 	}
 }
@@ -316,6 +318,8 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 		} else if(action.includes('forward') || action.includes('ahead')) {
 			place = forLoc
 			return forward;
+		} else {
+			return "I don't understand what you mean."
 		}
 		
 	}
