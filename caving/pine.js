@@ -87,6 +87,7 @@ function canyonPlace() {
 }	
 
 function ledgePlace() {
+	out2.innerHTML = ""
 	if(command.includes('climb') && command.includes('down')) {
 					outElement.innerHTML = "You climb back down the rock face, with some difficulty.";
 					place = 'canyon';
@@ -158,6 +159,7 @@ function cavePlace() {
 }
 
 function cavernPlace() {
+	out2.innerHTML = ""
 	 if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
 						"You cannot see anything to your right. You see darkness.", 
@@ -179,6 +181,7 @@ function cavernPlace() {
 }
 
 function deep() {
+	out2.innerHTML = ""
 	if(command.includes('follow') && command.includes('white line')) {
 			printOut('You follow the white line. <br> It leads you to a massive hole in the ground.')
 			place = 'hole'
