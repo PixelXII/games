@@ -80,7 +80,7 @@ function canyonPlace() {
 								 "canyon",
 						"You walk through the tunnel, back to where you began.",
 								 "first",
-						"You step slowly over the sticks, rocks, and fallen logs that litter the streambed.",
+						"As you step over fallen trees and rocks, you see a pool of water ahead.",
 								"stream")
 				out2.innerHTML = ""
 			}
@@ -109,6 +109,26 @@ function ledgePlace() {
 								"cave")
 			}
 }
+
+function streamPlace() {
+	if(command.includes('look')) {
+				outElement.innerHTML = game.look(command, 
+					"To your right there is a mossy boulder. <br> The moss makes a certain pattern on the boulder that implies that an immature human was there and influenced the shape of the moss.", 
+					"On the left is an ancient tree. The tree is an awe-inspiring one, and when you look at the tree you can see many burnt portions and scars from its years in the gorge.", 
+					"Behind you is the dried-up stream and tunnel.", 
+					"In front of you is a pool of water.")
+		out2.innerHTML = ""
+	} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+			outElement.innerHTML = game.move(command, 
+					"You cannot move into the boulder.",
+								"stream",
+					"That tree is too high to climb.",
+								"stream",
+					"You decide you have other places to go and walk back up the streambed.",
+								"canyon",
+					"You take off your clothes and take a dip in the beautiful blue water. <br><br> You misjudged the depth of the pool, and out of the darkness below comes an immense creature. <br> You scream as it drags you below, but no one can hear you. <br> <br> <br> END OF GAME <br> [You were eaten]",
+								"reset")
+			}
 
 function doAction() {
 	try {
@@ -143,6 +163,16 @@ inElement.addEventListener("keydown", function (e) {
 // The actual game
 
 var game = new Object();
+
+game.reset = function() {
+	noteElem.innerHTML = ""
+	out2.innerHTML = ""
+	outElement.innerHTML = ""
+	printOut("You screwed up. Type 'reset' to reset the game.")
+	if(command === 'reset' || command === 'Reset') {
+		location.reload()
+	}
+}
 
 game.start = function() {
 	printOut("<h2>COMMANDS:</h2> <br> <br> 'move' to move <br> 'look' to look")
