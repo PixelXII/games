@@ -88,7 +88,10 @@ function canyonPlace() {
 
 function ledgePlace() {
 	out2.innerHTML = ""
-	if(command.includes('climb') && command.includes('down')) {
+	if(command.includes('down') && command.includes('stairs')) {
+		printOut('You walk through the cave entrance and the stairs.') 
+		place = 'deep'
+	} else if(command.includes('climb') && command.includes('down')) {
 					outElement.innerHTML = "You climb back down the rock face, with some difficulty.";
 					place = 'canyon';
 				} else if(command.includes('look')) {
