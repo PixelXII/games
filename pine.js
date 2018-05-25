@@ -132,12 +132,15 @@ function streamPlace() {
 }
 
 function cavePlace() {
-	if(command.includes('look')) {
+	if(command.includes('down') && command.includes('stairs')) {
+		printOut('You walk down the stairs.') 
+		place == 'caveTwo'
+	} else if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
 						"To your right there is a stalagmite. There seems to be a swarm of creatures around it.", 
 						"To your left, a stalagtite precariously hangs down from the ceiling.", 
 						"Behind you is the entrance to the cave. Light spills in from the entrance.", 
-						"In front of you is a staircase. You cannot see where the rope leads to.")
+						"In front of you is a staircase. You cannot see where the stairs leads to.")
 			out2.innerHTML = ""
 			} else if(command.includes('move') || command.includes('crawl') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
@@ -181,7 +184,7 @@ function cave2() {
 						"To your right is the wall of the passageway.", 
 						"To your left is the wall of the passageway.", 
 						"Behind you is the opening at the very start of the cave.", 
-						"In front of you is the staircase leading down.")
+						"In front of you are more stairs leading down.")
 			out2.innerHTML = ""
 			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
@@ -191,7 +194,7 @@ function cave2() {
 								 "caveTwo",
 						"Your better senses tell you to leave the cave completely.",
 								 "cave",
-						"You decide to take a risk and walk down the stairs. <br> <br> Eventually, the stairs end and you find yourself in a very large space.",
+						"You decide to take a risk and walk down the rest of the stairs. <br> <br> Eventually, the stairs end and you find yourself in a very large space.",
 								"deep")
 			}
 }
@@ -304,7 +307,7 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 
 game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
-	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, to the north, is a steep rock face.',
+	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, is a steep rock face.',
 		'You can see a dried-up streambed on the other side of the tunnel.')
 		if(command.includes('look ') || command.includes('Look ')) {
 			try {
