@@ -191,9 +191,9 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 game.pickUp = function(action) {
 	if(action.includes('pick up') || action.includes('hold') || action.includes('grab')) {
 		if(action.includes('pick up')) {
-			thing = command.slice(8)
+			thing = action.slice(8)
 		} else {
-			thing = command.slice(5)
+			thing = action.slice(5)
 		}
 			eval(thing + ' = new Object()')
 			inventory--;
