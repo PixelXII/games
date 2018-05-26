@@ -4,12 +4,10 @@ var note;
 var thing;
 var inventory = 0;
 var place = 'first'
-var warning = document.getElementById('warning');
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
-warning.style.color = 'red';
 var eats = ['hazelnut', 'white flower']
 setInterval(printOut(output), 100)
 
@@ -30,10 +28,6 @@ var searchArray = function(needle, haystack){
 
 var slice = function(command, start, end) {
 	return command.slice(start, end)
-}
-
-var warning = function(mess) {
-	warning.innerHTML = mess
 }
 
 function firstPlace() {
@@ -156,7 +150,6 @@ game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
 	printOut('You are standing in a forest. You do not remember how you got there or where you are.',
 		'You realize that you are hungry and need to eat something.')
-	warning('HUNGRY');
 	setInterval(function() {
 			var i = 0;
 			if(i === 600) {
@@ -164,6 +157,7 @@ game.first = function() {
 					 "<br>Don't do it again.")
 				setTimeout(function() {game.reset()}, 5000)
 			}
+			i++
 		}, 1000)
 	}
 
@@ -189,19 +183,42 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 }
 
 game.pickUp = function(action) {
-	if(action.includes('pick up') || action.includes('hold') || action.includes('grab')) {
+	if(action.includes('pick') || action.includes('hold') || action.includes('grab')) {
 		if(action.includes('pick up')) {
 			thing = action.slice(8)
 		} else {
 			thing = action.slice(5)
 		}
+		if(inventory === 3) {
+			printOut('Your hands are full.')
+		} else {
 			eval(thing + ' = new Object()')
 			inventory++
-		if(searchArray(thing, eats) == true) {
-			eval(thing + '.edible = true')
-		} else {
-			     eval(thing + '.edible = false')
+			if(searchArray(thing, eats)) {
+				eval(thing + '.edible = true')
+			} else {
+				eval(thing + '.edible = false')
+			}
+		
+			printOut('Taken')
 		}
-		printOut('Taken')
 	}
 }
+
+game.eat = function(action) {
+	if(action.includes('eat') || action.includes('consume')) {
+		if(action.includes('consume')) {
+			thing = action.slice(8)
+		} else {
+			thing = action.slice(4)
+		}
+			eval(thing + ' = new Object()')
+			inventory++
+		if(eval(thing + '.edible == false')) {
+			printOut('You ate something you weren\'t supposed to. <br> <br> <br> END OF GAME  <br> [You died of food poisoning]')
+			setTimeout(function() {game.reset();}, 5000);
+		} else {
+			inventory--
+			printOut('Eaten. <br> <br> You are not hungry anymore.')
+		}
+	}
