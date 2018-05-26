@@ -2,7 +2,7 @@ var output = "caving <br> <br> <i style='font-size:12px;'>there's only one right
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
-var command = inElement.value;
+var command;
 var noteElem = document.getElementById('note');
 setInterval(printOut(output), 100)
 
@@ -13,6 +13,14 @@ function printOut(mess, mess2) {
   }
 }
 
-if(command == 'caving' || command == 'cave') {
-  location = '/caving'
+function doAction() {
+	inElement.submit()
+	command = inElement.value;
+	inElement.value = ''
+	if(command == 'caving' || command == 'cave') {
+ 	     location = '/caving'
+	} else {
+		printOut('there is only one game right now <br> <br> <br> <h1>check back later</h1>')
+	}
 }
+	
