@@ -1,6 +1,8 @@
 var output = "type start to begin"
 var command = null;
 var note;
+var thing;
+var inventory = 3;
 var place = 'first'
 var warning = document.getElementById('warning');
 var inElement = document.getElementById('input');
@@ -8,6 +10,7 @@ var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
 warning.style.color = 'red';
+var eats = ['hazelnut', 'white flower']
 setInterval(printOut(output), 100)
 
 function printOut(mess, mess2) {
@@ -16,6 +19,15 @@ function printOut(mess, mess2) {
 	  out2.innerHTML = mess2;
   }
 }
+
+var searchArray = function(needle, haystack){
+  for(var i = 0; i < needle.length; i++){
+    if(haystack.indexOf(needle[i]) === -1)
+       return false;
+  }
+  return true;
+}
+
 var slice = function(command, start, end) {
 	return command.slice(start, end)
 }
@@ -41,6 +53,28 @@ function firstPlace() {
 								 "first",
 						"You walk ahead to the flower patch. You notice that all of the flowers are red, except for one daisy.",
 								"flowers")
+				out2.innerHTML = ""
+			}
+}
+
+function flowerPlace() {
+	if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
+						"To your right there is the small, bubbling stream.", 
+						"To your left is a hazelnut tree. You can see some hazelnuts on the tree.", 
+						"Behind you is the massive tree.", 
+						"In front of you is a circle of stones.")
+			out2.innerHTML = ""
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+				outElement.innerHTML = game.move(command, 
+						"You take a step into the cold, clear water of the stream. ",
+								 "stream",
+						"The hazelnut tree is not strong enough for you to climb.",
+								 "flowers",
+						"You walk towards the tree and start hauling yourself up into the canopy.",
+								 "firstOak",
+						"You walk ahead to the stones and see a small shrine in the center of the circle.",
+								"shrine")
 				out2.innerHTML = ""
 			}
 }
@@ -150,3 +184,19 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 		
 	}
 }
+
+game.pickUp = function(command) {
+	if(action.includes('pick up') || action.includes('hold') || action.includes('grab')) {
+		if(action.includes('pick up')) {
+			var thing = slice(command, 8)
+		} else {
+			var thing = slice(command, 5)
+		}
+			eval(thing + ' = new Object()')
+			inventory--;
+		if(searchArray(thing, eats) == true) {
+			eval(thing + '.edible = true'
+		} else {
+			     eval(thing + '.edible = false')
+		}
+	}
