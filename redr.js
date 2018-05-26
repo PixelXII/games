@@ -17,7 +17,7 @@ function doAction() {
 	command = inElement.value;
 	inElement.value = ''
 	if(command == 'caving' || command == 'cave') {
- 	     location = '/caving'
+ 	     location = './caving/'
 	} else {
 		printOut('there is only one game right now <br> <br> <br> <h1>check back later</h1>')
 	}
