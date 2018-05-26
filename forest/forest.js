@@ -200,3 +200,4 @@ game.pickUp = function(command) {
 			     eval(thing + '.edible = false')
 		}
 	}
+}
