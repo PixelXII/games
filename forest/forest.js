@@ -125,7 +125,7 @@ game.first = function() {
 					 "<br>Don't do it again.")
 				setTimeout(function() {game.reset()}, 5000)
 			}
-		}
+		}, 1000)
 	}
 }
 
