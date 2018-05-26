@@ -277,7 +277,6 @@ game.start = function() {
 }
 
 game.look = function(action, rightMess, leftMess, behMess, foMess) {
-	var array = [rightMess, leftMess, behMess, foMess]
 	if(action.includes('look ') || action.includes('Look ')) {
 		
 		if(action.includes('right')) {
@@ -292,7 +291,7 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 			return "I don't understand what you mean."
 		}
 	if(action == 'look' || action == 'Look' || action == 'look around' || action == 'Look around') {
-		printOut(array)
+		printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
 		}
 	}
 }
