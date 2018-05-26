@@ -226,4 +226,3 @@ game.eat = function(action) {
 			setTimeout(function() {game.reset();}, 5000);
 		}
 	}
-}
