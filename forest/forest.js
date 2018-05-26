@@ -107,7 +107,7 @@ inElement.addEventListener("keydown", function (e) {
 });
 
 window.addEventListener('beforeunload', function() {
-	document.cookie = "place=" + location
+	document.cookie = "place=" + place
 	document.cookie = "inventory=" + inventory
 });
 
