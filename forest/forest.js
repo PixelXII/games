@@ -220,7 +220,7 @@ game.pickUp = function(action) {
 	}
 }
 
-game.eat = function(action) {
+ /* game.eat = function(action) {
 	if(action.includes('eat') || action.includes('consume')) {
 		if(action.includes('consume')) {
 			var thing = action.slice(8)
@@ -229,8 +229,7 @@ game.eat = function(action) {
 			var thing = action.slice(4)
 			var otherThing = action.slice(4)
 		}
-		inventory.spots++
-		if(eats.includes(otherThing)) {
+			inventory.spots--
 			printOut('Eaten. <br> <br> You are not hungry anymore.')
 			inventory.spots--
 		} else {
@@ -240,3 +239,5 @@ game.eat = function(action) {
 		console.log('eaten')
 	}
 }
+
+*/
