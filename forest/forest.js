@@ -221,7 +221,6 @@ game.pickUp = function(action) {
 }
 
 game.eat = function(action) {
-	try {
 	if(action.includes('eat') || action.includes('consume')) {
 		if(action.includes('consume')) {
 			var thing = action.slice(8)
@@ -239,7 +238,5 @@ game.eat = function(action) {
 			setTimeout(function() {game.reset();}, 5000);
 		}
 		console.log('eaten')
-	} catch {
-		console.log('not eaten')
 	}
 }
