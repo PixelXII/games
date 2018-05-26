@@ -14,7 +14,6 @@ function printOut(mess, mess2) {
 }
 
 function doAction() {
-	document.getElementById('input').submit();
 	command = inElement.value;
 	inElement.value = ''
 	if(command == 'caving' || command == 'cave') {
