@@ -53,6 +53,8 @@ function doAction() {
 			game.start()
 		} else if(place == 'first') {
 			firstPlace()
+		} else if(place == 'flowers') {
+			flowerPlace()
 		} else if(place == 'end') {
 			game.end()
 		} else if(outElement.innerHTML == 'undefined') {
