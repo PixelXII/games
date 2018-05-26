@@ -127,7 +127,6 @@ game.first = function() {
 			}
 		}, 1000)
 	}
-}
 
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
 	if(action.includes('move ') || action.includes('step') || action.includes('go') || action.includes('walk')) {
