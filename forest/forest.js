@@ -106,6 +106,12 @@ inElement.addEventListener("keydown", function (e) {
     }
 });
 
+window.addEventListener('beforeunload', function() {
+	document.cookie = "place=" + location;
+});
+
+
+
 var game = new Object();
 
 game.reset = function() {
