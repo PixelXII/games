@@ -2,7 +2,7 @@ var output = "type start to begin"
 var command = null;
 var note;
 var thing;
-var inventory = 3;
+var inventory = 0;
 var place = 'first'
 var warning = document.getElementById('warning');
 var inElement = document.getElementById('input');
@@ -196,7 +196,7 @@ game.pickUp = function(action) {
 			thing = action.slice(5)
 		}
 			eval(thing + ' = new Object()')
-			inventory--;
+			inventory++
 		if(searchArray(thing, eats) == true) {
 			eval(thing + '.edible = true')
 		} else {
