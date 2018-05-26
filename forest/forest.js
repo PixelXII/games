@@ -2,7 +2,7 @@ var output = "type start to begin"
 var command = null;
 var note;
 var place = 'first'
-var warn = document.getElementById('warning');
+var warning = document.getElementById('warning');
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
