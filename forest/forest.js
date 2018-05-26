@@ -8,7 +8,7 @@ var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
-var eats = ['hazelnut', 'white flower']
+var eats = ['hazelnut', 'white flower', 'daisy']
 setInterval(printOut(output), 100)
 
 function printOut(mess, mess2) {
@@ -194,7 +194,7 @@ game.pickUp = function(action) {
 		} else {
 			eval(thing + ' = new Object()')
 			inventory++
-			if(searchArray(thing, eats)) {
+			if(searchArray(thing, eats) == true) {
 				eval(thing + '.edible = true')
 			} else {
 				eval(thing + '.edible = false')
@@ -214,7 +214,7 @@ game.eat = function(action) {
 		}
 			eval(thing + ' = new Object()')
 			inventory++
-		if(eval(thing + '.edible == false')) {
+		if(eval(thing + '.edible == false') == true) {
 			printOut('You ate something you weren\'t supposed to. <br> <br> <br> END OF GAME  <br> [You died of food poisoning]')
 			setTimeout(function() {game.reset();}, 5000);
 		} else {
