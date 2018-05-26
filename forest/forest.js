@@ -86,6 +86,8 @@ function doAction() {
 		inElement.value = "";
 		if(command == 'start' || command == 'Start' || command.includes('help') || command.includes('Help')) {
 			game.start()
+		} else if(command.includes('grab') || command.includes('take') || command.includes('pick up')) {
+			game.pickUp(command)
 		} else if(place == 'first') {
 			firstPlace()
 		} else if(place == 'flowers') {
@@ -186,7 +188,7 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 	}
 }
 
-game.pickUp = function(command) {
+game.pickUp = function(action) {
 	if(action.includes('pick up') || action.includes('hold') || action.includes('grab')) {
 		if(action.includes('pick up')) {
 			thing = command.slice(8)
@@ -200,5 +202,6 @@ game.pickUp = function(command) {
 		} else {
 			     eval(thing + '.edible = false')
 		}
+		printOut('Taken')
 	}
 }
