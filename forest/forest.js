@@ -195,7 +195,7 @@ game.pickUp = function(command) {
 			eval(thing + ' = new Object()')
 			inventory--;
 		if(searchArray(thing, eats) == true) {
-			eval(thing + '.edible = true'
+			eval(thing + '.edible = true')
 		} else {
 			     eval(thing + '.edible = false')
 		}
