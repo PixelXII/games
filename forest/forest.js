@@ -209,6 +209,7 @@ game.pickUp = function(action) {
 }
 
 game.eat = function(action) {
+	try {
 	if(action.includes('eat') || action.includes('consume')) {
 		if(action.includes('consume')) {
 			thing = action.slice(8)
@@ -225,4 +226,8 @@ game.eat = function(action) {
 			printOut('You ate something you weren\'t supposed to. <br> <br> <br> END OF GAME  <br> [You died of food poisoning]')
 			setTimeout(function() {game.reset();}, 5000);
 		}
+		console.log('eaten')
+	} catch {
+		console.log('not eaten')
 	}
+}
