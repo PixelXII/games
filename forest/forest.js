@@ -33,7 +33,7 @@ var slice = function(command, start, end) {
 }
 
 var warning = function(mess) {
-	warn.innerHTML = mess
+	warning.innerHTML = mess
 }
 
 function firstPlace() {
