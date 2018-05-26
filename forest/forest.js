@@ -31,7 +31,8 @@ var searchArray = function(needle, haystack){
 var slice = function(command, start, end) {
 	return command.slice(start, end)
 }
-function warning(mess) {
+
+var warning = function(mess) {
 	warn.innerHTML = mess
 }
 
@@ -71,8 +72,8 @@ function flowerPlace() {
 								 "stream",
 						"The hazelnut tree is not strong enough for you to climb.",
 								 "flowers",
-						"You walk towards the tree and start hauling yourself up into the canopy.",
-								 "firstOak",
+						"You step out of the flower patch, back to where you started.",
+								 "first",
 						"You walk ahead to the stones and see a small shrine in the center of the circle.",
 								"shrine")
 				out2.innerHTML = ""
