@@ -108,7 +108,8 @@ inElement.addEventListener("keydown", function (e) {
 
 window.addEventListener('beforeunload', function() {
 	document.cookie = "place=" + place
-	document.cookie = "inventory=" + inventory
+	document.cookie = "inventorySpots=" + inventory.spots
+	document.cookie = "inventoryContents=" + inventory.contentsOf
 });
 
 
