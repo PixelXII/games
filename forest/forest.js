@@ -19,16 +19,12 @@ var slice = function(command, start, end) {
 }
 
 function firstPlace() {
-	if(command.includes('walk through tunnel') || command.includes('walk down tunnel') || command.includes('walk through the tunnel')) {
-					outElement.innerHTML = "You walk ahead to the dried stream. You can see a cave on the side of the canyon.";
-					place = 'canyon';
-					out2.innerHTML = ""
-				} else if(command.includes('look')) {
+	if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
-						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
-						"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
-						"Behind you is a steep rock face that looks impossible to climb.", 
-						"In front of you is the tunnel.")
+						"To your right there is a small, bubbling stream.", 
+						"To your left is a giant oak tree.", 
+						"Behind you is a massive tree. You cannot identify the species of this tree.", 
+						"In front of you is a small flower patch.")
 			out2.innerHTML = ""
 			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
@@ -87,7 +83,7 @@ game.end = function() {
 
 game.start = function() {
 	inElement.style.display = "none"
-	printOut("<h2>COMMANDS:</h2> <br> <br> 'move' to move <br> 'look' to look")
+	printOut("<h2>COMMANDS:</h2> <br> <br> 'move' to move <br> 'look' to look <br> 'eat' to eat <br> 'pick up' or 'hold' to pick up")
 	setTimeout(function() {game.first()}, 5000);
 }
 
