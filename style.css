@@ -24,6 +24,10 @@ html, body {
     font-size:24px;
 }
 
+.tajawal {
+  font-family:'Tajawal';
+}
+
 input[type="text"] { font-family:'Kaushan Script'; font-size:24px; }
 
 #input {
