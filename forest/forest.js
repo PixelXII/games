@@ -222,3 +222,4 @@ game.eat = function(action) {
 			printOut('Eaten. <br> <br> You are not hungry anymore.')
 		}
 	}
+}
