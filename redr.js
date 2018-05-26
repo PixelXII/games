@@ -23,4 +23,10 @@ function doAction() {
 		printOut('there is only one game right now <br> <br> <br> <h1>check back later</h1>')
 	}
 }
+
+inElement.addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) {
+      doAction()
+    }
+});
 	
