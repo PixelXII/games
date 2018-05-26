@@ -195,7 +195,7 @@ game.pickUp = function(action) {
 		} else {
 			eval(thing + ' = new Object()')
 			inventory++
-			if(searchArray(thing, eats) == true) {
+			if(eats.includes(thing)) {
 				eval(thing + '.edible = true')
 			} else {
 				eval(thing + '.edible = false')
@@ -213,14 +213,13 @@ game.eat = function(action) {
 		} else {
 			thing = action.slice(4)
 		}
-			eval(thing + ' = new Object()')
 			inventory++
-		if(eval(thing + '.edible == false') == true) {
-			printOut('You ate something you weren\'t supposed to. <br> <br> <br> END OF GAME  <br> [You died of food poisoning]')
-			setTimeout(function() {game.reset();}, 5000);
-		} else {
+		if(eats.includes(eval(thing))) {
 			inventory--
 			printOut('Eaten. <br> <br> You are not hungry anymore.')
+		} else {
+			printOut('You ate something you weren\'t supposed to. <br> <br> <br> END OF GAME  <br> [You died of food poisoning]')
+			setTimeout(function() {game.reset();}, 5000);
 		}
 	}
 }
