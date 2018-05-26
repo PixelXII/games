@@ -2,10 +2,12 @@ var output = "type start to begin"
 var command = null;
 var note;
 var place = 'first'
+var warn = document.getElementById('warning');
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
+warning.style.color = 'red';
 setInterval(printOut(output), 100)
 
 function printOut(mess, mess2) {
@@ -17,9 +19,12 @@ function printOut(mess, mess2) {
 var slice = function(command, start, end) {
 	return command.slice(start, end)
 }
+function warning(mess) {
+	warn.innerHTML = mess
+}
 
 function firstPlace() {
-	if(command.includes('look')) {
+	 if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
 						"To your right there is a small, bubbling stream.", 
 						"To your left is a giant oak tree.", 
@@ -28,14 +33,14 @@ function firstPlace() {
 			out2.innerHTML = ""
 			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
-						"You cannot move into the tree.",
+						"You take a step into the cold, clear water of the stream. ",
+								 "stream",
+						"You climb the oak tree.",
+								 "firstOak",
+						"The tree is too large to climb",
 								 "first",
-						"There is too much debris to climb on top of the pile.",
-								 "first",
-						"You cannot climb the rock.",
-								 "first",
-						"You walk ahead to the dried stream. You can see a cave on the side of the canyon.",
-								"canyon")
+						"You walk ahead to the flower patch. You notice that all of the flowers are red, except for one daisy.",
+								"flowers")
 				out2.innerHTML = ""
 			}
 }
@@ -105,23 +110,21 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 		printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
 		}
 	}
-}
+}		
 
 game.first = function() {
 	inElement.style.display = "block"
 	noteElem.innerHTML = "game written by kai wildberger"
-	printOut('You are standing at the entrance to a tunnel which leads under a road. <br> Behind you, is a steep rock face.',
-		'You can see a dried-up streambed on the other side of the tunnel.')
-		if(command.includes('look ') || command.includes('Look ')) {
-			try {
-			outElement.innerHTML = game.look(command, 
-						"To your right, there is a massive tree. It looks like it has been there for hundreds of years.", 
-						"To your left, there is a pile of rocks and sticks, presumably dumped off the road.", 
-								 "Behind you is a cement block with a ladder leading down into it.", 
-								 "In front of you is the tunnel.")
-				console.log('game.look() succeeded.')
-			} catch {
-				console.error('Excecution of game.look() failed.');
+	printOut('You are standing in a forest. You do not remember how you got there or where you are.',
+		'You realize that you are hungry and need to eat something.')
+	warning('HUNGRY');
+	setInterval(function() {
+			var i = 0;
+			if(i === 600) {
+				printOut('You did not eat and starved to death.',
+					 "<br>Don't do it again.")
+				setTimeout(function() {game.reset()}, 5000)
+			}
 		}
 	}
 }
