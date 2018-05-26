@@ -2,7 +2,9 @@ var output = "type start to begin"
 var command = null;
 var note;
 var thing;
-var inventory = 0;
+var inventory = new Object()
+inventory.spots = 0;
+inventory.contentsOf;
 var place = 'first'
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
@@ -187,22 +189,23 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 game.pickUp = function(action) {
 	if(action.includes('pick') || action.includes('hold') || action.includes('grab')) {
 		if(action.includes('pick up')) {
-			thing = action.slice(8)
+			var thing = action.slice(8)
 			var otherThing = action.slice(8)
 		} else {
-			thing = action.slice(5)
+			var thing = action.slice(5)
 			var otherThing = action.slice(5)
 		}
-		if(inventory === 3) {
+		if(inventory.spots === 3) {
 			printOut('Your hands are full.')
 		} else {
 			eval(thing + ' = new Object()')
-			inventory++
+			inventory.spots
 			if(eats.includes(otherThing)) {
 				eval(thing + '.edible = true')
 			} else {
 				eval(thing + '.edible = false')
 			}
+			inventory.contentsOf = [thing]
 			printOut('Taken')
 		}
 	}
@@ -212,15 +215,15 @@ game.eat = function(action) {
 	try {
 	if(action.includes('eat') || action.includes('consume')) {
 		if(action.includes('consume')) {
-			thing = action.slice(8)
+			var thing = action.slice(8)
 			var otherThing = action.slice(8)
 		} else {
-			thing = action.slice(4)
+			var thing = action.slice(4)
 			var otherThing = action.slice(4)
 		}
-			inventory++
+			inventory.spots++
 		if(eats.includes(otherThing)) {
-			inventory--
+			inventory.spots--
 			printOut('Eaten. <br> <br> You are not hungry anymore.')
 		}
 			printOut('You ate something you weren\'t supposed to. <br> <br> <br> END OF GAME  <br> [You died of food poisoning]')
