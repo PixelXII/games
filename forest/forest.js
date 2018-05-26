@@ -188,20 +188,21 @@ game.pickUp = function(action) {
 	if(action.includes('pick') || action.includes('hold') || action.includes('grab')) {
 		if(action.includes('pick up')) {
 			thing = action.slice(8)
+			var otherThing = action.slice(8)
 		} else {
 			thing = action.slice(5)
+			var otherThing = action.slice(5)
 		}
 		if(inventory === 3) {
 			printOut('Your hands are full.')
 		} else {
 			eval(thing + ' = new Object()')
 			inventory++
-			if(eats.includes(thing)) {
+			if(eats.includes(otherThing)) {
 				eval(thing + '.edible = true')
 			} else {
 				eval(thing + '.edible = false')
 			}
-		
 			printOut('Taken')
 		}
 	}
@@ -211,14 +212,16 @@ game.eat = function(action) {
 	if(action.includes('eat') || action.includes('consume')) {
 		if(action.includes('consume')) {
 			thing = action.slice(8)
+			var otherThing = action.slice(8)
 		} else {
 			thing = action.slice(4)
+			var otherThing = action.slice(4)
 		}
 			inventory++
-		if(eats.includes(eval(thing))) {
+		if(eats.includes(otherThing)) {
 			inventory--
 			printOut('Eaten. <br> <br> You are not hungry anymore.')
-		} else {
+		}
 			printOut('You ate something you weren\'t supposed to. <br> <br> <br> END OF GAME  <br> [You died of food poisoning]')
 			setTimeout(function() {game.reset();}, 5000);
 		}
