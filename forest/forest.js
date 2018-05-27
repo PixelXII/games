@@ -104,6 +104,8 @@ function doAction() {
 			game.start()
 		} else if(command.includes('grab') || command.includes('take') || command.includes('pick up')) {
 			game.pickUp(command)
+		} else if(command.includes('eat') || command.includes('consume')) {
+			game.eat(command)
 		} else if(place == 'first') {
 			firstPlace()
 		} else if(place == 'flowers') {
