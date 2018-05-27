@@ -1,6 +1,7 @@
 var output = "type start to begin"
 var command = null;
 var note;
+var place = 'first';
 var thing;
 var items = ['flowers', 'flower', 'daisy', 'hazelnut', 'rocks', 'rock', 'stone', 'stones']
 var pickUp = ['pick up', 'pick', 'grab', 'take']
