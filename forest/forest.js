@@ -97,7 +97,6 @@ function flowerPlace() {
 }
 
 function doAction() {
-	try {
 		command = inElement.value;
 		inElement.value = "";
 		if(place == 'first' && command == 'start' || command == 'Start') {
@@ -120,10 +119,6 @@ function doAction() {
 		if(outElement.innerHTML == 'undefined') {
 			outElement.innerHTML = "I don't understand what you mean."
 		}
-		console.log('doAction() done'); 
-	} catch {
-		console.error('doAction() failed.')
-	}	
 }
 inElement.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
