@@ -99,7 +99,7 @@ function flowerPlace() {
 function doAction() {
 		command = inElement.value;
 		inElement.value = "";
-		if(place == 'first' && command == 'start' || command == 'Start') {
+		if(command == 'start' || command == 'Start') {
 			game.start()
 		} else {
 			if(place == 'first') {
