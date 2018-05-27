@@ -1,4 +1,4 @@
-var output = "<h2 class='tajawal'>Options: <br> [select one]</h2> <br> <br> caving <br> <br> <i style='font-size:12px;'>there's only one right now</i>"
+var output = "<h2 class='tajawal'>Options:</h2> <br> [select one] <br> <br> caving <br> <br> forest"
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
@@ -18,6 +18,8 @@ function doAction() {
 	inElement.value = ''
 	if(command == 'caving' || command == 'cave') {
  	     location = './caving/'
+	} else if(command == 'forest' || command == 'Forest') {
+		location = './forest/'
 	} else {
 		printOut('there is only one game right now <br> <br> <br> <h1>check back later</h1>')
 	}
