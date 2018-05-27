@@ -105,7 +105,7 @@ function doAction() {
 		} else if(command.includes('grab') || command.includes('take') || command.includes('pick up') || command.includes('eat') || command.includes('consume')) {
 			if(command.includes('grab') || command.includes('take') || command.includes('pick up')) {
 				game.pickUp(command)
-			} else {
+			} else if(command.includes('eat') || command.includes('consume')) {
 				game.eat(command)
 			}
 		} else if(place == 'first') {
