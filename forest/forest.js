@@ -120,7 +120,7 @@ function doAction() {
 		if(outElement.innerHTML == 'undefined') {
 			outElement.innerHTML = "I don't understand what you mean."
 		}
-		console.log('doAction() done');
+		console.log('doAction() done'); 
 	} catch {
 		console.error('doAction() failed.')
 	}	
