@@ -100,24 +100,27 @@ function doAction() {
 	try {
 		command = inElement.value;
 		inElement.value = "";
-		if(command == 'start' || command == 'Start' || command.includes('help') || command.includes('Help')) {
+		if(place == 'first' && command == 'start' || command == 'Start') {
 			game.start()
-		} else if(command.includes('grab') || command.includes('take') || command.includes('pick up') || command.includes('eat') || command.includes('consume')) {
-			if(command.includes('grab') || command.includes('take') || command.includes('pick up')) {
-				game.pickUp(command)
-			} else if(command.includes('eat') || command.includes('consume')) {
-				game.eat(command)
+		} else {
+			if(place == 'first') {
+				firstPlace()
+			} else if(place == 'flowers') {
+				flowerPlace()
+			} else if(place == 'end') {
+				game.end()
 			}
-		} else if(place == 'first') {
-			firstPlace()
-		} else if(place == 'flowers') {
-			flowerPlace()
-		} else if(place == 'end') {
-			game.end()
-		} else if(outElement.innerHTML == 'undefined') {
+			if(command.includes('grab') || command.includes('take') || command.includes('pick up') || command.includes('eat') || command.includes('consume')) {
+				if(command.includes('grab') || command.includes('take') || command.includes('pick up')) {
+					game.pickUp(command)
+				} else if(command.includes('eat') || command.includes('consume')) {
+					game.eat(command)
+			}
+		} 
+		if(outElement.innerHTML == 'undefined') {
 			outElement.innerHTML = "I don't understand what you mean."
 		}
-			console.log('doAction() done');
+		console.log('doAction() done');
 	} catch {
 		console.error('doAction() failed.')
 	}	
