@@ -119,6 +119,7 @@ function doAction() {
 		if(outElement.innerHTML == 'undefined') {
 			outElement.innerHTML = "I don't understand what you mean."
 		}
+	}
 }
 inElement.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
