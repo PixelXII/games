@@ -102,10 +102,12 @@ function doAction() {
 		inElement.value = "";
 		if(command == 'start' || command == 'Start' || command.includes('help') || command.includes('Help')) {
 			game.start()
-		} else if(command.includes('grab') || command.includes('take') || command.includes('pick up')) {
-			game.pickUp(command)
-		} else if(command.includes('eat') || command.includes('consume')) {
-			game.eat(command)
+		} else if(command.includes('grab') || command.includes('take') || command.includes('pick up') || command.includes('eat') || command.includes('consume')) {
+			if(command.includes('grab') || command.includes('take') || command.includes('pick up')) {
+				game.pickUp(command)
+			} else {
+				game.eat(command)
+			}
 		} else if(place == 'first') {
 			firstPlace()
 		} else if(place == 'flowers') {
