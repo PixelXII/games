@@ -5,7 +5,25 @@ var thing;
 var inventory = new Object()
 inventory.spots = 0;
 inventory.contentsOf = [" "]
-var place = 'first'
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') {
+            c = c.substring(1,c.length);
+        }
+        if (c.indexOf(nameEQ) === 0) {
+            return c.substring(nameEQ.length,c.length);
+        }
+    }
+    return null;
+}
+if(readCookie('place') != null) {
+		var place = readCookie('place')
+	} else {
+		var place = 'first'
+	}
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
@@ -206,12 +224,12 @@ game.pickUp = function(action) {
 		if(inventory.spots === 3) {
 			printOut('Your hands are full.')
 		} else {
-			eval(thing + ' = new Object()')
+			eval(thing + 'Thing = new Object()')
 			inventory.spots++
 			if(eats.includes(otherThing)) {
-				eval(thing + '.edible = true')
+				eval(thing + 'Thing.edible = true')
 			} else {
-				eval(thing + '.edible = false')
+				eval(thing + 'Thing.edible = false')
 			}
 			inventory.contentsOf.pop()
 			inventory.contentsOf.push(thing)
@@ -220,7 +238,7 @@ game.pickUp = function(action) {
 	}
 }
 
- /* game.eat = function(action) {
+ game.eat = function(action) {
 	if(action.includes('eat') || action.includes('consume')) {
 		if(action.includes('consume')) {
 			var thing = action.slice(8)
@@ -229,9 +247,9 @@ game.pickUp = function(action) {
 			var thing = action.slice(4)
 			var otherThing = action.slice(4)
 		}
+		if(eval(thing+'Thing.edible') === true) {
 			inventory.spots--
 			printOut('Eaten. <br> <br> You are not hungry anymore.')
-			inventory.spots--
 		} else {
 			printOut('You ate something you weren\'t supposed to. <br> <br> <br> END OF GAME  <br> [You died of food poisoning]')
 			setTimeout(function() {game.reset();}, 5000);
@@ -239,5 +257,3 @@ game.pickUp = function(action) {
 		console.log('eaten')
 	}
 }
-
-*/
