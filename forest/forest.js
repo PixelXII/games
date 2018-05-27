@@ -1,7 +1,7 @@
 var output = "type start to begin"
 var command = null;
 var note;
-var place = 'first';
+var place = 'first'
 var thing;
 var items = ['flowers', 'flower', 'daisy', 'hazelnut', 'rocks', 'rock', 'stone', 'stones']
 var pickUp = ['pick up', 'pick', 'grab', 'take']
@@ -11,6 +11,8 @@ var nonEats = ['rock', 'shrine', 'grass']
 var poisons = ['red flower']
 var white, red, green, blue, purple, yellow, orange, brown;
 var inventory = new Object()
+inventory.spotsUsed = 0;
+inventory.contentsOf = []
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
@@ -97,6 +99,8 @@ function doAction() {
 			flowerPlace()
 		} else if(place == 'end') {
 			game.end()
+		} else if(command == 'inventory' || command == 'Inventory') {
+			game.displayInventory()
 		}
 		if(outElement.innerHTML == 'undefined') {
 			outElement.innerHTML = "I don't understand what you mean."
