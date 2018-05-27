@@ -247,7 +247,7 @@ game.pickUp = function(action) {
 		if(thing.includes(' ')) {
 			thing = thing.split(' ')
 			var newThing = thing.join()
-			thing = newThing
+			thing = newThing.replace(',', ' ');
 		}
 		if(eval(thing+'Thing.edible') === true) {
 			inventory.spotsUsed--
@@ -257,9 +257,7 @@ game.pickUp = function(action) {
 				inventory.contentsOf.pop()
 			}
 			outElement.innerHTML = ""
-			printOut("", 'Eaten.')
-		} else if(inventory.contentsOf.includes(eval(thing+'Thing')) === false) {
-			printOut('You do not have a ' + thing)
+			printOut("", 'Eaten.') 
 		} else {
 			printOut("You cannot eat that.")
 		}
