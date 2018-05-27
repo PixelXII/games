@@ -6,7 +6,7 @@ var thing;
 var items = ['flowers', 'flower', 'daisy', 'hazelnut', 'rocks', 'rock', 'stone', 'stones']
 var pickUp = ['pick up', 'pick', 'grab', 'take']
 var eatWords = ['eat', 'consume']
-var eats = ['hazelnut', 'white flower', 'daisy']
+var eats = ['hazelnut', 'white,flower', 'daisy']
 var nonEats = ['rock', 'shrine', 'grass']
 var poisons = ['red flower']
 var white, red, green, blue, purple, yellow, orange, brown;
@@ -209,8 +209,7 @@ game.pickUp = function(action) {
 		if(thing.includes(' ')) {
 			thing = thing.split(' ')
 			var newThing = thing.join()
-			newThing.replace(',', ' ');
-			thing = newThing
+			thing = newThing.replace(',', ' ');
 		}
 		if(items.includes(thing) === false) {
 			outElement.innerHTML = ""
@@ -220,7 +219,7 @@ game.pickUp = function(action) {
 			inventory.contentsOf.push(thing)
 			printOut('You have a ' + thing)
 		}
-		if(inventory.spots === 3) {
+		if(inventory.spotsUsed === 3) {
 			printOut('Your hands are full.')
 		} else {
 			eval(thing + 'Thing = new Object()')
@@ -257,7 +256,8 @@ game.pickUp = function(action) {
 			} else if(inventory.contentsOf.indexOf(thing) == inventory.contentsOf.length-1) {
 				inventory.contentsOf.pop()
 			}
-			printOut('Eaten. <br> <br> You are not hungry anymore.')
+			outElement.innerHTML = ""
+			printOut("", 'Eaten.')
 		} else if(inventory.contentsOf.includes(eval(thing+'Thing')) === false) {
 			printOut('You do not have a ' + thing)
 		} else {
