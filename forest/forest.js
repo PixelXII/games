@@ -117,8 +117,6 @@ function doAction() {
 			flowerPlace()
 		} else if(place == 'end') {
 			game.end()
-		} else if(command == 'inventory' || command == 'Inventory') {
-			game.displayInventory()
 		}
 		if(outElement.innerHTML == 'undefined') {
 			outElement.innerHTML = "I don't understand what you mean."
