@@ -258,9 +258,6 @@ function insidePlace() {
 								"inHut")
 				out2.innerHTML = ""
 			}
-			if(outElement.innerHTML === 'You approach the table, pick up the note, and walk out the door.') {
-				inventory.contentsOf.push('note')
-			}
 }
 
 function readNote() {
@@ -295,8 +292,8 @@ function doAction() {
 			downstreamPlace()
 		} else if(place == 'outHut') {
 			outsidePlace()
-		} else if(place == 'outHut' && inventory.contentsOf.includes('note')) {
-			setTimeout(function() { readNote() }, 5000)
+		} else if(place == 'outHut' && comand.includes('read') && command.includes('note')) {
+			readNote()
 		} else if(place == 'shrine' && inventory.contentsOf.includes('note')) {
 			setTimeout(function() { doNote() }, 5000)
 		} else if(place == 'inHut') {
