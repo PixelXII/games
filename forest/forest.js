@@ -153,8 +153,8 @@ function streamPlace() {
 function doAction() {
 		command = inElement.value;
 		inElement.value = "";
-		if(command == 'inventory' && outElement.innerHTML = "I don't understand what you mean.") {
-			game.displayInventory()
+		if(command.includes('()')) {
+			eval(command)
 		}
 		if(command == 'start' || command == 'Start') {
 			game.start()
