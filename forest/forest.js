@@ -155,7 +155,8 @@ function doAction() {
 		inElement.value = "";
 		if(command == 'start' || command == 'Start') {
 			game.start()
-		} else if(command == 'inventory' || command == 'Inventory') {
+		}
+		if(command == 'inventory' || command == 'Inventory') {
 			game.displayInventory()
 		}
 		else if(place == 'first') {
