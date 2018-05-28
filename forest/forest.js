@@ -258,6 +258,9 @@ function insidePlace() {
 								"inHut")
 				out2.innerHTML = ""
 			}
+			if(outElement.innerHTML === 'You approach the table, pick up the note, and walk out the door.') {
+				inventory.contentsOf.push('note')
+			}
 }
 
 function readNote() {
