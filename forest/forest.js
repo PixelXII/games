@@ -199,7 +199,7 @@ game.end = function() {
 
 game.start = function() {
 	inElement.style.display = "none"
-	printOut("<h3>COMMANDS:</h3> <br> move [direction](left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item]")
+	printOut("<h5>COMMANDS:</h5> <br> move [direction](left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item]")
 	setTimeout(function() {game.first()}, 5000);
 }
 
@@ -228,8 +228,7 @@ game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
 	printOut('You are standing in a forest. You do not remember how you got there or where you are.',
 		'You realize that you are hungry and need to eat something.')
-	setInterval(function() {game.displayInventory()}, 100)
-	}
+}
 
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
 	if(action.includes('move ') || action.includes('step') || action.includes('go') || action.includes('walk')) {
@@ -249,24 +248,6 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 			return "I don't understand what you mean."
 		}
 	}
-}
-game.displayInventory = function() {
-	if(inventory.contentsOf.length === 3) {
-		noteElem.innerHTML = inventory.contentsOf[1]+'<br><br>'+inventory.contentsOf[2]+'<br><br>'+inventory.contentsOf[3]
-	}
-	if(inventory.contentsOf.length === 2) {
-		noteElem.innerHTML = inventory.contentsOf[1]+'<br><br>'+inventory.contentsOf[2]
-	}
-	if(inventory.contentsOf.length === 1) {
-		noteElem.innerHTML = inventory.contentsOf[1]
-	} 
-	if(inventory.contentsOf.length === 0) {
-		noteElem.innerHTML = 'There is nothing in your inventory.'
-	}
-}
-
-if(noteElem.innerHTML == 'undefined') {
-	noteElem.innerHTML.replace('undefined', inventory.contentsOf[1])
 }
 
 game.pickUp = function(action, eats, items, poisons) {
