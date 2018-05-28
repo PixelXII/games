@@ -78,6 +78,7 @@ function firstPlace() {
 function firstOakPlace() {
 	var eats = ['acorn']
 	var items = ['rock', 'stone', 'acorn', 'stick', 'twig']
+	var poisons = []
 	eating(eats, items, poisons)
 	if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
