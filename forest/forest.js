@@ -8,6 +8,7 @@ var eatWords = ['eat', 'consume']
 var nonEats = ['rock', 'shrine', 'grass']
 var white, red, green, blue, purple, yellow, orange, brown;
 var inventory = new Object()
+var game = new Object()
 inventory.spotsUsed = 0;
 inventory.contentsOf = []
 var inElement = document.getElementById('input');
@@ -176,9 +177,6 @@ inElement.addEventListener("keydown", function (e) {
       doAction()
     }
 });
-
-
-var game = new Object();
 
 game.reset = function() {
 	noteElem.innerHTML = ""
