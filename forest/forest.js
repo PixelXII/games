@@ -40,8 +40,19 @@ var slice = function(command, start, end) {
 	return command.slice(start, end)
 }
 
+function eating() {
+	if(command.includes('eat')) {
+		game.eat(command)
+	} else if(command.includes('throw') || command.includes('chuck') || command.includes('drop')) {
+		game.throw(command)
+	} else if(command.includes('grab') || command.includes('pick') || command.includes('take')) {
+		game.pickUp(command)
+	}
+}
+
 function firstPlace() {
-	 if(command.includes('look')) {
+	eating()
+	if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
 						"To your right there is a small, bubbling stream.", 
 						"To your left is a giant oak tree.", 
@@ -63,13 +74,8 @@ function firstPlace() {
 }
 
 function flowerPlace() {
-	if(command.includes('eat')) {
-		game.eat(command)
-	} else if(command.includes('throw') || command.includes('chuck') || command.includes('drop')) {
-		game.throw(command)
-	} else if(command.includes('grab') || command.includes('pick') || command.includes('take')) {
-		game.pickUp(command)
-	} else if(command.includes('look')) {
+	eating()
+	if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
 						"To your right there is the small, bubbling stream.", 
 						"To your left is a hazelnut tree. You can see some hazelnuts on the tree.", 
@@ -196,7 +202,15 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 }
 
 game.displayInventory = function() {
-	printOut(inventory.contentsOf + '<br> <br> You have ' + 3-inventory.spotsUsed + ' spots in your backpack left.')
+	if(inventory.contentsOf.length === 3)
+		printOut(inventory.contentsOf[1]+'<br><br>'+inventory.contentsOf[2]+'<br><br>'+inventory.contentsOf[3])
+	} else if(inventory.contentsOf.length === 2) {
+		printOut(inventory.contentsOf[1]+'<br><br>'+inventory.contentsOf[2])
+	} else if(inventory.contentsOf.length === 1) {
+		printOut(inventory.contentsOf[1])
+	} else {
+		printOut('There is nothing in your inventory.')
+	}
 }
 
 game.pickUp = function(action) {
@@ -269,7 +283,7 @@ game.pickUp = function(action) {
 		} else {
 			printOut("You cannot eat that.")
 		}
-		console.log(thing+'eaten')
+		console.log(thing+' eaten')
 	}
  }
  
@@ -286,6 +300,8 @@ game.pickUp = function(action) {
 			thing = thing.split(' ')
 			var newThing = thing.join()
 			thing = newThing.replace(',', ' ');
+		} else if(thing.includes(',')) {
+			thing = thing.replace(',', ' ')
 		}
 		if(inventory.contentsOf.includes(thing) === false) {
 			printOut("", "You do not have a " + thing)
@@ -300,8 +316,8 @@ game.pickUp = function(action) {
   				array.splice(index, 1);
 			}
 			outElement.innerHTML = ""
-			printOut("", 'You are now rid of the '+thing) 
+			printOut("", 'You do not have a '+thing+' anymore') 
 		}
-		console.log(thing+'dropped')
+		console.log(thing+' dropped')
 	}
  }
