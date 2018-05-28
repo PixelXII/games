@@ -101,7 +101,7 @@ function flowerPlace() {
 
 function shrinePlace() {
 	var eats = ['hazelnut', 'acorn', 'blackberry', 'blackberries']
-	var items = ['rock', 'stone', 'acorn', 'hazelnut', 'stick', 'shrine', 'blackberry', 'blackberries']
+	var items = ['rock', 'stone', 'acorn', 'hazelnut', 'stick', 'shrine', 'blackberry', 'blackberries', 'mushroom']
 	var poisons = ['mushroom']
 	eating(eats, items, poisons)
 	if(command.includes('look')) {
@@ -126,7 +126,7 @@ function shrinePlace() {
 }
 function streamPlace() {
 	var eats = ['fish']
-	var items = ['rock', 'stone']
+	var items = ['rock', 'stone', 'crayfish', 'fish']
 	var poisons = ['crayfish']
 	eating(eats, items, poisons)
 	if(command.includes('look')) {
