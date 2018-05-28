@@ -134,7 +134,7 @@ game.end = function() {
 
 game.start = function() {
 	inElement.style.display = "none"
-	printOut("<h2>COMMANDS:</h2> <br> move [direction](left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item]")
+	printOut("<h3>COMMANDS:</h3> <br> move [direction](left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item]")
 	setTimeout(function() {game.first()}, 5000);
 }
 
