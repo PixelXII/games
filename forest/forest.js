@@ -65,6 +65,8 @@ function firstPlace() {
 function flowerPlace() {
 	if(command.includes('eat')) {
 		game.eat(command)
+	} else if(command.includes('throw') || command.includes('chuck') || command.includes('drop')) {
+		game.throw(command)
 	} else if(command.includes('grab') || command.includes('pick') || command.includes('take')) {
 		game.pickUp(command)
 	} else if(command.includes('look')) {
@@ -302,3 +304,4 @@ game.pickUp = function(action) {
 		}
 		console.log(thing+'dropped')
 	}
+ }
