@@ -3,6 +3,8 @@ var command = null;
 var note;
 var place = 'first'
 var thing;
+var mainEats = ['acorn', 'hazelnut', 'daisy', 'white flower', 'blackberries', 'blackberry', 'berry', 'fish']
+var mainPoisons = ['mushroom', 'red flower', 'crayfish']
 var pickUp = ['pick up', 'pick', 'grab', 'take']
 var eatWords = ['eat', 'consume']
 var nonEats = ['rock', 'shrine', 'grass']
@@ -73,6 +75,31 @@ function firstPlace() {
 			}
 }
 
+function firstOakPlace() {
+	var eats = ['acorn']
+	var items = ['rock', 'stone', 'acorn', 'stick', 'twig']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
+						"On the right there is a massive branch. The branch is too big to climb up.", 
+						"To your left is a place where the trunk splits. It is impossible to climb to the split without 3 legs.", 
+						"Behind you is where you started, just before the flowers.", 
+						"In front of you is a blackberry thicket.")
+			out2.innerHTML = ""
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+				outElement.innerHTML = game.move(command, 
+						"You take a step into the cold, clear water of the stream. ",
+								 "stream",
+						"You climb the oak tree.",
+								 "firstOak",
+						"The tree is too large to climb",
+								 "first",
+						"You walk ahead to the flower patch. You notice that all of the flowers are red, except for one daisy.",
+								"flowers")
+				out2.innerHTML = ""
+			}
+}
+
 function flowerPlace() {
 	var eats = ['hazelnut', 'acorn', 'daisy', 'white flower']
 	var items = ['rock', 'stone', 'acorn', 'hazelnut', 'daisy', 'red flower', 'white flower']
@@ -100,7 +127,7 @@ function flowerPlace() {
 }
 
 function shrinePlace() {
-	var eats = ['hazelnut', 'acorn', 'blackberry', 'blackberries']
+	var eats = ['hazelnut', 'acorn', 'blackberry', 'blackberries', 'berry']
 	var items = ['rock', 'stone', 'acorn', 'hazelnut', 'stick', 'shrine', 'blackberry', 'blackberries', 'mushroom']
 	var poisons = ['mushroom']
 	eating(eats, items, poisons)
@@ -277,7 +304,7 @@ game.pickUp = function(action, eats, items, poisons) {
 		} else {
 			eval(thing + 'Thing = new Object()')
 			inventory.spotsUsed++
-			if(eats.includes(otherThing) || poisons.includes(otherThing)) {
+			if(mainEats.includes(otherThing) || mainPoisons.includes(otherThing)) {
 				eval(thing + 'Thing.edible = true')
 			} else { 
 				eval(thing + 'Thing.edible = false')
@@ -314,12 +341,7 @@ game.pickUp = function(action, eats, items, poisons) {
   				array.splice(index, 1);
 			}
 			outElement.innerHTML = ""
-			if(poisons.includes(otherThing)) {
-				printOut("", "You were poisoned by the " + thing + "<br><br><br>END OF GAME<br> [You were poisoned])")
-				setTimeout(function() {game.reset()}, 5000)
-			} else if(eats.includes(otherThing)) {
-				printOut("", 'Eaten.') 
-			}
+			printOut("", 'Eaten.') 
 		} else {
 			printOut("You cannot eat that.", "")
 		}
