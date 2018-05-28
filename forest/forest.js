@@ -178,7 +178,7 @@ inElement.addEventListener("keydown", function (e) {
     }
 });
 	
-	var game = new Object()
+var game = new Object()
 
 game.reset = function() {
 	noteElem.innerHTML = ""
