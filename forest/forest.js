@@ -171,7 +171,7 @@ function doAction() {
 			game.end()
 		} 
 		if(outElement.innerHTML == 'undefined') {
-			outElement.innerHTML = "I don't understand what you mean."
+			printOut("I don't understand what you mean.", "")
 		}
 }
 inElement.addEventListener("keydown", function (e) {
@@ -228,15 +228,6 @@ game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
 	printOut('You are standing in a forest. You do not remember how you got there or where you are.',
 		'You realize that you are hungry and need to eat something.')
-	setInterval(function() {
-			var i = 0;
-			if(i === 600) {
-				printOut('You did not eat and starved to death.',
-					 "<br>Don't do it again.")
-				setTimeout(function() {game.reset()}, 5000)
-			}
-			i++
-		}, 1000)
 	}
 
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
@@ -339,7 +330,7 @@ game.pickUp = function(action, eats, items, poisons) {
 			outElement.innerHTML = ""
 			printOut("", 'Eaten.') 
 		} else {
-			printOut("You cannot eat that.")
+			printOut("You cannot eat that.", "")
 		}
 		console.log(thing+' eaten')
 	}
@@ -374,7 +365,7 @@ game.pickUp = function(action, eats, items, poisons) {
   				array.splice(index, 1);
 			}
 			outElement.innerHTML = ""
-			printOut("", 'You do not have a '+thing+' anymore') 
+			printOut('You do not have a '+thing+' anymore', "") 
 		}
 		console.log(thing+' dropped')
 	}
