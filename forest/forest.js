@@ -272,7 +272,7 @@ game.displayInventory = function() {
 }
 
 game.pickUp = function(action, eats, items, poisons) {
-	if(action.includes('pick up') || action.includes('pick') || action.includes('hold') || action.includes('grab')) {
+	if(action.includes('pick up') || action.includes('pick') || action.includes('hold') || action.includes('grab') || action.includes('take')) {
 		if(action.includes('pick up')) {
 		   	var thing = action.slice(8);
 			var otherThing = thing;
