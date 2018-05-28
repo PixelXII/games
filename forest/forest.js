@@ -249,6 +249,9 @@ game.pickUp = function(action) {
 			var newThing = thing.join()
 			thing = newThing.replace(',', ' ');
 		}
+		if(inventory.contentsOf.includes(thing) === false) {
+			printOut("", "You do not have a " + thing)
+		} 
 		if(eval(thing+'Thing.edible') === true) {
 			inventory.spotsUsed--
 			if(inventory.contentsOf.indexOf(thing) == 0) {
