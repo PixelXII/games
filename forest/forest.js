@@ -292,7 +292,7 @@ function doAction() {
 			downstreamPlace()
 		} else if(place == 'outHut') {
 			outsidePlace()
-		} else if(place == 'outHut' && comand.includes('read') && command.includes('note')) {
+		} else if(inventory.contentsOf.includes('note') && comand.includes('read') && command.includes('note')) {
 			readNote()
 		} else if(place == 'shrine' && inventory.contentsOf.includes('note')) {
 			setTimeout(function() { doNote() }, 5000)
