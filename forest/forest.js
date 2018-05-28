@@ -194,6 +194,8 @@ function doAction() {
 			streamPlace()
 		} else if(place == 'shrine') {
 			shrinePlace()
+		} else if(place == 'firstOak') {
+			firstOakPlace()
 		} else if(place == 'end') {
 			game.end()
 		} 
