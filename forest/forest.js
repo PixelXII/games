@@ -260,6 +260,15 @@ function insidePlace() {
 			}
 }
 
+function readNote() {
+	printOut("The note says:<br><br>", "<q>Please put this by the shrine in the woods. I would appreciate it very much. Thank you.</q>")
+}
+
+function doNote() {
+	printOut('You put the note on the blackberries in the shrine.', 'You feel an enlightening sensation come over you, and you feel yourself leaving the forest.')
+	setTimeout(function() {game.end()}, 5000)
+}
+
 function doAction() {
 		command = inElement.value;
 		inElement.value = "";
@@ -283,8 +292,11 @@ function doAction() {
 			downstreamPlace()
 		} else if(place == 'outHut') {
 			outsidePlace()
-		} /* else if(place == 'outHut' && inventory.contentsOf.includes('note')) { */
-		else if(place == 'inHut') {
+		} else if(place == 'outHut' && inventory.contentsOf.includes('note')) {
+			setTimeout(function() { readNote() }, 5000)
+		} else if(place == 'shrine' && inventory.contentsOf.includes('note')) {
+			setTimeout(function() { doNote() }, 5000)
+		} else if(place == 'inHut') {
 			insidePlace()
 		} else if(place == 'end') {
 			game.end()
@@ -312,7 +324,7 @@ game.reset = function() {
 }
 
 game.end = function() {
-	printOut('END OF GAME <br> ------------------------------<br> You have reached the end of this adventure. <br> <br> Game written by Kai Wildberger, age 12, grade 6 <br> <br> <br> <br> May 24th, 2018');
+	printOut('END OF GAME <br> ------------------------------<br> You have reached the end of this adventure. <br> <br> Game written by Kai Wildberger, age 12, grade 6 <br> <br> <br> <br> May DATE, 2018');
 	inElement.style.display = "none"
 }
 
