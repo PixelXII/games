@@ -228,6 +228,7 @@ game.first = function() {
 	noteElem.innerHTML = "game written by kai wildberger"
 	printOut('You are standing in a forest. You do not remember how you got there or where you are.',
 		'You realize that you are hungry and need to eat something.')
+	setInterval(function() {game.displayInventory()}, 100)
 	}
 
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
@@ -251,16 +252,16 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 }
 game.displayInventory = function() {
 	if(inventory.contentsOf.length === 3) {
-		printOut(inventory.contentsOf[1]+'<br><br>'+inventory.contentsOf[2]+'<br><br>'+inventory.contentsOf[3])
+		noteElem.innerHTML = inventory.contentsOf[1]+'<br><br>'+inventory.contentsOf[2]+'<br><br>'+inventory.contentsOf[3]
 	}
 	if(inventory.contentsOf.length === 2) {
-		printOut(inventory.contentsOf[1]+'<br><br>'+inventory.contentsOf[2])
+		noteElem.innerHTML = inventory.contentsOf[1]+'<br><br>'+inventory.contentsOf[2]
 	}
 	if(inventory.contentsOf.length === 1) {
-		printOut(inventory.contentsOf[1]);
+		noteElem.innerHTML = inventory.contentsOf[1]
 	} 
 	if(inventory.contentsOf.length === 0) {
-		printOut('There is nothing in your inventory.');
+		noteElem.innerHTML = 'There is nothing in your inventory.'
 	}
 }
 
