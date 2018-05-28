@@ -7,7 +7,6 @@ var pickUp = ['pick up', 'pick', 'grab', 'take']
 var eatWords = ['eat', 'consume']
 var nonEats = ['rock', 'shrine', 'grass']
 var white, red, green, blue, purple, yellow, orange, brown;
-var game = new Object()
 var inventory = new Object()
 inventory.spotsUsed = 0;
 inventory.contentsOf = []
@@ -149,6 +148,8 @@ function streamPlace() {
 								"downStream")
 				out2.innerHTML = ""
 			}
+	}
+}
 
 function doAction() {
 		command = inElement.value;
@@ -177,6 +178,8 @@ inElement.addEventListener("keydown", function (e) {
       doAction()
     }
 });
+	
+	var game = new Object()
 
 game.reset = function() {
 	noteElem.innerHTML = ""
