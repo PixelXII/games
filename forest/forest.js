@@ -89,14 +89,14 @@ function firstOakPlace() {
 			out2.innerHTML = ""
 			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
-						"You take a step into the cold, clear water of the stream. ",
-								 "stream",
-						"You climb the oak tree.",
+						"You cannot climb the branch.",
 								 "firstOak",
-						"The tree is too large to climb",
+						"You cannot reach there.",
+								 "firstOak",
+						"You jump off the tree.",
 								 "first",
-						"You walk ahead to the flower patch. You notice that all of the flowers are red, except for one daisy.",
-								"flowers")
+						"You decide not to jump into the brambles.",
+								"firstOak")
 				out2.innerHTML = ""
 			}
 }
@@ -153,6 +153,10 @@ function shrinePlace() {
 			}
 }
 function streamPlace() {
+	if(command == 'drown') {
+		printOut('You drowned in the stream because you wanted to.')
+		setTimeout(function() {game.reset()}, 5000)
+	}
 	var eats = ['fish']
 	var items = ['rock', 'stone', 'crayfish', 'fish']
 	var poisons = ['crayfish']
@@ -170,13 +174,91 @@ function streamPlace() {
 								 "oppBank",
 						"You exit the stream.",
 								 "first",
-						"You decide to wade up the stream.",
-								 "upStream",
+						"The current is too great to wade up the stream.",
+								 "stream",
 						"You walk ahead to the bend in the river.",
 								"downStream")
 				out2.innerHTML = ""
 			}
 	}
+
+function downstreamPlace() {
+	var eats = ['fish']
+	var poisons = []
+	var items = ['rock', 'stone', 'fish']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
+						"On the right is a small hut, peeking over the tops of some bushes.", 
+						"To your left is some blackberry bushes. You can see the top of a shrine through the bushes.", 
+						"Behind you is the part of the stream that you entered.", 
+						"In front of you, the stream flows underground, into a massive cliff.")
+			out2.innerHTML = ""
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+				outElement.innerHTML = game.move(command, 
+						"You take your chances and approach the hut.",
+								 "outHut",
+						"You cannot climb over the blackberry bushes.",
+								 "downstream",
+						"You decide to start making your way back before anything happens.",
+								 "stream",
+						"You cannot go underground or up the cliff.",
+								"downstream")
+				out2.innerHTML = ""
+			}
+}
+
+function outsidePlace() {
+	var eats = ['blackberry', 'hazelnut']
+	var poisons = ['mushroom']
+	var items = ['rock', 'stone', 'mushroom', 'hazelnut', 'acorn', 'stick', 'twig', 'blackberry']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
+						"To the right is a dense copse of trees.", 
+						"To your left is the cliff that the stream ran under.", 
+						"Behind you is the stream.", 
+						"In front of you is a small straw hut.")
+			out2.innerHTML = ""
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+				outElement.innerHTML = game.move(command, 
+						"You cannot walk through the trees.",
+								 "outHut",
+						"You cannot walk up the cliff, or through it.",
+								 "outHut",
+						"You walk back to the stream.",
+								 "downstream",
+						"You enter the hut cautiously. <br> There doesn't seem to be anyone inside.",
+								"inHut")
+				out2.innerHTML = ""
+			}
+}
+
+function insidePlace() {
+	var eats = ['porridge']
+	var poisons = []
+	var items = ['porridge', 'note']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
+						"On your right is a small wood-burning stove.", 
+						"To your left is a table with a note on it.", 
+						"Behind you is the door.", 
+						"In front of you is a large leather chair.")
+			out2.innerHTML = ""
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+				outElement.innerHTML = game.move(command, 
+						"You cannot walk through the fire.",
+								 "inHut",
+						"You approach the table, pick up the note, and walk out the door.",
+								 "outHut",
+						"You walk back out the door.",
+								 "outHut",
+						"You are about to sit down on the chair when you realize there is a tarantula on the chair.",
+								"inHut")
+				out2.innerHTML = ""
+			}
+}
 
 function doAction() {
 		command = inElement.value;
@@ -197,6 +279,13 @@ function doAction() {
 			shrinePlace()
 		} else if(place == 'firstOak') {
 			firstOakPlace()
+		} else if(place == 'downstream') {
+			downstreamPlace()
+		} else if(place == 'outHut') {
+			outsidePlace()
+		} /* else if(place == 'outHut' && inventory.contentsOf.includes('note')) { */
+		else if(place == 'inHut') {
+			insidePlace()
 		} else if(place == 'end') {
 			game.end()
 		} 
