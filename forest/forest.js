@@ -299,10 +299,8 @@ game.pickUp = function(action, eats, items, poisons) {
 		} else {
 			eval(thing + 'Thing = new Object()')
 			inventory.spotsUsed++
-			if(eats.includes(otherThing)) {
+			if(eats.includes(otherThing) || poisons.includes(otherThing)) {
 				eval(thing + 'Thing.edible = true')
-			} else if(poisons.includes(otherThing)) {
-				eval(thing + "Thing.edible = 'poison'")
 			} else { 
 				eval(thing + 'Thing.edible = false')
 			}
