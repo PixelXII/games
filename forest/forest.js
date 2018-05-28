@@ -155,7 +155,10 @@ function doAction() {
 		inElement.value = "";
 		if(command == 'start' || command == 'Start') {
 			game.start()
-		} else if(place == 'first') {
+		} else if(command == 'inventory' || command == 'Inventory') {
+			game.displayInventory()
+		}
+		else if(place == 'first') {
 			firstPlace()
 		} else if(place == 'flowers') {
 			flowerPlace()
@@ -165,9 +168,7 @@ function doAction() {
 			shrinePlace()
 		} else if(place == 'end') {
 			game.end()
-		} else if(command == 'inventory' || command == 'Inventory') {
-			game.displayInventory()
-		}
+		} 
 		if(outElement.innerHTML == 'undefined') {
 			outElement.innerHTML = "I don't understand what you mean."
 		}
