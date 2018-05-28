@@ -3,12 +3,9 @@ var command = null;
 var note;
 var place = 'first'
 var thing;
-var items = ['flowers', 'flower', 'daisy', 'hazelnut', 'rocks', 'rock', 'stone', 'stones']
 var pickUp = ['pick up', 'pick', 'grab', 'take']
 var eatWords = ['eat', 'consume']
-var eats = ['hazelnut', 'white,flower', 'daisy']
 var nonEats = ['rock', 'shrine', 'grass']
-var poisons = ['red flower']
 var white, red, green, blue, purple, yellow, orange, brown;
 var inventory = new Object()
 inventory.spotsUsed = 0;
@@ -40,22 +37,25 @@ var slice = function(command, start, end) {
 	return command.slice(start, end)
 }
 
-function eating() {
+function eating(eats, items, poisons) {
 	if(command.includes('eat')) {
 		game.eat(command)
 	} else if(command.includes('throw') || command.includes('chuck') || command.includes('drop')) {
 		game.throw(command)
 	} else if(command.includes('grab') || command.includes('pick') || command.includes('take')) {
-		game.pickUp(command)
+		game.pickUp(command, eats, items, poisons)
 	}
 }
 
 function firstPlace() {
-	eating()
+	var eats = ['acorn', 'hazelnut']
+	var poisons = ['mushroom']
+	var items = ['rock', 'stone', 'mushroom', 'hazelnut', 'acorn', 'stick', 'twig']
+	eating(eats, items, poisons)
 	if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
-						"To your right there is a small, bubbling stream.", 
-						"To your left is a giant oak tree.", 
+						"To your right there is a small, bubbling stream. There is also a hazelnut shrub, bursting with hazelnuts.", 
+						"To your left is a giant oak tree. There are many mushrooms under the tree.", 
 						"Behind you is a massive tree. You cannot identify the species of this tree.", 
 						"In front of you is a small flower patch.")
 			out2.innerHTML = ""
@@ -74,7 +74,10 @@ function firstPlace() {
 }
 
 function flowerPlace() {
-	eating()
+	var eats = ['hazelnut', 'acorn', 'daisy', 'white flower']
+	var items = ['rock', 'stone', 'acorn', 'hazelnut', 'daisy', 'red flower', 'white flower']
+	var poisons = ['red flower']
+	eating(eats, items, poisons)
 	if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
 						"To your right there is the small, bubbling stream.", 
@@ -96,6 +99,56 @@ function flowerPlace() {
 			}
 }
 
+function shrinePlace() {
+	var eats = ['hazelnut', 'acorn', 'blackberry', 'blackberries']
+	var items = ['rock', 'stone', 'acorn', 'hazelnut', 'stick', 'shrine', 'blackberry', 'blackberries']
+	var poisons = ['mushroom']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
+						"To your right there is a blackberry thicket. You can hear the small, bubbling stream on the other side..", 
+						"To your left is a blackberry thicket. There are a few blackberries on the bush.", 
+						"Behind you is the flower patch.", 
+						"In front of you is the shrine. There is an offering of blackberries at the shrine.")
+			out2.innerHTML = ""
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+				outElement.innerHTML = game.move(command, 
+						"You cannot walk through the blackberry bush.",
+								 "shrine",
+						"You cannot walk through the blackberry bush",
+								 "shrine",
+						"You slowly back away from the shrine, back to the safety of the flowers.",
+								 "flowers",
+						"You cannot walk through the shrine.",
+								"shrine")
+				out2.innerHTML = ""
+			}
+}
+function streamPlace() {
+	var eats = ['fish']
+	var items = ['rock', 'stone']
+	var poisons = ['crayfish']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
+						"To your right there is the opposite bank of the stream. Under the water, you can see a crayfish.", 
+						"To your left is the patch of flowers and the mushrooms under the oak.", 
+						"Behind you is where the stream is coming from, and eventually, its source.", 
+						"In front of you is a bend in the stream. You cannot see past the bend.")
+			out2.innerHTML = ""
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+				outElement.innerHTML = game.move(command, 
+						"You step out of the stream and dry yourself off.",
+								 "oppBank",
+						"You exit the stream.",
+								 "first",
+						"You decide to wade up the stream.",
+								 "upStream",
+						"You walk ahead to the bend in the river.",
+								"downStream")
+				out2.innerHTML = ""
+			}
+
 function doAction() {
 		command = inElement.value;
 		inElement.value = "";
@@ -105,6 +158,10 @@ function doAction() {
 			firstPlace()
 		} else if(place == 'flowers') {
 			flowerPlace()
+		} else if(place == 'stream') {
+			streamPlace()
+		} else if(place == 'shrine') {
+			shrinePlace()
 		} else if(place == 'end') {
 			game.end()
 		} else if(command == 'inventory' || command == 'Inventory') {
@@ -213,7 +270,7 @@ game.displayInventory = function() {
 	}
 }
 
-game.pickUp = function(action) {
+game.pickUp = function(action, eats, items, poisons) {
 	if(action.includes('pick up') || action.includes('pick') || action.includes('hold') || action.includes('grab')) {
 		if(action.includes('pick up')) {
 		   	var thing = action.slice(8)
