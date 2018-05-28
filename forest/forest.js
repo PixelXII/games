@@ -253,8 +253,7 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 game.first = function() {
 	inElement.style.display = "block"
 	noteElem.innerHTML = "game written by kai wildberger"
-	printOut('You are standing in a forest. You do not remember how you got there or where you are.',
-		'You realize that you are hungry and need to eat something.')
+	printOut('You are standing in a forest. You do not remember how you got there or where you are.')
 }
 
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
