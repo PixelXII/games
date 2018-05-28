@@ -153,11 +153,11 @@ function streamPlace() {
 function doAction() {
 		command = inElement.value;
 		inElement.value = "";
+		if(command == 'inventory' && outElement.innerHTML = "I don't understand what you mean.") {
+			game.displayInventory()
+		}
 		if(command == 'start' || command == 'Start') {
 			game.start()
-		}
-		if(command == 'inventory' || command == 'Inventory') {
-			game.displayInventory()
 		}
 		else if(place == 'first') {
 			firstPlace()
