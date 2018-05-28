@@ -254,27 +254,24 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 		} else {
 			return "I don't understand what you mean."
 		}
-		
 	}
 }
-
 game.displayInventory = function() {
 	if(inventory.contentsOf.length === 3)
 		printOut(inventory.contentsOf[1]+'<br><br>'+inventory.contentsOf[2]+'<br><br>'+inventory.contentsOf[3])
-	}
-	if(inventory.contentsOf.length === 2) {
+	} else if(inventory.contentsOf.length === 2) {
 		printOut(inventory.contentsOf[1]+'<br><br>'+inventory.contentsOf[2])
 	} else if(inventory.contentsOf.length === 1) {
-		printOut(inventory.contentsOf[1])
+		printOut(inventory.contentsOf[1]);
 	} else {
-		printOut('There is nothing in your inventory.')
+		printOut('There is nothing in your inventory.');
 	}
 }
 
 game.pickUp = function(action, eats, items, poisons) {
 	if(action.includes('pick up') || action.includes('pick') || action.includes('hold') || action.includes('grab')) {
 		if(action.includes('pick up')) {
-		   	var thing = action.slice(8)
+		   	var thing = action.slice(8);
 			var otherThing = thing;
 		} else {
 			var thing = action.slice(5)
