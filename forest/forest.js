@@ -177,7 +177,7 @@ function streamPlace() {
 						"The current is too great to wade up the stream.",
 								 "stream",
 						"You walk ahead to the bend in the river.",
-								"downStream")
+								"downstream")
 				out2.innerHTML = ""
 			}
 	}
