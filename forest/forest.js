@@ -258,12 +258,47 @@ game.pickUp = function(action) {
 				inventory.contentsOf.shift()
 			} else if(inventory.contentsOf.indexOf(thing) == inventory.contentsOf.length-1) {
 				inventory.contentsOf.pop()
+			} else {
+				var index = inventory.contentsOf.indexOf(thing);
+  				array.splice(index, 1);
 			}
 			outElement.innerHTML = ""
 			printOut("", 'Eaten.') 
 		} else {
 			printOut("You cannot eat that.")
 		}
-		console.log('eaten')
+		console.log(thing+'eaten')
 	}
  }
+ 
+ game.throw = function(action) {
+	 if(action.includes('throw') || action.includes('chuck') || action.includes('drop')) {
+		if(action.includes('drop')) {
+			var thing = action.slice(5)
+			var otherThing = action.slice(5)
+		} else {
+			var thing = action.slice(6)
+			var otherThing = action.slice(6)
+		}
+		if(thing.includes(' ')) {
+			thing = thing.split(' ')
+			var newThing = thing.join()
+			thing = newThing.replace(',', ' ');
+		}
+		if(inventory.contentsOf.includes(thing) === false) {
+			printOut("", "You do not have a " + thing)
+		} else {
+			inventory.spotsUsed--
+			if(inventory.contentsOf.indexOf(thing) == 0) {
+				inventory.contentsOf.shift()
+			} else if(inventory.contentsOf.indexOf(thing) == inventory.contentsOf.length-1) {
+				inventory.contentsOf.pop()
+			} else {
+				var index = inventory.contentsOf.indexOf(thing);
+  				array.splice(index, 1);
+			}
+			outElement.innerHTML = ""
+			printOut("", 'You are now rid of the '+thing) 
+		}
+		console.log(thing+'dropped')
+	}
