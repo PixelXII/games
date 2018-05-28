@@ -65,7 +65,7 @@ function firstPlace() {
 				outElement.innerHTML = game.move(command, 
 						"You take a step into the cold, clear water of the stream. ",
 								 "stream",
-						"You climb the oak tree.",
+						"You climb the oak tree.", "",
 								 "firstOak",
 						"The tree is too large to climb",
 								 "first",
@@ -91,7 +91,7 @@ function firstOakPlace() {
 				outElement.innerHTML = game.move(command, 
 						"You cannot climb the branch.",
 								 "firstOak",
-						"You cannot reach there.",
+						"You cannot reach there.", "",
 								 "firstOak",
 						"You jump off the tree.",
 								 "first",
@@ -117,7 +117,7 @@ function flowerPlace() {
 				outElement.innerHTML = game.move(command, 
 						"You take a step into the cold, clear water of the stream. ",
 								 "stream",
-						"The hazelnut tree is not strong enough for you to climb.",
+						"The hazelnut tree is not strong enough for you to climb.", "",
 								 "flowers",
 						"You step out of the flower patch, back to where you started.",
 								 "first",
@@ -143,7 +143,7 @@ function shrinePlace() {
 				outElement.innerHTML = game.move(command, 
 						"You cannot walk through the blackberry bush.",
 								 "shrine",
-						"You cannot walk through the blackberry bush",
+						"You cannot walk through the blackberry bush", "",
 								 "shrine",
 						"You slowly back away from the shrine, back to the safety of the flowers.",
 								 "flowers",
@@ -172,7 +172,7 @@ function streamPlace() {
 				outElement.innerHTML = game.move(command, 
 						"You step out of the stream and dry yourself off.",
 								 "oppBank",
-						"You exit the stream.",
+						"You exit the stream.", "",
 								 "first",
 						"The current is too great to wade up the stream.",
 								 "stream",
@@ -198,7 +198,7 @@ function downstreamPlace() {
 				outElement.innerHTML = game.move(command, 
 						"You take your chances and approach the hut.",
 								 "outHut",
-						"You cannot climb over the blackberry bushes.",
+						"You cannot climb over the blackberry bushes.", "",
 								 "downstream",
 						"You decide to start making your way back before anything happens.",
 								 "stream",
@@ -224,7 +224,7 @@ function outsidePlace() {
 				outElement.innerHTML = game.move(command, 
 						"You cannot walk through the trees.",
 								 "outHut",
-						"You cannot walk up the cliff, or through it.",
+						"You cannot walk up the cliff, or through it.", "", 
 								 "outHut",
 						"You walk back to the stream.",
 								 "downstream",
@@ -250,7 +250,8 @@ function insidePlace() {
 				outElement.innerHTML = game.move(command, 
 						"You cannot walk through the fire.",
 								 "inHut",
-						"You approach the table, pick up the note, and walk out the door.",
+						"You approach the table, pick up the note, and walk out the door.", 
+								 "inventory.contentsOf.push('note')",
 								 "outHut",
 						"You walk back out the door.",
 								 "outHut",
@@ -360,7 +361,7 @@ game.first = function() {
 	printOut('You are standing in a forest. You do not remember how you got there or where you are.')
 }
 
-game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
+game.move = function(action, right, rightLoc, left, exec, leftLoc, back, backLoc, forward, forLoc) {
 	if(action.includes('move ') || action.includes('step') || action.includes('go') || action.includes('walk')) {
 		if(action.includes('right')) {
 			place = rightLoc
@@ -376,6 +377,9 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 			return forward;
 		} else {
 			return "I don't understand what you mean."
+		}
+		if(exec != null || exec != undefined) {
+			eval(exec)
 		}
 	}
 }
