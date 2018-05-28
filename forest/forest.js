@@ -314,7 +314,12 @@ game.pickUp = function(action, eats, items, poisons) {
   				array.splice(index, 1);
 			}
 			outElement.innerHTML = ""
-			printOut("", 'Eaten.') 
+			if(poisons.includes(otherThing)) {
+				printOut("", "You were poisoned by the " + thing + "<br><br><br>END OF GAME<br> [You were poisoned])")
+				setTimeout(function() {game.reset()}, 5000)
+			} else if(eats.includes(otherThing)) {
+				printOut("", 'Eaten.') 
+			}
 		} else {
 			printOut("You cannot eat that.", "")
 		}
