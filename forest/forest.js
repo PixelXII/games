@@ -149,7 +149,6 @@ function streamPlace() {
 				out2.innerHTML = ""
 			}
 	}
-}
 
 function doAction() {
 		command = inElement.value;
