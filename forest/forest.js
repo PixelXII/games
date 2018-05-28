@@ -265,6 +265,10 @@ game.displayInventory = function() {
 	}
 }
 
+if(noteElem.innerHTML == 'undefined') {
+	noteElem.innerHTML.replace('undefined', inventory.contentsOf[1])
+}
+
 game.pickUp = function(action, eats, items, poisons) {
 	if(action.includes('pick up') || action.includes('pick') || action.includes('hold') || action.includes('grab') || action.includes('take')) {
 		if(action.includes('pick up')) {
