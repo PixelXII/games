@@ -259,11 +259,14 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 game.displayInventory = function() {
 	if(inventory.contentsOf.length === 3)
 		printOut(inventory.contentsOf[1]+'<br><br>'+inventory.contentsOf[2]+'<br><br>'+inventory.contentsOf[3])
-	} else if(inventory.contentsOf.length === 2) {
+	}
+	if(inventory.contentsOf.length === 2) {
 		printOut(inventory.contentsOf[1]+'<br><br>'+inventory.contentsOf[2])
-	} else if(inventory.contentsOf.length === 1) {
+	}
+	if(inventory.contentsOf.length === 1) {
 		printOut(inventory.contentsOf[1]);
-	} else {
+	} 
+	if(inventory.contentsOf.length === 0) {
 		printOut('There is nothing in your inventory.');
 	}
 }
