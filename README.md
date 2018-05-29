@@ -1,5 +1,5 @@
 # Text - Based Adventures
 
-[pine](https://pixelxii.github.io/pine) is a text-based game, such as [Zork](http://www.zorkonline.net).
+['Text'](https://pixelxii.github.io/text) is a repository for text-based games, such as [Zork](http://www.zorkonline.net).
 
 
