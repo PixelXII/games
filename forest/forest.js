@@ -142,7 +142,7 @@ function shrinePlace() {
 	eating(eats, items, poisons)
 	if(inventory.contentsOf.includes('note') && command.includes('note') && command.includes('shrine')) {
 		doNote()
-		setTimeout(function() {game.end()}, 5000)
+		setTimeout(function() {game.end()}, 6000)
 	}
 	if(command.includes('look')) {
 					if(inventory.contentsOf.includes('note') === false) {
@@ -350,7 +350,7 @@ game.reset = function() {
 }
 
 game.end = function() {
-	printOut('END OF GAME <br> ------------------------------<br> You have reached the end of this adventure. <br> <br> Game written by Kai Wildberger, age 12, grade 6 <br> <br> <br> <br> May DATE, 2018');
+	printOut('END OF GAME <br> ------------------------------<br> You have reached the end of this adventure. <br> <br> Game written by Kai Wildberger, age 12, grade 6 <br> <br> <br> <br> May 29th, 2018');
 	inElement.style.display = "none"
 }
 
