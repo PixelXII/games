@@ -54,6 +54,7 @@ function eating(eats, items, poisons) {
 }
 
 function firstPlace() {
+	out2.innerHTML = ""
 	var eats = ['acorn', 'hazelnut']
 	var poisons = ['mushroom']
 	var items = ['rock', 'stone', 'mushroom', 'hazelnut', 'acorn', 'stick', 'twig']
@@ -80,6 +81,7 @@ function firstPlace() {
 }
 
 function firstOakPlace() {
+	out2.innerHTML = ""
 	var eats = ['acorn']
 	var items = ['rock', 'stone', 'acorn', 'stick', 'twig']
 	var poisons = []
@@ -106,6 +108,7 @@ function firstOakPlace() {
 }
 
 function flowerPlace() {
+	out2.innerHTML = ""
 	var eats = ['hazelnut', 'acorn', 'daisy', 'white flower']
 	var items = ['rock', 'stone', 'acorn', 'hazelnut', 'daisy', 'red flower', 'white flower']
 	var poisons = ['red flower']
@@ -132,6 +135,7 @@ function flowerPlace() {
 }
 
 function shrinePlace() {
+	out2.innerHTML = ""
 	var eats = ['hazelnut', 'acorn', 'blackberry', 'blackberries', 'berry']
 	var items = ['rock', 'stone', 'acorn', 'hazelnut', 'stick', 'shrine', 'blackberry', 'blackberries', 'mushroom']
 	var poisons = ['mushroom']
@@ -174,6 +178,7 @@ function shrinePlace() {
 			}
 }
 function streamPlace() {
+	out2.innerHTML = ""
 	if(command == 'drown') {
 		printOut('You drowned in the stream because you wanted to.')
 		setTimeout(function() {game.reset()}, 5000)
@@ -204,6 +209,7 @@ function streamPlace() {
 	}
 
 function downstreamPlace() {
+	out2.innerHTML = ""
 	var eats = ['fish']
 	var poisons = []
 	var items = ['rock', 'stone', 'fish']
@@ -230,6 +236,7 @@ function downstreamPlace() {
 }
 
 function outsidePlace() {
+	out2.innerHTML = ""
 	var eats = ['blackberry', 'hazelnut']
 	var poisons = ['mushroom']
 	var items = ['rock', 'stone', 'mushroom', 'hazelnut', 'acorn', 'stick', 'twig', 'blackberry']
@@ -256,6 +263,7 @@ function outsidePlace() {
 }
 
 function insidePlace() {
+	out2.innerHTML = ""
 	var eats = ['porridge']
 	var poisons = []
 	var items = ['porridge', 'note']
@@ -279,7 +287,7 @@ function insidePlace() {
 								"inHut")
 				out2.innerHTML = ""
 			}
-			if(pickUp.includes(command) && command.includes('note') && inventory.contentsOf('')) {
+			if(pickUp.includes(command) && command.includes('note')) {
 				printOut('You approach the table, pick up the note, and hurry out the door, expecting the worst. <br> <br> <blockquote>Please put this by the shrine in the woods. I would appreciate it very much. Thank you.</blockquote>')
 				game.pickUp('grab note', '', 'note', '')
 			}
