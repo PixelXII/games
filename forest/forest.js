@@ -362,7 +362,9 @@ game.start = function() {
 
 game.look = function(action, rightMess, leftMess, behMess, foMess) {
 	if(action.includes('look ') || action.includes('Look ')) {
-		
+		if(action == 'look' || action.includes('look') && action.includes('around')) {
+			printOut(rightMess+'<br>'+leftMess+'<br>'+behMess+'<br>'+foMess)
+		}
 		if(action.includes('right')) {
 			return rightMess;
 		} else if(action.includes('left')) {
