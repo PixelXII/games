@@ -140,7 +140,7 @@ function shrinePlace() {
 	var items = ['rock', 'stone', 'acorn', 'hazelnut', 'stick', 'shrine', 'blackberry', 'blackberries', 'mushroom']
 	var poisons = ['mushroom']
 	eating(eats, items, poisons)
-	if(inventory.contentsOf.includes('note')) {
+	if(inventory.contentsOf.includes('note') && command.includes('note') && command.includes('shrine')) {
 		doNote()
 		setTimeout(function() {game.end()}, 5000)
 	}
