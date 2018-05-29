@@ -3,11 +3,14 @@ var command = null;
 var note;
 var place = 'first'
 var thing;
+var note = "note"
+var pushNote = 'inventory.contentsOf.push('+note+')'
 var mainEats = ['acorn', 'hazelnut', 'daisy', 'white flower', 'blackberries', 'blackberry', 'berry', 'fish']
 var mainPoisons = ['mushroom', 'red flower', 'crayfish']
 var pickUp = ['pick up', 'pick', 'grab', 'take']
 var eatWords = ['eat', 'consume']
 var nonEats = ['rock', 'shrine', 'grass']
+var carryNote = false;
 var white, red, green, blue, purple, yellow, orange, brown;
 var inventory = new Object()
 inventory.spotsUsed = 0;
@@ -16,6 +19,7 @@ var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
+setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
 setInterval(printOut(output), 100)
 
 function printOut(mess, mess2) {
@@ -65,7 +69,7 @@ function firstPlace() {
 				outElement.innerHTML = game.move(command, 
 						"You take a step into the cold, clear water of the stream. ",
 								 "stream",
-						"You climb the oak tree.", "",
+						"You climb the oak tree.",
 								 "firstOak",
 						"The tree is too large to climb",
 								 "first",
@@ -91,7 +95,7 @@ function firstOakPlace() {
 				outElement.innerHTML = game.move(command, 
 						"You cannot climb the branch.",
 								 "firstOak",
-						"You cannot reach there.", "",
+						"You cannot reach there.",
 								 "firstOak",
 						"You jump off the tree.",
 								 "first",
@@ -117,7 +121,7 @@ function flowerPlace() {
 				outElement.innerHTML = game.move(command, 
 						"You take a step into the cold, clear water of the stream. ",
 								 "stream",
-						"The hazelnut tree is not strong enough for you to climb.", "",
+						"The hazelnut tree is not strong enough for you to climb.",
 								 "flowers",
 						"You step out of the flower patch, back to where you started.",
 								 "first",
@@ -132,18 +136,35 @@ function shrinePlace() {
 	var items = ['rock', 'stone', 'acorn', 'hazelnut', 'stick', 'shrine', 'blackberry', 'blackberries', 'mushroom']
 	var poisons = ['mushroom']
 	eating(eats, items, poisons)
+	if(inventory.contentsOf.includes('note')) {
+		doNote()
+		setTimeout(function() {game.end()}, 5000)
+	}
 	if(command.includes('look')) {
+					if(inventory.contentsOf.includes('note') === false) {
 					outElement.innerHTML = game.look(command, 
 						"To your right there is a blackberry thicket. You can hear the small, bubbling stream on the other side..", 
 						"To your left is a blackberry thicket. There are a few blackberries on the bush.", 
 						"Behind you is the flower patch.", 
 						"In front of you is the shrine. There is an offering of blackberries at the shrine.")
-			out2.innerHTML = ""
+						out2.innerHTML = ""
+					} else if(inventory.contentsOf.includes('note')) {
+						outElement.innerHTML = game.look(command, 
+						"To your right there is a blackberry thicket. You can hear the small, bubbling stream on the other side..", 
+						"To your left is a blackberry thicket. There are a few blackberries on the bush.", 
+						"Behind you is the flower patch.", 
+						"In front of you is the shrine. You place the note on the shrine, as requested in the note.")
+						
+					}
+					if(outElement.innerHTML == "In front of you is the shrine. You place the note on the shrine, as requested in the note.") {
+						setTimeout(function() { printOut('You feel yourself rising out of the forest from some ethereal force.') }, 5000)
+						setTimeout(function() { game.end() }, 5000)
+					}
 			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
 						"You cannot walk through the blackberry bush.",
 								 "shrine",
-						"You cannot walk through the blackberry bush", "",
+						"You cannot walk through the blackberry bush",
 								 "shrine",
 						"You slowly back away from the shrine, back to the safety of the flowers.",
 								 "flowers",
@@ -171,8 +192,8 @@ function streamPlace() {
 			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
 						"You step out of the stream and dry yourself off.",
-								 "oppBank",
-						"You exit the stream.", "",
+								 "outHut",
+						"You exit the stream.",
 								 "first",
 						"The current is too great to wade up the stream.",
 								 "stream",
@@ -198,7 +219,7 @@ function downstreamPlace() {
 				outElement.innerHTML = game.move(command, 
 						"You take your chances and approach the hut.",
 								 "outHut",
-						"You cannot climb over the blackberry bushes.", "",
+						"You cannot climb over the blackberry bushes.",
 								 "downstream",
 						"You decide to start making your way back before anything happens.",
 								 "stream",
@@ -224,7 +245,7 @@ function outsidePlace() {
 				outElement.innerHTML = game.move(command, 
 						"You cannot walk through the trees.",
 								 "outHut",
-						"You cannot walk up the cliff, or through it.", "", 
+						"You cannot walk up the cliff, or through it.",
 								 "outHut",
 						"You walk back to the stream.",
 								 "downstream",
@@ -250,8 +271,7 @@ function insidePlace() {
 				outElement.innerHTML = game.move(command, 
 						"You cannot walk through the fire.",
 								 "inHut",
-						"You approach the table, pick up the note, and walk out the door.", 
-								 "inventory.contentsOf.push('note')",
+						"You approach the table, pick up the note, and hurry out the door, expecting the worst. <br> <br> The note says: <br> <blockquote>Please put this by the shrine in the woods. I would appreciate it very much. Thank you.</blockquote>",
 								 "outHut",
 						"You walk back out the door.",
 								 "outHut",
@@ -259,22 +279,28 @@ function insidePlace() {
 								"inHut")
 				out2.innerHTML = ""
 			}
-}
-
-function readNote() {
-	printOut("The note says:<br><br>", "<q>Please put this by the shrine in the woods. I would appreciate it very much. Thank you.</q>")
-}
+			if(pickUp.includes(command) && command.includes('note') && inventory.contentsOf('')) {
+				printOut('You approach the table, pick up the note, and hurry out the door, expecting the worst. <br> <br> <blockquote>Please put this by the shrine in the woods. I would appreciate it very much. Thank you.</blockquote>')
+				game.pickUp('grab note', '', 'note', '')
+			}
+			if(outElement.innerHTML == "You approach the table, pick up the note, and hurry out the door, expecting the worst. <br> <br> The note says: <br> <blockquote>Please put this by the shrine in the woods. I would appreciate it very much. Thank you.</blockquote> <br> <br> You are outside the hut.") {
+				inventory.contentsOf.push('note')
+			}
+}	
 
 function doNote() {
-	printOut('You put the note on the blackberries in the shrine.', 'You feel an enlightening sensation come over you, and you feel yourself leaving the forest.')
-	setTimeout(function() {game.end()}, 5000)
+	printOut('You walk to the shrine and put the note on the shrine, as requested. <br> As you do this, you feel a sense of enlightenment wash over you, and you feel yourself leaving the forest.')
 }
 
 function doAction() {
 		command = inElement.value;
 		inElement.value = "";
-		if(command.includes('()')) {
+		if(command.includes('game') || command.includes('(') || command.includes(')')) {
 			eval(command)
+		}
+		if(command.includes('note') && command.includes('drop')) {
+			printOut('It would be unwise to drop the note.');
+			return false;
 		}
 		if(command == 'start' || command == 'Start') {
 			game.start()
@@ -293,10 +319,6 @@ function doAction() {
 			downstreamPlace()
 		} else if(place == 'outHut') {
 			outsidePlace()
-		} else if(inventory.contentsOf.includes('note') && comand.includes('read') && command.includes('note')) {
-			readNote()
-		} else if(place == 'shrine' && inventory.contentsOf.includes('note')) {
-			setTimeout(function() { doNote() }, 5000)
 		} else if(place == 'inHut') {
 			insidePlace()
 		} else if(place == 'end') {
@@ -306,6 +328,7 @@ function doAction() {
 			printOut("I don't understand what you mean.", "")
 		}
 }
+
 inElement.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
       doAction()
@@ -349,11 +372,11 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 		} else {
 			return "I don't understand what you mean."
 		}
-	if(action == 'look' || action == 'Look' || action == 'look around' || action == 'Look around') {
-		printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
-		}
 	}
-}		
+	if(action.includes('look') || actions.includes('around')) {
+		printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
+	}
+}
 
 game.first = function() {
 	inElement.style.display = "block"
@@ -361,7 +384,7 @@ game.first = function() {
 	printOut('You are standing in a forest. You do not remember how you got there or where you are.')
 }
 
-game.move = function(action, right, rightLoc, left, exec, leftLoc, back, backLoc, forward, forLoc) {
+game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
 	if(action.includes('move ') || action.includes('step') || action.includes('go') || action.includes('walk')) {
 		if(action.includes('right')) {
 			place = rightLoc
@@ -377,9 +400,6 @@ game.move = function(action, right, rightLoc, left, exec, leftLoc, back, backLoc
 			return forward;
 		} else {
 			return "I don't understand what you mean."
-		}
-		if(exec != null || exec != undefined) {
-			eval(exec)
 		}
 	}
 }
