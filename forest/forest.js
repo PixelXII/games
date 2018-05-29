@@ -271,7 +271,7 @@ function insidePlace() {
 	if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
 						"On your right is a small wood-burning stove.", 
-						"To your left is a table with a note on it.", 
+						"To your left is a table with a note on it. <br> <br> The note says: <br> Please put this on the shrine in the woods. I would appreciate it. Thank you.", 
 						"Behind you is the door.", 
 						"In front of you is a large leather chair.")
 			out2.innerHTML = ""
@@ -279,7 +279,7 @@ function insidePlace() {
 				outElement.innerHTML = game.move(command, 
 						"You cannot walk through the fire.",
 								 "inHut",
-						"You approach the table, pick up the note, and hurry out the door, expecting the worst. <br> <br> The note says: <br> <blockquote>Please put this by the shrine in the woods. I would appreciate it very much. Thank you.</blockquote>",
+						"You approach the table, pick up the note, and hurry out the door, expecting the worst.",
 								 "outHut",
 						"You walk back out the door.",
 								 "outHut",
@@ -287,17 +287,11 @@ function insidePlace() {
 								"inHut")
 				out2.innerHTML = ""
 			}
-			if(pickUp.includes(command) && command.includes('note')) {
-				printOut('You approach the table, pick up the note, and hurry out the door, expecting the worst. <br> <br> <blockquote>Please put this by the shrine in the woods. I would appreciate it very much. Thank you.</blockquote>')
-				game.pickUp('grab note', '', 'note', '')
-			}
-			if(outElement.innerHTML == "You approach the table, pick up the note, and hurry out the door, expecting the worst. <br> <br> The note says: <br> <blockquote>Please put this by the shrine in the woods. I would appreciate it very much. Thank you.</blockquote> <br> <br> You are outside the hut.") {
-				inventory.contentsOf.push('note')
-			}
 }	
 
 function doNote() {
 	printOut('You walk to the shrine and put the note on the shrine, as requested. <br> As you do this, you feel a sense of enlightenment wash over you, and you feel yourself leaving the forest.')
+	setTimeout(function() {game.end()}, 5000)
 }
 
 function doAction() {
