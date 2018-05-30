@@ -406,36 +406,37 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 }
 
 game.pickUp = function(action, eats, items, poisons) {
-	if(action.includes('pick up') || action.includes('pick') || action.includes('hold') || action.includes('grab') || action.includes('take')) {
-		if(action.includes('pick up')) {
-		   	var thing = action.slice(8);
-			var otherThing = thing;
-		} else {
-			var thing = action.slice(5)
-			var otherThing = thing
-		}
-		if(thing.includes(' ')) {
-			thing = thing.split(' ')
-			var newThing = thing.join()
-			thing = newThing.replace(',', ' ');
-		}
-		if(items.includes(thing) === false) {
-			outElement.innerHTML = ""
-			printOut("", "You don't see a " + thing)
-		} else {
-			out2.innerHTML = ""
-			inventory.contentsOf.push(thing)
-			printOut('You have a ' + thing)
-		}
-		if(inventory.spotsUsed === 3) {
+	if(inventory.spotsUsed === 3) {
 			printOut('Your hands are full.')
 		} else {
-			eval(thing + 'Thing = new Object()')
-			inventory.spotsUsed++
-			if(mainEats.includes(otherThing) || mainPoisons.includes(otherThing)) {
-				eval(thing + 'Thing.edible = true')
-			} else { 
-				eval(thing + 'Thing.edible = false')
+			if(action.includes('pick up') || action.includes('pick') || action.includes('hold') || action.includes('grab') || action.includes('take')) {
+			if(action.includes('pick up')) {
+		   		var thing = action.slice(8);
+				var otherThing = thing;
+			} else {
+				var thing = action.slice(5)
+				var otherThing = thing
+			}
+			if(thing.includes(' ')) {
+				thing = thing.split(' ')
+				var newThing = thing.join()
+				thing = newThing.replace(',', ' ');
+			}
+			if(items.includes(thing) === false) {
+				outElement.innerHTML = ""
+				printOut("", "You don't see a " + thing)
+			} else {
+				out2.innerHTML = ""
+				inventory.contentsOf.push(thing)
+				printOut('You have a ' + thing)
+			} else {
+				eval(thing + 'Thing = new Object()')
+				inventory.spotsUsed++
+				if(mainEats.includes(otherThing) || mainPoisons.includes(otherThing)) {
+					eval(thing + 'Thing.edible = true')
+				} else { 
+					eval(thing + 'Thing.edible = false')
+				}
 			}
 		}
 	}
