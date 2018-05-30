@@ -344,7 +344,7 @@ game.reset = function() {
 	out2.innerHTML = ""
 	outElement.innerHTML = ""
 	printOut("You screwed up. Type 'reset' to reset the game.")
-	if(command === 'reset' || command === 'Reset') {
+	if(command.includes('reset') || command.includes('Reset')) {
 		location.reload()
 	}
 }
