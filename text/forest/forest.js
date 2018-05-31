@@ -1,3 +1,16 @@
+/* 
+
+If anyone is bothering to look at the source for the game, I'll say hi first. 
+
+'hi'.
+
+I am twelve and I am just beginning to understand how I can make a JavaScript game. 
+The code is probably horribly messy and things aren't functioning exactly the way they are supposed to (the game works though!).
+If you have a bug, issue, or something else, go to the github repo at github.com/PixelXII/games
+
+*/
+
+// Variables
 var output = "type start to begin"
 var command = null;
 var note;
@@ -21,6 +34,9 @@ var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
 setInterval(printOut(output), 100)
+
+
+// Functions
 
 function printOut(mess, mess2) {
   outElement.innerHTML = mess
@@ -52,6 +68,8 @@ function eating(eats, items, poisons) {
 		game.pickUp(command, eats, items, poisons)
 	}
 }
+
+// Functions that handle the messages to display for the locations.
 
 function firstPlace() {
 	out2.innerHTML = ""
@@ -294,6 +312,8 @@ function doNote() {
 	setTimeout(function() {game.end()}, 5000)
 }
 
+// doAction(): getting form data and calling location functions
+
 function doAction() {
 		command = inElement.value;
 		inElement.value = "";
@@ -331,12 +351,16 @@ function doAction() {
 		}
 }
 
+// event listeners help everything
+
 inElement.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
       doAction()
     }
 });
 	
+// the game object
+
 var game = new Object()
 
 game.reset = function() {
@@ -405,6 +429,8 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 	}
 }
 
+// This is where it gets slightly screwy. I wrote pickUp, throw, and eat all past 8pm on school nights. Somehow, they work.
+
 game.pickUp = function(action, eats, items, poisons) {
 	if(inventory.spotsUsed === 3) {
 			printOut('Your hands are full.')
@@ -429,7 +455,7 @@ game.pickUp = function(action, eats, items, poisons) {
 				out2.innerHTML = ""
 				inventory.contentsOf.push(thing)
 				printOut('You have a ' + thing)
-			} else {
+			}
 				eval(thing + 'Thing = new Object()')
 				inventory.spotsUsed++
 				if(mainEats.includes(otherThing) || mainPoisons.includes(otherThing)) {
