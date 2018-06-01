@@ -13,9 +13,9 @@ function displayImage() {
 setInterval(function(){ displayImage() }, 100) */
 
 var slideIndex = 0;
+var x = document.getElementsByClassName("mySlides");
 var y = x[slideIndex-1]
 var i;
-var x = document.getElementsByClassName("mySlides");
 carousel();
 
 function carousel() {
