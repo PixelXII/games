@@ -14,11 +14,11 @@ setInterval(function(){ displayImage() }, 100) */
 
 var slideIndex = 0;
 var y = x[slideIndex-1]
+var i;
+var x = document.getElementsByClassName("mySlides");
 carousel();
 
 function carousel() {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
     for (i = 0; i < x.length; i++) {
       x[i].style.display = "none"; 
     }
