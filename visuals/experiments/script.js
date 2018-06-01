@@ -1,9 +1,12 @@
-var canvas = document.createElement("canvas");
-var ctx = canvas.getContext("2d");
-canvas.width = 512;
-canvas.height = 480;
-var div = document.getElementById('div')
-div.appendChild(canvas);
+var canvas, ctx, div;
+window.onload = function() {
+	canvas = document.createElement("canvas");
+	ctx = canvas.getContext("2d");
+	canvas.width = 512;
+	canvas.height = 480;
+	div = document.getElementById('div')
+	div.appendChild(canvas);
+}
 var bgReady = false;
 var bgImage = new Image();
 bgImage.onload = function () {
