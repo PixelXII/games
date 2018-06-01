@@ -16,11 +16,11 @@ window.onload = function() {
   var x = document.getElementsByClassName("mySlides");
   var i = 0;
   function skooch() {
+      i = 0;
       for (i < x.length; i++) {
         x[i].style.display = "none"; 
       }
-      slideIndex++;
-      if (slideIndex >= x.length) {slideIndex = 1} 
+      slideIndex++; 
       x[slideIndex-1].style.display = "block"; 
   }
   setInterval(skooch, 100);
