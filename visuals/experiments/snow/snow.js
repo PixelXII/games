@@ -11,19 +11,19 @@ function displayImage() {
 }
 
 setInterval(function(){ displayImage() }, 100) */
-
-var slideIndex = 0;
-var x = document.getElementsByClassName("mySlides");
-var y = x[slideIndex-1]
-var i;
-carousel();
-
-function carousel() {
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none"; 
-    }
-    slideIndex++;
-    if (slideIndex > x.length) {slideIndex = 1} 
-    y.style.display = "block"; 
-    setTimeout(carousel, 500);
+window.onload = function() {
+  var slideIndex = 0;
+  var x = document.getElementsByClassName("mySlides");
+  var y = x[slideIndex-1]
+  var i;
+  function skooch() {
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none"; 
+      }
+      slideIndex++;
+      if (slideIndex > x.length) {slideIndex = 1} 
+      y.style.display = "block"; 
+      setTimeout(carousel, 500);
+  }
+  skooch();
 }
