@@ -1,6 +1,6 @@
 var baller = new Image()
 var canvas = document.getElementById('canvas');
-canvas.appendChild(baller)
+var ball = document.getElementById('baller');
 
 var i = 1
 function displayImage() {
