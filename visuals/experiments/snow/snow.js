@@ -14,7 +14,6 @@ setInterval(function(){ displayImage() }, 100) */
 window.onload = function() {
   var slideIndex = 0;
   var x = document.getElementsByClassName("mySlides");
-  var y = x[slideIndex-1]
   var i;
   function skooch() {
       for (i = 0; i < x.length; i++) {
@@ -22,7 +21,7 @@ window.onload = function() {
       }
       slideIndex++;
       if (slideIndex >= x.length) {slideIndex = 1} 
-      y.style.display = "block"; 
+      x[slideIndex-1].style.display = "block"; 
   }
   setInterval(skooch, 500);
   skooch();
