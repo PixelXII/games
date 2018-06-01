@@ -21,7 +21,7 @@ window.onload = function() {
         x[i].style.display = "none"; 
       }
       slideIndex++;
-      if (slideIndex > x.length) {slideIndex = 1} 
+      if (slideIndex >= x.length) {slideIndex = 1} 
       y.style.display = "block"; 
       setTimeout(carousel, 500);
   }
