@@ -13,7 +13,7 @@ bgImage.src = "./grass.png";
 
 var hero = {
 	speed: 256
-	x: 0
+	x: 0,
 	y: 0
 }
 
