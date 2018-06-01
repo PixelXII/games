@@ -4,7 +4,7 @@ canvas.appendChild(baller)
 
 var i = 1
 function displayImage() {
-  for(i<10) {
+  while(i<10) {
     baller.src = i+'.png'
     i++
   }
