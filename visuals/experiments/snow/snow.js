@@ -16,8 +16,7 @@ window.onload = function() {
   var x = document.getElementsByClassName("mySlides");
   var i = 0;
   function skooch() {
-      i = 0;
-      for (i < x.length; i++) {
+      for (i = 0; i < x.length; i++) {
         x[i].style.display = "none"; 
       }
       slideIndex++; 
