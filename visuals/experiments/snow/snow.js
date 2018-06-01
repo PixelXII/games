@@ -13,6 +13,7 @@ function displayImage() {
 setInterval(function(){ displayImage() }, 100) */
 
 var slideIndex = 0;
+var y = x[slideIndex-1]
 carousel();
 
 function carousel() {
@@ -23,6 +24,6 @@ function carousel() {
     }
     slideIndex++;
     if (slideIndex > x.length) {slideIndex = 1} 
-    x[slideIndex-1].style.display = "block"; 
+    y.style.display = "block"; 
     setTimeout(carousel, 500);
 }
