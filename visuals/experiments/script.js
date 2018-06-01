@@ -12,7 +12,7 @@ bgImage.onload = function () {
 bgImage.src = "./grass.png";
 
 var hero = {
-	speed: 256
+	speed: 256,
 	x: 0,
 	y: 0
 }
