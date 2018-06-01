@@ -466,7 +466,6 @@ game.pickUp = function(action, eats, items, poisons) {
 			}
 		}
 	}
-}
 
  game.eat = function(action) {
 	if(action.includes('eat') || action.includes('consume')) {
