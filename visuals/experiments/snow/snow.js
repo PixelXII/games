@@ -1,5 +1,4 @@
-document.onload = function() {  
-function displayImage() {
+ function displayImage() {
     var slideIndex = 0;
     var x = document.getElementsByClassName("mySlides");
     var i = 0;
@@ -12,4 +11,3 @@ function displayImage() {
    }
    setInterval(skooch, 100);
   }
-}
