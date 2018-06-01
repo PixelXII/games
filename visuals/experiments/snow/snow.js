@@ -23,7 +23,7 @@ window.onload = function() {
       slideIndex++;
       if (slideIndex >= x.length) {slideIndex = 1} 
       y.style.display = "block"; 
-      setTimeout(carousel, 500);
   }
+  setInterval(skooch, 500);
   skooch();
 }
