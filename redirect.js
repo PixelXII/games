@@ -1,4 +1,4 @@
-var output = "<h2 class='tajawal'>Options:</h2> <br> [select one] <br> <br> caving <br> <br> forest"
+var output = "<strong>text</strong> <br> <br> <br> <strong>visuals</strong>"
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
