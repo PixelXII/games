@@ -1,4 +1,4 @@
-var output = "<h2 class='tajawal'>Options:</h2> <br> [select one] <br> <br> caving <br> <br> forest"
+var output = "<i>Please note this is still in development and there is only one option right now.</i> <br> <br> <strong>experiments</strong>"
 var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
@@ -16,12 +16,10 @@ function printOut(mess, mess2) {
 function doAction() {
 	command = inElement.value;
 	inElement.value = ''
-	if(command == 'caving' || command == 'cave') {
- 	     location = './caving/'
-	} else if(command == 'forest' || command == 'Forest') {
-		location = './forest/'
+	if(command == 'experiment' || command == 'Experiment') {
+ 	     location = './experiments/'
 	} else {
-		printOut('there is only one game right now <br> <br> <br> <h1>check back later</h1>')
+		printOut('this is still in development. <br> <br> <br> <h1>check back later</h1>')
 	}
 }
 
