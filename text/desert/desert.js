@@ -135,7 +135,8 @@ game.start = function() {
 }
 
 game.look = function(action, rightMess, leftMess, behMess, foMess) {
-	if(action.includes('look ') || action.includes('Look ')) {
+	action = action.toLowerCase()
+	if(action.includes('look')) {
 		/* if(action == 'look' || action.includes('look') && action.includes('around')) {
 			printOut(rightMess+'<br>'+leftMess+'<br>'+behMess+'<br>'+foMess)
 		} */ 
@@ -215,7 +216,6 @@ game.pickUp = function(action, eats, items, poisons) {
 				} else { 
 					eval(thing + 'Thing.edible = false')
 				}
-        game.pickLimit()
 			}
 		}
 	}
