@@ -291,11 +291,7 @@ game.pickUp = function(action, eats, items, poisons) {
 	}
  }
  
- // The new stage of development: look around, hint, and other features. (i have not decided yet..my friend and helper is thinking of them)
+ // The new stage of development: look around and other features. (i have not decided yet..my friend and helper is thinking of them)
  
  // I was going to add an item limit, so there isn't an infinite number of items in a given area, but I decided not to because I'm lazy.
- 
- game.hint = function(message) {
-   printOut("[look <direction>]  [move <direction>]  [pick up <item>]" + message)
-   setTimeout(function() { printOut('You have ' + 3-hints + "left.") }, 5000)
- }
+
