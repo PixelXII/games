@@ -62,12 +62,14 @@ function firstPlace() {
 	var poisons = ['']
 	var items = ['rock']
 	eating(eats, items, poisons)
+	if(command.includes('look')) {
 	outElement.innerHTML = game.look(command, 
 	  "On your right there is a well with a considerable amount of water in it.", 
 		"To your left is a very steep slope going down to an area of sparse shrubbery and rocks.", 
     "Behind you is a massive mound of boulders.", 
     "In front of you, away from the pile of boulders, is the edge of the dune that you are standing on.")
-  
+	}
+	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
   outElement.innerHTML = game.move(command, 
 		"You walk to the well.",
 								 "well",
@@ -77,6 +79,7 @@ function firstPlace() {
 								 "first",
 		"Walking forward, you come to the end of the small dune.",
 								"dune")
+	}
 }
 
 
