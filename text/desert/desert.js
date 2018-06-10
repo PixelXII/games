@@ -147,12 +147,11 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 			  return behMess;
 		} else if(action.includes('forward') || action.includes('ahead')) {
 			return foMess;
+		} else if(action.includes('around')) {
+			return foMess + "<br>" + behMess + "<br>" + rightMess + "<br>" + leftMess
 		} else {
 			return "I don't understand what you mean."
 		}
-	}
-	if(action.includes('look') || actions.includes('around')) {
-		printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
 	}
 }
 
