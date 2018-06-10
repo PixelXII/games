@@ -2,7 +2,7 @@
 
 If anyone is bothering to look at the source for the game, I'll say hi first. 
 
-'hi'.
+"hi"
 
 I am twelve and I am just beginning to understand how I can make a JavaScript game. 
 The code is probably horribly messy and things aren't functioning exactly the way they are supposed to (the game works though!).
@@ -36,7 +36,7 @@ setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100
 setInterval(printOut(output), 100)
 
 
-// Functions
+// Utility functions
 
 function printOut(mess, mess2) {
   outElement.innerHTML = mess
