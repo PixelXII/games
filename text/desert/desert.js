@@ -135,7 +135,7 @@ game.start = function() {
 }
 
 game.look = function(action, rightMess, leftMess, behMess, foMess) {
-	if(action.includes('look')) {
+	if(action == 'look around' || action == 'look about' || action == 'look around the area') {
 		/* if(action == 'look' || action.includes('look') && action.includes('around')) {
 			printOut(rightMess+'<br>'+leftMess+'<br>'+behMess+'<br>'+foMess)
 		} */ 
