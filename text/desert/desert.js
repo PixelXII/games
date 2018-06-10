@@ -57,7 +57,7 @@ function eating(eats, items, poisons) {
 // The area functions
 
 function firstPlace() {
-  out2.innerHTML = ""
+  	out2.innerHTML = ""
 	var eats = ['cactus fruit']
 	var poisons = ['']
 	var items = ['rock']
@@ -80,6 +80,7 @@ function firstPlace() {
 		"Walking forward, you come to the end of the small dune.",
 								"dune")
 	}
+	game.hint("")
 }
 
 
@@ -295,6 +296,6 @@ game.pickUp = function(action, eats, items, poisons) {
  // I was going to add an item limit, so there isn't an infinite number of items in a given area, but I decided not to because I'm lazy.
  
  game.hint = function(message) {
-   printOut(message)
+   printOut("[look <direction>]  [move <direction>]  [pick up <item>]" + message)
    setTimeout(function() { printOut('You have ' + 3-hints + "left.") }, 5000)
  }
