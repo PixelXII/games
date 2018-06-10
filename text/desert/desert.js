@@ -80,7 +80,6 @@ function firstPlace() {
 		"Walking forward, you come to the end of the small dune.",
 								"dune")
 	}
-	game.hint("")
 }
 
 
@@ -184,6 +183,8 @@ game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forw
 
 // This is where it gets slightly screwy. I wrote pickUp, throw, and eat all past 8pm on school nights. Somehow, they work.
 
+// ALSO: eval() is used a SH*T ton of times here...
+
 game.pickUp = function(action, eats, items, poisons) {
 	if(inventory.spotsUsed === 3) {
 			printOut('Your hands are full.')
@@ -237,7 +238,7 @@ game.pickUp = function(action, eats, items, poisons) {
 		if(inventory.contentsOf.includes(thing) === false) {
 			printOut("", "You do not have a " + thing)
 		} 
-		if(eval(thing+'Thing.edible') === true) {
+		if(eval(thing + 'Thing.edible') === true) {
 			inventory.spotsUsed--
 			if(inventory.contentsOf.indexOf(thing) == 0) {
 				inventory.contentsOf.shift()
