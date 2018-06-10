@@ -60,7 +60,7 @@ function firstPlace() {
   	out2.innerHTML = ""
 	var eats = ['cactus fruit']
 	var poisons = ['']
-	var items = ['rock']
+	var items = ['rock', 'cactus fruit']
 	eating(eats, items, poisons)
 	if(command.includes('look')) {
 	outElement.innerHTML = game.look(command, 
