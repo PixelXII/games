@@ -174,7 +174,7 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 game.first = function() {
 	inElement.style.display = "block"
 	noteElem.innerHTML = "game written by kai wildberger"
-	printOut('You are standing in a forest. You do not remember how you got there or where you are.')
+	printOut('You find yourself in a desert, surrounded by tumbleweeds and sand.')
 }
 
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
