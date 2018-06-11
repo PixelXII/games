@@ -20,6 +20,8 @@ function doAction() {
  	     location = './caving/'
 	} else if(command == 'forest' || command == 'Forest') {
 		location = './forest/'
+	} else if(command == 'desert' || command == 'Desert') {
+		location = './desert/'
 	} else {
 		printOut('there is only one game right now <br> <br> <br> <h1>check back later</h1>')
 	}
