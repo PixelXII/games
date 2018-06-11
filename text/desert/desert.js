@@ -99,9 +99,6 @@ function doAction() {
 		command = inElement.value;
 		inElement.value = ""; 
     // In this version I deleted the if statement that evals a command if it contains ( or ). That was somewhat dangerous, so I removed it.
-		if(action.includes('look') || actions.includes('around')) {
-			printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
-		}
 		if(command == 'start' || command == 'Start') {
 			game.start()
 		}
@@ -157,6 +154,9 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 			return foMess;
 		} else {
 			return "I don't understand what you mean."
+		}
+		if(action.includes('look') || action.includes('around')) {
+			printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
 		}
 	}
 }
