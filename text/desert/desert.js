@@ -146,6 +146,14 @@ game.start = function() {
 	setTimeout(function() {game.first()}, 5000);
 }
 
+game.look3D = function(command) {
+	if(command.includes('up')) {
+		printOut('There is a vulture circling above you in the sky.')
+	} else {
+		printOut('There is a rock and a small dead bush beneath you.')
+	}
+}
+
 game.look = function(action, rightMess, leftMess, behMess, foMess) {
 	if(action.includes('look ') || action.includes('Look ')) {
 		/* if(action == 'look' || action.includes('look') && action.includes('around')) {
@@ -162,6 +170,9 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 		} else {
 			return "I don't understand what you mean."
 		}
+	}
+	if(action.includes('up') || action.includes('down')) {
+		game.look3D(action)
 	}
 	if(action.includes('look') || actions.includes('around')) {
 		printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
