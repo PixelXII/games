@@ -224,13 +224,6 @@ game.pickUp = function(action, eats, items, poisons) {
 				inventory.contentsOf.push(thing)
 				printOut('You have a ' + thing)
 			}
-				eval(thing + 'Thing = new Object()')
-				inventory.spotsUsed++
-				if(mainEats.includes(otherThing) || mainPoisons.includes(otherThing)) {
-					eval(thing + 'Thing.edible = true')
-				} else { 
-					eval(thing + 'Thing.edible = false')
-				}
 			}
 		}
 	}
@@ -252,7 +245,7 @@ game.pickUp = function(action, eats, items, poisons) {
 		if(inventory.contentsOf.includes(thing) === false) {
 			printOut("", "You do not have a " + thing)
 		} 
-		if(eval(thing+'Thing.edible') === true) {
+		if(mainEats.includes(thing)) {
 			inventory.spotsUsed--
 			if(inventory.contentsOf.indexOf(thing) == 0) {
 				inventory.contentsOf.shift()
