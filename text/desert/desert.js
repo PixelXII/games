@@ -16,14 +16,11 @@ var command = null;
 var note;
 var place = 'first'
 var thing;
-var note = "note"
-var pushNote = 'inventory.contentsOf.push('+note+')'
-var mainEats = ['acorn', 'hazelnut', 'daisy', 'white flower', 'blackberries', 'blackberry', 'berry', 'fish']
-var mainPoisons = ['mushroom', 'red flower', 'crayfish']
+var mainEats = ['cactus fruit']
+var mainPoisons = ['']
 var pickUp = ['pick up', 'pick', 'grab', 'take']
 var eatWords = ['eat', 'consume']
-var nonEats = ['rock', 'shrine', 'grass']
-var carryNote = false;
+var nonEats = ['rock', 'cactus', 'stick', 'twig', 'torch']
 var white, red, green, blue, purple, yellow, orange, brown;
 var inventory = new Object()
 inventory.spotsUsed = 0;
