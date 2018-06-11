@@ -32,7 +32,6 @@ var noteElem = document.getElementById('note');
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
 setInterval(printOut(output), 100)
 
-
 // Utility functions
 
 function printOut(mess, mess2) {
