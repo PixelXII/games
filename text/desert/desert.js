@@ -100,7 +100,11 @@ function doAction() {
 		command = inElement.value;
 		inElement.value = ""; 
     	if(command == 'inventory' || command == 'show inventory') {
-    		printOut(inventory.contentsOf)
+		if(inventory.contentsOf.length === 0) {
+			printOut('There is nothing in your inventory.')
+		} else {
+    			printOut(inventory.contentsOf[1] + '<br>' + inventory.contentsOf[2] + '<br>' + inventory.contentsOf[3])
+		}
     	}
 		if(command == 'start' || command == 'Start') {
 			game.start()
