@@ -104,23 +104,23 @@ function wellPlace() {
 	eating(eats, items, poisons)
 	if(command.includes('look')) {
 	outElement.innerHTML = game.look(command,
-	 "On your right there ??? stillll inn development ?", 
+	 "On your right there are some more boulders.", 
 	 "To your left is the dune where you started.", 
-   	 "Behind you is the massive mound of boulders.",
-   	 "In front of you is the well itself, bucket and all.",
+   	 "Behind you is a cacti patch.",
+   	 "In front of you is a massive hole. There is a railing around the hole, forcing you to enter a different way.",
 	 "Above you is the awning over the well. It's made of rotting wood and old rusty nails.", 
 	 "Below you is the ground. You can see cactus fruit, rocks, sand, and the walls of the well."
     )
 	}
 	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
   outElement.innerHTML = game.move(command, 
-		"You walk to the well.",
+		"You cannot walk through the boulders.",
 								 "well",
-		"You slip and slide and eventually you find yourself at the bottom of the slope. <br> Gravel and sand continues falling long after you've reached the bottom.",
-								 "belowSlope",
-		"You cannot climb the boulders.",
+		"You decide to head back to the dune.",
 								 "first",
-		"Walking forward, you come to the end of the small dune.",
+		"It would be unwise to walk through the cacti.",
+								 "well",
+		"The railing is impossible to climb.",
 								"dune")
 	}
 }
