@@ -149,7 +149,7 @@ game.end = function() {
 game.start = function() {
 	inElement.style.display = "none"
 	printOut("move [direction](left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item]")
-	setTimeout(function() {game.first()}, 5000);
+	setTimeout(function() {game.first()}, 7000);
 }
 
 game.look = function(action, rightMess, leftMess, behMess, foMess, upMess, downMess) {
