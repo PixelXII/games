@@ -167,9 +167,6 @@ function doAction() {
 	if(command == 'thanks') {
 		printOut("You're welcome")
 	}
-	if(outElement.innerHTML = "You're welcome" && command == 'sure') {
-		place = 'thanks'
-	}
 		if(command == 'start' || command == 'Start') {
 			game.start()
 		}
