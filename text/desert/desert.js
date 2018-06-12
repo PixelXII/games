@@ -143,11 +143,11 @@ game.start = function() {
 }
 
 game.look = function(action, rightMess, leftMess, behMess, foMess) {
-	if(command.includes('look') && command.includes('around')) {
-			printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
-	}
+	
 	if(action.includes('look ') || action.includes('Look ')) {
-		if(action.includes('right')) {
+		if(action.includes('around')) {
+			printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
+		} else if(action.includes('right')) {
 			return rightMess;
 		} else if(action.includes('left')) {
 			return leftMess;
