@@ -174,6 +174,8 @@ function doAction() {
 			sure()
 		} else if(place == 'first') {
 			firstPlace()
+		} else if(place == 'well') {
+			wellPlace()
 		} else if(place == 'end') {
 			game.end()
 		} 
