@@ -95,10 +95,16 @@ function firstPlace() {
 
 // doAction(): getting form data and calling location functions
 
+function doThings() {
+	if(command.includes('inventory')) {
+		printOut(inventory.contentsOf)
+	}
+}
 function doAction() {
 		command = inElement.value;
 		inElement.value = ""; 
     // In this version I deleted the if statement that evals a command if it contains ( or ). That was somewhat dangerous, so I removed it.
+		doThings() // Everything else
 		if(command == 'start' || command == 'Start') {
 			game.start()
 		}
