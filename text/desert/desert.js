@@ -106,6 +106,9 @@ function doAction() {
     			printOut(inventory.contentsOf[1] + '<br>' + inventory.contentsOf[2] + '<br>' + inventory.contentsOf[3])
 		}
     	}
+	if(command == 'thanks') {
+		printOut("You're welcome")
+	}
 		if(command == 'start' || command == 'Start') {
 			game.start()
 		}
