@@ -20,7 +20,7 @@ var mainEats = ['cactus fruit']
 var mainPoisons = ['']
 var pickUp = ['pick up', 'pick', 'grab', 'take']
 var eatWords = ['eat', 'consume']
-var nonEats = ['rock', 'cactus', 'stick', 'twig', 'torch']
+var nonEats = ['rock', 'cactus', 'stick', 'twig', 'torch', 'sand']
 var white, red, green, blue, purple, yellow, orange, brown;
 var inventory = new Object()
 inventory.spotsUsed = 0;
@@ -71,14 +71,17 @@ function firstPlace() {
   	out2.innerHTML = ""
 	var eats = ['cactus fruit']
 	var poisons = ['']
-	var items = ['rock', 'cactus fruit']
+	var items = ['rock', 'cactus fruit', "sand"]
 	eating(eats, items, poisons)
 	if(command.includes('look')) {
 	outElement.innerHTML = game.look(command, 
 	  "On your right there is a well with a considerable amount of water in it.", 
 		"To your left is a very steep slope going down to an area of sparse shrubbery and rocks.", 
     "Behind you is a massive mound of boulders.", 
-    "In front of you, away from the pile of boulders, is the edge of the dune that you are standing on.")
+    "In front of you, away from the pile of boulders, is the edge of the dune that you are standing on.",
+	"Above you is the cloudless sky. You see a vulture circling high above you.", 
+	"Below you is the ground. You can see cactus fruit and rocks, and, of course, sand."
+    )
 	}
 	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
   outElement.innerHTML = game.move(command, 
@@ -93,18 +96,12 @@ function firstPlace() {
 	}
 }
 
-// doAction(): getting form data and calling location functions
-
-function doThings() {
-	if(command.includes('inventory')) {
-		printOut(inventory.contentsOf)
-	}
-}
 function doAction() {
 		command = inElement.value;
 		inElement.value = ""; 
-    // In this version I deleted the if statement that evals a command if it contains ( or ). That was somewhat dangerous, so I removed it.
-		doThings() // Everything else
+    	if(command == 'inventory' || command == 'show inventory') {
+    		printOut(inventory.contentsOf)
+    	}
 		if(command == 'start' || command == 'Start') {
 			game.start()
 		}
@@ -114,7 +111,7 @@ function doAction() {
 			game.end()
 		} 
 		if(outElement.innerHTML == 'undefined') {
-			printOut("I don't understand what you mean.", "")
+			printOut("I don't understand what you're trying to do.", "")
 		}
 }
 
@@ -148,11 +145,9 @@ game.start = function() {
 	setTimeout(function() {game.first()}, 5000);
 }
 
-game.look = function(action, rightMess, leftMess, behMess, foMess) {
+game.look = function(action, rightMess, leftMess, behMess, foMess, upMess, downMess) {
 	if(action.includes('look ') || action.includes('Look ')) {
-		if(action.includes('around')) {
-			printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
-		} else if(action.includes('right')) {
+		if(action.includes('right')) {
 			return rightMess;
 		} else if(action.includes('left')) {
 			return leftMess;
@@ -160,6 +155,12 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 			  return behMess;
 		} else if(action.includes('forward') || action.includes('ahead')) {
 			return foMess;
+		} else if(action.includes('up')) {
+			return upMess
+		} else if(action.includes('down')) {
+			return downMess
+		} else if(action.includes('around')) {
+			return rightMess + '<br>' + leftMess + '<br>' + behMess + '<br>' + foMess
 		} else {
 			return "I don't understand what you mean."
 		}
