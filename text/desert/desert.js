@@ -146,7 +146,7 @@ function sure() {
 		"You walk to the statue.",
 								 "thanks",
 		"You walk through the portal.",
-								 "first",
+								 "portal",
 		"You approach the raven.",
 								 "thanks",
 		"Walking forward, you burn yourself on the pineapple and fall off the slab of glass.",
@@ -172,6 +172,8 @@ function doAction() {
 		}
 		if(place == 'thanks') {
 			sure()
+		} else if(place == 'portal') {
+			place = prompt('enter a place')
 		} else if(place == 'first') {
 			firstPlace()
 		} else if(place == 'well') {
