@@ -101,9 +101,6 @@ function doAction() {
     // In this version I deleted the if statement that evals a command if it contains ( or ). That was somewhat dangerous, so I removed it.
 		if(command == 'start' || command == 'Start') {
 			game.start()
-		} 
-		if(command.includes('look') && command.includes('around')) {
-			printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
 		}
 		if(place == 'first') {
 			firstPlace()
@@ -146,6 +143,9 @@ game.start = function() {
 }
 
 game.look = function(action, rightMess, leftMess, behMess, foMess) {
+	if(command.includes('look') && command.includes('around')) {
+			printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
+	}
 	if(action.includes('look ') || action.includes('Look ')) {
 		if(action.includes('right')) {
 			return rightMess;
