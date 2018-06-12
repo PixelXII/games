@@ -123,6 +123,36 @@ function wellPlace() {
 		"Walking forward, you come to the end of the small dune.",
 								"dune")
 	}
+}
+
+function sure() {
+	out2.innerHTML = ""
+	var eats = ['cactus fruit', 'well']
+	var poisons = ['']
+	var items = ['rock', 'cactus fruit', "sand", 'water']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+	outElement.innerHTML = game.look(command,
+	 "On your right there is actually a pure golden statue.", 
+	 "To your left is a portal of swirling purple.", 
+   	 "Behind you is a very large raven.",
+   	 "In front of you is a spider.",
+	 "Above you is one bright star in the shape of a pineapple.", 
+	 "Below you is a slab of glass. Below you, you can see a strange, blocky shape. It looks like a slice of desert hanging in the sky."
+    )
+	}
+	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
+  outElement.innerHTML = game.move(command, 
+		"You walk to the statue.",
+								 "thanks",
+		"You walk through the portal.",
+								 "first",
+		"You approach the raven.",
+								 "thanks",
+		"Walking forward, you burn yourself on the pineapple and fall off the slab of glass.",
+								"well")
+	}
+}
 
 function doAction() {
 		command = inElement.value;
@@ -137,10 +167,15 @@ function doAction() {
 	if(command == 'thanks') {
 		printOut("You're welcome")
 	}
+	if(outElement.innerHTML = "You're welcome" && command == 'sure') {
+		place = 'thanks'
+	}
 		if(command == 'start' || command == 'Start') {
 			game.start()
 		}
-		if(place == 'first') {
+		if(place == 'thanks') {
+			sure()
+		} else if(place == 'first') {
 			firstPlace()
 		} else if(place == 'end') {
 			game.end()
