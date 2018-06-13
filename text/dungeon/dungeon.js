@@ -355,7 +355,7 @@ game.pickUp = function(action, eats, items, poisons) {
 	 damage:3,
 	 hp:8,
 	 exp:0,
-	 place:null
+	 place:1
  }
  
  var placeInt = setInterval(function() { player.place = place }, 10)
@@ -363,14 +363,14 @@ game.pickUp = function(action, eats, items, poisons) {
  // clearInterval(placeInt)
  
  var zombie = {
-	 place:1,
+	 place:2,
 	 hp:5,
 	 startinghp:5,
 	 damage:2
  }
  
  var skeleton = {
-	 place:2,
+	 place:5,
 	 hp:3,
 	 startinghp:3,
 	 damage:2
