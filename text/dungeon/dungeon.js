@@ -87,22 +87,18 @@ function doAction() {
 			sure()
 		} else if(place == 'portal') {
 			place = prompt('enter a place')
-		} else if(place == 'first') {
+		} else if(place == 1) {
 			firstPlace()
-		} else if(place == 'well') {
-			wellPlace()
-		} else if(place == 'belowSlope') {
-			belowSlope()
-		} else if(place === 'rockpile') {
-			rockPlace()
+		} else if(place == 2) {
+			secondPlace()
 		}
-
 		if(place == 'end') {
 			game.end()
 		} 
 		if(outElement.innerHTML == 'undefined') {
 			printOut("I don't understand what you're trying to do.", "")
 		}
+		npc()
 }
 
 // event listeners help everything
@@ -283,3 +279,47 @@ game.pickUp = function(action, eats, items, poisons) {
 		console.log(thing+' dropped')
 	}
  }
+ 
+ // Characters/NPCs.
+ 
+ // Started these at 9 am. I haven't had any coffee this morning, and I am not at my fullest. 
+ // I have a small inkling on how to do this, though.
+ 
+ var player = {
+	 damage:3,
+	 hp:8,
+ }
+ 
+ var placeInt = setInterval(function() { player.place = place }, 10)
+ 
+ // clearInterval(placeInt)
+ 
+ var zombie = {
+	 place:1,
+	 hp:5,
+	 startinghp:5,
+	 damage:2
+ }
+ 
+ var skeleton = {
+	 place:2,
+	 hp:3,
+	 startinghp:3,
+	 damage:2
+ }
+ 
+ function npc() {
+	 if(place == zombie.place) {
+		 var playerHits = 0;
+		 printOut('You encounter a zombie. It has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.')
+		 if(command.includes('kill') || command.includes('hit') || command.includes('smack')) {
+			 zombie.hp = zombie.hp - player.damage
+			 playerHits++
+		 }
+		 if(playerHits = 1) {
+			 player.hp = player.hp - zombie.damage
+		 }
+	 }
+ }
+			 
+ 
