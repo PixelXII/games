@@ -207,6 +207,8 @@ function doAction() {
 			firstPlace()
 		} else if(place == 'well') {
 			wellPlace()
+		} else if(place == 'belowSlope') {
+			belowSlope()
 		} else if(place == 'end') {
 			game.end()
 		} 
