@@ -187,6 +187,35 @@ function rockPlace() {
 	}
 }
 
+function empty2() {
+	out2.innerHTML = ""
+	var eats = ['cactus fruit']
+	var poisons = ['cactus']
+	var items = ['rock', 'cactus fruit', "sand", 'cactus']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+	outElement.innerHTML = game.look(command, 
+	  "On your right there is a well with a considerable amount of water in it.", 
+		"To your left is a very steep slope going down to an area of sparse shrubbery and rocks.", 
+    "Behind you is a massive mound of boulders.", 
+    "In front of you, away from the pile of boulders, is the edge of the dune that you are standing on.",
+	"Above you is the cloudless sky. You see a vulture circling high above you.", 
+	"Below you is the ground. You can see cactus fruit and rocks, and, of course, sand."
+    )
+	}
+	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
+  outElement.innerHTML = game.move(command, 
+		"You walk to the well.",
+								 "well",
+		"You slip and slide and eventually you find yourself at the bottom of the slope. <br> Gravel and sand continues falling long after you've reached the bottom.",
+								 "belowSlope",
+		"You cannot climb the boulders.",
+								 "first",
+		"Walking forward, you come to the end of the small dune.",
+								"dune")
+	}
+}
+
 function sure() {
 	out2.innerHTML = ""
 	var eats = ['cactus fruit', 'well']
