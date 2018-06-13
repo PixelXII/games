@@ -125,6 +125,35 @@ function wellPlace() {
 	}
 }
 
+function belowSlope() {
+	out2.innerHTML = ""
+	var eats = ['cactus fruit', 'twig', 'stick']
+	var poisons = ['']
+	var items = ['rock', 'cactus fruit', "sand", 'twig', 'stick']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+	outElement.innerHTML = game.look(command, 
+	  "To the right is the slope from which you came.", 
+		"To your left is a very empty expanse which stretches on for as far as you can see.", 
+    "Behind you is also the slope.", 
+    "In front of you is a small mound of rocks.",
+	"Above you is the cloudless sky. You see a vulture circling high above you.", 
+	"Below you is the ground. You can see cactus fruit and rocks, and sand, of coarse."
+    )
+	}
+	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
+  outElement.innerHTML = game.move(command, 
+		"You cannot climb up the slope.",
+								 "belowSlope",
+		"You step into the expanse of space next to the slope, careful to keep the slope and dune in sight.",								 
+				   "empty1",
+		"You cannot climb up the slope.",
+								 "belowSlope",
+		"You move forward to the small pile of rocks",
+								"rockpile")
+	}
+}
+
 function sure() {
 	out2.innerHTML = ""
 	var eats = ['cactus fruit', 'well']
