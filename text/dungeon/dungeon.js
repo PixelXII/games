@@ -186,7 +186,7 @@ game.reset = function() {
 }
 
 game.end = function() {
-	printOut("END OF GAME <br> ------------------------------<br> You have reached the end of this adventure. <br> <br> Game written by Kai Wildberger and art by <a href='https://www.literallysomeartist.deviantart.com'>Ashlyn Bishop</a> <br> Art by <br> <br> <br> <br> May 29th, 2018");
+	printOut("END OF GAME <br> ------------------------------<br> You have reached the end of this adventure. <br> <br> Game written by Kai Wildberger and art by <a style='color:black;'href='https://www.literallysomeartist.deviantart.com'>Ashlyn Bishop</a><br> <br> <br> <br> May 29th, 2018");
 	inElement.style.display = "none"
 }
 
