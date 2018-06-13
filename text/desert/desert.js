@@ -224,7 +224,7 @@ function doAction() {
 				printOut('There is nothing in your inventory.')
 			} else {
 				printOut(inventory.contentsOf.toString().replace(',', ', '))
-				var inter = setInterval(function() { outElement.innerHTML.toString().replace(',', ', ') }, 10)
+				var inter = setInterval(function() { outElement.innerHTML.replace(',', ', ') }, 10)
 				setTimeout(function() { clearInterval(inter) }, 50)
 			} 
     	}
