@@ -288,7 +288,8 @@ game.pickUp = function(action, eats, items, poisons) {
  var player = {
 	 damage:3,
 	 hp:8,
-	 exp:0
+	 exp:0,
+	 place:null
  }
  
  var placeInt = setInterval(function() { player.place = place }, 10)
