@@ -155,7 +155,7 @@ game.look = function(action, rightMess, leftMess, behMess, foMess, upMess, downM
 
 game.first = function() {
 	inElement.style.display = "block"
-	noteElem.innerHTML = "game written by kai wildberger"
+	noteElem.innerHTML = "<p style='font-size:12px;'>game written by kai wildberger</p>"
 	printOut('You find yourself in a desert, surrounded by tumbleweeds and sand.')
 }
 
