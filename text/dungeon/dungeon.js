@@ -418,7 +418,6 @@ game.pickUp = function(action, eats, items, poisons) {
 		 let playerHits = 0;
 		 let zombieHits = 0;
 		 return '<strong>[encounter]</strong> <br> The zombie has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.'
-		 if(out2.innerHTML = zombie.hp) {
 		 	if(command.includes('kill') || command.includes('attack') || command.includes('hit') && command.includes('zombie')) {
 				 return 'Brutally, you attack the zombie.'
 				 zombie.hp = zombie.hp - player.damage
@@ -435,7 +434,6 @@ game.pickUp = function(action, eats, items, poisons) {
 			 	player.exp = zombie.startinghp + place
 				out2.innerHTML = ""
 			}
-	 	}
 	 }
  }
 
