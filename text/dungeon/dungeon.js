@@ -65,6 +65,60 @@ function eating(eats, items, poisons) {
 	}
 }
 
+
+
+// Characters/NPCs.
+ 
+ // Started these at 9 am. I haven't had any coffee this morning, and I am not at my fullest. 
+ // I have a small inkling on how to do this, though.
+ 
+ var player = {
+	 damage:3,
+	 hp:8,
+	 exp:0,
+	 place:null
+ }
+ 
+ var placeInt = setInterval(function() { player.place = place }, 10)
+ 
+ // clearInterval(placeInt)
+ 
+ var zombie = {
+	 place:1,
+	 hp:5,
+	 startinghp:5,
+	 damage:2
+ }
+ 
+ var skeleton = {
+	 place:2,
+	 hp:3,
+	 startinghp:3,
+	 damage:2
+ }
+ 
+ function npc(command) {
+	 if(place == zombie.place) {
+		 let playerHits = 0;
+		 let zombieHits = 0;
+		 printOut('You encounter a zombie. It has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.')
+		 if(command.includes('kill') || command.includes('hit') || command.includes('smack')) {
+			 zombie.hp = zombie.hp - player.damage
+			 playerHits++
+			 printOut('Brutally, you attack the zombie.')
+		 }
+		 if(playerHits === 1) {
+			 player.hp = player.hp - zombie.damage
+			 zombieHits++
+			 printOut('The zombie attacks you back mercilessly.')
+		 }
+		 if(zombie.hp === 0) {
+			 printOut('The zombie has died. You earned ' + zombie.startinghp + place + ' experience points.')
+			 player.exp = zombie.startinghp + place
+	 	}
+	 }
+ }
+
 function doAction() {
 		command = inElement.value;
 		inElement.value = ""; 
@@ -98,7 +152,7 @@ function doAction() {
 		if(outElement.innerHTML == 'undefined') {
 			printOut("I don't understand what you're trying to do.", "")
 		}
-		npc()
+		npc(command)
 }
 
 // event listeners help everything
@@ -278,56 +332,4 @@ game.pickUp = function(action, eats, items, poisons) {
 		}
 		console.log(thing+' dropped')
 	}
- }
- 
- // Characters/NPCs.
- 
- // Started these at 9 am. I haven't had any coffee this morning, and I am not at my fullest. 
- // I have a small inkling on how to do this, though.
- 
- var player = {
-	 damage:3,
-	 hp:8,
-	 exp:0,
-	 place:null
- }
- 
- var placeInt = setInterval(function() { player.place = place }, 10)
- 
- // clearInterval(placeInt)
- 
- var zombie = {
-	 place:1,
-	 hp:5,
-	 startinghp:5,
-	 damage:2
- }
- 
- var skeleton = {
-	 place:2,
-	 hp:3,
-	 startinghp:3,
-	 damage:2
- }
- 
- function npc() {
-	 if(place == zombie.place) {
-		 let playerHits = 0;
-		 let zombieHits = 0;
-		 printOut('You encounter a zombie. It has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.')
-		 if(command.includes('kill') || command.includes('hit') || command.includes('smack')) {
-			 zombie.hp = zombie.hp - player.damage
-			 playerHits++
-			 printOut('Brutally, you attack the zombie.')
-		 }
-		 if(playerHits === 1) {
-			 player.hp = player.hp - zombie.damage
-			 zombieHits++
-			 printOut('The zombie attacks you back mercilessly.')
-		 }
-		 if(zombie.hp === 0) {
-			 printOut('The zombie has died. You earned ' + zombie.startinghp + place + ' experience points.')
-			 player.exp = zombie.startinghp + place
-	 	}
-	 }
  }
