@@ -101,19 +101,19 @@ function eating(eats, items, poisons) {
 	 if(place == zombie.place) {
 		 let playerHits = 0;
 		 let zombieHits = 0;
-		 printOut('You encounter a zombie. It has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.')
+		 return 'You encounter a zombie. It has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.'
 		 if(command.includes('kill') || command.includes('hit') || command.includes('smack')) {
 			 zombie.hp = zombie.hp - player.damage
 			 playerHits++
-			 printOut('Brutally, you attack the zombie.')
+			 return 'Brutally, you attack the zombie.'
 		 }
 		 if(playerHits === 1) {
 			 player.hp = player.hp - zombie.damage
 			 zombieHits++
-			 printOut('The zombie attacks you back mercilessly.')
+			 return 'The zombie attacks you back mercilessly.'
 		 }
 		 if(zombie.hp === 0) {
-			 printOut('The zombie has died. You earned ' + zombie.startinghp + place + ' experience points.')
+			 return 'The zombie has died. You earned ' + zombie.startinghp + place + ' experience points.'
 			 player.exp = zombie.startinghp + place
 	 	}
 	 }
