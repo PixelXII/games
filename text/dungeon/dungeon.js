@@ -14,7 +14,7 @@ If you have a bug, issue, or something else, go to the github repo at github.com
 var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
 var command = null;
 var note;
-var place = 'first'
+var place = 1
 var thing;
 var mainEats = ['cactus fruit']
 var mainPoisons = ['']
