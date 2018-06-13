@@ -161,8 +161,8 @@ function doAction() {
 		if(outElement.innerHTML == 'undefined') {
 			printOut("I don't understand what you're trying to do.", "")
 		}
-		if(command.includes('hit') || command.includes('attack')) {
-			printOut(npc())
+		if(roomCheck() === true) {
+			printOut(npc())	
 		}
 }
 
@@ -404,4 +404,12 @@ game.pickUp = function(action, eats, items, poisons) {
 			 player.exp = zombie.startinghp + place
 	 	}
 	 }
+ }
+
+ function roomCheck() {
+ 	if(zombie.place === player.place || skeleton.place === player.place) {
+ 		return true
+ 	} else {
+ 		return false
+ 	}
  }
