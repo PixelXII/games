@@ -224,6 +224,7 @@ function doAction() {
 				printOut('There is nothing in your inventory.')
 			} else {
 				printOut(inventory.contentsOf.toString().replace(',', ', '))
+				outElement.innerHTML.toString().replace(',', ', ')
 			} 
     	}
 	if(command == 'thanks') {
