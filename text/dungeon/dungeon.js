@@ -118,14 +118,43 @@ function firstPlace() {
 	}
 	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
   outElement.innerHTML = game.move(command, 
-		"You cannot walk through walls..",
+		"You cannot walk through walls.",
 								 1,
 		"You cannot walk through walls.",
 								 1,
 		"You cannot pick the lock of the door or break it down.",
 								 1,
 		"You approach the zombie carefully.",
-								1)
+								2)
+	}
+}
+
+function secondPlace() {
+	out2.innerHTML = ""
+	var eats = ['']
+	var poisons = ['']
+	var items = ["bone", "rock"]
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+	outElement.innerHTML = game.look(command,
+	 "On your right there is one of the walls of the dungeon. The bricks are mossy and have been used a lot.", 
+	 "To your left is another wall of the dungeon.", 
+   	 "Behind you is the place you started.",
+   	 "In front of you is a very dark and small passageway.",
+	 "Above you is darkness. You can assume that the ceiling of the dungeon is above you, but you cannot see it.", 
+	 "Below you is the floor of the dungeon. You can see a few zombie guts and intestines scattered about."
+    )
+	}
+	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
+  outElement.innerHTML = game.move(command, 
+		"You cannot walk through walls.",
+								 2,
+		"You cannot walk through walls.",
+								 2,
+		"You make your way around the innards of the zombie and head back to the door.",
+								 1,
+		"You start down the passage.",
+								3)
 	}
 }
 
