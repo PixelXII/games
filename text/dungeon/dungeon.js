@@ -11,7 +11,6 @@ If you have a bug, issue, or something else, go to the github repo at github.com
 */
 
 // Variables
-document.getElementsByTagName('body').style.backgroundColor = '#F1F1D4'
 var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
 var command = null;
 var note;
