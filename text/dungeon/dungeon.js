@@ -419,18 +419,14 @@ game.pickUp = function(action, eats, items, poisons) {
 		 return 'You encounter a zombie. It has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.'
 		 zhp = setInterval(function() { out2.innerHTML = zombie.hp; console.log('zhp set') }, 100)
 		 if(command.includes('kill') || command.includes('attack') || command.includes('hit') && command.includes('zombie')) {
-		 	try {
-			 zombie.hp = zombie.hp - player.damage
-		 	} catch {
-		 		console.error('error at zombie.hp - player.damage')
-		 	}
-			 playerHits++
 			 return 'Brutally, you attack the zombie.'
+			 zombie.hp = zombie.hp - player.damage
+			 playerHits++
 		 }
-		 if(playerHits === 1) {
+		 if(playerHits % 2 === 1 || playerHits === 1) {
 			 player.hp = player.hp - zombie.damage
 			 zombieHits++
-			 return 'The zombie attacks you back mercilessly.'
+			 setTimeout(function() { return 'The zombie attacks you back mercilessly.' }, 5000)
 		 }
 		 if(zombie.hp === 0) {
 		 	clearInterval(zhp)
