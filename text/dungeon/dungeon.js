@@ -67,57 +67,66 @@ function eating(eats, items, poisons) {
 
 
 
-// Characters/NPCs.
- 
- // Started these at 9 am. I haven't had any coffee this morning, and I am not at my fullest. 
- // I have a small inkling on how to do this, though.
- 
- var player = {
-	 damage:3,
-	 hp:8,
-	 exp:0,
-	 place:null
- }
- 
- var placeInt = setInterval(function() { player.place = place }, 10)
- 
- // clearInterval(placeInt)
- 
- var zombie = {
-	 place:1,
-	 hp:5,
-	 startinghp:5,
-	 damage:2
- }
- 
- var skeleton = {
-	 place:2,
-	 hp:3,
-	 startinghp:3,
-	 damage:2
- }
- 
- function npc(command) {
-	 if(place == zombie.place) {
-		 let playerHits = 0;
-		 let zombieHits = 0;
-		 return 'You encounter a zombie. It has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.'
-		 if(command.includes('kill') || command.includes('hit') || command.includes('smack')) {
-			 zombie.hp = zombie.hp - player.damage
-			 playerHits++
-			 return 'Brutally, you attack the zombie.'
-		 }
-		 if(playerHits === 1) {
-			 player.hp = player.hp - zombie.damage
-			 zombieHits++
-			 return 'The zombie attacks you back mercilessly.'
-		 }
-		 if(zombie.hp === 0) {
-			 return 'The zombie has died. You earned ' + zombie.startinghp + place + ' experience points.'
-			 player.exp = zombie.startinghp + place
-	 	}
-	 }
- }
+
+
+function sure() {
+	out2.innerHTML = ""
+	var eats = ['']
+	var poisons = ['']
+	var items = ["bone", "rock"]
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+	outElement.innerHTML = game.look(command,
+	 "On your right there is the wall of the dungeon. The bricks have a lot of moss on them and are very worn.", 
+	 "To your left is the other wall of the dungeon.", 
+   	 "Behind you is a locked door.",
+   	 "In front of you is a spider.",
+	 "Above you is one bright star in the shape of a pineapple.", 
+	 "Below you is a slab of glass. Below you, you can see a strange, blocky shape. It looks like a slice of desert hanging in the sky."
+    )
+	}
+	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
+  outElement.innerHTML = game.move(command, 
+		"You walk to the statue.",
+								 "thanks",
+		"You walk through the portal.",
+								 "portal",
+		"You approach the raven.",
+								 "thanks",
+		"Walking forward, you burn yourself on the pineapple and fall off the slab of glass.",
+								"well")
+	}
+}
+	
+
+function firstPlace() {
+	out2.innerHTML = ""
+	var eats = ['']
+	var poisons = ['']
+	var items = ["bone", "rock"]
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+	outElement.innerHTML = game.look(command,
+	 "On your right there is the wall of the dungeon. The bricks have a lot of moss on them and are very worn.", 
+	 "To your left is the other wall of the dungeon.", 
+   	 "Behind you is a locked door.",
+   	 "In front of you is a zombie. Behind it, you can see the darkness of a small passageway.",
+	 "Above you is darkness. You can assume that the ceiling of the dungeon is above you, but you cannot see it.", 
+	 "Below you is the floor of the dungeon. The flagstones are worn and cracked."
+    )
+	}
+	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
+  outElement.innerHTML = game.move(command, 
+		"You cannot walk through walls..",
+								 1,
+		"You cannot walk through walls.",
+								 1,
+		"You cannot pick the lock of the door or break it down.",
+								 1,
+		"You approach the zombie carefully.",
+								1)
+	}
+}
 
 function doAction() {
 		command = inElement.value;
@@ -152,7 +161,9 @@ function doAction() {
 		if(outElement.innerHTML == 'undefined') {
 			printOut("I don't understand what you're trying to do.", "")
 		}
-		npc(command)
+		if(command.includes('hit') || command.includes('attack')) {
+			printOut(npc())
+		}
 }
 
 // event listeners help everything
@@ -210,7 +221,7 @@ game.look = function(action, rightMess, leftMess, behMess, foMess, upMess, downM
 game.first = function() {
 	inElement.style.display = "block"
 	noteElem.innerHTML = "<p style='font-size:12px;'>game written by kai wildberger</p>"
-	printOut('You find yourself in a desert, surrounded by tumbleweeds and sand.')
+	printOut('You find yourself in a dungeon, surrounded by damp darkness and stone.')
 }
 
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
@@ -332,4 +343,65 @@ game.pickUp = function(action, eats, items, poisons) {
 		}
 		console.log(thing+' dropped')
 	}
+ }
+
+
+// Characters/NPCs.
+ 
+ // Started these at 9 am. I haven't had any coffee this morning, and I am not at my fullest. 
+ // I have a small inkling on how to do this, though.
+ 
+ var player = {
+	 damage:3,
+	 hp:8,
+	 exp:0,
+	 place:null
+ }
+ 
+ var placeInt = setInterval(function() { player.place = place }, 10)
+ 
+ // clearInterval(placeInt)
+ 
+ var zombie = {
+	 place:1,
+	 hp:5,
+	 startinghp:5,
+	 damage:2
+ }
+ 
+ var skeleton = {
+	 place:2,
+	 hp:3,
+	 startinghp:3,
+	 damage:2
+ }
+
+ var zhp;
+ 
+ function npc(command) {
+	 if(place == zombie.place) {
+		 let playerHits = 0;
+		 let zombieHits = 0;
+		 return 'You encounter a zombie. It has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.'
+		 zhp = setInterval(function() { out2.innerHTML = zombie.hp; console.log('zhp set') }, 100)
+		 if(command.includesd('kill') || command.includes('attack') || command.includes('hit') && command.includes('zombie')) {
+		 	try {
+			 zombie.hp = zombie.hp - player.damage
+		 	} catch {
+		 		console.error('error at zombie.hp - player.damage')
+		 	}
+			 playerHits++
+			 return 'Brutally, you attack the zombie.'
+		 }
+		 if(playerHits === 1) {
+			 player.hp = player.hp - zombie.damage
+			 zombieHits++
+			 return 'The zombie attacks you back mercilessly.'
+		 }
+		 if(zombie.hp === 0) {
+		 	clearInterval(zhp)
+			 return 'The zombie has died. You earned ' + zombie.startinghp + place + ' experience points.'
+			 player.exp = zombie.startinghp + place
+	 	}
+	 }
  }
