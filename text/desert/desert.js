@@ -1,8 +1,8 @@
 /* 
 
-If anyone is bothering to look at the source for the game, I'll say hi first. 
+Hello.
 
-"hi"
+Thanks for caring about the source for this game.
 
 I am twelve and I am just beginning to understand how I can make a JavaScript game. 
 The code is probably horribly messy and things aren't functioning exactly the way they are supposed to (the game works though!).
@@ -154,6 +154,39 @@ function belowSlope() {
 	}
 }
 
+function rockPlace() {
+	out2.innerHTML = ""
+	var eats = ['cactus fruit']
+	var poisons = ['']
+	var items = ['rock', 'cactus fruit', "sand", 'stone', 'large rock']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+	outElement.innerHTML = game.look(command,
+	 "On your right there is a small hill of clay and sand with a few bushes and sticks on top.", 
+	 "To your left is a large expanse of emptiness.", 
+   	 "Behind you is the bottom of the steep slope.",
+   	 "In front of you is a small trail leading around a dead bush and between two cacti.",
+	 "Above you is the cloudless sky with a hawk and a vulture circling.", 
+	 "Below you is a dung beetle rolling a ball of poo across the sandy floor."
+    )
+	}
+	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
+  outElement.innerHTML = game.move(command, 
+		"Upon hearing a sharp rattling coming from the hill, you decide to step away from it.",
+								 "rockpile",
+		"You do not trust yourself to remain in sight of the dune and hill and do not stray from the path.",
+								 "rockpile",
+		"You find the hill of clay somewhat unflattering and slowly make your way back to the bottom of the hill.",
+								 "belowSlope",
+		"Following the trail, you dodge the cacti and keep going.",
+								"empty2")
+	}
+	if(command == 'follow trail' || command == 'take trail' || command.includes('trail')) {
+		printOut('You step onto the trail and go on.')
+		place = 'empty2'
+	}
+}
+
 function sure() {
 	out2.innerHTML = ""
 	var eats = ['cactus fruit', 'well']
@@ -187,11 +220,11 @@ function doAction() {
 		command = inElement.value;
 		inElement.value = ""; 
     	if(command == 'inventory' || command == 'show inventory') {
-		if(inventory.contentsOf.length === 0) {
-			printOut('There is nothing in your inventory.')
-		} else {
-    			printOut(inventory.contentsOf[1] + '<br>' + inventory.contentsOf[2] + '<br>' + inventory.contentsOf[3])
-		}
+			if(inventory.contentsOf.length === 0) {
+				printOut('There is nothing in your inventory.')
+			} else {
+				printOut(inventory.contentsOf.toString().replace(',', ', '))
+			} 
     	}
 	if(command == 'thanks') {
 		printOut("You're welcome")
@@ -209,7 +242,11 @@ function doAction() {
 			wellPlace()
 		} else if(place == 'belowSlope') {
 			belowSlope()
-		} else if(place == 'end') {
+		} else if(place === 'rockpile') {
+			rockPlace()
+		}
+
+		if(place == 'end') {
 			game.end()
 		} 
 		if(outElement.innerHTML == 'undefined') {
@@ -243,7 +280,7 @@ game.end = function() {
 
 game.start = function() {
 	inElement.style.display = "none"
-	printOut("move [direction](left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item]")
+	printOut("move [direction](up down left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item] <br> drop[item] <br> inventory (to display inventory)")
 	setTimeout(function() {game.first()}, 7000);
 }
 
@@ -321,6 +358,7 @@ game.pickUp = function(action, eats, items, poisons) {
 				out2.innerHTML = ""
 				inventory.contentsOf.push(thing)
 				printOut('You have a ' + thing)
+				console.log(thing + ' taken')
 			}
 			}
 		}
@@ -345,9 +383,7 @@ game.pickUp = function(action, eats, items, poisons) {
 		} 
 		if(mainEats.includes(thing)) {
 			inventory.spotsUsed--
-			if(inventory.contentsOf.indexOf(thing) == 0) {
-				inventory.contentsOf.shift()
-			} else if(inventory.contentsOf.indexOf(thing) == inventory.contentsOf.length-1) {
+			if(inventory.contentsOf.indexOf(thing) == inventory.contentsOf.length-1) {
 				inventory.contentsOf.pop()
 			} else {
 				var index = inventory.contentsOf.indexOf(thing);
