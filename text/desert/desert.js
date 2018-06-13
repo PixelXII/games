@@ -11,7 +11,7 @@ If you have a bug, issue, or something else, go to the github repo at github.com
 */
 
 // Variables
-var output = "type start to begin <br> <br> <h3>Sorry about there being no mobile support</h3>"
+var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
 var command = null;
 var note;
 var place = 'first'
