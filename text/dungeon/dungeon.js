@@ -327,5 +327,6 @@ game.pickUp = function(action, eats, items, poisons) {
 		 if(zombie.hp === 0) {
 			 printOut('The zombie has died. You earned ' + zombie.startinghp + place + ' experience points.')
 			 player.exp = zombie.startinghp + place
+	 	}
 	 }
  }
