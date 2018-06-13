@@ -414,10 +414,10 @@ game.pickUp = function(action, eats, items, poisons) {
  
  function npc(command) {
 	 if(place == zombie.place) {
+		 zhp = setInterval(function() { out2.innerHTML = zombie.hp; }, 100)
 		 let playerHits = 0;
 		 let zombieHits = 0;
 		 return 'You encounter a zombie. It has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.'
-		 zhp = setInterval(function() { out2.innerHTML = zombie.hp; console.log('zhp set') }, 100)
 		 if(command.includes('kill') || command.includes('attack') || command.includes('hit') && command.includes('zombie')) {
 			 return 'Brutally, you attack the zombie.'
 			 zombie.hp = zombie.hp - player.damage
