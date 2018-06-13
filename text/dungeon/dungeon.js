@@ -414,7 +414,7 @@ game.pickUp = function(action, eats, items, poisons) {
  
  function npc(command) {
 	 if(place == zombie.place) {
-		 zhp = setInterval(function() { out2.innerHTML = zombie.hp; }, 100)
+		 zhp = setInterval(function() { out2.innerHTML = zombie.hp; if(zombie.hp < 0) { zombie.hp = 0 }}, 100)
 		 let playerHits = 0;
 		 let zombieHits = 0;
 		 return '<strong>[encounter]</strong> <br> The zombie has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.'
