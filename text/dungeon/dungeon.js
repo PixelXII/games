@@ -5,7 +5,8 @@ Hello.
 Thanks for caring about the source for this game.
 
 I am twelve and I am just beginning to understand how I can make a JavaScript game. 
-The code is probably horribly messy and things aren't functioning exactly the way they are supposed to (the game works though!).
+The code is probably horribly messy and things aren't functioning perfectly...but it works!
+I got my friend to do some art for me, to add some more visual elements to the game.
 If you have a bug, issue, or something else, go to the github repo at github.com/PixelXII/games
 
 */
@@ -388,7 +389,7 @@ game.pickUp = function(action, eats, items, poisons) {
 		 let zombieHits = 0;
 		 return 'You encounter a zombie. It has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.'
 		 zhp = setInterval(function() { out2.innerHTML = zombie.hp; console.log('zhp set') }, 100)
-		 if(command.includesd('kill') || command.includes('attack') || command.includes('hit') && command.includes('zombie')) {
+		 if(command.includes('kill') || command.includes('attack') || command.includes('hit') && command.includes('zombie')) {
 		 	try {
 			 zombie.hp = zombie.hp - player.damage
 		 	} catch {
