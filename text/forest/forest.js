@@ -47,8 +47,8 @@ function printOut(mess, mess2) {
 }
 
 function notedis() {
-	if(place === 'insidePlace' || place === 'shrine' && inventory.contentsOf.includes('note')) {
-		noteElem.innerHTML = "<img src='./noote.png' style='height:50; width:50;'>"
+	if(place === 'inHut' || place === 'shrine' && inventory.contentsOf.includes('note')) {
+		noteElem.innerHTML = "<img src='./note.png' style='height:50; width:50;'>"
 	} else {
 		noteElem.innerHTML = ""
 	}
