@@ -34,7 +34,6 @@ var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
 setInterval(printOut(output), 100)
-setInterval(notedis(), 500)
 
 
 // Utility functions
@@ -44,14 +43,6 @@ function printOut(mess, mess2) {
   if(mess2 != null) {
 	  out2.innerHTML = mess2;
   }
-}
-
-function notedis() {
-	if(place === 'inHut' || place === 'shrine' && inventory.contentsOf.includes('note')) {
-		noteElem.innerHTML = "<img src='./note.png' style='height:50; width:50;'>"
-	} else {
-		noteElem.innerHTML = ""
-	}
 }
 
 var searchArray = function(needle, haystack) {
@@ -333,10 +324,14 @@ function doAction() {
 			printOut('It would be unwise to drop the note.');
 			return false;
 		}
+		if(place === 'inHut' || place === 'shrine' && inventory.contentsOf.includes('note')) {
+			noteElem.innerHTML = "<img src='./note.png' style='height:50; width:50;'>"
+		} else {
+			noteElem.innerHTML = ""
+		}
 		if(command == 'start' || command == 'Start') {
 			game.start()
-		}
-		else if(place == 'first') {
+		} else if(place == 'first') {
 			firstPlace()
 		} else if(place == 'flowers') {
 			flowerPlace()
