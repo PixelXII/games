@@ -37,13 +37,12 @@ setInterval(printOut(output), 100)
 setInterval(function() {
 	if(place === 'shrine') {
 		out2.innerHTML = "<img src='./altar.png' style='width:50; height:50;'>"
-	} 
-	if(place === 'inHut' || place === 'shrine' && inventory.contentsOf.includes('note')) {
+	} else if(place === 'inHut' || place === 'shrine' && inventory.contentsOf.includes('note')) {
 		out2.innerHTML = "<img src='./note.png' style='height:50; width:50;'>"
-	} else {
-		out2.innerHTML = ""
-	}
-}, 100)
+	} 
+	
+	setTimeout(function() { out2.innerHTML = "" }, 5000)
+}, 2000)
 
 
 // Utility functions
