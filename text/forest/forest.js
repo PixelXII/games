@@ -34,6 +34,15 @@ var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
 setInterval(printOut(output), 100)
+setInterval(function() {
+	if(place === 'shrine') {
+		noteElem.innerHTML =+ "<br><img src='./shrine.png' style='width:50; height:50;'>"
+	} else if(place === 'inHut' || place === 'shrine' && inventory.contentsOf.includes('note')) {
+		noteElem.innerHTML = "<img src='./note.png' style='height:50; width:50;'>"
+	} else {
+		noteElem.innerHTML = ""
+	}
+}, 100)
 
 
 // Utility functions
@@ -323,11 +332,6 @@ function doAction() {
 		if(command.includes('note') && command.includes('drop')) {
 			printOut('It would be unwise to drop the note.');
 			return false;
-		}
-		if(place === 'inHut' || place === 'shrine' && inventory.contentsOf.includes('note')) {
-			noteElem.innerHTML = "<img src='./note.png' style='height:50; width:50;'>"
-		} else {
-			noteElem.innerHTML = ""
 		}
 		if(command == 'start' || command == 'Start') {
 			game.start()
