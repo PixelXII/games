@@ -430,6 +430,7 @@ function fightZombie() {
 			player.exp = zombie.startinghp + place
 			out2.innerHTML = ""
 		}
+	}
 }
 
  function npc(command) {
