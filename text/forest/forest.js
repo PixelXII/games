@@ -36,7 +36,7 @@ setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100
 setInterval(printOut(output), 100)
 setInterval(function() {
 	if(place === 'shrine') {
-		out2.innerHTML =+ "<img src='altar.png' style='width:50; height:50;'>"
+		out2.innerHTML =+ "<img src='./altar.png' style='width:50; height:50;'>"
 	} else if(place === 'inHut' || place === 'shrine' && inventory.contentsOf.includes('note')) {
 		out2.innerHTML = "<img src='./note.png' style='height:50; width:50;'>"
 	} else {
