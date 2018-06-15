@@ -434,7 +434,6 @@ game.pickUp = function(action, eats, items, poisons) {
 
 function npc(command) {
 	if(roomCheck('zombie') === true) {
-		return 'You have encountered a zombie.'
 		if(command.includes('hit') || command.includes('kill') || command.includes('attack')) {
 			return 'You hit the zombie.'
 			displayHealth('zombie')
