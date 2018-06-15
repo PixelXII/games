@@ -194,7 +194,6 @@ function shrinePlace() {
 					}
 					if(outElement.innerHTML == "In front of you is the shrine. You place the note on the shrine, as requested in the note.") {
 						setTimeout(function() { printOut('You feel yourself rising out of the forest from some ethereal force.') }, 5000)
-						gameend = true;
 						setTimeout(function() { game.end() }, 5000)
 					}
 			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
@@ -392,6 +391,7 @@ game.end = function() {
 	outElement.innerHTML = ""
 	out2.innerHTML = ""
 	noteElem.innerHTML = ""
+	gameend = true;
 	printOut("END OF GAME <br> ------------------------------<br> You have reached the end of this adventure. <br> <br> Game written by Kai Wildberger and art by <a style='color:black; cursor:pointer; text-decoration:underline;' title='her deviantart' onclick='lit()'>Ashlyn Bishop</a><br> <br> <br> <br> May 29th, 2018");
 	inElement.style.display = "none"
 }
