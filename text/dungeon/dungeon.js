@@ -388,6 +388,7 @@ game.pickUp = function(action, eats, items, poisons) {
  var player = {
 	 damage:3,
 	 hp:8,
+	 startinghp: 8,
 	 exp:0,
 	 place:1
  }
@@ -410,6 +411,8 @@ game.pickUp = function(action, eats, items, poisons) {
  
  var health;
  
+console.log('oi')
+
  var displayHealth = function(creature) {
 	 health = setInterval(function() {
 		 out2.innerHTML = eval(creature+'.hp')
@@ -426,6 +429,10 @@ game.pickUp = function(action, eats, items, poisons) {
 	 }, 3000)
  }
  
+ function hit(creature) {
+	 eval(creature+'.hp') =- player.damage
+ }
+ 
  setInterval(function() {
 	 if(zombie.hp < 0) {
 		 zombie.hp = 0
@@ -436,14 +443,15 @@ function npc(command) {
 	if(roomCheck('zombie') === true) {
 		if(command.includes('hit') || command.includes('kill') || command.includes('attack')) {
 			return 'You hit the zombie.'
+			hit('zombie')
 			displayHealth('zombie')
 			hitBack('zombie', 'The zombie attacks you in return.')
-			if(zombie.hp === 0) {
-				var exp = zombie.startinghp + player.place
-				return 'You have killed the zombie and gotten ' + exp + ' experience.'
-				player.exp =+ exp
-			}
 		}
+		if(zombie.hp === 0) {
+			var exp = zombie.startinghp + player.place
+			return 'You have killed the zombie and gotten ' + exp + ' experience.'
+			player.exp =+ exp
+			}
 	}
 }
 			
