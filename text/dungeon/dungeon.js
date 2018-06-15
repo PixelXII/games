@@ -77,7 +77,7 @@ function firstPlace() {
 						"To your right there is a wall.", 
 						"To your left is the road.",
 						"Behind you is a mass of people waiting at the crosswalk.", 
-						"In front of you is a sidewalk lined with small privet trees.")
+						"In front of you is a sidewalk lined with small privet trees. Farther up, there is a man on his cell phone leaning against the wall.")
 			out2.innerHTML = ""
 			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
@@ -101,7 +101,7 @@ function secondPlace() {
 	eating(eats, items, poisons)
 	if(command.includes('look')) {
 					outElement.innerHTML = game.look(command, 
-						"To your right there is a wall.", 
+						"To your right there is a wall. There is a man on his cell phone leaning against it.", 
 						"To your left is the road.",
 						"Behind you is a the segment of sidewalk where you started.", 
 						"In front of you is the sidewalk, lined with small privet trees.")
