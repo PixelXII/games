@@ -191,7 +191,7 @@ function doAction() {
 		if(outElement.innerHTML == 'undefined') {
 			printOut("I don't understand what you're trying to do.", "")
 		}
-		if(roomCheck() === true) {
+		if(roomCheck('zombie') === true || roomCheck('skeleton') === true) {
 			printOut(npc())	
 		}
 }
@@ -434,7 +434,11 @@ function fightZombie() {
 
  function npc(command) {
 	 if(place == zombie.place) {
-		 zhp = setInterval(function() { out2.innerHTML = zombie.hp; if(zombie.hp < 0) { zombie.hp = 0 }}, 100)
+		 zhp = setInterval(function() { out2.innerHTML = zombie.hp; 
+					       if(zombie.hp < 0) { 
+						       zombie.hp = 0 
+					       }
+					      }, 100)
 		 let playerHits = 0;
 		 let zombieHits = 0;
 		 return '<strong>[encounter]</strong> <br> The zombie has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.'
