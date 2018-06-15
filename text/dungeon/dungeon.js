@@ -118,6 +118,7 @@ function secondPlace() {
 								4)
 				out2.innerHTML = ""
 			}
+	area.push('male')
 }
 
 
@@ -217,7 +218,7 @@ game.look = function(action, rightMess, leftMess, behMess, foMess, upMess, downM
 game.first = function() {
 	inElement.style.display = "block"
 	noteElem.innerHTML = "game written by kai wildberger"
-	printOut('You find yourself in a desert, surrounded by tumbleweeds and sand.')
+	printOut('You find yourself in a very large city enclosed by the tallest walls you\'ve ever seen.')
 }
 
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
@@ -463,18 +464,6 @@ function femaleInArea(command) {
  
 
 function npc(command) {
-	if(place === 2) {
-		area.push('male')
-	} else if(place === 4) {
-		area.push('unfem')
-	} else if(place === 3) {
-		area.push('male')
-		area.push('female')
-		area.push('unale')
-	} else if(place === 5) {
-		area.push('unale')
-	}
-	
 	if(command.includes('talk') && area.includes('female') || area.includes('unfem')) {
 		if(command.includes('girl') || command.includes('woman') || command.includes('lady')) {
 			femaleInArea(command)
