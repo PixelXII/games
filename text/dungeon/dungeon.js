@@ -54,7 +54,6 @@ function eating(eats, items, poisons) {
 }
 
 
-
 function doAction() {
 		command = inElement.value;
 		inElement.value = ""; 
