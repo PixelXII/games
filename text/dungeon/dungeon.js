@@ -408,31 +408,9 @@ game.pickUp = function(action, eats, items, poisons) {
 	 damage:2
  }
 
- var zhp;
+var zhp;
 
-var playersTurn = null;
- 
-function fightZombie() {
-	playersTurn = true
-	return 'Brutally, you attack the zombie.'
-	zombie.hp = zombie.hp - player.damage
-	if(outElement.innerHTML === 'Brutally, you attack the zombie') {
-			setTimeout(function() {
-				playersTurn = false;
-				player.hp = player.hp - zombie.damage
-				zombieHits++
-				return 'The zombie attacks you back mercilessly.'
-			}, 5000)
-	}
-	if(zombie.hp === 0) {
-		clearInterval(zhp)
-		return 'The zombie has died. You earned ' + zombie.startinghp + place + ' experience points.'
-		player.exp = zombie.startinghp + place
-		out2.innerHTML = ""
-	}
-}
-
- function npc(command) {
+function npc(command) {
 	 if(place == zombie.place) {
 		 zhp = setInterval(function() { out2.innerHTML = zombie.hp; 
 					       if(zombie.hp < 0) { 
@@ -442,7 +420,13 @@ function fightZombie() {
 		 let playerHits = 0;
 		 let zombieHits = 0;
 		 return '<strong>[encounter]</strong> <br> The zombie has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.'
-		 setTimeout(fightZombie(), 5000)
+		 if(command.includes('attack') || command.includes('hit') || command.includes('kill')) {
+			 zombie.hp =- player.damage
+			 setTimeout(function() {
+				 return 'The zombie attacks you back...'
+				 player.hp =- zombie.damage
+			 }, 3000)
+		 }
 	 }
  }
 
