@@ -120,13 +120,13 @@ function doAction() {
 		if(place == 'end') {
 			game.end()
 		} 
-	if(roomCheck(unfriendlymale) === true) {
+	if(roomCheck('unale') === true) {
 		area.push('unale')
-	} else if (roomCheck(unfriendlyfemale) === true) {
+	} else if (roomCheck('unfem') === true) {
 		area.push('unfem')
-	} else if(roomCheck(friendlymale) === true) {
+	} else if(roomCheck('male') === true) {
 		area.push('male')
-	} else if(roomCheck(friendlyfemale) === true) {
+	} else if(roomCheck('female') === true) {
 		area.push('female')
 	} else {
 		area = ['player']
