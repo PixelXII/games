@@ -407,28 +407,47 @@ game.pickUp = function(action, eats, items, poisons) {
 	 startinghp:3,
 	 damage:2
  }
-
-var zhp;
-
-function npc(command) {
-	 if(place == zombie.place) {
-		 zhp = setInterval(function() { out2.innerHTML = zombie.hp; 
-					       if(zombie.hp < 0) { 
-						       zombie.hp = 0 
-					       }
-					      }, 100)
-		 let playerHits = 0;
-		 let zombieHits = 0;
-		 return '<strong>[encounter]</strong> <br> The zombie has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.'
-		 if(command.includes('attack') || command.includes('hit') || command.includes('kill')) {
-			 zombie.hp =- player.damage
-			 setTimeout(function() {
-				 return 'The zombie attacks you back...'
-				 player.hp =- zombie.damage
-			 }, 3000)
-		 }
+ 
+ var health;
+ 
+ var displayHealth = function(creature) {
+	 health = setInterval(function() {
+		 printOut("", eval(creature+'.hp'))
+	 }, 100)
+	 if(creature === 'cut') {
+		 clearInterval(health)
 	 }
  }
+ 
+ var hitBack = function(creature, mess) {
+	 setTimeout(function() {
+	 	 player.hp =- eval(creature+'.damage')
+		 printOut(mess)
+	 }, 3000)
+ }
+ 
+ setInterval(function() {
+	 if(zombie.hp < 0) {
+		 zombie.hp = 0
+	 }
+ }
+
+function npc(command) {
+	if(roomCheck('zombie') === true) {
+		return 'You have encountered a zombie.'
+		if(command.includes('hit') || command.includes('kill') || command.includes('attack')) {
+			return 'You hit the zombie.'
+			displayHealth('zombie')
+			hitBack('zombie', 'The zombie attacks you in return.')
+			if(zombie.hp === 0) {
+				var exp = zombie.startinghp + player.place
+				return 'You have killed the zombie and gotten ' + exp + ' experience.'
+				player.exp =+ exp
+			}
+		}
+	}
+}
+			
 
  function roomCheck(creature) {
  	if(eval(creature+'.place') === player.place) {
