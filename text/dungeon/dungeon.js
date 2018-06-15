@@ -474,6 +474,11 @@ function npc(command) {
 		if(command.includes('guy') || command.includes('man')) {
 			maleInArea(command)
 		}
+	} 
+	if(area.includes('male') === false || area.includes('unale') === false) {
+		printOut('He is too far away to hear you.')
+	} else if(area.includes('female') === false || area.includes('unfem') === false) {
+		printOut("She is too far away to hear you.")
 	}
 	
 	/* if(area.includes('male') || area.includes('unale')) {
