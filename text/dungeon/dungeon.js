@@ -391,7 +391,7 @@ game.pickUp = function(action, eats, items, poisons) {
 	 place:1
  }
  
- var placeInt = setInterval(function() { player.place = place }, 10)
+ var placeInt = setInterval(function() { player.place = place }, 1000)
  
  var zombie = {
 	 place:2,
@@ -408,8 +408,6 @@ game.pickUp = function(action, eats, items, poisons) {
  }
  
  var health;
- 
-console.log('oi')
 
  var displayHealth = function(creature) {
 	 health = setInterval(function() {
@@ -418,13 +416,6 @@ console.log('oi')
 	 if(creature === 'cut') {
 		 clearInterval(health)
 	 }
- }
- 
- var hitBack = function(creature, mess) {
-	 setTimeout(function() {
-	 	 player.hp =- eval(creature+'.damage')
-		 printOut(mess)
-	 }, 3000)
  }
  
  setInterval(function() {
@@ -438,8 +429,9 @@ function npc(command) {
 		if(command.includes('hit') || command.includes('kill') || command.includes('attack')) {
 			return 'You hit the zombie.'
 			displayHealth('zombie')
-			zombie.hp =- player.damage
-			hitBack('zombie', 'The zombie attacks you in return.')
+			for(i = zombie.hp; i > zombie.hp - player.damage; i--) {
+				printOut(zombie.hp)
+			}
 		}
 		if(zombie.hp === 0) {
 			var exp = zombie.startinghp + player.place
