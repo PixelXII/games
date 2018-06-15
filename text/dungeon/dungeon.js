@@ -346,7 +346,7 @@ game.pickUp = function(action, eats, items, poisons) {
 			 }
 		 } else if(area.includes('male')) {
 			   if(inventory.contentsOf.includes(thing)) {
-			 	printOut("You hit the man with the " + thing ". You are at an advantage here and you quickly knock him out.")
+			 	printOut("You hit the man with the " + thing ". You are at an advantage here and you quickly knock him out."))
 		 	   } else {
 				   printOut('You do not have a ' + thing)
 			   }
