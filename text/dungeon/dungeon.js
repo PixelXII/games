@@ -1,21 +1,7 @@
-/* 
-
-Hello.
-
-Thanks for caring about the source for this game.
-
-I am twelve and I am just beginning to understand how I can make a JavaScript game. 
-The code is probably horribly messy and things aren't functioning perfectly...but it works!
-I got my friend to do some art for me, to add some more visual elements to the game.
-If you have a bug, issue, or something else, go to the github repo at github.com/PixelXII/games
-
-*/
-
-// Variables
-var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about the mobile support issues</p>"
+var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
 var command = null;
 var note;
-var place = 1
+var place = 'first'
 var thing;
 var mainEats = ['cactus fruit']
 var mainPoisons = ['']
@@ -30,6 +16,7 @@ var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
+var area = ['player']
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
 setInterval(printOut(output), 100)
 
@@ -68,96 +55,6 @@ function eating(eats, items, poisons) {
 
 
 
-
-
-function sure() {
-	out2.innerHTML = ""
-	var eats = ['']
-	var poisons = ['']
-	var items = ["bone", "rock"]
-	eating(eats, items, poisons)
-	if(command.includes('look')) {
-	outElement.innerHTML = game.look(command,
-	 "On your right there is the wall of the dungeon. The bricks have a lot of moss on them and are very worn.", 
-	 "To your left is the other wall of the dungeon.", 
-   	 "Behind you is a locked door.",
-   	 "In front of you is a spider.",
-	 "Above you is one bright star in the shape of a pineapple.", 
-	 "Below you is a slab of glass. Below you, you can see a strange, blocky shape. It looks like a slice of desert hanging in the sky."
-    )
-	}
-	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
-  outElement.innerHTML = game.move(command, 
-		"You walk to the statue.",
-								 "thanks",
-		"You walk through the portal.",
-								 "portal",
-		"You approach the raven.",
-								 "thanks",
-		"Walking forward, you burn yourself on the pineapple and fall off the slab of glass.",
-								"well")
-	}
-}
-	
-
-function firstPlace() {
-	out2.innerHTML = ""
-	var eats = ['']
-	var poisons = ['']
-	var items = ["bone", "rock"]
-	eating(eats, items, poisons)
-	if(command.includes('look')) {
-	outElement.innerHTML = game.look(command,
-	 "On your right there is the wall of the dungeon. The bricks have a lot of moss on them and are very worn.", 
-	 "To your left is the other wall of the dungeon.", 
-   	 "Behind you is a locked door.",
-   	 "In front of you is a zombie. Behind it, you can see the darkness of a small passageway.",
-	 "Above you is darkness. You can assume that the ceiling of the dungeon is above you, but you cannot see it.", 
-	 "Below you is the floor of the dungeon. The flagstones are worn and cracked."
-    )
-	}
-	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
-  outElement.innerHTML = game.move(command, 
-		"You cannot walk through walls.",
-								 1,
-		"You cannot walk through walls.",
-								 1,
-		"You cannot pick the lock of the door or break it down.",
-								 1,
-		"You approach the zombie carefully.",
-								2)
-	}
-}
-
-function secondPlace() {
-	out2.innerHTML = ""
-	var eats = ['']
-	var poisons = ['']
-	var items = ["bone", "rock"]
-	eating(eats, items, poisons)
-	if(command.includes('look')) {
-	outElement.innerHTML = game.look(command,
-	 "On your right there is one of the walls of the dungeon. The bricks are mossy and have been used a lot.", 
-	 "To your left is another wall of the dungeon.", 
-   	 "Behind you is the place you started.",
-   	 "In front of you is a very dark and small passageway.",
-	 "Above you is darkness. You can assume that the ceiling of the dungeon is above you, but you cannot see it.", 
-	 "Below you is the floor of the dungeon. You can see a few zombie guts and intestines scattered about."
-    )
-	}
-	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
-  outElement.innerHTML = game.move(command, 
-		"You cannot walk through walls.",
-								 2,
-		"You cannot walk through walls.",
-								 2,
-		"You make your way around the innards of the zombie and head back to the door.",
-								 1,
-		"You start down the passage.",
-								3)
-	}
-}
-
 function doAction() {
 		command = inElement.value;
 		inElement.value = ""; 
@@ -176,13 +73,9 @@ function doAction() {
 		if(command == 'start' || command == 'Start') {
 			game.start()
 		}
-		if(place == 'thanks') {
-			sure()
-		} else if(place == 'portal') {
-			place = prompt('enter a place')
-		} else if(place == 1) {
+		if(place == '1') {
 			firstPlace()
-		} else if(place == 2) {
+		} else if(place == '2') {
 			secondPlace()
 		}
 		if(place == 'end') {
@@ -191,7 +84,18 @@ function doAction() {
 		if(outElement.innerHTML == 'undefined') {
 			printOut("I don't understand what you're trying to do.", "")
 		}
-		printOut(npc(command))	
+	if(roomCheck(unfriendlymale) === true) {
+		area.push('unmale')
+	} else if (roomCheck(unfriendlyfemale) === true) {
+		area.push('unfem')
+	} else if(roomCheck(friendlymale) === true) {
+		area.push('male')
+	} else if(roomCheck(friendlyfemale) === true) {
+		area.push('female')
+	} else {
+		area = ['player']
+	}
+	printOut(npc(command))
 }
 
 // event listeners help everything
@@ -213,12 +117,8 @@ game.reset = function() {
 	printOut("You screwed up. Reload to reset the game.")
 }
 
-function lit() {
-	window.open('https://literallysomeartist.deviantart.com', '_blank')
-}
-
 game.end = function() {
-	printOut("END OF GAME <br> ------------------------------<br> You have reached the end of this adventure. <br> <br> Game written by Kai Wildberger and art by <a style='color:black; cursor:pointer; text-decoration:underline;' title='her deviantart' onclick='lit()'>Ashlyn Bishop</a><br> <br> <br> <br> May 29th, 2018");
+	printOut('END OF GAME <br> ------------------------------<br> You have reached the end of this adventure. <br> <br> Game written by Kai Wildberger, age 12, grade 6 <br> <br> <br> <br> May 29th, 2018');
 	inElement.style.display = "none"
 }
 
@@ -252,8 +152,8 @@ game.look = function(action, rightMess, leftMess, behMess, foMess, upMess, downM
 
 game.first = function() {
 	inElement.style.display = "block"
-	noteElem.innerHTML = "<p style='font-size:12px;'>game written by kai wildberger</p>"
-	printOut('You find yourself in a dungeon, surrounded by damp darkness and stone.')
+	noteElem.innerHTML = "game written by kai wildberger"
+	printOut('You find yourself in a desert, surrounded by tumbleweeds and sand.')
 }
 
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
@@ -378,6 +278,7 @@ game.pickUp = function(action, eats, items, poisons) {
  }
 
 
+
 // Characters/NPCs.
  
  // Started these at 9 am. I haven't had any coffee this morning, and I am not at my fullest. 
@@ -393,59 +294,121 @@ game.pickUp = function(action, eats, items, poisons) {
  
  var placeInt = setInterval(function() { player.place = place }, 1000)
  
- var zombie = {
-	 place:2,
-	 hp:5,
-	 startinghp:5,
-	 damage:2
+ var friendlyfemale = {
+	 dialogue: ["It's a really nice day today. There isn't a cloud in the sky!", "Oh, hi. Sorry, I didn't see you there.", "Hello."],
+	 movement: 3,
+	 name: ['Georgia', 'Sunny', 'April', 'Ellie']
  }
  
- var skeleton = {
-	 place:5,
-	 hp:3,
-	 startinghp:3,
-	 damage:2
+ var unfriendlyfemale = {
+	 dialogue: ['Hi.', 'Who are you?', 'Get outta my way!', '. . .'],
+	 movement: 2,
+	 name: ['Kelly', 'Caroline', 'Carol']
  }
  
- var health;
+ var friendlymale = {
+	 dialogue: ["Hey, look who's here!", "Hey.", "Yo!"],
+	 movement: 4,
+	 name: ['George', 'Gregory', 'Jaden', 'Matt', 'Matthew']
+ }
+ 
+ var unfriendlymale = {
+	 dialogue: ['Oh.', "I find it disappointing you're still here.", "Probably shouldn't hang around here..."],
+	 movement: 1,
+	 name: ["Scott", 'Mack', 'Julian', 'Rob']
+ }
+ 
+ function maleInArea(command) {
+	if(command.includes('talk')) {
+		var ran = Math.random()
+		var i;
+		if(ran < 0.33) {
+			i = 1
+		} else if(ran > 0.33 && ran < 0.66) {
+			i = 2
+		} else {
+			ran = 3
+		}
+		if(area.includes('male')) {
+			printOut('He says: "' + friendlymale.dialogue[i] + '"')
+		} else {
+			printOut('He says: "' + unfriendlymale.dialogue[i] + '"')
+		}
+	}
+	 if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with')) {
+		var arr = command.split(' ')
+		var thing = arr[arr.length-1]
+		if(area.includes('unmale')) {
+			 if(inventory.contentsOf.includes(thing)) {
+				 printOut("You beat the man with the " + thing + ". However, he is more experienced in fights like this and quickly knocks you out.")
+				 setTimeout(game.end(), 5000)
+			 } else {
+				 printOut('You do not have a ' + thing)
+			 }
+		 } else if(area.includes('male')) {
+			   if(inventory.contentsOf.includes(thing) {
+			 	printOut("You hit the man with the " + thing ". You are at an advantage here because the man you are fighting does not fight very well. <br> You quickly knock him out with the " + thing +".")
+		 	   } else {
+				   printOut('You do not have a ' + thing)
+			   }
+	 	} 
+	 }
+ }
 
- var displayHealth = function(creature) {
-	 health = setInterval(function() {
-		 out2.innerHTML = eval(creature+'.hp')
-	 }, 100)
-	 if(creature === 'cut') {
-		 clearInterval(health)
+function femaleInArea(command) {
+	if(command.includes('talk')) {
+		var ran = Math.random()
+		var i;
+		if(ran < 0.33) {
+			i = 1
+		} else if(ran > 0.33 && ran < 0.66) {
+			i = 2
+		} else {
+			ran = 3
+		}
+		if(area.includes('female')) {
+			printOut('She says: "' + friendlyfemale.dialogue[i] + '"')
+		} else {
+			printOut('She says: "' + unfriendlyfemale.dialogue[i] + '"')
+		}
+	}
+	 if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with')) {
+		var arr = command.split(' ')
+		var thing = arr[arr.length-1]
+		if(area.includes('unfem')) {
+			if(inventory.contentsOf.includes(thing)) {
+				printOut('You hit the woman with the " + thing + ". She brushes it off and dispatches you with one swift blow.")
+			} else {
+					 printOut('You do not have a ' + thing)
+			}
+		} else if(area.includes('fem')) {
+			if(inventory.contentsOf.includes(thing)) {
+				printOut('You hit the woman with the ' + thing + '. You quickly realize your mistake as she screams and knocks you out with her flailing fists.')
+			} else {
+				printOut('You do not have a ' + thing)
+			}
 	 }
  }
  
- setInterval(function() {
-	 if(zombie.hp < 0) {
-		 zombie.hp = 0
-	 }
- }, 100)
+
+
+
+
+ 
 
 function npc(command) {
-	if(roomCheck('zombie') === true) {
-		if(command.includes('hit') || command.includes('kill') || command.includes('attack')) {
-			return 'You hit the zombie.'
-			displayHealth('zombie')
-			for(i = zombie.hp; i > zombie.hp - player.damage; i--) {
-				printOut(zombie.hp)
-			}
-		}
-		if(zombie.hp === 0) {
-			var exp = zombie.startinghp + player.place
-			return 'You have killed the zombie and gotten ' + exp + ' experience.'
-			player.exp =+ exp
-			}
+	if(area.includes('male') || area.includes('unmale')) {
+	   	maleInArea(command)
+	} else if(area.includes('female') || area.includes('unfem')) {
+		femaleInArea(command)
 	}
 }
 			
 
- function roomCheck(creature) {
- 	if(eval(creature+'.place') === player.place) {
- 		return true
- 	} else {
- 		return false
- 	}
+ function roomCheck(person) {
+	 if(area.includes(eval(person) {
+		 return true;
+	 } else {
+		 return false;
+	 }
  }
