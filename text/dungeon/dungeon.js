@@ -191,9 +191,7 @@ function doAction() {
 		if(outElement.innerHTML == 'undefined') {
 			printOut("I don't understand what you're trying to do.", "")
 		}
-		if(roomCheck('zombie') === true || roomCheck('skeleton') === true) {
-			printOut(npc(command))	
-		}
+		printOut(npc(command))	
 }
 
 // event listeners help everything
@@ -429,10 +427,6 @@ console.log('oi')
 	 }, 3000)
  }
  
- function hit(creature) {
-	 eval(creature+'.hp') =- player.damage
- }
- 
  setInterval(function() {
 	 if(zombie.hp < 0) {
 		 zombie.hp = 0
@@ -443,8 +437,8 @@ function npc(command) {
 	if(roomCheck('zombie') === true) {
 		if(command.includes('hit') || command.includes('kill') || command.includes('attack')) {
 			return 'You hit the zombie.'
-			hit('zombie')
 			displayHealth('zombie')
+			zombie.hp =- player.damage
 			hitBack('zombie', 'The zombie attacks you in return.')
 		}
 		if(zombie.hp === 0) {
