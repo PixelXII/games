@@ -161,6 +161,7 @@ function doAction() {
 		area = ['player']
 	}
 	*/
+	npc(command)
 }
 
 // event listeners always help
