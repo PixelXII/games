@@ -19,7 +19,20 @@ var noteElem = document.getElementById('note');
 var area = ['player']
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
 setInterval(printOut(output), 100)
-
+setInterval(function() { if(outElement.innerHTML === 'undefined') {
+			printOut("I don't understand what you're trying to do.", "")
+		} else if(outElement.innerHTML == 'He says: "undefined"' || outElement.innerHTML == 'She says: "undefined"') {
+			if(area.includes('male')) {
+				printOut('He says: "'+friendlymale.dialogue[1]+'"')
+			} else if(area.includes('unale')) {
+				printOut('He says: "'+unfriendlymale.dialogue[2]+'"')
+			} else if(area.includes('female')) {
+				printOut('She says: "'+friendlyfemale.dialogue[3]+'"')
+			} else if(area.includes('unfem')) {
+				printOut('She says: "' + unfriendlyfemale.dialogue[1]+'"')
+			}
+		}
+}, 3) 
 // Utility functions
 
 function printOut(mess, mess2) {
@@ -53,6 +66,33 @@ function eating(eats, items, poisons) {
 	}
 }
 
+function firstPlace() {
+	out2.innerHTML = ""
+	var eats = []
+	var poisons = ['trash', 'juice box']
+	var items = ['juice box', 'trash']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
+						"To your right there is a wall.", 
+						"To your left is the road.",
+						"Behind you is a mass of people waiting at the crosswalk.", 
+						"In front of you is a sidewalk lined with small privet trees.")
+			out2.innerHTML = ""
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+				outElement.innerHTML = game.move(command, 
+						"You cannot walk through walls.",
+								 1,
+						"It would be unwise to walk into the road.",
+								 1,
+						"You walk towards the crosswalk.",
+								 3,
+						"You walk ahead on the sidewalk, encountering a few people.",
+								2)
+				out2.innerHTML = ""
+			}
+}
+
 
 function doAction() {
 		command = inElement.value;
@@ -80,11 +120,8 @@ function doAction() {
 		if(place == 'end') {
 			game.end()
 		} 
-		if(outElement.innerHTML == 'undefined') {
-			printOut("I don't understand what you're trying to do.", "")
-		}
 	if(roomCheck(unfriendlymale) === true) {
-		area.push('unmale')
+		area.push('unale')
 	} else if (roomCheck(unfriendlyfemale) === true) {
 		area.push('unfem')
 	} else if(roomCheck(friendlymale) === true) {
@@ -94,7 +131,6 @@ function doAction() {
 	} else {
 		area = ['player']
 	}
-	printOut(npc(command))
 }
 
 // event listeners help everything
@@ -104,6 +140,7 @@ inElement.addEventListener("keydown", function (e) {
       doAction()
     }
 });
+
 	
 // the game object
 
@@ -300,7 +337,7 @@ game.pickUp = function(action, eats, items, poisons) {
  }
  
  var unfriendlyfemale = {
-	 dialogue: ['Hi.', 'Who are you?', 'Get outta my way!', '. . .'],
+	 dialogue: ['Hi.', 'Who are you?', 'Get outta my way!'],
 	 movement: 2,
 	 name: ['Kelly', 'Caroline', 'Carol']
  }
@@ -312,7 +349,7 @@ game.pickUp = function(action, eats, items, poisons) {
  }
  
  var unfriendlymale = {
-	 dialogue: ['Oh.', "I find it disappointing you're still here.", "Probably shouldn't hang around here..."],
+	 dialogue: ["Oh.", "I find it disappointing you're still here.", "Probably shouldn't hang around here..."],
 	 movement: 1,
 	 name: ["Scott", 'Mack', 'Julian', 'Rob']
  }
@@ -326,7 +363,7 @@ game.pickUp = function(action, eats, items, poisons) {
 		} else if(ran > 0.33 && ran < 0.66) {
 			i = 2
 		} else {
-			ran = 3
+			i = 3
 		}
 		if(area.includes('male')) {
 			printOut('He says: "' + friendlymale.dialogue[i] + '"')
@@ -337,7 +374,7 @@ game.pickUp = function(action, eats, items, poisons) {
 	 if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with')) {
 		var arr = command.split(' ')
 		var thing = arr[arr.length-1]
-		if(area.includes('unmale')) {
+		if(area.includes('unale')) {
 			 if(inventory.contentsOf.includes(thing)) {
 				 printOut("You beat the man with the " + thing + ". However, he is more experienced in fights like this and quickly knocks you out.")
 				 setTimeout(game.end(), 5000)
@@ -346,7 +383,7 @@ game.pickUp = function(action, eats, items, poisons) {
 			 }
 		 } else if(area.includes('male')) {
 			   if(inventory.contentsOf.includes(thing)) {
-			 	printOut("You hit the man with the " + thing ". You are at an advantage here and you quickly knock him out."))
+			 	printOut("You hit the man with the " + thing + ". You are at an advantage here and you quickly knock him out.")
 		 	   } else {
 				   printOut('You do not have a ' + thing)
 			   }
@@ -364,7 +401,7 @@ function femaleInArea(command) {
 		} else if(ran > 0.33 && ran < 0.66) {
 			i = 2
 		} else {
-			ran = 3
+			i = 3
 		}
 		if(area.includes('female')) {
 			printOut('She says: "' + friendlyfemale.dialogue[i] + '"')
@@ -377,7 +414,7 @@ function femaleInArea(command) {
 		var thing = arr[arr.length-1]
 		if(area.includes('unfem')) {
 			if(inventory.contentsOf.includes(thing)) {
-				printOut('You hit the woman with the " + thing + ". She brushes it off and dispatches you with one swift blow.")
+				printOut("You hit the woman with the " + thing + ". She brushes it off and dispatches you with one swift blow.")
 			} else {
 					 printOut('You do not have a ' + thing)
 			}
@@ -389,6 +426,7 @@ function femaleInArea(command) {
 			}
 	 }
  }
+}
  
 
 
@@ -397,7 +435,7 @@ function femaleInArea(command) {
  
 
 function npc(command) {
-	if(area.includes('male') || area.includes('unmale')) {
+	if(area.includes('male') || area.includes('unale')) {
 	   	maleInArea(command)
 	} else if(area.includes('female') || area.includes('unfem')) {
 		femaleInArea(command)
@@ -405,8 +443,8 @@ function npc(command) {
 }
 			
 
- function roomCheck(person) {
-	 if(area.includes(eval(person) {
+function roomCheck(person) {
+	 if(area.includes(eval("'"+person+"'"))) {
 		 return true;
 	 } else {
 		 return false;
