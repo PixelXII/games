@@ -401,6 +401,9 @@ game.pickUp = function(action, eats, items, poisons) {
 		} else {
 			printOut('He says: "' + unfriendlymale.dialogue[i] + '"')
 		}
+		if(area.includes('male') === false || area.includes('unale') === false) {
+			printOut('He is too far away to hear you.')
+		} 
 	}
 	 if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with')) {
 		var arr = command.split(' ')
@@ -438,6 +441,9 @@ function femaleInArea(command) {
 			printOut('She says: "' + friendlyfemale.dialogue[i] + '"')
 		} else {
 			printOut('She says: "' + unfriendlyfemale.dialogue[i] + '"')
+		}
+		if(area.includes('female') === false || area.includes('unfem') === false) {
+			printOut("She is too far away to hear you.")
 		}
 	}
 	 if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with')) {
@@ -498,11 +504,6 @@ function npc(command) {
 				printOut('She says: "'+unfriendlyfemale.name[i]+'."')
 			}
 		}
-	}
-	if(area.includes('male') === false || area.includes('unale') === false) {
-		printOut('He is too far away to hear you.')
-	} else if(area.includes('female') === false || area.includes('unfem') === false) {
-		printOut("She is too far away to hear you.")
 	}
 }
 			
