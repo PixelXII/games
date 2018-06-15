@@ -93,6 +93,34 @@ function firstPlace() {
 			}
 }
 
+function secondPlace() {
+	out2.innerHTML = ""
+	var eats = []
+	var poisons = ['trash', 'juice box']
+	var items = ['juice box', 'trash']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
+						"To your right there is a wall.", 
+						"To your left is the road.",
+						"Behind you is a the segment of sidewalk where you started.", 
+						"In front of you is the sidewalk, lined with small privet trees.")
+			out2.innerHTML = ""
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+				outElement.innerHTML = game.move(command, 
+						"You cannot walk through walls.",
+								 2,
+						"It would be unwise to walk into the road.",
+								 2,
+						"You walk back to where you came from.",
+								 1,
+						"You walk ahead on the sidewalk, encountering a few more people.",
+								4)
+				out2.innerHTML = ""
+			}
+	area.push('male')
+}
+
 
 function doAction() {
 		command = inElement.value;
@@ -120,7 +148,7 @@ function doAction() {
 		if(place == 'end') {
 			game.end()
 		} 
-	if(roomCheck('unale') === true) {
+	/* if(roomCheck('unale') === true) {
 		area.push('unale')
 	} else if (roomCheck('unfem') === true) {
 		area.push('unfem')
@@ -131,9 +159,10 @@ function doAction() {
 	} else {
 		area = ['player']
 	}
+	*/
 }
 
-// event listeners help everything
+// event listeners always help
 
 inElement.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
