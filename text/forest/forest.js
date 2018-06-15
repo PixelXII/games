@@ -16,7 +16,6 @@ var command = null;
 var note;
 var place = 'first'
 var thing;
-var gameend = false;
 var note = "note"
 var pushNote = 'inventory.contentsOf.push('+note+')'
 var mainEats = ['acorn', 'hazelnut', 'daisy', 'white flower', 'blackberries', 'blackberry', 'berry', 'fish']
@@ -35,19 +34,13 @@ var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
 setInterval(printOut(output), 100)
-var displayImages = setInterval(function() {
+setInterval(function() {
 	if(place === 'shrine') {
 		out2.innerHTML = "<img src='./altar.png' style='width:100; height:100;'>"
 	} else if(place === 'inHut' || place === 'shrine' && inventory.contentsOf.includes('note')) {
 		out2.innerHTML = "<img src='./note.png' style='height:100; width:100;'>"
 	} 
 }, 2000)
-
-setInterval(function() {
-	if(gameend = true) {
-		clearInterval(displayImages)
-	}
-}, 100)
 
 
 // Utility functions
@@ -391,7 +384,6 @@ game.end = function() {
 	outElement.innerHTML = ""
 	out2.innerHTML = ""
 	noteElem.innerHTML = ""
-	gameend = true;
 	printOut("END OF GAME <br> ------------------------------<br> You have reached the end of this adventure. <br> <br> Game written by Kai Wildberger and art by <a style='color:black; cursor:pointer; text-decoration:underline;' title='her deviantart' onclick='lit()'>Ashlyn Bishop</a><br> <br> <br> <br> May 29th, 2018");
 	inElement.style.display = "none"
 }
