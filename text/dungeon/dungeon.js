@@ -118,7 +118,6 @@ function secondPlace() {
 								4)
 				out2.innerHTML = ""
 			}
-	area.push('male')
 }
 
 
