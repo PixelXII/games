@@ -34,7 +34,7 @@ var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
 setInterval(printOut(output), 100)
-setInterval(function() {
+var images = setInterval(function() {
 	if(place === 'shrine') {
 		out2.innerHTML = "<img src='./altar.png' style='width:100; height:100;'>"
 	} else if(place === 'inHut' || place === 'shrine' && inventory.contentsOf.includes('note')) {
@@ -370,6 +370,7 @@ inElement.addEventListener("keydown", function (e) {
 var game = new Object()
 
 game.reset = function() {
+	clearInterval(images)
 	noteElem.innerHTML = ""
 	out2.innerHTML = ""
 	outElement.innerHTML = ""
@@ -381,6 +382,7 @@ function lit() {
 }
 
 game.end = function() {
+	clearInterval(images)
 	outElement.innerHTML = ""
 	out2.innerHTML = ""
 	noteElem.innerHTML = ""
