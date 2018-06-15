@@ -16,6 +16,7 @@ var command = null;
 var note;
 var place = 'first'
 var thing;
+var gameend = false;
 var note = "note"
 var pushNote = 'inventory.contentsOf.push('+note+')'
 var mainEats = ['acorn', 'hazelnut', 'daisy', 'white flower', 'blackberries', 'blackberry', 'berry', 'fish']
@@ -34,13 +35,19 @@ var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
 setInterval(printOut(output), 100)
-setInterval(function() {
+var displayImages = setInterval(function() {
 	if(place === 'shrine') {
 		out2.innerHTML = "<img src='./altar.png' style='width:100; height:100;'>"
 	} else if(place === 'inHut' || place === 'shrine' && inventory.contentsOf.includes('note')) {
 		out2.innerHTML = "<img src='./note.png' style='height:100; width:100;'>"
 	} 
 }, 2000)
+
+setInterval(function() {
+	if(gameend = true) {
+		clearInterval(displayImages)
+	}
+}, 100)
 
 
 // Utility functions
@@ -187,6 +194,7 @@ function shrinePlace() {
 					}
 					if(outElement.innerHTML == "In front of you is the shrine. You place the note on the shrine, as requested in the note.") {
 						setTimeout(function() { printOut('You feel yourself rising out of the forest from some ethereal force.') }, 5000)
+						gameend = true;
 						setTimeout(function() { game.end() }, 5000)
 					}
 			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
