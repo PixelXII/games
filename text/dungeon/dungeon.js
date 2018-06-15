@@ -430,7 +430,7 @@ game.pickUp = function(action, eats, items, poisons) {
 	 if(zombie.hp < 0) {
 		 zombie.hp = 0
 	 }
- }
+ }, 100)
 
 function npc(command) {
 	if(roomCheck('zombie') === true) {
