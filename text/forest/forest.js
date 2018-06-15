@@ -40,8 +40,6 @@ setInterval(function() {
 	} else if(place === 'inHut' || place === 'shrine' && inventory.contentsOf.includes('note')) {
 		out2.innerHTML = "<img src='./note.png' style='height:50; width:50;'>"
 	} 
-	
-	setTimeout(function() { out2.innerHTML = "" }, 5000)
 }, 2000)
 
 
@@ -465,7 +463,7 @@ game.pickUp = function(action, eats, items, poisons) {
 			}
 			if(items.includes(thing) === false) {
 				outElement.innerHTML = ""
-				printOut("", "You don't see a " + thing)
+				printOut("You don't see a " + thing)
 			} else {
 				out2.innerHTML = ""
 				inventory.contentsOf.push(thing)
@@ -497,7 +495,7 @@ game.pickUp = function(action, eats, items, poisons) {
 			thing = newThing.replace(',', ' ');
 		}
 		if(inventory.contentsOf.includes(thing) === false) {
-			printOut("", "You do not have a " + thing)
+			printOut("You do not have a " + thing)
 		} 
 		if(eval(thing+'Thing.edible') === true) {
 			inventory.spotsUsed--
@@ -510,7 +508,7 @@ game.pickUp = function(action, eats, items, poisons) {
   				array.splice(index, 1);
 			}
 			outElement.innerHTML = ""
-			printOut("", 'Eaten.') 
+			printOut('Eaten.') 
 		} else {
 			printOut("You cannot eat that.", "")
 		}
