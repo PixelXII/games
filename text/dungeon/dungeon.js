@@ -119,7 +119,7 @@ function secondPlace() {
 				out2.innerHTML = ""
 			}
 	var poosh = setInterval(function() { area.push('male') }, 10)
-	setTimeout(function() { clearInterval(poosh) }, 5)
+	setTimeout(function() { clearInterval(poosh) }, 11)
 }
 
 
