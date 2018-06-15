@@ -12,7 +12,7 @@ If you have a bug, issue, or something else, go to the github repo at github.com
 */
 
 // Variables
-var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
+var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about the mobile support issues</p>"
 var command = null;
 var note;
 var place = 1
