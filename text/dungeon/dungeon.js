@@ -370,13 +370,13 @@ game.pickUp = function(action, eats, items, poisons) {
  var unfriendlyfemale = {
 	 dialogue: ['Hi.', 'Who are you?', 'Get outta my way!'],
 	 movement: 2,
-	 name: ['Kelly', 'Caroline', 'Carol']
+	 name: ['Kelly', 'Caroline', 'Carol', 'Pam']
  }
  
  var friendlymale = {
 	 dialogue: ["Hey, look who's here!", "Hey.", "Yo!"],
 	 movement: 4,
-	 name: ['George', 'Gregory', 'Jaden', 'Matt', 'Matthew']
+	 name: ['George', 'Gregory', 'Jaden', 'Matt']
  }
  
  var unfriendlymale = {
@@ -474,19 +474,36 @@ function npc(command) {
 		if(command.includes('guy') || command.includes('man')) {
 			maleInArea(command)
 		}
-	} 
+	} else if(command.includes('"') || command.includes("'")) {
+		if(command.includes('your') && command.includes('name')) {
+			var ran = Math.random()
+			var na;
+			var i;
+			if(ran < 0.25) {
+				i = 1
+			} else if(ran > 0.25 && ran < 0.5) {
+				i = 2
+			} else if(ran > 0.5 && ran < 0.75) {
+				i = 3
+			} else {
+				i = 4
+			}
+			if(area.includes('unale')) {
+			   	printOut('He says: "'+unfriendlymale.name[i]+'."')
+			} else if(area.includes('male')) {
+				printOut('He says: "'+friendlymale.name[i]+'."')
+			} else if(area.includes('female')) {
+				printOut('She says: "'+friendlyfemale.name[i]+'."')
+			} else if(area.includes('unfem')) {
+				printOut('She says: "'+unfriendlyfemale.name[i]+'."')
+			}
+		}
+	}
 	if(area.includes('male') === false || area.includes('unale') === false) {
 		printOut('He is too far away to hear you.')
 	} else if(area.includes('female') === false || area.includes('unfem') === false) {
 		printOut("She is too far away to hear you.")
 	}
-	
-	/* if(area.includes('male') || area.includes('unale')) {
-	   	maleInArea(command)
-	} else if(area.includes('female') || area.includes('unfem')) {
-		femaleInArea(command)
-	}
-	*/
 }
 			
 
