@@ -425,7 +425,7 @@ function fightZombie() {
 			}, 5000)
 	}
 	if(zombie.hp === 0) {
-		 clearInterval(zhp)
+		clearInterval(zhp)
 		return 'The zombie has died. You earned ' + zombie.startinghp + place + ' experience points.'
 		player.exp = zombie.startinghp + place
 		out2.innerHTML = ""
@@ -438,14 +438,12 @@ function fightZombie() {
 		 let playerHits = 0;
 		 let zombieHits = 0;
 		 return '<strong>[encounter]</strong> <br> The zombie has ' + zombie.hp + ' health and does ' + zombie.damage + ' points of damage.'
-		 if(command.includes('kill') || command.includes('attack') || command.includes('hit') && command.includes('zombie')) {
-			fightZombie()
-	 	}
+		 setTimeout(fightZombie(), 5000)
 	 }
  }
 
- function roomCheck() {
- 	if(zombie.place === player.place || skeleton.place === player.place) {
+ function roomCheck(creature) {
+ 	if(eval(creature+'.place') === player.place) {
  		return true
  	} else {
  		return false
