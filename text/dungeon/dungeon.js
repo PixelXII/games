@@ -192,7 +192,7 @@ function doAction() {
 			printOut("I don't understand what you're trying to do.", "")
 		}
 		if(roomCheck('zombie') === true || roomCheck('skeleton') === true) {
-			printOut(npc())	
+			printOut(npc(command))	
 		}
 }
 
