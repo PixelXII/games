@@ -3,11 +3,11 @@ var command = null;
 var note;
 var place = 1
 var thing;
-var mainEats = ['cactus fruit']
-var mainPoisons = ['']
+var mainEats = ['pizza']
+var mainPoisons = ['trash']
 var pickUp = ['pick up', 'pick', 'grab', 'take']
 var eatWords = ['eat', 'consume']
-var nonEats = ['rock', 'cactus', 'stick', 'twig', 'torch', 'sand']
+var nonEats = ['rock']
 var white, red, green, blue, purple, yellow, orange, brown;
 var inventory = new Object()
 inventory.spotsUsed = 0;
@@ -435,11 +435,30 @@ function femaleInArea(command) {
  
 
 function npc(command) {
-	if(area.includes('male') || area.includes('unale')) {
+	if(place === 2) {
+		area.push('male')
+	} else if(place === 4) {
+		area.push('unfem')
+	} else if(place === 3) {
+		area.push('male')
+		area.push('female')
+		area.push('unale')
+	} else if(place === 5) {
+		area.push('unale')
+	}
+	
+	if(command.includes('talk') && command.includes('girl') || command.includes('woman') || command.includes('lady') && area.includes('female') || area.includes('unfem')) {
+		femaleInArea(command)
+	} else if(command.includes('talk') && command.includes('guy') || command.includes('man') && area.includes('male') || area.includes('unale')) {
+		maleInArea(command)
+	}
+	
+	/* if(area.includes('male') || area.includes('unale')) {
 	   	maleInArea(command)
 	} else if(area.includes('female') || area.includes('unfem')) {
 		femaleInArea(command)
 	}
+	*/
 }
 			
 
