@@ -354,6 +354,7 @@ game.pickUp = function(action, eats, items, poisons) {
 	 }
  }
 
+
 function femaleInArea(command) {
 	if(command.includes('talk')) {
 		var ran = Math.random()
