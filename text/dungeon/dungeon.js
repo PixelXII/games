@@ -412,7 +412,7 @@ game.pickUp = function(action, eats, items, poisons) {
  
  var displayHealth = function(creature) {
 	 health = setInterval(function() {
-		 printOut("", eval(creature+'.hp'))
+		 out2.innerHTML = eval(creature+'.hp')
 	 }, 100)
 	 if(creature === 'cut') {
 		 clearInterval(health)
