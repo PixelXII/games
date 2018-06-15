@@ -389,9 +389,9 @@ game.pickUp = function(action, eats, items, poisons) {
 		var ran = Math.random()
 		var i;
 		if(ran < 0.33) {
-			i = 1
-		} else if(ran > 0.33 && ran < 0.66) {
 			i = 2
+		} else if(ran > 0.33 && ran < 0.66) {
+			i = 1
 		} else {
 			i = 3
 		}
@@ -471,6 +471,7 @@ function npc(command) {
 		}
 		if(area.includes('female') === false || area.includes('unfem') === false) {
 			printOut("She is too far away to hear you.")
+			doAction()
 		}
 	} else if(command.includes('talk') && area.includes('male') || area.includes('unale')) {
 		if(command.includes('guy') || command.includes('man')) {
@@ -478,6 +479,7 @@ function npc(command) {
 		}
 		if(area.includes('male') === false || area.includes('unale') === false) {
 			printOut('He is too far away to hear you.')
+			doAction()
 		} 
 	} else if(command.includes('"') || command.includes("'")) {
 		if(command.includes('your') && command.includes('name')) {
