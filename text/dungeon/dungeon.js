@@ -469,16 +469,10 @@ function npc(command) {
 		if(command.includes('girl') || command.includes('woman') || command.includes('lady')) {
 			femaleInArea(command)
 		}
-		if(area.includes('female') === false || area.includes('unfem') === false) {
-			printOut("She is too far away to hear you.")
-		}
 	} else if(command.includes('talk') && area.includes('male') || area.includes('unale')) {
 		if(command.includes('guy') || command.includes('man')) {
 			maleInArea(command)
 		}
-		if(area.includes('male') === false || area.includes('unale') === false) {
-			printOut('He is too far away to hear you.')
-		} 
 	} else if(command.includes('"') || command.includes("'")) {
 		if(command.includes('your') && command.includes('name')) {
 			var ran = Math.random()
