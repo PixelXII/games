@@ -77,7 +77,9 @@ function firstPlace() {
 						"To your right there is a wall.", 
 						"To your left is the road.",
 						"Behind you is a mass of people waiting at the crosswalk.", 
-						"In front of you is a sidewalk lined with small privet trees. Farther up, there is a man on his cell phone leaning against the wall.")
+						"In front of you is a sidewalk lined with small privet trees. Farther up, there is a man on his cell phone leaning against the wall.",
+						"Above you is a cloudless sky and you can see the tops of skyscrapers.",
+						"Below you is the sidewalk. There are a couple pigeons waddling around and trash scattered around.")
 			out2.innerHTML = ""
 			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
