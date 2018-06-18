@@ -148,7 +148,7 @@ function doAction() {
 		if(place == 'end') {
 			game.end()
 		} 
-	/* if(roomCheck('unale') === true) {
+	if(roomCheck('unale') === true) {
 		area.push('unale')
 	} else if (roomCheck('unfem') === true) {
 		area.push('unfem')
@@ -159,7 +159,6 @@ function doAction() {
 	} else {
 		area = ['player']
 	}
-	*/
 	npc(command)
 }
 
