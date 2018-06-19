@@ -209,7 +209,7 @@ function doAction() {
 	npc(command)
 	if(command === 'help' || command === 'HELP' || command === 'Help') {
 		var past = outElement.innerHTML
-		outElement.innerHTML = "move [direction](up down left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item] <br> drop[item] <br> inventory (to display inventory)"
+		outElement.innerHTML = "move [direction](up down left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item] <br> drop[item] <br> inventory (to display inventory) <br> talk to <person> <br> \"[what is your name? / what are you doing?]\""
 		setTimeout(function() {
 			outElement.innerHTML = past
 		}, 5000)
@@ -243,7 +243,7 @@ game.end = function() {
 
 game.start = function() {
 	inElement.style.display = "none"
-	printOut("move [direction](up down left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item] <br> drop[item] <br> inventory (to display inventory) <br> help")
+	printOut("move [direction](up down left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item] <br> drop[item] <br> inventory (to display inventory) <br> talk to <person> <br> \"[what is your name? / what are you doing?]\" <br> help")
 	setTimeout(function() {game.first()}, 7000);
 }
 
