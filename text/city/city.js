@@ -461,14 +461,14 @@ game.pickUp = function(action, eats, items, poisons) {
 			out2.innerHTMl = 'What do you hit him with? <br> <br> <p style=\'font-size:10px;\'>this can be a "fist"</p>'
 		}
 		if(area.includes('unale')) {
-			 if(inventory.contentsOf.includes(thing) || thing === 'fist' || thing === 'hands') {
+			 if(inventory.contentsOf.includes(thing) || thing === 'fist' || thing === 'fists' || thing === 'hands') {
 				 printOut("You beat the man with the " + thing + ". However, he is more experienced in fights like this and quickly knocks you out.")
 				 setTimeout(function() { game.end() }, 5000)
 			 } else {
 				 printOut('You do not have a ' + thing)
 			 }
 		 } else if(area.includes('male')) {
-			   if(inventory.contentsOf.includes(thing) || thing === 'fist' || thing === 'hands') {
+			   if(inventory.contentsOf.includes(thing) || thing === 'fist' || thing === 'fists' || thing === 'hands') {
 			 	printOut("You hit the man with the " + thing + ". You are at an advantage here and you quickly knock him out.")
 				   area = ['player']
 				   beaten = true
@@ -524,7 +524,7 @@ function femaleInArea(command) {
 			out2.innerHTMl = 'What do you hit her with? <br> <br> <p style=\'font-size:10px;\'>this can be a "fist"</p>'
 		}
 		if(area.includes('unfem')) {
-			if(inventory.contentsOf.includes(thing) || thing === 'fist' || thing === 'hands') {
+			if(inventory.contentsOf.includes(thing) || thing === 'fist' || thing === 'fists' || thing === 'hands') {
 				printOut("You hit the woman with the " + thing + ". She brushes it off and dispatches you with one swift blow.")
 				area = ['player']
 				setTimeout(function() { game.end() }, 5000)
@@ -532,7 +532,7 @@ function femaleInArea(command) {
 					 printOut('You do not have a ' + thing)
 			}
 		} else if(area.includes('fem')) {
-			if(inventory.contentsOf.includes(thing) || thing === 'fist' || thing === 'hands') {
+			if(inventory.contentsOf.includes(thing) || thing === 'fist' || thing === 'fists' || thing === 'hands') {
 				printOut('You hit the woman with the ' + thing + '. You quickly realize your mistake as she screams and knocks you out with her flailing fists.')
 				area = ['player']
 				setTimeout(function() { game.end() }, 5000)
