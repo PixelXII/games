@@ -552,14 +552,10 @@ function femaleInArea(command) {
  
 
 function npc(command) {
-	if(command.includes('talk') && area.includes('female') || area.includes('unfem')) {
-		if(command.includes('girl') || command.includes('woman') || command.includes('lady')) {
-			femaleInArea(command)
-		}
-	} else if(command.includes('talk') && area.includes('male') || area.includes('unale')) {
-		if(command.includes('guy') || command.includes('man')) {
-			maleInArea(command)
-		}
+	if(command.includes('talk') && area.includes('female') || area.includes('unfem') || command.includes('"')) {
+		femaleInArea(command)
+	} else if(command.includes('talk') && area.includes('male') || area.includes('unale') || command.includes('"')) {
+		maleInArea(command)
 	} 
 }
 			
