@@ -99,7 +99,16 @@ function undefin() {
 					}
 				}
 			}
-		}	
+		}
+	if(area.length > 2) {
+		if(place === 2) {
+			area = ['player', 'male']
+		} else if(place === 3) {
+			area = ['player', 'unfem']
+		} else if(place === 4) {
+			area = ['player', 'unfem']
+		}
+	}	
 }
 
 setInterval(undefin(), 25) 
