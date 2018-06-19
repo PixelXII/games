@@ -1,5 +1,5 @@
 var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
-var command = null;
+var command;
 var note;
 var place = 1
 var thing;
@@ -16,7 +16,7 @@ var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
-noteElem.innerHTML = "<h3>game written by kai wildberger</h3>"
+noteElem.innerHTML = "<p style='font-size:8px;'>game written by kai wildberger</p>"
 var area = ['player']
 
 // Intervals + onload functions
