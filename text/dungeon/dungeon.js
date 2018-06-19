@@ -16,6 +16,7 @@ var inElement = document.getElementById('input');
 var outElement = document.getElementById('out');
 var out2 = document.getElementById('out2');
 var noteElem = document.getElementById('note');
+noteElem.innerHTML = "<h3>game written by kai wildberger</h3>"
 var area = ['player']
 
 // Intervals + onload functions
