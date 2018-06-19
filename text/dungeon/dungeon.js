@@ -3,6 +3,7 @@ var command;
 var note;
 var place = 1
 var thing;
+var beaten = false;
 var mainEats = ['pizza']
 var mainPoisons = ['trash']
 var pickUp = ['pick up', 'pick', 'grab', 'take']
@@ -33,11 +34,17 @@ function inArea(person) {
 
 function areaHandler() {
 	if(place === 2) {
-		inArea('male')
+		if(beaten === false) {
+			inArea('male')
+		}
 	} else if(place === 3) {
-		inArea('unfem')
+		if(beaten === false) {
+			inArea('unfem')
+		}
 	} else if(place === 4) {
-		inArea('unale')
+		if(beaten === false) {
+			inArea('unale')
+		}
 	} else {
 		area = ["player"]
 	}
@@ -461,6 +468,7 @@ game.pickUp = function(action, eats, items, poisons) {
 			   if(inventory.contentsOf.includes(thing)) {
 			 	printOut("You hit the man with the " + thing + ". You are at an advantage here and you quickly knock him out.")
 				   area = ['player']
+				   beaten = true
 		 	   } else {
 				   printOut('You do not have a ' + thing)
 			   }
