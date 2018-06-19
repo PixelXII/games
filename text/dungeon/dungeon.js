@@ -439,19 +439,23 @@ game.pickUp = function(action, eats, items, poisons) {
  
  function maleInArea(command) {
 	if(command.includes('talk')) {
-		var ran = Math.random()
-		var i;
-		if(ran < 0.33) {
-			i = 2
-		} else if(ran >= 0.33 && ran <= 0.66) {
-			i = 1
+		if(beaten === true) {
+			printOut('He is beat up and passed out.')
 		} else {
-			i = 3
-		}
-		if(area.includes('male')) {
-			printOut('He says: "' + friendlymale.dialogue[i] + '"')
-		} else {
-			printOut('He says: "' + unfriendlymale.dialogue[i] + '"')
+			var ran = Math.random()
+			var i;
+			if(ran < 0.33) {
+				i = 2
+			} else if(ran >= 0.33 && ran <= 0.66) {
+				i = 1
+			} else {
+				i = 3
+			}
+			if(area.includes('male')) {
+				printOut('He says: "' + friendlymale.dialogue[i] + '"')
+			} else {
+				printOut('He says: "' + unfriendlymale.dialogue[i] + '"')
+			}
 		}
 	}
 	 if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with')) {
