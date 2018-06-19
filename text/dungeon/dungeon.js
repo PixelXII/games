@@ -21,7 +21,7 @@ var area = ['player']
 
 // Intervals + onload functions
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
-setInterval(function() { undefin() }, 500)
+setInterval(function() { undefin() }, 10)
 printOut(output)
 
 
