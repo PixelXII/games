@@ -456,7 +456,7 @@ game.pickUp = function(action, eats, items, poisons) {
 	 if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with')) {
 		var arr = command.split(' ')
 		var thing = arr[arr.length-1]
-		if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with') === false) {
+		if(command.includes('attack') || command.includes('hit') && command.includes('with') === false) {
 			throw new Error('You must specify an item to hit him with. fist is valid')
 			out2.innerHTMl = 'What do you hit him with? <br> <br> <p style=\'font-size:10px;\'>this can be a "fist"</p>'
 		}
@@ -516,7 +516,7 @@ function femaleInArea(command) {
 			printOut('She says: "' + unfriendlyfemale.dialogue[i] + '"')
 		}
 	}
-	 if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with')) {
+	 if(command.includes('attack') || command.includes('hit') && command.includes('with')) {
 		var arr = command.split(' ')
 		var thing = arr[arr.length-1]
 		if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with') === false) {
