@@ -187,7 +187,7 @@ function rockPlace() {
 	}
 }
 
-function empty2() {
+function dunePlace() {
 	out2.innerHTML = ""
 	var eats = ['cactus fruit']
 	var poisons = ['cactus']
@@ -195,26 +195,28 @@ function empty2() {
 	eating(eats, items, poisons)
 	if(command.includes('look')) {
 	outElement.innerHTML = game.look(command, 
-	  "On your right there is a well with a considerable amount of water in it.", 
-		"To your left is a very steep slope going down to an area of sparse shrubbery and rocks.", 
-    "Behind you is a massive mound of boulders.", 
-    "In front of you, away from the pile of boulders, is the edge of the dune that you are standing on.",
+	  "On your right is a small hole in the ground. The hole is probably big enough for you to fit in, but you can't be sure.", 
+		"To your left is a small hill of clay with some bushes and sticks on top.", 
+    "Behind you is the dunes where you started.", 
+    "In front of you is some cacti and rocks.",
 	"Above you is the cloudless sky. You see a vulture circling high above you.", 
 	"Below you is the ground. You can see cactus fruit and rocks, and, of course, sand."
     )
 	}
 	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
   outElement.innerHTML = game.move(command, 
-		"You walk to the well.",
-								 "well",
-		"You slip and slide and eventually you find yourself at the bottom of the slope. <br> Gravel and sand continues falling long after you've reached the bottom.",
-								 "belowSlope",
-		"You cannot climb the boulders.",
+		"You squeeze through the hole and find yourself in a small, dank cavern.",
+								 "firstCave",
+		"You decide against stepping on the hill when you hear a sharp rattle coming from inside the den.",
+								 "dune",
+		"You move back to the dunes.",
 								 "first",
-		"Walking forward, you come to the end of the small dune.",
-								"dune")
+		"Walking forward, you dodge cacti and rocks and find yourself on a simple trail.",
+								"empty2")
 	}
 }
+
+
 
 function sure() {
 	out2.innerHTML = ""
@@ -275,6 +277,8 @@ function doAction() {
 			belowSlope()
 		} else if(place === 'rockpile') {
 			rockPlace()
+		} else if(place === 'dune') {
+			dunePlace()
 		}
 
 		if(place == 'end') {
