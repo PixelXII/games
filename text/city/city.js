@@ -457,6 +457,10 @@ game.pickUp = function(action, eats, items, poisons) {
 	 if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with')) {
 		var arr = command.split(' ')
 		var thing = arr[arr.length-1]
+		if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with') === false) {
+			throw new Error('You must specify an item to hit him with. fist is valid')
+			out2.innerHTMl = 'What do you hit him with? <br> <br> <p style=\'font-size:10px;\'>this can be a "fist"</p>'
+		}
 		if(area.includes('unale')) {
 			 if(inventory.contentsOf.includes(thing) || thing === 'fist' || thing === 'hands') {
 				 printOut("You beat the man with the " + thing + ". However, he is more experienced in fights like this and quickly knocks you out.")
@@ -516,6 +520,10 @@ function femaleInArea(command) {
 	 if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with')) {
 		var arr = command.split(' ')
 		var thing = arr[arr.length-1]
+		if(command.includes('attack') || command.includes('hit') || command.includes('beat') && command.includes('with') === false) {
+			throw new Error('You must specify an item to hit her with. fist is valid')
+			out2.innerHTMl = 'What do you hit her with? <br> <br> <p style=\'font-size:10px;\'>this can be a "fist"</p>'
+		}
 		if(area.includes('unfem')) {
 			if(inventory.contentsOf.includes(thing) || thing === 'fist' || thing === 'hands') {
 				printOut("You hit the woman with the " + thing + ". She brushes it off and dispatches you with one swift blow.")
