@@ -16,6 +16,10 @@ html, body {
     font-size:24px;
 }
 
+body {
+  background-size:cover;
+}
+
 input[type="text"] { font-family:'Kaushan Script'; font-size:24px; }
 
 #input {
