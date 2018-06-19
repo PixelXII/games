@@ -81,8 +81,10 @@ function eating(eats, items, poisons) {
 }
 
 function undefin() {
+	console.log('undefin()')
 	if(outElement.innerHTML === 'undefined') {
 			printOut("I don't understand what you're trying to do.", "")
+			throw new Error('There was an unrecognised command. ~ ???')
 		} else if(outElement.innerHTML == 'He says: "undefined"' || outElement.innerHTML == 'She says: "undefined"' && command.includes('talk')) {
 			if(area.includes('male')) {
 				printOut('He says: "'+friendlymale.dialogue[1]+'"')
@@ -93,7 +95,7 @@ function undefin() {
 			} else if(area.includes('unfem')) {
 				printOut('She says: "' + unfriendlyfemale.dialogue[1]+'"')
 			}
-
+			throw new Error('There was an error with the speech.')
 			if(command.includes('"') && command.includes('"')) {
 				if(command.includes('your') && command.includes('name')) {
 					if(roomCheck('male') == true) {
