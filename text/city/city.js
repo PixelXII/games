@@ -81,7 +81,6 @@ function eating(eats, items, poisons) {
 }
 
 function undefin() {
-	console.log('undefin()')
 	if(outElement.innerHTML === 'undefined') {
 			printOut("I don't understand what you're trying to do.", "")
 			throw new Error('There was an unrecognised command. ~ ???')
