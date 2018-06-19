@@ -198,6 +198,13 @@ function doAction() {
 			game.end()
 		} 
 	npc(command)
+	if(command === 'help' || command === 'HELP' || command === 'Help') {
+		var past = outElement.innerHTML
+		outElement.innerHTML = "move [direction](up down left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item] <br> drop[item] <br> inventory (to display inventory)"
+		setTimeout(function() {
+			outElement.innerHTML = past
+		}, 5000)
+	}
 }
 
 // event listeners always help
