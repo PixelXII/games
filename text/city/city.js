@@ -109,18 +109,6 @@ function undefin() {
 					}
 				}
 			}
-			
-			if(command.includes('your') && command.includes('name') && outElement.innerHTML.includes('undefined')) {
-					if(roomCheck('male')) {
-					   	printOut('He says: "'+friendlymale.name[2]+'"')
-					} else if(roomCheck('unale')) {
-						printOut('He says: "'+unfriendlymale.name[2]+'"')
-					} else if(roomCheck('female')) {
-						printOut('She says: "'+friendlyfemale.name[2]+'"')
-					} else if(roomCheck('unfem')) {
-						printOut('She says: "'+unfriendlyfemale.name[2]+'"')
-					}
-				} 
 		}
 	if(area.length > 2) {
 		if(place === 2) {
