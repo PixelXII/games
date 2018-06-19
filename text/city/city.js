@@ -1,3 +1,10 @@
+/* TODO:
+
+	~ fix people saying 'undefined' when player asks name
+	
+	*/
+
+
 var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
 var command;
 var note;
