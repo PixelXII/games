@@ -21,6 +21,7 @@ var area = ['player']
 
 // Intervals + onload functions
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
+setInterval(undefin(), 500)
 printOut(output)
 
 
@@ -463,8 +464,7 @@ game.pickUp = function(action, eats, items, poisons) {
 				   printOut('You do not have a ' + thing)
 			   }
 	 	} 
-	 }
-	 else if(command.includes('"') || command.includes("'")) {
+	 } else if(command.includes('"') || command.includes("'")) {
 		if(command.includes('your') && command.includes('name')) {
 			var ran = Math.random()
 			var na;
@@ -521,8 +521,7 @@ function femaleInArea(command) {
 				printOut('You do not have a ' + thing)
 			}
 	 }
- }
- else if(command.includes('"') || command.includes("'")) {
+ } else if(command.includes('"') || command.includes("'")) {
 		if(command.includes('your') && command.includes('name')) {
 			var ran = Math.random()
 			var na;
@@ -552,9 +551,9 @@ function femaleInArea(command) {
  
 
 function npc(command) {
-	if(command.includes('talk') && area.includes('female') || area.includes('unfem') || command.includes('"')) {
+	if(roomCheck('female') || roomCheck('unfem')) {
 		femaleInArea(command)
-	} else if(command.includes('talk') && area.includes('male') || area.includes('unale') || command.includes('"')) {
+	} else if(roomCheck('male') || roomCheck('unale')) {
 		maleInArea(command)
 	} 
 }
