@@ -234,7 +234,7 @@ game.end = function() {
 
 game.start = function() {
 	inElement.style.display = "none"
-	printOut("move [direction](up down left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item] <br> drop[item] <br> inventory (to display inventory)")
+	printOut("move [direction](up down left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item] <br> drop[item] <br> inventory (to display inventory) <br> help")
 	setTimeout(function() {game.first()}, 7000);
 }
 
