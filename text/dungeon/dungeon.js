@@ -25,7 +25,6 @@ setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100
 setInterval(function() { undefin() }, 10)
 printOut(output)
 
-
 // Utility functions
 
 function inArea(person) {
@@ -177,7 +176,6 @@ function secondPlace() {
 				out2.innerHTML = ""
 			}
 }
-
 
 function doAction() {
 		areaHandler()
@@ -396,8 +394,6 @@ game.pickUp = function(action, eats, items, poisons) {
 	}
  }
 
-
-
 // Characters/NPCs.
  
  // Started these at 9 am. I haven't had any coffee this morning, and I am not at my fullest. 
@@ -500,7 +496,6 @@ game.pickUp = function(action, eats, items, poisons) {
 	}
  }
 
-
 function femaleInArea(command) {
 	if(command.includes('talk')) {
 		var ran = Math.random()
@@ -560,12 +555,7 @@ function femaleInArea(command) {
 		}
 	}
 }
- 
 
-
-
-
- 
 
 function npc(command) {
 	if(roomCheck('female') || roomCheck('unfem')) {
@@ -575,7 +565,6 @@ function npc(command) {
 	} 
 }
 			
-
 function roomCheck(person) {
 	 if(area.includes(eval("'"+person+"'"))) {
 		 return true;
