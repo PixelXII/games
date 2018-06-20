@@ -291,6 +291,7 @@ game.look = function(action, rightMess, leftMess, behMess, foMess, upMess, downM
 game.first = function() {
 	inElement.style.display = "block"
 	noteElem.innerHTML = "game written by kai wildberger"
+	place = 1
 	printOut('You find yourself in a very large city enclosed by the tallest walls you\'ve ever seen.')
 }
 
