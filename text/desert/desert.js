@@ -225,8 +225,8 @@ function empty2Place() {
 	if(command.includes('look')) {
 	outElement.innerHTML = game.look(command, 
 	  "On your right is an empty expanse of desert", 
-		"To your left is a small hill of clay with some bushes and sticks on top.", 
-    "Behind you is the dunes where you started.", 
+		"To your left is a split in the trail that you didn't notice before. an empty expanse of desert, waiting for the simple traveller to get lost in it.", 
+    "Behind you is the dune and the ", 
     "In front of you is some cacti and rocks.",
 	"Above you is the cloudless sky. You see a vulture circling high above you.", 
 	"Below you is the ground. You can see cactus fruit and rocks, and, of course, sand."
@@ -238,13 +238,12 @@ function empty2Place() {
 								 "firstCave",
 		"You decide against stepping on the hill when you hear a sharp rattle coming from inside the den.",
 								 "dune",
-		"You move back to the dunes.",
-								 "first",
+		"You move back, taking the opposite split.",
+								 "split",
 		"Walking forward, you dodge cacti and rocks and find yourself on a simple trail.",
 								"empty2")
 	}
-
-
+}
 
 
 function doAction() {
@@ -279,6 +278,8 @@ function doAction() {
 			dunePlace()
 		} else if(place === 'empty2') {
 			empty2Place()
+		} else if(place === 'split') {
+			trailSplit()
 		}
 
 		if(place == 'end') {
