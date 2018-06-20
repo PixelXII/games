@@ -284,8 +284,10 @@ function doAction() {
 		} else if(place === 'split') {
 			if(previous === 'dune') {
 				place = 'rockpile'
+				doAction()
 			} else if(previous === 'rock') {
 				place = 'dune'
+				doAction()
 			}
 		}
 
