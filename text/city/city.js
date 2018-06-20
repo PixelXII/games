@@ -91,17 +91,20 @@ function eating(eats, items, poisons) {
 }
 
 function nameUndef() {
-	if(command.includes('"') && command.includes('"')) {
-		if(command.includes('your') && command.includes('name')) {
-			if(roomCheck('male') == true) {
-				printOut('He says: "' + friendlymale.name[2]+'"')
-			} else if(roomCheck('unale') == true) {
-				printOut('He says: "' + unfriendlymale.name[2]+'"')
-			} else if(roomCheck('female') == true) {
-				printOut('She says: "' + friendlyfemale.name[2]+'"')
-			} else if(roomCheck('unfem') == true) {
-				printOut('She says: "'+unfriendlyfemale.name[2]+'"')
-			}
+	console.log('nameUndef()')
+	if(command.includes('you') && command.includes('name')) {
+		var ran = Math.round(Math.random()*3)
+		if(ran === 0) {
+			ran = 3
+		}
+		if(roomCheck('male')) {
+			printOut('He says: "'+friendlymale.name[ran]+'"')
+		} else if(roomCheck('unale')) {
+			printOut('He says: "'+unfriendlymale.name[ran]+'"')
+		} else if(roomCheck('female')) {
+			printOut('She says: "'+friendlyfemale.name[ran]+'"')
+		} else if(roomCheck('unfem')) {
+			printOut('She says: "'+unfriendlyfemale.name[ran]+'"')
 		}
 	}
 }
