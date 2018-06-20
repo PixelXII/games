@@ -216,36 +216,36 @@ function dunePlace() {
 	}
 }
 
-
-
-function sure() {
+function empty2Place() {
 	out2.innerHTML = ""
-	var eats = ['cactus fruit', 'well']
-	var poisons = ['']
-	var items = ['rock', 'cactus fruit', "sand", 'water']
+	var eats = ['cactus fruit']
+	var poisons = ['cactus']
+	var items = ['rock', 'cactus fruit', "sand", 'cactus']
 	eating(eats, items, poisons)
 	if(command.includes('look')) {
-	outElement.innerHTML = game.look(command,
-	 "On your right there is actually a pure golden statue.", 
-	 "To your left is a portal of swirling purple.", 
-   	 "Behind you is a very large raven.",
-   	 "In front of you is a spider.",
-	 "Above you is one bright star in the shape of a pineapple.", 
-	 "Below you is a slab of glass. Below you, you can see a strange, blocky shape. It looks like a slice of desert hanging in the sky."
+	outElement.innerHTML = game.look(command, 
+	  "On your right is an empty expanse of desert", 
+		"To your left is a small hill of clay with some bushes and sticks on top.", 
+    "Behind you is the dunes where you started.", 
+    "In front of you is some cacti and rocks.",
+	"Above you is the cloudless sky. You see a vulture circling high above you.", 
+	"Below you is the ground. You can see cactus fruit and rocks, and, of course, sand."
     )
 	}
 	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
   outElement.innerHTML = game.move(command, 
-		"You walk to the statue.",
-								 "thanks",
-		"You walk through the portal.",
-								 "portal",
-		"You approach the raven.",
-								 "thanks",
-		"Walking forward, you burn yourself on the pineapple and fall off the slab of glass.",
-								"well")
+		"You squeeze through the hole and find yourself in a small, dank cavern.",
+								 "firstCave",
+		"You decide against stepping on the hill when you hear a sharp rattle coming from inside the den.",
+								 "dune",
+		"You move back to the dunes.",
+								 "first",
+		"Walking forward, you dodge cacti and rocks and find yourself on a simple trail.",
+								"empty2")
 	}
-}
+
+
+
 
 function doAction() {
 		command = inElement.value;
@@ -267,8 +267,6 @@ function doAction() {
 		}
 		if(place == 'thanks') {
 			sure()
-		} else if(place == 'portal') {
-			place = prompt('enter a place')
 		} else if(place == 'first') {
 			firstPlace()
 		} else if(place == 'well') {
@@ -279,6 +277,8 @@ function doAction() {
 			rockPlace()
 		} else if(place === 'dune') {
 			dunePlace()
+		} else if(place === 'empty2') {
+			empty2Place()
 		}
 
 		if(place == 'end') {
