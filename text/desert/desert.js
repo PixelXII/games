@@ -325,6 +325,7 @@ game.end = function() {
 
 game.start = function() {
 	inElement.style.display = "none"
+	place = 1
 	printOut("move [direction](up down left right forward back)<br> look [direction] <br> eat [item] <br> pick up/grab [item] <br> drop[item] <br> inventory (to display inventory)")
 	setTimeout(function() {game.first()}, 7000);
 }
@@ -355,6 +356,7 @@ game.first = function() {
 	inElement.style.display = "block"
 	noteElem.innerHTML = "game written by kai wildberger"
 	printOut('You find yourself in a desert, surrounded by tumbleweeds and sand.')
+	place = 1
 }
 
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
