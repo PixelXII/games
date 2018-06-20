@@ -29,7 +29,7 @@ var area = ['player']
 
 // Intervals + onload functions
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
-setInterval(function() { undefin() }, 10)
+setInterval(function() { undefin(); nameUndef() }, 10)
 printOut(output)
 
 // Utility functions
@@ -87,6 +87,22 @@ function eating(eats, items, poisons) {
 	}
 }
 
+function nameUndef() {
+	if(command.includes('"') && command.includes('"')) {
+		if(command.includes('your') && command.includes('name')) {
+			if(roomCheck('male') == true) {
+				printOut('He says: "' + friendlymale.name[2]+'"')
+			} else if(roomCheck('unale') == true) {
+				printOut('He says: "' + unfriendlymale.name[2]+'"')
+			} else if(roomCheck('female') == true) {
+				printOut('She says: "' + friendlyfemale.name[2]+'"')
+			} else if(roomCheck('unfem') == true) {
+				printOut('She says: "'+unfriendlyfemale.name[2]+'"')
+			}
+		}
+	}
+}
+
 function undefin() {
 	if(outElement.innerHTML === 'undefined') {
 			printOut("I don't understand what you're trying to do.", "")
@@ -102,19 +118,6 @@ function undefin() {
 				printOut('She says: "' + unfriendlyfemale.dialogue[1]+'"')
 			}
 			throw new Error('There was an error with the speech.')
-			if(command.includes('"') && command.includes('"')) {
-				if(command.includes('your') && command.includes('name')) {
-					if(roomCheck('male') == true) {
-						printOut('He says: "' + friendlymale.name[2]+'"')
-					} else if(roomCheck('unale') == true) {
-						printOut('He says: "' + unfriendlymale.name[2]+'"')
-					} else if(roomCheck('female') == true) {
-						printOut('She says: "' + friendlyfemale.name[2]+'"')
-					} else if(roomCheck('unfem') == true) {
-						printOut('She says: "'+unfriendlyfemale.name[2]+'"')
-					}
-				}
-			}
 		}
 	if(area.length > 2) {
 		if(place === 2) {
