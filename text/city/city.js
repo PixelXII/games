@@ -38,6 +38,10 @@ printOut(output)
 
 // Utility functions
 
+function timeout(action, time) {
+	setTimeout(function() { eval(action)  }, time)
+}
+
 function inArea(person) {
 	area.push(person)
 }
@@ -512,13 +516,13 @@ game.pickUp = function(action, eats, items, poisons) {
 			} else if(area.includes('male')) {
 				printOut('He says: "'+friendlymale.name[i]+'."')
 			}
-			if(place === 2) {
+			if(place === 2 && command.includes('name')) {
 				place2AskedName = true
 			} else if(place === 4) {
 				place4AskedName = true
 			}
 			if(place2AskedName === true) {
-				printOut('You already know his name.')
+				timeout("printOut('You already know his name.')", 5000)
 			} else if(place4AskedName === true) {
 				printOut('You already know his name.')
 			}
