@@ -92,7 +92,7 @@ function eating(eats, items, poisons) {
 
 function nameUndef() {
 	console.log('nameUndef()')
-	if(command.includes('you') && command.includes('name') && outElement.innerHTML = 'He says: "undefined."') {
+	if(command.includes('you') && command.includes('name') && outElement.innerHTML === 'He says: "undefined."') {
 		var ran = Math.round(Math.random()*3)
 		if(ran === 0) {
 			ran = 3
