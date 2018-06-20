@@ -522,7 +522,7 @@ game.pickUp = function(action, eats, items, poisons) {
 				place4AskedName = true
 			}
 			if(place2AskedName === true) {
-				timeout("printOut('You already know his name.')", 5000)
+				timeout("printOut('You already know his name.')", 100)
 			} else if(place4AskedName === true) {
 				printOut('You already know his name.')
 			}
