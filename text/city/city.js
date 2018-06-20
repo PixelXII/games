@@ -32,6 +32,7 @@ var area = ['player']
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
 setInterval(function() { undefin(); }, 10)
 setTimeout(function() { nameUndef() }, 5000)
+setInterval(function() { noteElem.innerHTML = "<p style='font-size:10px;'>game written by kai wildberger</p>"; }, 100)
 printOut(output)
 
 
