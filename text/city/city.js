@@ -4,6 +4,7 @@
 	
 	*/
 
+var place2AskedName = false, place3AskedName = false, place4AskedName = false;
 
 var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
 var command;
@@ -511,6 +512,16 @@ game.pickUp = function(action, eats, items, poisons) {
 			} else if(area.includes('male')) {
 				printOut('He says: "'+friendlymale.name[i]+'."')
 			}
+			if(place === 2) {
+				place2AskedName = true
+			} else if(place === 4) {
+				place4AskedName = true
+			}
+			if(place2AskedName === true) {
+				printOut('You already know his name.')
+			} else if(place4AskedName === true) {
+				printOut('You already know his name.')
+			}
 		}
 	}
  }
@@ -574,6 +585,12 @@ function femaleInArea(command) {
 				printOut('She says: "'+friendlyfemale.name[i]+'."')
 			} else if(area.includes('unfem')) {
 				printOut('She says: "'+unfriendlyfemale.name[i]+'."')
+			}
+			if(place === 3) {
+				place3AskedName = true
+			}
+			if(place3AskedName === true) {
+				printOut('You already know her name.')
 			}
 		}
 	}
