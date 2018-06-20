@@ -356,7 +356,6 @@ game.first = function() {
 	inElement.style.display = "block"
 	noteElem.innerHTML = "game written by kai wildberger"
 	printOut('You find yourself in a desert, surrounded by tumbleweeds and sand.')
-	place = 1
 }
 
 game.move = function(action, right, rightLoc, left, leftLoc, back, backLoc, forward, forLoc) {
