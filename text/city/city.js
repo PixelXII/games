@@ -454,6 +454,9 @@ game.pickUp = function(action, eats, items, poisons) {
 	 movement: 1,
 	 name: ['Scott', 'Mack', 'Julian', 'Rob']
  }
+ var place2name;
+ function place2Male(name) {
+	 place2name = 
  
  function maleInArea(command) {
 	if(command.includes('talk')) {
@@ -518,16 +521,12 @@ game.pickUp = function(action, eats, items, poisons) {
 			} else if(area.includes('male')) {
 				printOut('He says: "'+friendlymale.name[i]+'."')
 			}
-			if(place === 2 && command.includes('name')) {
-				place2AskedName = true
-			} else if(place === 4) {
-				place4AskedName = true
-			}
-			if(place2AskedName === true) {
-				timeout("printOut('You already know his name.')", 100)
-			} else if(place4AskedName === true) {
-				printOut('You already know his name.')
-			}
+			
+			
+			place2Male(friendlymale.name[i])
+			
+			
+			// place4Male()
 		}
 	}
  }
@@ -592,13 +591,9 @@ function femaleInArea(command) {
 			} else if(area.includes('unfem')) {
 				printOut('She says: "'+unfriendlyfemale.name[i]+'."')
 			}
-			if(place === 3) {
-				place3AskedName = true
-			}
-			if(place3AskedName === true) {
-				printOut('You already know her name.')
-			}
+			
 		}
+	 //place3Female()
 	}
 }
 
