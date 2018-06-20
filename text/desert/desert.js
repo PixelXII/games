@@ -14,6 +14,7 @@ If you have a bug, issue, or something else, go to the github repo at github.com
 var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
 var command = null;
 var note;
+var previous = null;
 var place = 'first'
 var thing;
 var mainEats = ['cactus fruit']
@@ -185,6 +186,7 @@ function rockPlace() {
 		printOut('You step onto the trail and go on.')
 		place = 'empty2'
 	}
+	previous = 'rock'
 }
 
 function dunePlace() {
@@ -210,10 +212,11 @@ function dunePlace() {
 		"You decide against stepping on the hill when you hear a sharp rattle coming from inside the den.",
 								 "dune",
 		"You move back to the dunes.",
-								 "first",
+								 "dune",
 		"Walking forward, you dodge cacti and rocks and find yourself on a simple trail.",
 								"empty2")
 	}
+	previous = 'dune'
 }
 
 function empty2Place() {
@@ -225,22 +228,22 @@ function empty2Place() {
 	if(command.includes('look')) {
 	outElement.innerHTML = game.look(command, 
 	  "On your right is an empty expanse of desert", 
-		"To your left is a split in the trail that you didn't notice before. an empty expanse of desert, waiting for the simple traveller to get lost in it.", 
-    "Behind you is the dune and the ", 
-    "In front of you is some cacti and rocks.",
+		"To your left is a massive cactus.", 
+    "Behind you is the dune and the well.", 
+    "In front of you is a split in the trail. In front of that, you see a small shack.",
 	"Above you is the cloudless sky. You see a vulture circling high above you.", 
 	"Below you is the ground. You can see cactus fruit and rocks, and, of course, sand."
     )
 	}
 	if(command.includes('walk') || command.includes('step') || command.includes('move')) {
   outElement.innerHTML = game.move(command, 
-		"You squeeze through the hole and find yourself in a small, dank cavern.",
-								 "firstCave",
-		"You decide against stepping on the hill when you hear a sharp rattle coming from inside the den.",
-								 "dune",
+		"You decide to not take the risk of getting lost in the desert and stick to the trail.",
+								 "empty2",
+		"You take the split in the trail.",
+								 "split",
 		"You move back, taking the opposite split.",
 								 "split",
-		"Walking forward, you dodge cacti and rocks and find yourself on a simple trail.",
+		"Walking forward, you emerge from the trail into a clearing which houses the shack.",
 								"empty2")
 	}
 }
@@ -279,7 +282,11 @@ function doAction() {
 		} else if(place === 'empty2') {
 			empty2Place()
 		} else if(place === 'split') {
-			trailSplit()
+			if(previous === 'dune') {
+				place = 'rockpile'
+			} else if(previous === 'rock') {
+				place = 'dune'
+			}
 		}
 
 		if(place == 'end') {
