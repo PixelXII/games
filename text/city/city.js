@@ -104,13 +104,13 @@ function nameUndef() {
 			ran = 3
 		}
 		if(roomCheck('male')) {
-			printOut('He says: "'+friendlymale.name[ran]+'"')
+			printOut('He says: "'+friendlymale.name+'"')
 		} else if(roomCheck('unale')) {
-			printOut('He says: "'+unfriendlymale.name[ran]+'"')
+			printOut('He says: "'+unfriendlymale.name+'"')
 		} else if(roomCheck('female')) {
-			printOut('She says: "'+friendlyfemale.name[ran]+'"')
+			printOut('She says: "'+friendlyfemale.name+'"')
 		} else if(roomCheck('unfem')) {
-			printOut('She says: "'+unfriendlyfemale.name[ran]+'"')
+			printOut('She says: "'+unfriendlyfemale.name+'"')
 		}
 	}
 }
@@ -434,30 +434,27 @@ game.pickUp = function(action, eats, items, poisons) {
  var friendlyfemale = {
 	 dialogue: ["It's a really nice day today. There isn't a cloud in the sky!", "Oh, hi. Sorry, I didn't see you there.", "Hello."],
 	 movement: 3,
-	 name: ['Georgia', 'Sunny', 'April', 'Ellie']
+	 name: ['Ellie']
  }
  
  var unfriendlyfemale = {
 	 dialogue: ['Hi.', 'Who are you?', 'Get outta my way!'],
 	 movement: 2,
-	 name: ['Kelly', 'Caroline', 'Carol', 'Pam']
+	 name: ['Pam']
  }
  
  var friendlymale = {
 	 dialogue: ["Hey, look who's here!", "Hey.", "Yo!"],
 	 movement: 4,
-	 name: ['George', 'Tyler', 'Jaden', 'Matt']
+	 name: ['Tyler']
  }
  
  var unfriendlymale = {
 	 dialogue: ["Oh.", "I find it disappointing you're still here.", "Probably shouldn't hang around here..."],
 	 movement: 1,
-	 name: ['Scott', 'Mack', 'Julian', 'Rob']
+	 name: ['Julian']
  }
  var place2name;
- function place2Male(name) {
-	 place2name = 
- 
  function maleInArea(command) {
 	if(command.includes('talk')) {
 		if(beaten === true) {
@@ -504,29 +501,11 @@ game.pickUp = function(action, eats, items, poisons) {
 	 	} 
 	 } else if(command.includes('"') || command.includes("'")) {
 		if(command.includes('your') && command.includes('name')) {
-			var ran = Math.random()
-			var na;
-			var i;
-			if(ran < 0.25) {
-				i = 1
-			} else if(ran >= 0.25 && ran <= 0.5) {
-				i = 2
-			} else if(ran >= 0.5 && ran <= 0.75) {
-				i = 3
-			} else {
-				i = 4
-			}
 			if(area.includes('unale')) {
-			   	printOut('He says: "'+unfriendlymale.name[i]+'."')
+			   	printOut('He says: "'+unfriendlymale.name+'."')
 			} else if(area.includes('male')) {
-				printOut('He says: "'+friendlymale.name[i]+'."')
+				printOut('He says: "'+friendlymale.name+'."')
 			}
-			
-			
-			place2Male(friendlymale.name[i])
-			
-			
-			// place4Male()
 		}
 	}
  }
@@ -574,22 +553,10 @@ function femaleInArea(command) {
 	 }
  } else if(command.includes('"') || command.includes("'")) {
 		if(command.includes('your') && command.includes('name')) {
-			var ran = Math.random()
-			var na;
-			var i;
-			if(ran < 0.25) {
-				i = 1
-			} else if(ran >= 0.25 && ran <= 0.5) {
-				i = 2
-			} else if(ran >= 0.5 && ran <= 0.75) {
-				i = 3
-			} else {
-				i = 4
-			}
 			if(area.includes('female')) {
-				printOut('She says: "'+friendlyfemale.name[i]+'."')
+				printOut('She says: "'+friendlyfemale.name+'."')
 			} else if(area.includes('unfem')) {
-				printOut('She says: "'+unfriendlyfemale.name[i]+'."')
+				printOut('She says: "'+unfriendlyfemale.name+'."')
 			}
 			
 		}
