@@ -1,9 +1,3 @@
-/* TODO:
-
-	~ fix people saying 'undefined' when player asks name
-	
-	*/
-
 var place2AskedName = false, place3AskedName = false, place4AskedName = false;
 
 var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
@@ -241,6 +235,14 @@ inElement.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
       doAction()
     }
+});
+
+// This is a new feature, adding the ability to evaluate the previous command. It does only go back one, though...
+
+inElement.addEventListener("keydown", function (e) {
+	if (e.keycode === 38) {
+		inElement.value = command
+	}
 });
 
 	
