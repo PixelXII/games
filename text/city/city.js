@@ -237,13 +237,7 @@ inElement.addEventListener("keydown", function (e) {
     }
 });
 
-// This is a new feature, adding the ability to evaluate the previous command. It does only go back one, though...
-
-inElement.addEventListener("keydown", function (e) {
-	if (e.keycode === 38) {
-		inElement.value = command
-	}
-});
+// I removed it
 
 	
 // the game object
