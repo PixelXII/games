@@ -18,7 +18,7 @@ var place = 'first'
 var thing;
 var note = "note"
 var pushNote = 'inventory.contentsOf.push('+note+')'
-var mainEats = ['acorn', 'hazelnut', 'daisy', 'white flower', 'blackberries', 'blackberry', 'berry', 'fish']
+var mainEats = ['acorn', 'hazelnut', 'hazelnuts', 'daisy', 'white flower', 'blackberries', 'blackberry', 'berry', 'fish']
 var mainPoisons = ['mushroom', 'red flower', 'crayfish']
 var pickUp = ['pick up', 'pick', 'grab', 'take']
 var eatWords = ['eat', 'consume']
@@ -167,7 +167,7 @@ function shrinePlace() {
 	eating(eats, items, poisons)
 	if(inventory.contentsOf.includes('note') && command.includes('note') && command.includes('shrine')) {
 		doNote()
-		setTimeout(function() {game.end()}, 6000)
+		setTimeout(function() {game.end()}, 8000)
 	}
 	if(command.includes('look')) {
 					if(inventory.contentsOf.includes('note') === false) {
