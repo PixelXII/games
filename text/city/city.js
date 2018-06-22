@@ -131,7 +131,7 @@ function undefin() {
 		} else if(place === 3) {
 			area = ['player', 'unfem']
 		} else if(place === 4) {
-			area = ['player', 'unfem']
+			area = ['player', 'unale']
 		}
 	}	
 } 
@@ -241,6 +241,33 @@ function fourthPlace() {
 						"You walk back to the man on his cell phone.",
 								 2,
 						"Your leash has reached its breaking point, and you cannot go to the building",
+								4)
+				out2.innerHTML = ""
+			}
+}
+
+function fifthPlace() {
+	out2.innerHTML = ""
+	var eats = []
+	var poisons = ['trash', 'juice box']
+	var items = ['juice box', 'trash']
+	eating(eats, items, poisons)
+	if(command.includes('look')) {
+					outElement.innerHTML = game.look(command, 
+						"To your right is the road.", 
+						"To your left is the wall.",
+						"Behind you is the segment of sidewalk where you started.", 
+						"In front of you is the crosswalk, its once bright stripes fading.")
+			out2.innerHTML = ""
+			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
+				outElement.innerHTML = game.move(command, 
+						"You take the crosswalk and notice the many different types of people who are also crossing.",
+								 5,
+						"You cannot walk through walls.",
+								 3,
+						"You walk back to where you came from.",
+								 1,
+						"You have reached the boundary, where the leash holding you cannot reach around the corner.",
 								4)
 				out2.innerHTML = ""
 			}
