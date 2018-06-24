@@ -90,25 +90,6 @@ function eating(eats, items, poisons) {
 	}
 }
 
-function nameUndef() {
-	console.log('nameUndef()')
-	if(command.includes('you') && command.includes('name') && outElement.innerHTML === 'He says: "undefined."') {
-		var ran = Math.round(Math.random()*3)
-		if(ran === 0) {
-			ran = 3
-		}
-		if(roomCheck('male')) {
-			printOut('He says: "'+friendlymale.name+'"')
-		} else if(roomCheck('unale')) {
-			printOut('He says: "'+unfriendlymale.name+'"')
-		} else if(roomCheck('female')) {
-			printOut('She says: "'+friendlyfemale.name+'"')
-		} else if(roomCheck('unfem')) {
-			printOut('She says: "'+unfriendlyfemale.name+'"')
-		}
-	}
-}
-
 function undefin() {
 	if(outElement.innerHTML === 'undefined') {
 			printOut("I don't understand what you're trying to do.", "")
@@ -256,19 +237,19 @@ function fifthPlace() {
 					outElement.innerHTML = game.look(command, 
 						"To your right is the road.", 
 						"To your left is the wall.",
-						"Behind you is the segment of sidewalk where you started.", 
-						"In front of you is the crosswalk, its once bright stripes fading.")
+						"Behind you is the segment of crosswalk where you started.", 
+						"In front of you is the other side of the road.")
 			out2.innerHTML = ""
 			} else if(command.includes('move') || command.includes('walk') || command.includes('step') || command.includes('go')) {
 				outElement.innerHTML = game.move(command, 
-						"You take the crosswalk and notice the many different types of people who are also crossing.",
+						"You should not attempt to walk into the road.",
 								 5,
-						"You cannot walk through walls.",
-								 3,
-						"You walk back to where you came from.",
-								 1,
-						"You have reached the boundary, where the leash holding you cannot reach around the corner.",
-								4)
+						"You should not attempt to walk into the intersection.",
+								 5,
+						"You turn around and walk back to the start of the crosswalk.",
+								 4,
+						"You have reached the boundary, where the leash holding you cannot reach to the other side.",
+								5)
 				out2.innerHTML = ""
 			}
 }
