@@ -1,3 +1,6 @@
+// Errors for the commits
+we
+
 var place2AskedName = false, place3AskedName = false, place4AskedName = false;
 var output = "type start to begin"
 var command;
