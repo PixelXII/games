@@ -2,7 +2,6 @@ var place2AskedName = false, place3AskedName = false, place4AskedName = false;
 var output = "type start to begin"
 var command;
 var note;
-wee
 var place = 1
 var thing;
 var beaten = false;
