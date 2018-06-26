@@ -193,7 +193,7 @@ function thirdPlace() {
 								 3,
 						"You walk back to where you came from.",
 								 1,
-						"You have reached the boundary, where the leash holding you cannot reach around the corner.",
+						"You have reached the boundary, where the leash holding you cannot reach around the corner. <br> You can stay where you are, but you cannot move forward any more.",
 								4)
 				out2.innerHTML = ""
 			}
