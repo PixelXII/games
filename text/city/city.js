@@ -1,5 +1,5 @@
 var place2AskedName = false, place3AskedName = false, place4AskedName = false;
-var output = "there was an error. please hard reload (ctrl/cmd+shift+R) or try again later."
+var output = "type start to begin"
 var command;
 var note;
 wee
