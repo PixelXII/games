@@ -1,5 +1,4 @@
 var place2AskedName = false, place3AskedName = false, place4AskedName = false;
-yee is not defined
 var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
 var command;
 var note;
@@ -23,6 +22,11 @@ noteElem.innerHTML = "<p style='font-size:10px;'>game written by kai wildberger<
 var area = ['player']
 
 // Intervals + onload functions
+setTimeout(function() {
+	if(outElement.innerHTML === "type start to begin <br> <br> <div style='font-size:14px;'>Note: this game does not support mobile edition. only computers are supported</div>") {
+		outElement.innerHTML = "there was an error. please hard reload (ctrl/cmd+shift+R) or try again later."
+		throw new Error('there was some sort of error preventing script excecution.')
+	}, 100)
 setInterval(function() { inventory.spotsUsed = inventory.contentsOf.length}, 100)
 setInterval(function() { undefin(); }, 10)
 setInterval(function() { noteElem.innerHTML = "<p style='font-size:10px;'>game written by kai wildberger</p>"; }, 100)
