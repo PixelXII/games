@@ -1,5 +1,5 @@
 var place2AskedName = false, place3AskedName = false, place4AskedName = false;
-
+yee is not defined
 var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
 var command;
 var note;
