@@ -192,7 +192,7 @@ function thirdPlace() {
 								 3,
 						"You walk back to where you came from.",
 								 1,
-						"You have reached the boundary, where the leash holding you cannot reach around the corner. <br> You can stay where you are, but you cannot move forward any more.",
+						"You move forward, to the very end of the leash tethering you to the pole on the streetlight.",
 								4)
 				out2.innerHTML = ""
 			}
@@ -217,8 +217,8 @@ function fourthPlace() {
 								 4,
 						"It would be unwise to walk into the road.",
 								 4,
-						"You walk back to the man on his cell phone.",
-								 2,
+						"You walk back towards the man on his cell phone.",
+								 3,
 						"Your leash has reached its breaking point, and you cannot go to the building",
 								4)
 				out2.innerHTML = ""
