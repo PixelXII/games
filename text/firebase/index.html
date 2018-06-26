@@ -1,0 +1,34 @@
+<head>
+  <title>Desert - A Text-Based RPG</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  
+  <div align="center" id="container">
+    <br><br><br><br><br>
+    <div id="note" align="center">&nbsp;</div>
+    <br><br>
+  <div id="out" align="center">type start to begin <br> <br> <div style="font-size:14px;">Note: this game does not support mobile edition. only computers are supported</div></div>
+  <br><br>
+    <div id="out2" align="center">&nbsp;</div>
+    <br><br>
+      <input id="input" type="text" autofocus="true">
+    <br>
+</div>
+  <div id="warning">&nbsp;</div>
+  <script src="./desert.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+       apiKey: "AIzaSyCtLGsUYsknhvDdfTwTJAW14oLSIdFyKfI",
+       authDomain: "city-tbr.firebaseapp.com",
+       databaseURL: "https://city-tbr.firebaseio.com",
+       projectId: "city-tbr",
+       storageBucket: "city-tbr.appspot.com",
+       messagingSenderId: "645130492474"
+   };
+   firebase.initializeApp(config);
+</script>
+</body>
