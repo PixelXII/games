@@ -1,5 +1,5 @@
 var place2AskedName = false, place3AskedName = false, place4AskedName = false;
-var output = "type start to begin <br> <br> <p style='font-size:12px;'>Sorry about there being no mobile support</p>"
+var output = "there was an error. please hard reload (ctrl/cmd+shift+R) or try again later."
 var command;
 var note;
 wee
