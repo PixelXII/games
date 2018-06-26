@@ -279,6 +279,8 @@ function doAction() {
 			thirdPlace()
 		} else if(place == 4) {
 			fourthPlace()
+		} else if(place === 5) {
+			fifthPlace()
 		}
 		if(place == 'end') {
 			game.end()
