@@ -5,7 +5,6 @@ var note;
 var place = 1
 var thing;
 var beaten = false;
-we
 var mainEats = ['pizza']
 var mainPoisons = ['trash']
 var pickUp = ['pick up', 'pick', 'grab', 'take']
