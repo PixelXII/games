@@ -4,7 +4,7 @@ var place2AskedName = false, place3AskedName = false, place4AskedName = false;
 var output = "type start to begin"
 var command;
 var note;
-var place = 1
+var place = 3
 var thing;
 var beaten = false;
 var mainEats = ['pizza']
@@ -119,7 +119,7 @@ function undefin() {
 
 // Place functions
 
-function firstPlace() {
+function thirdPlace() {
 	out2.innerHTML = ""
 	var eats = []
 	var poisons = ['trash', 'juice box']
@@ -173,7 +173,7 @@ function secondPlace() {
 			}
 }
 
-function thirdPlace() {
+function firstPlace() {
 	out2.innerHTML = ""
 	var eats = []
 	var poisons = ['trash', 'juice box']
