@@ -119,7 +119,8 @@ function undefin() {
 
 // Place functions
 
-function thirdPlace() {
+function firstPlace() {
+	console.log('first')
 	out2.innerHTML = ""
 	var eats = []
 	var poisons = ['trash', 'juice box']
@@ -147,6 +148,7 @@ function thirdPlace() {
 }
 
 function secondPlace() {
+	console.log('second')
 	out2.innerHTML = ""
 	var eats = []
 	var poisons = ['trash', 'juice box']
@@ -173,7 +175,8 @@ function secondPlace() {
 			}
 }
 
-function firstPlace() {
+function thirdPlace() {
+	console.log('third')
 	out2.innerHTML = ""
 	var eats = []
 	var poisons = ['trash', 'juice box']
@@ -201,6 +204,7 @@ function firstPlace() {
 }
 
 function fourthPlace() {
+	console.log('fourth')
 	out2.innerHTML = ""
 	var eats = []
 	var poisons = ['trash', 'juice box']
@@ -228,6 +232,7 @@ function fourthPlace() {
 }
 
 function fifthPlace() {
+	console.log('fifth')
 	out2.innerHTML = ""
 	var eats = []
 	var poisons = ['trash', 'juice box']
