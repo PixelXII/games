@@ -1,19 +1,19 @@
 {
-  "manifest_version":2,
-  "name":"RaterFox",
-  "description":"does absolutely nothing",
-  "version":1,
-  "author":"kia",
+  "manifest_version": 2,
+  "name": "forest",
+  "description": "does absolutely nothing",
+  "version": "1",
+  "author": "kia",
   
   "browser_action": {
-    "default-icon":"whee.png",
-    "default-title":"nothing...",
-    "default-popup":"popup.html"
+    "default-icon": "whee.png",
+    "default-title": "nothing...",
+    "default-popup": "popup.html"
   },
   
-  "chrome-url-overrides": {
-    "https://pixelxii.github.io/games/text/forest":"forest.html"
-  }
+  "chrome_url_overrides": {
+    "newtab": "forest.html"
+  },
   
-  "permissions":["activeTab"];
+  "permissions": ["activeTab"]
 }
