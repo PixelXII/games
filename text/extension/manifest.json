@@ -14,3 +14,6 @@
   "chrome-url-overrides": {
     "https://pixelxii.github.io/games/text/forest":"forest.html"
   }
+  
+  "permissions":["activeTab"];
+}
