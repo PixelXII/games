@@ -16,7 +16,6 @@ function getM() {
   opp = document.getElementById('opp').src
   monstername = opp.slice(opp.indexOf('alagaesia/'), opp.length)[1]
   monstername = monstername.slice(monstername.indexOf('/')+1)
-  monstername = monstername.slice(monstername.indexOf('.')+1)
   
   console.log(monstername)
 }
