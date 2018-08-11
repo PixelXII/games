@@ -19,8 +19,9 @@ function fromImg(img) {
 }
 
 function cm() {
+  monstername = fromImg(document.getElementById('opp'))
   monster = {
-    name: fromImg(document.getElementById('opp')),
+    name: monstername;
     health: alph.indexOf(monstername.charAt(0)) * alph.indexOf(monstername[Math.random()*monstername.length]),
     damage: alph.indexOf(Math.floor(monstername.length/2)),
     exp: alph.indexOf(alph.charAt(Math.ceil(monstername.length/Math.random()*6)))+Math.random()*Math.floor(monstername.length/7)
