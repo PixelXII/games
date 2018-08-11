@@ -7,7 +7,7 @@ var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'
 
 function castSpell(type, damage) {
   var monstername = document.getElementById('opp').src
-  monstername = monstername.split(monstername.indexOf('.'), monstername.length)
+  monstername = monstername.split(monstername.indexOf('alagaesia/'), monstername.length)[1]
   var monstertype;
   if(water.includes(monstername)) {
     monstertype = 'water'
@@ -26,7 +26,8 @@ function castSpell(type, damage) {
   
   monster = {
     name: monstername,
-    type: monstertype
+    type: monstertype,
+    health: 
   }
 }
   
