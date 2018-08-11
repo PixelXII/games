@@ -12,12 +12,13 @@ function castSpell(spell, targ) {
   targ.health -= d
 }
 
-function getM() {
-  opp = document.getElementById('opp').src
-  monstername = opp.slice(opp.indexOf('alagaesia/'), opp.length)[1]
-  monstername = monstername.slice(monstername.indexOf('/')+1)
+function fromImg(img) {
+  var opp, fin;
+  opp = img.src
+  fin = opp.slice(opp.indexOf('alagaesia/'), opp.length)[1]
+  fin = fin.slice(fin.indexOf('/')+1)
   
-  console.log(monstername)
+  console.log(fin)
 }
   
   
