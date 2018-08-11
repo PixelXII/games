@@ -24,7 +24,7 @@ function cm() {
     name: monstername,
     health: alph.indexOf(monstername.charAt(0)) * alph.indexOf(monstername[Math.random()*monstername.length]),
     damage: alph.indexOf(Math.floor(monstername.length/2)),
-    exp: alph.indexOf(alph.toString().charAt(Math.ceil(monstername.length/Math.random()*6)))+Math.random()*Math.floor(monstername.length/7)
+    exp: alph.indexOf(alph.toString().replace(/,/g, '').charAt(Math.ceil(monstername.length/Math.random()*6)))+Math.random()*Math.floor(monstername.length/7)
   }
 }
   
