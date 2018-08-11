@@ -30,6 +30,11 @@
   animation-duration:0.4s;
 }
 
+table {
+  border-spacing:10px;
+  border-collapse:seperate;
+}
+
 .monster {}
 
 .button {}
