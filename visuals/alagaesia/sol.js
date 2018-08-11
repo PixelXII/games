@@ -46,6 +46,8 @@ function cm() {
     exp: Math.floor(Math.random()*monstername.length/2)+Math.floor(Math.random()*15)
   }
 }
+
+cm()
   
   
 function Spell(name, damage) {
