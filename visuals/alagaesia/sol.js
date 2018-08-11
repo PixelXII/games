@@ -21,8 +21,11 @@ var hurricane = new Spell("Hurricane", 21)
 function castSpell(spell) {
   let d = spell.damage
   let n = spell.name
-  
-  monster.health -= d
+  if(monster.health <= 0) {
+    // callback
+  } else {
+    monster.health -= d
+  }
 }
 
 function fromImg(img) {
