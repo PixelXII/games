@@ -1,14 +1,13 @@
-var monster;
+var monster, monstername, monstertype;
 var water = ['Piranha', 'Shark', 'Mutant Turtle', 'Pirate', 'Pirate Captain']
 var fire = ['Fire Atronach', 'Firebeetle', 'Flametongue', 'Dragon']
 var earth = ['Elf', 'Spriggan', 'Demented Flower', 'Dwarf', 'Dwarf King', 'Rockmouse']
 var air = ['Storm Atronach', 'Air Elemental', 'Cloud Elf', 'Sunbird']
 var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-function castSpell(type, damage) {
-  var monstername = document.getElementById('opp').src
+function castSpell(name, damage) {
+  monstername = document.getElementById('opp').src
   monstername = monstername.split(monstername.indexOf('alagaesia/'), monstername.length)[1]
-  var monstertype;
   if(water.includes(monstername)) {
     monstertype = 'water'
   } else if(fire.includes(monstername)) {
@@ -18,16 +17,18 @@ function castSpell(type, damage) {
   } else if(air.includes(monstername)) {
     monstertype = 'air'
   }
-  
+}
+
+function calcMonster() {
   var o = monstername[0]
   var l = monstername[monstername.length]
   var health = alph.indexOf(o)+1 * alph.indexOf(l)+1
   
   
   monster = {
-    name: monstername,
-    type: monstertype,
-    health: 
+   name: monstername,
+   type: monstertype,
+   health: health
   }
 }
   
