@@ -1,8 +1,5 @@
 var monster, monstername, monstertype;
-var water = ['Piranha', 'Shark', 'Mutant Turtle', 'Pirate', 'Pirate Captain']
-var fire = ['Fire Atronach', 'Firebeetle', 'Flametongue', 'Dragon']
-var earth = ['Elf', 'Spriggan', 'Demented Flower', 'Dwarf', 'Dwarf King', 'Rockmouse']
-var air = ['Storm Atronach', 'Air Elemental', 'Cloud Elf', 'Sunbird']
+var enemies = ['Piranha', 'Shark', 'Mutant Turtle', 'Pirate', 'Pirate Captain', 'Fire Atronach', 'Firebeetle', 'Flametongue', 'Dragon', 'Elf', 'Spriggan', 'Demented Flower', 'Dwarf', 'Dwarf King', 'Rockmouse', 'Storm Atronach', 'Air Elemental', 'Cloud Elf', 'Sunbird']
 var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
 function castSpell(spell, targ) {
@@ -19,6 +16,15 @@ function fromImg(img) {
   fin = fin.slice(fin[0], fin.indexOf('.'))
   
   return fin;
+}
+
+function cm() {
+  monster = {
+    name: fromImg(document.getElementById('opp')),
+    health: alph.indexOf(monstername[0]) * alph.indexOf(monstername[Math.random()*monstername.length]),
+    damage: alph.indexOf(Math.floor(monstername.length/2)),
+    exp: alph.indexOf(alph.charAt(Math.ceil(monstername.length/Math.random()*6)))+Math.random()*Math.floor(monstername.length/7)
+  }
 }
   
   
