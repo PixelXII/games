@@ -16,7 +16,7 @@ function fromImg(img) {
   var opp, fin;
   opp = img.src
   fin = opp.slice(opp.indexOf('alagaesia/'), opp.length)[1]
-  fin = fin.slice(fin.indexOf('/')+1)
+ // fin = fin.slice(fin.indexOf('/')+1)
   
   return fin;
 }
