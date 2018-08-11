@@ -21,10 +21,10 @@ function fromImg(img) {
 function cm() {
   monstername = fromImg(document.getElementById('opp'))
   monster = {
-    name: monstername,
-    health: alph.indexOf(monstername.charAt(0)) * alph.indexOf(monstername[Math.random()*monstername.length]),
-    damage: alph.indexOf(Math.floor(monstername.length/2)),
-    exp: alph.indexOf(alph.toString().replace(/,/g, '').charAt(Math.ceil(monstername.length/Math.random()*6)))+Math.random()*Math.floor(monstername.length/7)
+    name: monstername.replace(/^\w/, c => c.toUpperCase());,
+    health: Math.ceil(alph.indexOf(monstername.charAt(0)) * alph.indexOf(monstername[Math.random()*monstername.length]))+31,
+    damage: Math.ceil(alph.indexOf(Math.floor(monstername.length/2)))+16,
+    exp: Math.ceil(alph.indexOf(alph.toString().replace(/,/g, '').charAt(Math.ceil(monstername.length/Math.random()*6)))+Math.random()*Math.floor(monstername.length/7))*16
   }
 }
   
