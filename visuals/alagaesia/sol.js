@@ -24,7 +24,7 @@ function cm() {
     name: monstername.replace(/^\w/, c => c.toUpperCase()),
     health: Math.ceil(alph.indexOf(monstername.charAt(0)) * alph.indexOf(monstername[Math.random()*monstername.length]))+31,
     damage: Math.floor((Math.ceil(alph.indexOf(Math.floor(monstername.length/2)))+16)/2),
-    exp: Math.floor(Math.random()*monstername.length/3)
+    exp: Math.floor(Math.random()*monstername.length/2)+Math.floor(Math.random()*6)
   }
 }
   
