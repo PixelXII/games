@@ -20,8 +20,8 @@ function castSpell(name, damage) {
 }
 
 function calcMonster() {
-  var o = monstername[0]
-  var l = monstername[monstername.length]
+  var o = monstername.charAt(0)
+  var l = monstername.charAt(monstername.length)
   var health = alph.indexOf(o)+1 * alph.indexOf(l)+1
   
   
