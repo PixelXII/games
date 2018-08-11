@@ -26,7 +26,7 @@ function castSpell(type, damage) {
   
   monster = {
     name: monstername,
-    type: monstertype;
+    type: monstertype
   }
 }
   
