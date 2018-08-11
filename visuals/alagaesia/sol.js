@@ -2,11 +2,27 @@ var monster, monstername, monstertype;
 var enemies = ['Piranha', 'Shark', 'Mutant Turtle', 'Pirate', 'Pirate Captain', 'Fire Atronach', 'Firebeetle', 'Flametongue', 'Dragon', 'Elf', 'Spriggan', 'Demented Flower', 'Dwarf', 'Dwarf King', 'Rockmouse', 'Storm Atronach', 'Air Elemental', 'Cloud Elf', 'Sunbird']
 var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-function castSpell(spell, targ) {
+// Spells
+
+var flames = new Spell("Flames", 6)
+var iceBlast = new Spell("Ice Blast", 8)
+var sparks = new Spell("Sparks", 5)
+var squirt = new Spell("Squirt", 7)
+var firebolt = new Spell("Firebolt", 12)
+var freeze = new Spell("Freeze", 11)
+var lightningBolt = new Spell('Lightning Bolt', 15)
+var waterfall = new Spell("Waterfall", 13)
+var inferno = new Spell("Inferno", 19)
+var blizzard = new Spell("Blizzard", 20)
+var electricStorm = new Spell("Electrical Storm", 18)
+var hurricane = new Spell("Hurricane", 21)
+
+
+function castSpell(spell) {
   let d = spell.damage
   let n = spell.name
   
-  targ.health -= d
+  monster.health -= d
 }
 
 function fromImg(img) {
@@ -24,15 +40,13 @@ function cm() {
     name: monstername.replace(/^\w/, c => c.toUpperCase()),
     health: Math.ceil(alph.indexOf(monstername.charAt(0)) * alph.indexOf(monstername[Math.random()*monstername.length]))+31,
     damage: Math.floor((Math.ceil(alph.indexOf(Math.floor(monstername.length/2)))+16)/2),
-    exp: Math.floor(Math.random()*monstername.length/2)+Math.floor(Math.random()*6)
+    exp: Math.floor(Math.random()*monstername.length/2)+Math.floor(Math.random()*15)
   }
 }
   
   
-function Spell(name, damage, img) {
+function Spell(name, damage) {
   this.name = name
-  this.spellType = type
   this.damage = damage
-  
-  document.getElementById('tb').innerHTML = document.getElementById('tb').innerHTML + '<td> <img class=\'spell\' src="'+img+'" onclick="castSpell('+this.spellType+', '+this.damage+')"> </td>'
+  this.imgSrc = this.name.toLowerCase()
 }
