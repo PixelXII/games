@@ -37,8 +37,7 @@ var electricStorm = new Spell("Electrical Storm", 18)
 var hurricane = new Spell("Hurricane", 21)
 var spells = [flames, iceBlast, sparks, squirt, firebolt, freeze, lightningBolt, waterfall, inferno, blizzard, electricStorm, hurricane]
 var lv1 = [flames, iceBlast, sparks, squirt]
-var lv2 = lv1 + [firebolt, freeze, lightningBolt, waterfall]
-var lv3 = lv2 + [inferno, blizzard, electricStorm, hurricane]
+var lv2 = [flames, iceBlast, sparks, squirt, firebolt, freeze, lightningBolt, waterfall]
 function randomSpell() {  // returns random spell based on player's level
   if(player.level <= 7) {
     return lv1[Math.floor(Math.random()*lv1.length)]
