@@ -16,7 +16,11 @@ var inferno = new Spell("Inferno", 19)
 var blizzard = new Spell("Blizzard", 20)
 var electricStorm = new Spell("Electrical Storm", 18)
 var hurricane = new Spell("Hurricane", 21)
-
+var spells = ['flames', 'iceBlast', 'sparks', 'squirt', 'firebolt', 'freeze', 'lightningBolt', 'waterfall', 'inferno', 'blizzard', 'electricStorm', 'hurricane']
+Spell.prototype.castByMonster = function(e) {
+  console.log(this)
+  console.log(e)
+}
 
 function castSpell(spell) {
   let d = spell.damage
@@ -26,6 +30,8 @@ function castSpell(spell) {
   } else {
     monster.health -= d
   }
+  
+  monster.castSpell
 }
 
 function fromImg(img) {
