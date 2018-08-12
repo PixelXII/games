@@ -59,7 +59,7 @@ Spell.prototype.cast = function(spell) {  // casts spell
 // Other functions
 
 function nextBattle() {
-  document.getElementById('opp').src = enemies[Math.random()*enemies.length]+'.png'
+  document.getElementById('opp').src = enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
   cm()
 }
 
