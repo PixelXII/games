@@ -21,8 +21,8 @@ var player = {
     player.mana = player.totm
   },
   die: function() {
-    document.getElementById('report').innerHTML = "You died! <br> You can cast Resurrect for " + Math.round(player.totm/2) + " mana."
-    document.getElemetById('resurrect').style.display = 'block'
+    document.getElementById('conftext').innerHTML = "You died! <br> You can cast Resurrect for " + Math.round(player.totm/2) + " mana."
+    document.getElemetById('confirmation').style.display = 'block'
   }
 }
 
