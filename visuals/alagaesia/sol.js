@@ -104,9 +104,14 @@ var displayhealth;
 
 function dhp() {  // *D*isplay *H*ealth *P*oints
   displayHealth = setInterval(function() {
+    if(monster.health < 0) {
+      monster.health = 0
+    } else if(player.health < 0) {
+      player.health = 0
+    }
     playerhealth.innerText = player.health
     monsterhealth.innerText = monster.health
-  }, 100)
+  }, 10)
 }
 dhp()
 
