@@ -50,6 +50,6 @@ table {
   border-collapse:seperate;
 }
 
-.monster {}
-
-.button {}
+.largetext {
+  font-size:36px;
+}
