@@ -11,6 +11,10 @@
   font-size:16px;
 }
 
+body {
+  background-color:#78909c;
+}
+
 .spell {
   width:75;
   height:75;
