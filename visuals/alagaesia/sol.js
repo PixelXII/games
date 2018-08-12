@@ -40,6 +40,12 @@ Spell.prototype.castByMonster = function() {
   return 'The ' + monstername + ' used ' + this.name + '!'
 }
 
+function nextBattle() {
+  document.getElementById('opp').src = enemies[Math.random()*enemies.length]+'.png'
+  cm()
+}
+  
+
 function castSpell(spell) {
   let d = spell.damage
   let n = spell.name
