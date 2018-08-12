@@ -166,7 +166,9 @@ function dhp() {  // d isplay  h it  p oints
     monsterhealth.innerText = monster.health
   }, 10)
 }
-  
+
+dhp()
+
 
 leveledspells = setInterval(function() {
   if(player.level <= 7) {
