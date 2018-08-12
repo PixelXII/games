@@ -44,7 +44,9 @@ function nextBattle() {
   document.getElementById('opp').src = enemies[Math.random()*enemies.length]+'.png'
   cm()
 }
-  
+
+function spellElement(spell) {
+  document.getElementById('tb').innerHTML = document.getElementById('tb').innerHTML + '<img class="spell" src="'+spell+'.png" onclick="castSpell('+spell+')" title="Cast '+spell.toString().replace(/^\w/, c => c.toUpperCase())'">'
 
 function castSpell(spell) {
   let d = spell.damage
