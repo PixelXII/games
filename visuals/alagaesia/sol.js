@@ -2,7 +2,9 @@ var monster, monstername, monstertype;
 var enemies = ['Piranha', 'Shark', 'Mutant Turtle', 'Pirate', 'Pirate Captain', 'Fire Atronach', 'Firebeetle', 'Flametongue', 'Dragon', 'Elf', 'Spriggan', 'Demented Flower', 'Dwarf', 'Dwarf King', 'Rockmouse', 'Storm Atronach', 'Air Elemental', 'Cloud Elf', 'Sunbird']
 var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
+
 // Player
+
 
 var player = {
   level: 1,
@@ -16,7 +18,9 @@ var player = {
   }
 }
 
+
 // Spells
+
 
 var flames = new Spell("Flames", 6)
 var iceBlast = new Spell("Ice Blast", 8)
@@ -31,13 +35,26 @@ var blizzard = new Spell("Blizzard", 20)
 var electricStorm = new Spell("Electrical Storm", 18)
 var hurricane = new Spell("Hurricane", 21)
 var spells = [flames, iceBlast, sparks, squirt, firebolt, freeze, lightningBolt, waterfall, inferno, blizzard, electricStorm, hurricane]
-function randomSpell() {  // returns random spell
-  return spells[Math.floor(Math.random()*spells.length)]
+var lv1 = [flames, iceBlast, sparks, squirt]
+var lv2 = lv1 + [firebolt, freeze, lightningBolt, waterfall]
+var lv3 = lv2 + [inferno, blizzard, electricStorm, hurricane]
+function randomSpell() {  // returns random spell based on player's level
+  if(player.level <= 7) {
+    return lv1[Math.floor(Math.random()*lv1.length)]
+  } else if(player.level > 7 && player.level <= 14) {
+    return lv2[Math.floor(Math.random()*lv2.length)]
+  } else {
+    return spells[Math.floor(Math.random()*spells.length)]
+  }
 }
 
 Spell.prototype.castByMonster = function() {  // enemy casts specified spell
   player.health -= this.damage
-  return 'The ' + monstername + ' used ' + this.name + '!'
+  if(monstername.includes('%20')) {
+    return 'The ' + monstername.replace('%20', ' ') + ' used ' + this.name + '!'
+  } else {
+    return 'The ' + monstername + ' used ' + this.name + '!'
+  }
 }
 
 Spell.prototype.cast = function() {  // casts spell
@@ -56,7 +73,9 @@ Spell.prototype.cast = function() {  // casts spell
   randomSpell().castByMonster()
 }
 
+
 // Other functions
+
 
 function nextBattle() {
   document.getElementById('opp').src = enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
@@ -84,10 +103,12 @@ function cm() {  // creates monster with random stats generated from name
     damage: Math.floor((Math.ceil(alph.indexOf(Math.floor(monstername.length/2)))+16)/2),
     exp: Math.floor(Math.random()*monstername.length/2)+Math.floor(Math.random()*15)
   }
+  if(monster.name.includes('%20')) {
+    monster.name = monster.name.replace('%20', ' ')
+  }
 }
 
 cm()
-  
   
 function Spell(name, damage) {  // Spell constructor function
   this.name = name
@@ -97,6 +118,7 @@ function Spell(name, damage) {  // Spell constructor function
 
 
 // Getting the numbers to the document (using document.write()!!)
+
 
 var playerhealth = document.getElementById('playerhealth')
 var monsterhealth = document.getElementById('monsterhealth')
