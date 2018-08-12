@@ -13,6 +13,7 @@ var player = {
   exp: 0,
   levelUp: function() {
     player.level++;
+    clearInterval(displayhealth)
     player.health = player.health + Math.floor(0.20*player.health)
     player.mana = player.mana + Math.floor(0.16*player.mana)
   }
@@ -122,9 +123,8 @@ function Spell(name, damage) {  // Spell constructor function
 
 var playerhealth = document.getElementById('playerhealth')
 var monsterhealth = document.getElementById('monsterhealth')
-var displayhealth;
-
-function dhp() {  // *D*isplay *H*ealth *P*oints
+var displayhealth, leveledspells;
+function dhp() {  // d isplay  h it  p oints
   displayHealth = setInterval(function() {
     if(monster.health < 0) {
       monster.health = 0
@@ -135,6 +135,19 @@ function dhp() {  // *D*isplay *H*ealth *P*oints
     monsterhealth.innerText = monster.health
   }, 10)
 }
-dhp()
+  
+
+leveledspells = setInterval(function() {
+  if(player.level <= 7) {
+    document.getElementById('t1').style.display = 'block'
+  } else if(player.level > 7 && player.level <= 14) {
+    document.getElementById('t1').style.display = 'block'
+    document.getElementById('t2').style.display = 'block'
+  } else {
+    document.getElementById('t1').style.display = 'block'
+    document.getElementById('t2').style.display = 'block'
+    document.getElementById('t3').style.display = 'block'
+  }
+
 
 
