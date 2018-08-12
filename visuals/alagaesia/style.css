@@ -62,3 +62,11 @@ table {
   border:1.5px solid black;
   border-radius:2px;
 }
+
+#yes {
+  background-color:#4caf50;
+}
+
+#no {
+  background-color:#f44336;
+}
