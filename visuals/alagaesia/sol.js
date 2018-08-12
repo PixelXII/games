@@ -48,6 +48,8 @@ function castSpell(spell) {
     if(player.exp >= Math.ceil(8.7*player.level)) {
       player.levelUp()
     }
+    
+    nextBattle()
   } else {
     monster.health -= d
   }
