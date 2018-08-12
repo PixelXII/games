@@ -22,6 +22,16 @@ var player = {
   },
   die: function() {
     document.getElementById('conftext').innerHTML = "You died! <br> You can cast Resurrect for " + Math.round(player.totm/2) + " mana."
+    document.getElementById('yes').addEventListener('click', function() {
+      resurrect.cb()
+    });
+    document.getElementById('no').addEventListener('click', function() {
+      if(confirm('Are you sure you don\'t want to spend ' + Math.round(player.totm/2) + ' mana to resurrect?')) {
+        location.reload()
+      }
+    });
+    document.getElementById('monster').style.display = 'none'
+    document.getElementById('spells').style.display = 'none'
     document.getElementById('confirmation').style.display = 'block'
   }
 }
