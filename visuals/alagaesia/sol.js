@@ -148,6 +148,7 @@ leveledspells = setInterval(function() {
     document.getElementById('t2').style.display = 'block'
     document.getElementById('t3').style.display = 'block'
   }
+}
 
 
 
