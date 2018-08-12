@@ -64,7 +64,7 @@ function nextBattle() {
 }
 
 function spellElement(spell) {  // creates spell element
-  document.getElementById('tb').innerHTML = document.getElementById('tb').innerHTML + '<img class="spell" src="'+spell+'.png" onclick="castSpell('+spell+')" title="Cast '+spell.toString().replace(/^\w/, c => c.toUpperCase())+'">'
+  document.getElementById('t1').innerHTML = document.getElementById('t1').innerHTML + '<img class="spell" src="'+spell+'.png" onclick="castSpell('+spell+')" title="Cast '+spell.toString().replace(/^\w/, c => c.toUpperCase())+'">'
 }
 
 function fromImg(img) {  // Gets image name from src, excluding the extension
