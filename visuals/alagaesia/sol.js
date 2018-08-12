@@ -31,25 +31,16 @@ var blizzard = new Spell("Blizzard", 20)
 var electricStorm = new Spell("Electrical Storm", 18)
 var hurricane = new Spell("Hurricane", 21)
 var spells = [flames, iceBlast, sparks, squirt, firebolt, freeze, lightningBolt, waterfall, inferno, blizzard, electricStorm, hurricane]
-function randomSpell() {
+function randomSpell() {  // returns random spell
   return spells[Math.floor(Math.random()*spells.length)]
 }
 
-Spell.prototype.castByMonster = function() {
+Spell.prototype.castByMonster = function() {  // enemy casts specified spell
   player.health -= this.damage
   return 'The ' + monstername + ' used ' + this.name + '!'
 }
 
-function nextBattle() {
-  document.getElementById('opp').src = enemies[Math.random()*enemies.length]+'.png'
-  cm()
-}
-
-function spellElement(spell) {
-  document.getElementById('tb').innerHTML = document.getElementById('tb').innerHTML + '<img class="spell" src="'+spell+'.png" onclick="castSpell('+spell+')" title="Cast '+spell.toString().replace(/^\w/, c => c.toUpperCase())+'">'
-}
-
-function castSpell(spell) {
+Spell.prototype.cast = function(spell) {  // casts spell
   let d = spell.damage
   let n = spell.name
   if(monster.health <= 0) {
@@ -65,7 +56,18 @@ function castSpell(spell) {
   randomSpell().castByMonster()
 }
 
-function fromImg(img) {
+// Other functions
+
+function nextBattle() {
+  document.getElementById('opp').src = enemies[Math.random()*enemies.length]+'.png'
+  cm()
+}
+
+function spellElement(spell) {  // creates spell element
+  document.getElementById('tb').innerHTML = document.getElementById('tb').innerHTML + '<img class="spell" src="'+spell+'.png" onclick="castSpell('+spell+')" title="Cast '+spell.toString().replace(/^\w/, c => c.toUpperCase())+'">'
+}
+
+function fromImg(img) {  // Gets image name from src, excluding the extension
   var opp, fin;
   opp = img.src
   fin = opp.slice(opp.indexOf('alagaesia')+'alagaesia'.length+1)
@@ -74,7 +76,7 @@ function fromImg(img) {
   return fin;
 }
 
-function cm() {
+function cm() {  // creates monster with random stats generated from name
   monstername = fromImg(document.getElementById('opp'))
   monster = {
     name: monstername.replace(/^\w/, c => c.toUpperCase()),
@@ -87,8 +89,25 @@ function cm() {
 cm()
   
   
-function Spell(name, damage) {
+function Spell(name, damage) {  // Spell constructor function
   this.name = name
   this.damage = damage
   this.imgSrc = this.name.toLowerCase()
 }
+
+
+// Getting the numbers to the document (using document.write()!!)
+
+var playerhealth = document.getElementById('playerhealth')
+var monsterhealth = document.getElementById('monsterhealth')
+var displayhealth;
+
+function dhp() {  // *D*isplay *H*ealth *P*oints
+  displayHealth = setInterval(function() {
+    playerhealth.innerText = player.health
+    monsterhealth.innerText = monster.health
+  }, 100)
+}
+dhp()
+
+
