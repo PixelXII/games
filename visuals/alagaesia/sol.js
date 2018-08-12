@@ -8,6 +8,7 @@ var player = {
   level: 1,
   health: 30,
   mana: 30,
+  exp: 0,
   levelUp: function() {
     player.level++;
     player.health = player.health + Math.floor(0.20*player.health)
@@ -29,7 +30,10 @@ var inferno = new Spell("Inferno", 19)
 var blizzard = new Spell("Blizzard", 20)
 var electricStorm = new Spell("Electrical Storm", 18)
 var hurricane = new Spell("Hurricane", 21)
-var spells = ['flames', 'iceBlast', 'sparks', 'squirt', 'firebolt', 'freeze', 'lightningBolt', 'waterfall', 'inferno', 'blizzard', 'electricStorm', 'hurricane']
+var spells = [flames, iceBlast, sparks, squirt, firebolt, freeze, lightningBolt, waterfall, inferno, blizzard, electricStorm, hurricane]
+function randomSpell() {
+  return spells[Math.random()*spells.length]
+}
 
 Spell.prototype.castByMonster = function() {
   player.health -= this.damage
@@ -40,12 +44,14 @@ function castSpell(spell) {
   let d = spell.damage
   let n = spell.name
   if(monster.health <= 0) {
-    console.log("RIP " + monstername.toUpperCase())
+    player.exp = player.exp + monster.exp
+    if(player.exp >= Math.ceil(8.7*player.level)) {
+      player.levelUp()
+    }
   } else {
     monster.health -= d
   }
-  
-  monster.castSpell
+  randomSpell().castByMonster()
 }
 
 function fromImg(img) {
