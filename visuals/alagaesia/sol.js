@@ -30,7 +30,8 @@ var inferno = new Spell("Inferno", 19)
 var blizzard = new Spell("Blizzard", 20)
 var electricStorm = new Spell("Electrical Storm", 18)
 var hurricane = new Spell("Hurricane", 21)
-var spells = [flames, iceBlast, sparks, squirt, firebolt, freeze, lightningBolt, waterfall, inferno, blizzard, electricStorm, hurricane]
+var spells = [flames.name, iceBlast.name, sparks.name, squirt.name, firebolt.name, freeze.name, lightningBolt.name, waterfall.name, inferno.name, blizzard.name, electricStorm.name, hurricane.name]
+
 function randomSpell() {
   return spells[Math.random()*spells.length]
 }
