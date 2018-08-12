@@ -40,9 +40,9 @@ Spell.prototype.castByMonster = function() {  // enemy casts specified spell
   return 'The ' + monstername + ' used ' + this.name + '!'
 }
 
-Spell.prototype.cast = function(spell) {  // casts spell
-  let d = spell.damage
-  let n = spell.name
+Spell.prototype.cast = function() {  // casts spell
+  let d = this.damage
+  let n = this.name
   if(monster.health <= 0) {
     player.exp = player.exp + monster.exp
     if(player.exp >= Math.ceil(8.7*player.level)) {
