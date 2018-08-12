@@ -32,7 +32,7 @@ var electricStorm = new Spell("Electrical Storm", 18)
 var hurricane = new Spell("Hurricane", 21)
 var spells = [flames, iceBlast, sparks, squirt, firebolt, freeze, lightningBolt, waterfall, inferno, blizzard, electricStorm, hurricane]
 function randomSpell() {
-  return spells[Math.random()*spells.length]
+  return spells[Math.floor(Math.random()*spells.length)]
 }
 
 Spell.prototype.castByMonster = function() {
