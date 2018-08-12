@@ -2,6 +2,19 @@ var monster, monstername, monstertype;
 var enemies = ['Piranha', 'Shark', 'Mutant Turtle', 'Pirate', 'Pirate Captain', 'Fire Atronach', 'Firebeetle', 'Flametongue', 'Dragon', 'Elf', 'Spriggan', 'Demented Flower', 'Dwarf', 'Dwarf King', 'Rockmouse', 'Storm Atronach', 'Air Elemental', 'Cloud Elf', 'Sunbird']
 var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
+// Player
+
+var player = {
+  level: 1,
+  health: 30,
+  mana: 30,
+  levelUp: function() {
+    player.level++;
+    player.health = Math.floor(0.15*player.health)
+    player.mana = Math.floor(0.13*player.mana)
+  }
+}
+
 // Spells
 
 var flames = new Spell("Flames", 6)
@@ -17,16 +30,17 @@ var blizzard = new Spell("Blizzard", 20)
 var electricStorm = new Spell("Electrical Storm", 18)
 var hurricane = new Spell("Hurricane", 21)
 var spells = ['flames', 'iceBlast', 'sparks', 'squirt', 'firebolt', 'freeze', 'lightningBolt', 'waterfall', 'inferno', 'blizzard', 'electricStorm', 'hurricane']
-Spell.prototype.castByMonster = function(e) {
-  console.log(this)
-  console.log(e)
+
+Spell.prototype.castByMonster = function() {
+  player.health -= this.damage
+  return 'The ' + monstername + ' used ' + this.name + '!'
 }
 
 function castSpell(spell) {
   let d = spell.damage
   let n = spell.name
   if(monster.health <= 0) {
-    // callback
+    console.log("RIP " + monstername.toUpperCase())
   } else {
     monster.health -= d
   }
