@@ -1,7 +1,6 @@
 var monster, monstername, monstertype;
 var enemies = ['Piranha', 'Shark', 'Mutant Turtle', 'Pirate', 'Pirate Captain', 'Fire Atronach', 'Firebeetle', 'Flametongue', 'Dragon', 'Elf', 'Spriggan', 'Demented Flower', 'Dwarf', 'Dwarf King', 'Rockmouse', 'Storm Atronach', 'Air Elemental', 'Cloud Elf', 'Sunbird']
 var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-var halfmana = Math.random()*Math.round(player.totm/2)
 
 // Player
 
@@ -22,7 +21,7 @@ var player = {
     player.mana = player.totm
   },
   die: function() {
-    document.getElementById('report').innerHTML = "You died! <br> You can cast Resurrect for " + halfmana + " mana."
+    document.getElementById('report').innerHTML = "You died! <br> You can cast Resurrect for " + Math.round(player.totm/2) + " mana."
     document.getElemetById('resurrect').style.display = 'block'
   }
 }
@@ -48,7 +47,7 @@ var hurricane = new Spell("Hurricane", 21)
 
 var resurrect = new special("Resurrect", function() {
   player.health = player.toth
-  player.mana = halfmana
+  player.mana = Math.round(player.totm/2)
   
   nextBattle()
 })
