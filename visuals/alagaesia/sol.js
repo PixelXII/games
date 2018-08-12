@@ -10,8 +10,8 @@ var player = {
   mana: 30,
   levelUp: function() {
     player.level++;
-    player.health = Math.floor(0.15*player.health)
-    player.mana = Math.floor(0.13*player.mana)
+    player.health = player.health + Math.floor(0.20*player.health)
+    player.mana = player.mana + Math.floor(0.16*player.mana)
   }
 }
 
