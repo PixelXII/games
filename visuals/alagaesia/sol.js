@@ -22,7 +22,7 @@ var player = {
   },
   die: function() {
     document.getElementById('conftext').innerHTML = "You died! <br> You can cast Resurrect for " + Math.round(player.totm/2) + " mana."
-    document.getElemetById('confirmation').style.display = 'block'
+    document.getElementById('confirmation').style.display = 'block'
   }
 }
 
