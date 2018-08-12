@@ -61,6 +61,7 @@ table {
   padding:2px;
   border:1.5px solid black;
   border-radius:2px;
+  cursor:pointer;
 }
 
 #yes {
