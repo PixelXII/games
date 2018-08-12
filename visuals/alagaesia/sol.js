@@ -1,7 +1,7 @@
 var monster, monstername, monstertype;
 var enemies = ['Piranha', 'Shark', 'Mutant Turtle', 'Pirate', 'Pirate Captain', 'Fire Atronach', 'Firebeetle', 'Flametongue', 'Dragon', 'Elf', 'Spriggan', 'Demented Flower', 'Dwarf', 'Dwarf King', 'Rockmouse', 'Storm Atronach', 'Air Elemental', 'Cloud Elf', 'Sunbird']
 var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-
+var halfmana = Math.random()*Math.round(player.totm/2)
 
 // Player
 
@@ -10,12 +10,20 @@ var player = {
   level: 1,
   health: 30,
   mana: 30,
+  toth: 30,
+  totm: 30,
   exp: 0,
   levelUp: function() {
     player.level++;
     clearInterval(displayhealth)
-    player.health = player.health + Math.floor(0.20*player.health)
-    player.mana = player.mana + Math.floor(0.16*player.mana)
+    player.toth = player.toth + Math.floor(0.20*player.toth)
+    player.totm = player.totm + Math.floor(0.16*player.totm)
+    player.health = player.toth
+    player.mana = player.totm
+  },
+  die: function() {
+    document.getElementById('report').innerHTML = "You died! <br> You can cast Resurrect for " + halfmana + " mana."
+    document.getElemetById('resurrect').style.display = 'block'
   }
 }
 
@@ -35,6 +43,17 @@ var inferno = new Spell("Inferno", 19)
 var blizzard = new Spell("Blizzard", 20)
 var electricStorm = new Spell("Electrical Storm", 18)
 var hurricane = new Spell("Hurricane", 21)
+
+// special spells
+
+var resurrect = new special("Resurrect", function() {
+  player.health = player.toth
+  player.mana = halfmana
+  
+  nextBattle()
+})
+  
+
 var spells = [flames, iceBlast, sparks, squirt, firebolt, freeze, lightningBolt, waterfall, inferno, blizzard, electricStorm, hurricane]
 var lv1 = [flames, iceBlast, sparks, squirt]
 var lv2 = [flames, iceBlast, sparks, squirt, firebolt, freeze, lightningBolt, waterfall]
@@ -60,6 +79,7 @@ Spell.prototype.castByMonster = function() {  // enemy casts specified spell
 Spell.prototype.cast = function() {  // casts spell
   let d = this.damage
   let n = this.name
+  player.mana -= Math.round(this.damage/2)
   if(monster.health <= 0) {
     player.exp = player.exp + monster.exp
     if(player.exp >= Math.ceil(8.7*player.level)) {
@@ -110,10 +130,22 @@ function cm() {  // creates monster with random stats generated from name
 
 cm()
   
+  
+// Constructors
+  
+  
 function Spell(name, damage) {  // Spell constructor function
   this.name = name
   this.damage = damage
-  this.imgSrc = this.name.toLowerCase()
+}
+
+function special(name, callback) {
+  this.name = name
+  this.callback = callback
+}
+
+special.prototype.cb = function() {
+  this.callback()
 }
 
 
