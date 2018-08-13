@@ -82,27 +82,34 @@ function randomSpell() {  // returns random spell based on player's level
 Spell.prototype.castByMonster = function() {  // enemy casts specified spell
   player.health -= this.damage
   if(monstername.includes('%20')) {
-    return 'The ' + monstername.replace('%20', ' ') + ' used ' + this.name + '!'
+    document.getElementById('monsterlog').innerText = 'The ' + monstername.replace('%20', ' ') + ' used ' + this.name + '!'
   } else {
-    return 'The ' + monstername + ' used ' + this.name + '!'
+    document.getElementById('monsterlog').innerText = 'The ' + monstername + ' used ' + this.name + '!'
   }
 }
 
 Spell.prototype.cast = function() {  // casts spell
-  let d = this.damage
-  let n = this.name
-  player.mana -= Math.round(this.damage/2)
-  if(monster.health <= 0) {
-    player.exp = player.exp + monster.exp
-    if(player.exp >= Math.ceil(8.7*player.level)) {
-      player.levelUp()
-    }
-    
-    nextBattle()
+  let cost = Math.round(this.damage*0.75)
+  if(player.mana < cost) {
+    document.getElementById('playerlog').innerText = 'You don\'t have enough mana to cast ' + this.name + '.'
   } else {
-    monster.health -= d
+    let d = this.damage
+    let n = this.name
+    player.mana -= Math.round(this.damage/2)
+    if(monster.health <= 0) {
+      player.exp = player.exp + monster.exp
+      if(player.exp >= Math.ceil(8.7*player.level)) {
+        player.levelUp()
+      }
+      nextBattle()
+    } else {
+      monster.health -= d
+    }
+    player.mana -= cost
+    setTimeout(function() {
+      randomSpell().castByMonster()
+    }, Math.round(Math.random()*5600))
   }
-  randomSpell().castByMonster()
 }
 
 
@@ -111,13 +118,19 @@ Spell.prototype.cast = function() {  // casts spell
 
 function nextBattle() {
   setTimeout(function() {
-    document.getElementById('opp').src = enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
-    cm()
     document.getElementById('confirmation').style.display = 'block'
     document.getElementById('no').style.display = 'none'
     document.getElementById('spells').style.display = 'none'
     document.getElementById('monster').style.display = 'none'
-    document.getElementById('conftext').innerHTML = 'Are you ready for the next <code>battle?</code>'
+    document.getElementById('conftext').innerHTML = 'Are you ready for the next battle?'
+    document.getElementById('yes').addEventListener('click', function() {
+      document.getElementById('confirmation').style.display = 'none'
+      document.getElementById('no').style.display = 'block'
+      document.getElementById('spells').style.display = 'block'
+      document.getElementById('monster').style.display = 'block'
+      document.getElementById('opp').src = enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
+      cm()
+    });
   }, 5000)
 }
 
