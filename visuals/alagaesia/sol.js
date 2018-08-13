@@ -86,10 +86,12 @@ Spell.prototype.castByMonster = function() {  // enemy casts specified spell
   } else {
     document.getElementById('monsterlog').innerText = 'The ' + monstername + ' used ' + this.name + '!'
   }
+  document.getElementById('spells').style.display = 'block'
 }
 
 Spell.prototype.cast = function() {  // casts spell
   let cost = Math.round(this.damage*0.75)
+  document.getElementById('spells').style.display = 'none'
   if(player.mana < cost) {
     document.getElementById('playerlog').innerText = 'You don\'t have enough mana to cast ' + this.name + '.'
   } else {
@@ -193,6 +195,12 @@ var MaHe = setInterval(function() {
     player.mana = Math.round(player.totm/2)
   }
 }, 100)
+
+var died = setInterval(function() {
+  if(player.health <= 0) {
+    player.die()
+  }
+}, 10)
 
 
 // Getting the numbers to the document (using document.write()!!)
