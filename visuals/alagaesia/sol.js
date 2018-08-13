@@ -110,8 +110,15 @@ Spell.prototype.cast = function() {  // casts spell
 
 
 function nextBattle() {
-  document.getElementById('opp').src = enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
-  cm()
+  setTimeout(function() {
+    document.getElementById('opp').src = enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
+    cm()
+    document.getElementById('confirmation').style.display = 'block'
+    document.getElementById('no').style.display = 'none'
+    document.getElementById('spells').style.display = 'none'
+    document.getElementById('monster').style.display = 'none'
+    document.getElementById('conftext').innerHTML = 'Are you ready for the next <code>battle?</code>'
+  }, 5000)
 }
 
 function spellElement(spell) {  // creates spell element
@@ -159,6 +166,18 @@ function special(name, callback) {
 special.prototype.cb = function() {
   this.callback()
 }
+
+
+// Setting intervals
+
+var MaHe = setInterval(function() {
+  if(player.health > player.toth) {
+    player.health = Math.round(player.toth/2)
+  }
+  if(player.mana > player.totm) {
+    player.mana = Math.round(player.totm/2)
+  }
+}, 100)
 
 
 // Getting the numbers to the document (using document.write()!!)
