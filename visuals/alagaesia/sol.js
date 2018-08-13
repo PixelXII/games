@@ -159,6 +159,7 @@ function cm() {  // creates monster with random stats generated from name
     monster.name = monster.name.replace('%20', ' ')
   }
   document.getElementById('mlabel').innerText = monster.name + "'s Health: "
+  document.getElementById('mname').innerText = monster.name
 }
 
 cm()
