@@ -83,8 +83,10 @@ Spell.prototype.castByMonster = function() {  // enemy casts specified spell
   player.health -= this.damage
   if(monstername.includes('%20')) {
     document.getElementById('monsterlog').innerText = 'The ' + monstername.replace('%20', ' ') + ' used ' + this.name + '!'
+    clearLog('monster')
   } else {
     document.getElementById('monsterlog').innerText = 'The ' + monstername + ' used ' + this.name + '!'
+    clearLog('monster')
   }
   document.getElementById('spells').style.display = 'block'
 }
@@ -94,6 +96,7 @@ Spell.prototype.cast = function() {  // casts spell
   document.getElementById('spells').style.display = 'none'
   if(player.mana < cost) {
     document.getElementById('playerlog').innerText = 'You don\'t have enough mana to cast ' + this.name + '.'
+    clearLog('player')
   } else {
     let d = this.damage
     let n = this.name
@@ -134,6 +137,14 @@ function nextBattle() {
       cm()
     });
   }, 5000)
+}
+
+function clearLog(p) {
+  if(p === 'player') {
+    setTimeout(function() { document.getElementById('playerlog').innerHTML = '' }, 3000)
+  } else if(p === 'monster') {
+    setTimeout(function() { document.getElementById('monsterlog').innerHTML = '' }, 3000)
+  }
 }
 
 function spellElement(spell) {  // creates spell element
