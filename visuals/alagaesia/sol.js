@@ -179,6 +179,7 @@ function cm() {  // creates monster with random stats generated from name
   }
   document.getElementById('mlabel').innerText = monster.name + "'s Health: "
   document.getElementById('mname').innerText = monster.name
+  document.getElementById('mmana').innerText = monster.name + "'s Mana: "
 }
 
 cm()
@@ -230,7 +231,7 @@ function startRegen() {  // regenerates a certain percentage of mana & health pe
       monster.health += Math.round(player.level/15*monster.health)
       monster.mana += Math.round(player.level/15*monster.health)
     }
-  }, 4000)
+  }, 8000)
 }
 
 startRegen()
@@ -249,9 +250,17 @@ function dhp() {  // d isplay  h it  p oints
     } else if(player.health < 0) {
       player.health = 0
     }
+    if(player.mana < 0) {
+      player.mana = 0;
+    } else if(monster.mana < 0 ) {
+      monster.mana = 0
+    }
+    
+    document.getElementById('monster-manal').innerText = monster.mana
+    document.getElementById('playermana').innerText = player.mana
     playerhealth.innerText = player.health
     monsterhealth.innerText = monster.health
-  }, 10)
+  }, 5)
 }
 
 dhp()
