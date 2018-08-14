@@ -179,7 +179,7 @@ function cm() {  // creates monster with random stats generated from name
   }
   document.getElementById('mlabel').innerText = monster.name + "'s Health: "
   document.getElementById('mname').innerText = monster.name
-  document.getElementById('mmana').innerText = monster.name + "'s Mana: "
+  document.getElementById('monster-manal').innerText = monster.name + "'s Mana: "
 }
 
 cm()
@@ -260,7 +260,7 @@ function dhp() {  // d isplay  h it  p oints
       monster.mana = 0
     }
     
-    document.getElementById('monster-manal').innerText = monster.mana
+    document.getElementById('mmana').innerText = monster.mana
     document.getElementById('playermana').innerText = player.mana
     playerhealth.innerText = player.health
     monsterhealth.innerText = monster.health
