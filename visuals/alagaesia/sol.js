@@ -88,16 +88,17 @@ function randomSpell() {  // returns random spell based on player's level
 
 Spell.prototype.castByMonster = function() {  // enemy casts specified spell
   let cost = Math.round(this.damage*0.75)
-  player.health -= this.damage
-  monster.mana -= cost
-  if(monstername.includes('%20')) {
-    document.getElementById('monsterlog').innerText = 'The ' + monstername.replace('%20', ' ') + ' cast ' + this.name + '!'
-    clearLog('monster')
+  if(monster.mana >= cost) {
+    player.health -= this.damage
+    monster.mana -= cost
+    if(monstername.includes('%20')) {
+      log('monster', 'The ' + monstername.replace('%20', ' ') + ' cast ' + this.name + '!')
+    } else {
+      log('monster', 'The ' + monstername + ' cast ' + this.name + '!')
+    }
+    document.getElementById('spells').style.display = 'block'
   } else {
-    document.getElementById('monsterlog').innerText = 'The ' + monstername + ' cast ' + this.name + '!'
-    clearLog('monster')
-  }
-  document.getElementById('spells').style.display = 'block'
+    log('monster', 'The ' + monstername + " does not have enough mana to cast " + this.name ".")
 }
 
 Spell.prototype.cast = function() {  // casts spell
@@ -129,6 +130,16 @@ Spell.prototype.cast = function() {  // casts spell
 
 
 // Other functions
+
+
+function log(targ, cont) {
+  if(targ == 'monster') {
+    document.getElementById('monsterlog').innerHTML = cont
+  } else if(targ == 'player') {
+    document.getElementById('monsterlog').innerHTML = cont
+  }
+  clearLog(targ)
+}
 
 
 function nextBattle() {
