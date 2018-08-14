@@ -250,8 +250,10 @@ function dhp() {  // d isplay  h it  p oints
   displayHealth = setInterval(function() {
     if(monster.health < 0) {
       monster.health = 0
+      nextBattle()
     } else if(player.health < 0) {
       player.health = 0
+      player.die()
     }
     if(player.mana < 0) {
       player.mana = 0;
