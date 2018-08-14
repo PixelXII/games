@@ -30,6 +30,8 @@ var player = {
         location.reload()
       }
     });
+    document.getElementById('playerlog').innerHTML = ""
+    document.getElementById('monsterlog').innerHTML = ""
     document.getElementById('monster').style.display = 'none'
     document.getElementById('spells').style.display = 'none'
     document.getElementById('confirmation').style.display = 'block'
