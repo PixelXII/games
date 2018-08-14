@@ -243,8 +243,8 @@ startRegen()
 // Getting the numbers to the document (using document.write()!!)
 
 
-var playerhealth = document.getElementById('playerhealth')
-var monsterhealth = document.getElementById('monsterhealth')
+var playerhealth = document.getElementById('playerlabel')
+var monsterhealth = document.getElementById('monsterlabel')
 var displayhealth, leveledspells;
 function dhp() {  // d isplay  h it  p oints
   displayHealth = setInterval(function() {
@@ -259,10 +259,8 @@ function dhp() {  // d isplay  h it  p oints
       monster.mana = 0
     }
     
-    document.getElementById('mmana').innerText = monster.mana
-    document.getElementById('playermana').innerText = player.mana
-    playerhealth.innerText = player.health
-    monsterhealth.innerText = monster.health
+    playerhealth.innerText = player.health + "/" + player.mana
+    monsterhealth.innerText = monster.health + "/" + monster.mana
   }, 5)
 }
 
