@@ -235,7 +235,6 @@ function startRegen() {  // regenerates a certain percentage of mana & health pe
     if(monster.mana != monster.totm) {
       monster.mana += Math.round(player.level/15*monster.health)
     }
-    }
   }, 8000)
 }
 
