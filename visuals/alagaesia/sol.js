@@ -105,7 +105,7 @@ Spell.prototype.castByMonster = function() {  // enemy casts specified spell
 Spell.prototype.cast = function() {  // casts spell
   let cost = 4
   if(player.mana < cost) {
-    document.getElementById('playerlog').innerText = 'You don\'t have enough mana to cast ' + this.name + '.'
+    log('player', 'You don\'t have enough mana to cast ' + this.name + '.')
     clearLog('player')
   } else {
     let d = this.damage
@@ -120,8 +120,8 @@ Spell.prototype.cast = function() {  // casts spell
     } else {
       monster.health -= d
     }
-    player.mana -= cost
-    document.getElementById('playerlog').innerText = 'You cast ' + this.name + "."
+    player.mana -= cost/2
+    log('player', 'You cast ' + this.name + ".")
     clearLog('player')
     setTimeout(function() {
       randomSpell().castByMonster()
