@@ -133,7 +133,7 @@ function nextBattle() {
       document.getElementById('no').style.display = 'block'
       document.getElementById('spells').style.display = 'block'
       document.getElementById('monster').style.display = 'block'
-      document.getElementById('opp').src = enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
+      document.getElementById('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
       cm()
     });
   }, 5000)
@@ -148,13 +148,13 @@ function clearLog(p) {
 }
 
 function spellElement(spell) {  // creates spell element
-  document.getElementById('t1').innerHTML = document.getElementById('t1').innerHTML + '<img class="spell" src="'+spell+'.png" onclick="castSpell('+spell+')" title="Cast '+spell.toString().replace(/^\w/, c => c.toUpperCase())+'">'
+  document.getElementById('t1').innerHTML = document.getElementById('t1').innerHTML + '<img class="spell" src="images/'+spell+'.png" onclick="castSpell('+spell+')" title="Cast '+spell.toString().replace(/^\w/, c => c.toUpperCase())+'">'
 }
 
 function fromImg(img) {  // Gets image name from src, excluding the extension
   var opp, fin;
   opp = img.src
-  fin = opp.slice(opp.indexOf('alagaesia')+'alagaesia'.length+1)
+  fin = opp.slice(opp.indexOf('images')+'images'.length+1)
   fin = fin.slice(fin[0], fin.indexOf('.'))
   
   return fin;
