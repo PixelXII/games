@@ -90,7 +90,7 @@ Spell.prototype.castByMonster = function() {  // enemy casts specified spell
   let cost = 3
   if(monster.mana >= cost) {
     player.health -= this.damage
-    monster.mana -= cost
+    monster.mana -= Math.round(cost/2)
     if(monstername.includes('%20')) {
       log('monster', 'The ' + monstername.replace('%20', ' ') + ' cast ' + this.name + '!')
     } else {
@@ -120,7 +120,7 @@ Spell.prototype.cast = function() {  // casts spell
     } else {
       monster.health -= d
     }
-    player.mana -= cost/2
+    player.mana -= Math.round(cost/2)
     log('player', 'You cast ' + this.name + ".")
     setTimeout(function() {
       randomSpell().castByMonster()
