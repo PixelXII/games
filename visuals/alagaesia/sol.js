@@ -98,7 +98,7 @@ Spell.prototype.castByMonster = function() {  // enemy casts specified spell
     }
     document.getElementById('spells').style.display = 'block'
   } else {
-    log('monster', 'The ' + monstername + " does not have enough mana to cast " + this.name ".")
+    log('monster', 'The ' + monstername + " does not have enough mana to cast " + this.name + ".")
   }
 }
 
