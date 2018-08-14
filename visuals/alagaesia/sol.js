@@ -205,12 +205,12 @@ special.prototype.cb = function() {
 
 var MaHe = setInterval(function() {
   if(player.health > player.toth) {
-    player.health = Math.round(player.toth/2)
+    player.health = player.toth
   }
   if(player.mana > player.totm) {
-    player.mana = Math.round(player.totm/2)
+    player.mana = player.totm
   }
-}, 100)
+}, 5)
 
 var died = setInterval(function() {
   if(player.health <= 0) {
