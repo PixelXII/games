@@ -169,10 +169,10 @@ function cm() {  // creates monster with random stats generated from name
   monster = {
     name: monstername.replace(/^\w/, c => c.toUpperCase()),
     health: Math.ceil(alph.indexOf(monstername.charAt(0)) * alph.indexOf(monstername[Math.random()*monstername.length]))+31,
-    mana: Math.ceil(alph.indexOf(monstername.charAt(Math.round(Math.random()*player.level))+18)),
-    damage: monster.health+Math.round(Math.random()*player.level),
+    damage: Math.ceil(alph.indexOf(monstername.charAt(Math.round(Math.random()*player.level))+18)),
     exp: Math.floor(Math.random()*monstername.length/2)+Math.floor(Math.random()*15)
   }
+  monster.mana = monster.health+Math.round(Math.random()*player.level)
   if(monster.name.includes('%20')) {
     monster.name = monster.name.replace('%20', ' ')
   }
