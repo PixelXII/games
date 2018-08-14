@@ -173,6 +173,8 @@ function cm() {  // creates monster with random stats generated from name
     exp: Math.floor(Math.random()*monstername.length/2)+Math.floor(Math.random()*15)
   }
   monster.mana = monster.health+Math.round(Math.random()*player.level)
+  monster.totm = monster.mana
+  monster.toth = monster.health
   if(monster.name.includes('%20')) {
     monster.name = monster.name.replace('%20', ' ')
   }
@@ -221,9 +223,13 @@ var died = setInterval(function() {
 var regen;
 function startRegen() {  // regenerates a certain percentage of mana & health per second
   regen = setInterval(function() {
-    if(player.health != player.toth) {
+    if(player.health != player.toth && player.mana != player.totm) {
       player.health += Math.round(player.level/10*player.health)
       player.mana += Math.round(player.level/10*player.mana)
+    }
+    if(monster.health != monster.toth && monster.mana != monster.totm) {
+      monster.health += Math.round(player.level/15*monster.health)
+      monster.mana += Math.round(player.level/15*monster.health)
     }
   }, 4000)
 }
