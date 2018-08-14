@@ -61,8 +61,6 @@ var resurrect = new special("Resurrect", function() {
    document.getElementById('monster').style.display = 'block'
     document.getElementById('spells').style.display = 'block'
     document.getElementById('confirmation').style.display = 'none'
-  
-  nextBattle()
 })
   
 
