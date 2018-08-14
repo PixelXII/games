@@ -155,7 +155,7 @@ function spellElement(spell) {  // creates spell element
 function fromImg(img) {  // Gets image name from src, excluding the extension
   var opp, fin;
   opp = img.src
-  fin = opp.slice(opp.indexOf('images/')+'images/'.length+1)
+  fin = opp.slice(opp.indexOf('images')+'images'.length+1)
   fin = fin.slice(fin[0], fin.indexOf('.'))
   
   return fin;
