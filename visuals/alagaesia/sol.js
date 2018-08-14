@@ -97,7 +97,6 @@ Spell.prototype.cast = function() {  // casts spell
   if(player.mana < cost) {
     document.getElementById('playerlog').innerText = 'You don\'t have enough mana to cast ' + this.name + '.'
     clearLog('player')
-    randomSpell().castByMonster()
   } else {
     let d = this.damage
     let n = this.name
