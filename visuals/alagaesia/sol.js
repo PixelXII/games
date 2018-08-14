@@ -87,7 +87,7 @@ function randomSpell() {  // returns random spell based on player's level
 }
 
 Spell.prototype.castByMonster = function() {  // enemy casts specified spell
-  let cost = 4
+  let cost = 3
   if(monster.mana >= cost) {
     player.health -= this.damage
     monster.mana -= cost
@@ -103,7 +103,7 @@ Spell.prototype.castByMonster = function() {  // enemy casts specified spell
 }
 
 Spell.prototype.cast = function() {  // casts spell
-  let cost = 4
+  let cost = 3
   if(player.mana < cost) {
     log('player', 'You don\'t have enough mana to cast ' + this.name + '.')
     clearLog('player')
