@@ -20,15 +20,23 @@ var player = {
     player.mana = player.totm
   },
   die: function() {
-    document.getElementById('conftext').innerHTML = "You died! <br> You can cast Resurrect for " + Math.round(player.totm/2) + " mana."
-    document.getElementById('yes').addEventListener('click', function() {
-      resurrect.cb()
-    });
-    document.getElementById('no').addEventListener('click', function() {
-      if(confirm('Are you sure you don\'t want to spend ' + Math.round(player.totm/2) + ' mana to resurrect?')) {
+    if(player.mana >= 15) {
+      document.getElementById('conftext').innerHTML = "You died! <br> You can cast Resurrect for " + Math.round(player.totm/2) + " mana."
+      document.getElementById('yes').addEventListener('click', function() {
+        resurrect.cb()
+      });
+      document.getElementById('no').addEventListener('click', function() {
+        if(confirm('Are you sure you don\'t want to spend ' + Math.round(player.totm/2) + ' mana to resurrect?')) {
+          location.reload()
+        }
+      });
+    } else {
+      document.getElementById('yes').innerHTML = "! &nbspO K"
+      document.getElementById('yes').addEventListener('click', function() {
         location.reload()
-      }
-    });
+      })
+      document.getElementById('conftext').innerText = "You died! Resurrect costs 15 mana and you only have " + player.mana + "."
+    }
     document.getElementById('playerlog').innerHTML = ""
     document.getElementById('monsterlog').innerHTML = ""
     document.getElementById('monster').style.display = 'none'
