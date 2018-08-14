@@ -223,13 +223,18 @@ var died = setInterval(function() {
 var regen;
 function startRegen() {  // regenerates a certain percentage of mana & health per second
   regen = setInterval(function() {
-    if(player.health != player.toth && player.mana != player.totm) {
+    if(player.health != player.toth) {
       player.health += Math.round(player.level/10*player.health)
+    }
+    if(player.mana != player.totm) {
       player.mana += Math.round(player.level/10*player.mana)
     }
-    if(monster.health != monster.toth && monster.mana != monster.totm) {
+    if(monster.health != monster.toth) {
       monster.health += Math.round(player.level/15*monster.health)
+    }
+    if(monster.mana != monster.totm) {
       monster.mana += Math.round(player.level/15*monster.health)
+    }
     }
   }, 8000)
 }
