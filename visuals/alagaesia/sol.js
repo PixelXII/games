@@ -4,7 +4,6 @@ var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'
 
 // Player
 
-
 var player = {
   level: 1,
   health: 30,
@@ -80,7 +79,9 @@ function randomSpell() {  // returns random spell based on player's level
 }
 
 Spell.prototype.castByMonster = function() {  // enemy casts specified spell
+  let cost = Math.round(this.damage*0.75)
   player.health -= this.damage
+  monster.mana -= cost
   if(monstername.includes('%20')) {
     document.getElementById('monsterlog').innerText = 'The ' + monstername.replace('%20', ' ') + ' used ' + this.name + '!'
     clearLog('monster')
@@ -168,6 +169,7 @@ function cm() {  // creates monster with random stats generated from name
   monster = {
     name: monstername.replace(/^\w/, c => c.toUpperCase()),
     health: Math.ceil(alph.indexOf(monstername.charAt(0)) * alph.indexOf(monstername[Math.random()*monstername.length]))+31,
+    mana: Math.ceil(alph.indexOf(monstername.charAt(Math.round(Math.random()*player.level))+22,
     damage: Math.floor((Math.ceil(alph.indexOf(Math.floor(monstername.length/2)))+16)/2),
     exp: Math.floor(Math.random()*monstername.length/2)+Math.floor(Math.random()*15)
   }
@@ -215,6 +217,14 @@ var died = setInterval(function() {
     player.die()
   }
 }, 10)
+
+var regen;
+function startRegen() {  // regenerates a certain percentage of mana & health per second
+  regen = setInterval(function() {
+    player.health += Math.round(player.level/6*player.health)
+    player.mana += Math.round(player.level/6*player.mana)
+  }, 1000)
+}
 
 
 // Getting the numbers to the document (using document.write()!!)
