@@ -122,7 +122,6 @@ Spell.prototype.cast = function() {  // casts spell
     }
     player.mana -= cost/2
     log('player', 'You cast ' + this.name + ".")
-    clearLog('player')
     setTimeout(function() {
       randomSpell().castByMonster()
     }, Math.round(Math.random()*5600))
@@ -137,7 +136,7 @@ function log(targ, cont) {
   if(targ == 'monster') {
     document.getElementById('monsterlog').innerHTML = cont
   } else if(targ == 'player') {
-    document.getElementById('monsterlog').innerHTML = cont
+    document.getElementById('playerlog').innerHTML = cont
   }
   clearLog(targ)
 }
