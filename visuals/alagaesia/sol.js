@@ -101,7 +101,7 @@ Spell.prototype.cast = function() {  // casts spell
   } else {
     let d = this.damage
     let n = this.name
-    player.mana -= Math.round(this.damage/2)
+    player.mana = player.mana - Math.round(this.damage/2)
     if(monster.health <= 0) {
       player.exp = player.exp + monster.exp
       if(player.exp >= Math.ceil(8.7*player.level)) {
@@ -223,16 +223,16 @@ var regen;
 function startRegen() {  // regenerates a certain percentage of mana & health per second
   regen = setInterval(function() {
     if(player.health != player.toth) {
-      player.health += Math.round(player.level/10*player.health)
+      player.health += Math.round(player.level/10*player.toth)
     }
     if(player.mana != player.totm) {
-      player.mana += Math.round(player.level/10*player.mana)
+      player.mana += Math.round(player.level/10*player.totm)
     }
     if(monster.health != monster.toth) {
-      monster.health += Math.round(player.level/15*monster.health)
+      monster.health += Math.round(player.level/15*monster.toth)
     }
     if(monster.mana != monster.totm) {
-      monster.mana += Math.round(player.level/15*monster.health)
+      monster.mana += Math.round(player.level/15*monster.totm)
     }
   }, 8000)
 }
