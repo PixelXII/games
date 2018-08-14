@@ -83,10 +83,10 @@ Spell.prototype.castByMonster = function() {  // enemy casts specified spell
   player.health -= this.damage
   monster.mana -= cost
   if(monstername.includes('%20')) {
-    document.getElementById('monsterlog').innerText = 'The ' + monstername.replace('%20', ' ') + ' used ' + this.name + '!'
+    document.getElementById('monsterlog').innerText = 'The ' + monstername.replace('%20', ' ') + ' cast ' + this.name + '!'
     clearLog('monster')
   } else {
-    document.getElementById('monsterlog').innerText = 'The ' + monstername + ' used ' + this.name + '!'
+    document.getElementById('monsterlog').innerText = 'The ' + monstername + ' cast ' + this.name + '!'
     clearLog('monster')
   }
   document.getElementById('spells').style.display = 'block'
@@ -112,7 +112,7 @@ Spell.prototype.cast = function() {  // casts spell
       monster.health -= d
     }
     player.mana -= cost
-    document.getElementById('playerlog').innerText = 'You cast ' + this.name + ' for ' + Math.round(this.damage/2) + ' mana';
+    document.getElementById('playerlog').innerText = 'You cast ' + this.name + "."
     clearLog('player')
     setTimeout(function() {
       randomSpell().castByMonster()
