@@ -110,7 +110,8 @@ Spell.prototype.cast = function() {  // casts spell
       monster.health -= d
     }
     player.mana -= cost
-    document.getElementById('playerlog').innerText = 'You cast ' + this.name + ' and used ' + Math.round(this.damage/2) + ' mana';
+    document.getElementById('playerlog').innerText = 'You cast ' + this.name + ' for ' + Math.round(this.damage/2) + ' mana';
+    clearLog('player')
     setTimeout(function() {
       randomSpell().castByMonster()
     }, Math.round(Math.random()*5600))
