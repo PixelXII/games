@@ -136,6 +136,7 @@ Spell.prototype.cast = function() {  // casts spell
 // Other functions
 
 function displayConf(conftext, yes, no) {
+  id('confirmation').style.display = 'block'
   id('monsterdata').style.display = 'none'
   id('playerdata').style.display = 'none'
   id('spells').style.display = 'none'
