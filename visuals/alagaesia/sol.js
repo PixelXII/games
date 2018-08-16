@@ -180,6 +180,8 @@ function nextBattle(tim) {
     document.getElementById('no').style.display = 'none'
     document.getElementById('spells').style.display = 'none'
     document.getElementById('monster').style.display = 'none'
+    id('monsterdata').style.display = 'none'
+    id('playerdata').style.display = 'none'
     document.getElementById('yes').addEventListener('click', function() {
       document.getElementById('confirmation').style.display = 'none'
       document.getElementById('no').style.display = 'block'
@@ -198,6 +200,8 @@ function nextBattle(tim) {
       document.getElementById('no').style.display = 'none'
       document.getElementById('spells').style.display = 'none'
       document.getElementById('monster').style.display = 'none'
+      id("monsterdata").style.display = 'none'
+      id("playerdata").style.display = 'none'
       document.getElementById('conftext').innerHTML = 'Are you ready for the next battle?'
       document.getElementById('yes').addEventListener('click', function() {
         document.getElementById('confirmation').style.display = 'none'
@@ -290,9 +294,9 @@ var died = setInterval(function() {
 
 var monsterdied = setInterval(function() {
   if(monster.health <= 0) {
-    nextBattle()
+    nextBattle(false)
   }
-}, 10)
+}, 5)
 
 var regen;
 function startRegen() {  // regenerates a certain percentage of mana & health per second
