@@ -37,7 +37,7 @@ var player = {
       })
       displayConf("You died! <br> <br> Resurrect costs 15 mana and you only have " + player.mana + ".", "O K", function() {
         location.reload()
-      } null)
+      }, null)
       setTimeout(function() {
         location.reload()
       }, 5000)
