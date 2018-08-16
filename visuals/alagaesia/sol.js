@@ -106,6 +106,8 @@ function nextBattle() {
       displayConf('You killed the ' + monster.name + "! <br> <br> You gained " + monster.exp + " XP from it", 'O K', function() {
         id('confirmation').style.display = 'none'
         id('no').style.display = 'block'
+        id('monsterdata').style.display = 'block'
+        id('playerdata').style.display = 'block'
         id('spells').style.display = 'block'
         id('monster').style.display = 'block'
         id('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
