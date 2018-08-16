@@ -320,8 +320,8 @@ startRegen()
 // Getting the numbers to the document (using document.write()!!)
 
 
-var playerhealth = document.getElementById('playerlabel')
-var monsterhealth = document.getElementById('monsterlabel')
+var playerhealth = document.getElementById('playerhealth')
+var monsterhealth = document.getElementById('monsterhealth')
 var displayhealth, leveledspells;
 function dhp() {  // d isplay  h it  p oints
   displayHealth = setInterval(function() {
