@@ -113,6 +113,7 @@ function nextBattle() {
         id('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
         cm()
       }, null)
+      player.exp += monster.exp
     }, 5000)
 }
 
