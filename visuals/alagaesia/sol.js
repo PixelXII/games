@@ -246,7 +246,7 @@ function cm() {  // creates monster with random stats generated from name
   if(monster.name.includes('%20')) {
     monster.name = monster.name.replace('%20', ' ')
   }
-  document.getElementById('mlabel').innerText = monster.name
+  document.getElementById('mlabel').innerText = monster.name + ":"
   document.getElementById('mname').innerText = monster.name
 }
 
