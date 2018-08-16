@@ -90,34 +90,7 @@ function id(targ) {
 }
 
 
-function nextBattle(tim) {
-  if(tim === false) {
-    id('confirmation').style.display = 'block'
-    id('no').style.display = 'none'
-    clearLog(false)
-    id('spells').style.display = 'none'
-    id('monsterdata').style.display = 'none'
-    id('playerdata').style.display = 'none'
-    var old = id('yes')
-    var newm = old.cloneNode(true);
-    old.parentNode.replaceChild(newm, old);
-    id('yes').addEventListener('click', function() {
-     id('confirmation').style.display = 'none'
-      id('no').style.display = 'block'
-      id('spells').style.display = 'block'
-      id('monster').style.display = 'block'
-      id('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
-    });
-    displayConf('You killed the ' + monster.name + "! <br> <br> You gained " + monster.exp + ' XP from it.', 'O K', function() {
-        id('confirmation').style.display = 'none'
-        id('no').style.display = 'block'
-        id('spells').style.display = 'block'
-        id('monster').style.display = 'block'
-        id('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
-        cm()
-    }, null)
-    cm()
-  } else {
+function nextBattle() {
     setTimeout(function() {
       id('confirmation').style.display = 'block'
       id('no').style.display = 'none'
@@ -139,7 +112,6 @@ function nextBattle(tim) {
         cm()
       }, null)
     }, 5000)
-  }
 }
 
 function clearLog(p) {
