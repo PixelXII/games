@@ -175,26 +175,22 @@ function id(targ) {
 
 function nextBattle(tim) {
   if(tim === false) {
-     /* document.getElementById('confirmation').style.display = 'block'
+    document.getElementById('confirmation').style.display = 'block'
     document.getElementById('no').style.display = 'none'
     document.getElementById('spells').style.display = 'none'
     document.getElementById('monster').style.display = 'none'
-    document.getElementById('conftext').innerHTML = 'Are you ready for the next battle?'
     document.getElementById('yes').addEventListener('click', function() {
       document.getElementById('confirmation').style.display = 'none'
       document.getElementById('no').style.display = 'block'
       document.getElementById('spells').style.display = 'block'
       document.getElementById('monster').style.display = 'block'
-      document.getElementById('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png' */
+      document.getElementById('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
+    });
     displayConf('You killed the ' + monster.name + "! <br> <br> You gained " + monster.exp + ' XP from it.', 'O K', null)
     var old = id('yes')
     var newm = old.cloneNode(true);
     old.parentNode.replaceChild(newm, old);
-    id('yes').addEventListener('click', function() {
-      nextBattle() 
-    })
-      cm()
-    // });
+    cm()
   } else {
     setTimeout(function() {
       document.getElementById('confirmation').style.display = 'block'
