@@ -41,7 +41,7 @@ Weapon.prototype.use = function() {
 
 Weapon.prototype.monsterUse = function() {
   player.health -= this.damage
-  log('monster', "The " + monster.name + " hits you with the " + this.name "!")
+  log('monster', "The " + monster.name + " hits you with the " + this.name + "!")
 }
   
   
