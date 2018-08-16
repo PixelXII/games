@@ -62,4 +62,4 @@ player.inventory = [ironSword]
 
 // testing
 
-console.log(player.inventory)
+
