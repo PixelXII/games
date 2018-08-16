@@ -146,7 +146,9 @@ function displayConf(conftext, yes, ycallback, no, ncallback) {
     id('no').style.display = 'none'
   }
   id('yes').innerHTML = '!&nbsp&nbsp'+yes
-  id('yes').removeEventListener('click', nextBattle)
+  var old = document.getElementById("yes");
+  var newm = old.cloneNode(true);
+  old.parentNode.replaceChild(newm, old);
   id('yes').addEventListener('click', function() {
     ycallback()
   });
@@ -281,6 +283,17 @@ var died = setInterval(function() {
     player.die()
   }
 }, 10)
+
+var monsterdied = setInterval(function() {
+  if(monster.health <= 0) {
+    displayConf('You killed the ' + monster.name + "! <br> <br> You gained " + monster.exp + ' XP from it.', 'O K', null)
+    var old = id('yes')
+    var newm = old.cloneNode(true);
+    old.parentNode.replaceChild(newm, old);
+    id('yes').addEventListener('click', function() {
+      nextBattle() 
+    }
+  }
 
 var regen;
 function startRegen() {  // regenerates a certain percentage of mana & health per second
