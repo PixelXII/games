@@ -37,7 +37,7 @@ var player = {
       document.getElementById('yes').addEventListener('click', function() {
         location.reload()
       })
-      document.getElementById('conftext').innerText = "Resurrect costs 15 mana and you only have " + player.mana + "."
+      document.getElementById('conftext').innerText = "You died! <br> Resurrect costs 15 mana and you only have " + player.mana + "."
       setTimeout(function() {
         location.reload()
       }, 5000)
