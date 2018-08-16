@@ -25,19 +25,19 @@ var player = {
     document.getElementById('playerdata').style.display = 'none'
     document.getElementById('monsterdata').style.display = 'none'
     if(player.mana >= 15) {
-      document.getElementById('conftext').innerHTML = "You died! <br> You can cast Resurrect for " + Math.round(player.totm/2) + " mana."
-      document.getElementById('yes').addEventListener('click', function() {
+      displayConf("You died! <br> You can cast Resurrect for " + Math.round(player.totm/2) + " mana.", "O K", function() {
         resurrect.cb()
-      });
-      document.getElementById('no').addEventListener('click', function() {
+      }, "N O", function() {
         location.reload()
-      });
+      })
     } else {
       document.getElementById('yes').innerHTML = "! &nbspO K"
       document.getElementById('yes').addEventListener('click', function() {
         location.reload()
       })
-      document.getElementById('conftext').innerText = "You died! <br> Resurrect costs 15 mana and you only have " + player.mana + "."
+      displayConf("You died! <br> <br> Resurrect costs 15 mana and you only have " + player.mana + ".", "O K", function() {
+        location.reload()
+      } null)
       setTimeout(function() {
         location.reload()
       }, 5000)
