@@ -98,6 +98,9 @@ function nextBattle(tim) {
     id('spells').style.display = 'none'
     id('monsterdata').style.display = 'none'
     id('playerdata').style.display = 'none'
+    var old = id('yes')
+    var newm = old.cloneNode(true);
+    old.parentNode.replaceChild(newm, old);
     id('yes').addEventListener('click', function() {
      id('confirmation').style.display = 'none'
       id('no').style.display = 'block'
@@ -106,9 +109,6 @@ function nextBattle(tim) {
       id('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
     });
     displayConf('You killed the ' + monster.name + "! <br> <br> You gained " + monster.exp + ' XP from it.', 'O K', null)
-    var old = id('yes')
-    var newm = old.cloneNode(true);
-    old.parentNode.replaceChild(newm, old);
     cm()
   } else {
     setTimeout(function() {
@@ -120,6 +120,9 @@ function nextBattle(tim) {
       id('monsterlog').style.display = 'none'
       id("monsterdata").style.display = 'none'
       id("playerdata").style.display = 'none'
+      var old = id('yes')
+      var newm = old.cloneNode(true);
+      old.parentNode.replaceChild(newm, old);
       displayConf('You killed the ' + monster.name + "! <br> <br> You gained " + monster.exp + " XP from it", 'O K', null) 
       id('yes').addEventListener('click', function() {
         id('confirmation').style.display = 'none'
