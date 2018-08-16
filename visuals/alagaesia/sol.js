@@ -292,7 +292,7 @@ var monsterdied = setInterval(function() {
     old.parentNode.replaceChild(newm, old);
     id('yes').addEventListener('click', function() {
       nextBattle() 
-    }
+    })
   }
 
 var regen;
