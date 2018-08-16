@@ -159,24 +159,6 @@ function cm() {  // creates monster with random stats generated from name
 }
 
 cm()
-  
-  
-// Constructors
-  
-  
-function Spell(name, damage) {  // Spell constructor function
-  this.name = name
-  this.damage = damage
-}
-
-function special(name, callback) {
-  this.name = name
-  this.callback = callback
-}
-
-special.prototype.cb = function() {
-  this.callback()
-}
 
 
 // Setting intervals
