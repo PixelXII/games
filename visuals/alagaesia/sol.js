@@ -176,18 +176,18 @@ function id(targ) {
 
 function nextBattle(tim) {
   if(tim === false) {
-    document.getElementById('confirmation').style.display = 'block'
-    document.getElementById('no').style.display = 'none'
-    document.getElementById('spells').style.display = 'none'
-    document.getElementById('monster').style.display = 'none'
+    id('confirmation').style.display = 'block'
+    id('no').style.display = 'none'
+    id('spells').style.display = 'none'
+    id('monster').style.display = 'none'
     id('monsterdata').style.display = 'none'
     id('playerdata').style.display = 'none'
-    document.getElementById('yes').addEventListener('click', function() {
-      document.getElementById('confirmation').style.display = 'none'
-      document.getElementById('no').style.display = 'block'
-      document.getElementById('spells').style.display = 'block'
-      document.getElementById('monster').style.display = 'block'
-      document.getElementById('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
+    id('yes').addEventListener('click', function() {
+     id('confirmation').style.display = 'none'
+      id('no').style.display = 'block'
+      id('spells').style.display = 'block'
+      id('monster').style.display = 'block'
+      id('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
     });
     displayConf('You killed the ' + monster.name + "! <br> <br> You gained " + monster.exp + ' XP from it.', 'O K', null)
     var old = id('yes')
@@ -196,19 +196,21 @@ function nextBattle(tim) {
     cm()
   } else {
     setTimeout(function() {
-      document.getElementById('confirmation').style.display = 'block'
-      document.getElementById('no').style.display = 'none'
-      document.getElementById('spells').style.display = 'none'
-      document.getElementById('monster').style.display = 'none'
+      id('confirmation').style.display = 'block'
+      id('no').style.display = 'none'
+      id('spells').style.display = 'none'
+      id('monster').style.display = 'none'
+      id('playerlog').style.display = 'none'
+      id('monsterlog').style.display = 'none'
       id("monsterdata").style.display = 'none'
       id("playerdata").style.display = 'none'
-      document.getElementById('conftext').innerHTML = 'Are you ready for the next battle?'
-      document.getElementById('yes').addEventListener('click', function() {
-        document.getElementById('confirmation').style.display = 'none'
-        document.getElementById('no').style.display = 'block'
-        document.getElementById('spells').style.display = 'block'
-        document.getElementById('monster').style.display = 'block'
-        document.getElementById('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
+      displayConf('You killed the ' + monster.name + "! <br> <br> You gained " + monster.exp + " XP from it", 'O K', null) 
+      id('yes').addEventListener('click', function() {
+        id('confirmation').style.display = 'none'
+        id('no').style.display = 'block'
+        id('spells').style.display = 'block'
+        id('monster').style.display = 'block'
+        id('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
         cm()
       });
     }, 5000)
