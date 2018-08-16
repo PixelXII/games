@@ -62,8 +62,4 @@ player.inventory = [ironSword]
 
 // testing
 
-console.log(monster.inventory)
-
-console.log(randomWeapon())
-
 console.log(player.inventory)
