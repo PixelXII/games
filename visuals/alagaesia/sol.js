@@ -294,7 +294,7 @@ var monsterdied = setInterval(function() {
       nextBattle() 
     })
   }
-}
+}, 10)
 
 var regen;
 function startRegen() {  // regenerates a certain percentage of mana & health per second
