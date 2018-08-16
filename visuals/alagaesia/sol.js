@@ -215,6 +215,10 @@ var died = setInterval(function() {
 
 var monsterdied = setInterval(function() {
   if(monster.health <= 0) {
+    monster.health = 1
+    clearInterval(regen)
+    id('spells').style.display = 'none'
+    clearLog(false)
     nextBattle(false)
   }
 }, 5)
