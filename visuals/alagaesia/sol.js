@@ -181,6 +181,7 @@ var died = setInterval(function() {
 var monsterdied = setInterval(function() {
   if(monster.health <= 0) {
     monster.health = 1
+    id('monsterhealth').innerHTML = '0/'+monster.mana
     clearInterval(regen)
     id('spells').style.display = 'none'
     clearLog(false)
@@ -232,7 +233,7 @@ function dhp() {  // d isplay  h it  p oints
     
     playerhealth.innerText = player.health + "/" + player.mana
     monsterhealth.innerText = monster.health + "/" + monster.mana
-  }, 5)
+  }, 10)
 }
 
 dhp()
