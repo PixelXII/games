@@ -30,16 +30,17 @@ var player = {
         resurrect.cb()
       });
       document.getElementById('no').addEventListener('click', function() {
-        if(confirm('Are you sure you don\'t want to spend ' + Math.round(player.totm/2) + ' mana to resurrect?')) {
-          location.reload()
-        }
+        location.reload()
       });
     } else {
       document.getElementById('yes').innerHTML = "! &nbspO K"
       document.getElementById('yes').addEventListener('click', function() {
         location.reload()
       })
-      document.getElementById('conftext').innerText = "You died! Resurrect costs 15 mana and you only have " + player.mana + "."
+      document.getElementById('conftext').innerText = "Resurrect costs 15 mana and you only have " + player.mana + "."
+      setTimeout(function() {
+        location.reload()
+      }, 5000)
     }
     document.getElementById('playerlog').innerHTML = ""
     document.getElementById('monsterlog').innerHTML = ""
@@ -245,7 +246,7 @@ function cm() {  // creates monster with random stats generated from name
   if(monster.name.includes('%20')) {
     monster.name = monster.name.replace('%20', ' ')
   }
-  document.getElementById('mlabel').innerText = monster.name + "'s Health/Mana: "
+  document.getElementById('mlabel').innerText = monster.name
   document.getElementById('mname').innerText = monster.name
 }
 
