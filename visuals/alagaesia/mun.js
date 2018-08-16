@@ -158,6 +158,9 @@ function randomWeapon() {
 // Setting Inventories
 
 monster.inventory = randomWeapon()
+if(monster.inventory === undefined) {
+    monster.inventory = ironAxe
+}
 
 player.inventory = [ironSword]
 
