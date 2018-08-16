@@ -72,9 +72,11 @@ var hurricane = new Spell("Hurricane", 21)
 var resurrect = new special("Resurrect", function() {
   player.health = player.toth
   player.mana = Math.round(player.totm/2)
-   document.getElementById('monster').style.display = 'block'
-    document.getElementById('spells').style.display = 'block'
-    document.getElementById('confirmation').style.display = 'none'
+  id('monster').style.display = 'block'
+  id('spells').style.display = 'block'
+  id('playerdata').style.display = 'block'
+  id('monsterdata').style.display = 'block'
+  id('confirmation').style.display = 'none'
 })
   
 
