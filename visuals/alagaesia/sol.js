@@ -178,8 +178,7 @@ function nextBattle(tim) {
   if(tim === false) {
     id('confirmation').style.display = 'block'
     id('no').style.display = 'none'
-    id('playerlog').innerHTML = ""
-    id('monsterlog').innerHTML = ""
+    clearLog(false)
     id('spells').style.display = 'none'
     id('monsterdata').style.display = 'none'
     id('playerdata').style.display = 'none'
@@ -199,8 +198,7 @@ function nextBattle(tim) {
     setTimeout(function() {
       id('confirmation').style.display = 'block'
       id('no').style.display = 'none'
-      id('playerlog').innerHTML = ""
-      id('monsterlog').innerHTML = ""
+      clearLog(false)
       id('spells').style.display = 'none'
       id('playerlog').style.display = 'none'
       id('monsterlog').style.display = 'none'
@@ -224,6 +222,9 @@ function clearLog(p) {
     setTimeout(function() { document.getElementById('playerlog').innerHTML = '' }, 3000)
   } else if(p === 'monster') {
     setTimeout(function() { document.getElementById('monsterlog').innerHTML = '' }, 3000)
+  } else if(p === false) {
+    id('playerlog').innerHTML = ''
+    id('monsterlog').innerHTML = ''
   }
 }
 
