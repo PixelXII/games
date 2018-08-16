@@ -13,7 +13,7 @@ var player = {
   exp: 0,
   levelUp: function() {
     player.level++;
-    displayConf('You Leveled Up! <br> You\'re level ' + this.level + ' now!', 'O K', function() { nextBattle() }, 'disabled', null)
+    displayConf('You Leveled Up! <br> You\'re level ' + this.level + ' now!', 'O K', function() { nextBattle(false) }, 'disabled', null)
     clearInterval(displayhealth)
     player.toth = player.toth + Math.floor(0.20*player.toth)
     player.totm = player.totm + Math.floor(0.16*player.totm)
@@ -171,9 +171,9 @@ function id(targ) {
 }
 
 
-function nextBattle() {
-  setTimeout(function() {
-    document.getElementById('confirmation').style.display = 'block'
+function nextBattle(tim) {
+  if(tim === false) {
+     document.getElementById('confirmation').style.display = 'block'
     document.getElementById('no').style.display = 'none'
     document.getElementById('spells').style.display = 'none'
     document.getElementById('monster').style.display = 'none'
@@ -186,7 +186,23 @@ function nextBattle() {
       document.getElementById('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
       cm()
     });
-  }, 5000)
+  } else {
+    setTimeout(function() {
+      document.getElementById('confirmation').style.display = 'block'
+      document.getElementById('no').style.display = 'none'
+      document.getElementById('spells').style.display = 'none'
+      document.getElementById('monster').style.display = 'none'
+      document.getElementById('conftext').innerHTML = 'Are you ready for the next battle?'
+      document.getElementById('yes').addEventListener('click', function() {
+        document.getElementById('confirmation').style.display = 'none'
+        document.getElementById('no').style.display = 'block'
+        document.getElementById('spells').style.display = 'block'
+        document.getElementById('monster').style.display = 'block'
+        document.getElementById('opp').src = 'images/'+enemies[Math.floor(Math.random()*enemies.length)].toLowerCase()+'.png'
+        cm()
+      });
+    }, 5000)
+  }
 }
 
 function clearLog(p) {
