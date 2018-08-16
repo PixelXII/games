@@ -135,7 +135,7 @@ Spell.prototype.cast = function() {  // casts spell
 
 // Other functions
 
-function displayConf(conftext, yes, yCB, no, nCB) {
+function displayConf(conftext, yes, ycallback, no, ncallback) {
   id('confirmation').style.display = 'block'
   id('monsterdata').style.display = 'none'
   id('playerdata').style.display = 'none'
@@ -146,13 +146,13 @@ function displayConf(conftext, yes, yCB, no, nCB) {
     id('no').style.display = 'none'
   }
   id('yes').innerHTML = '!&nbsp&nbsp'+yes
-  
+  id('yes').removeEventListener('click', nextBattle)
   id('yes').addEventListener('click', function() {
-    yCB()
+    ycallback()
   });
-  if(nCB != null) {
+  if(ncallback != null) {
     id('no').addEventListener('click', function() {
-      nCB()
+      ncallback()
     });
   }
 }
