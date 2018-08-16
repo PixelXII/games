@@ -13,7 +13,7 @@ var player = {
   exp: 0,
   levelUp: function() {
     player.level++;
-    displayConf('You Leveled Up! <br> You\'re level ' + this.level + ' now!', 'O K', 'disabled')
+    displayConf('You Leveled Up! <br> You\'re level ' + this.level + ' now!', 'O K', nextBattle(), 'disabled', null)
     clearInterval(displayhealth)
     player.toth = player.toth + Math.floor(0.20*player.toth)
     player.totm = player.totm + Math.floor(0.16*player.totm)
@@ -135,7 +135,7 @@ Spell.prototype.cast = function() {  // casts spell
 
 // Other functions
 
-function displayConf(conftext, yes, no) {
+function displayConf(conftext, yes, yCB, no, nCB) {
   id('confirmation').style.display = 'block'
   id('monsterdata').style.display = 'none'
   id('playerdata').style.display = 'none'
@@ -146,6 +146,15 @@ function displayConf(conftext, yes, no) {
     id('no').style.display = 'none'
   }
   id('yes').innerHTML = '!&nbsp&nbsp'+yes
+  
+  id('yes').addEventListener('click', function() {
+    yCB()
+  });
+  if(nCB != null) {
+    id('no').addEventListener('click', function() {
+      nCB()
+    });
+  }
 }
 
 function log(targ, cont) {
