@@ -10,14 +10,17 @@
 
 .largetext {
   font-size:36px;
+  cursor:default;
 }
 
 .mediumtext {
   font-size:24px;
+  cursor:default;
 }
 
 .smallertext {
   font-size:16px;
+  cursor:default;
 }
 
 /* Main elements */
