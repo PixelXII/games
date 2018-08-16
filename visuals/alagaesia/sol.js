@@ -13,6 +13,7 @@ var player = {
   exp: 0,
   levelUp: function() {
     player.level++;
+    displayConf('You Leveled Up! <br> You\'re level ' + this.level + ' now!', 'O K', 'disabled')
     clearInterval(displayhealth)
     player.toth = player.toth + Math.floor(0.20*player.toth)
     player.totm = player.totm + Math.floor(0.16*player.totm)
@@ -20,6 +21,9 @@ var player = {
     player.mana = player.totm
   },
   die: function() {
+    clearInterval(regen)
+    document.getElementById('playerdata').style.display = 'none'
+    document.getElementById('monsterdata').style.display = 'none'
     if(player.mana >= 15) {
       document.getElementById('conftext').innerHTML = "You died! <br> You can cast Resurrect for " + Math.round(player.totm/2) + " mana."
       document.getElementById('yes').addEventListener('click', function() {
@@ -131,6 +135,17 @@ Spell.prototype.cast = function() {  // casts spell
 
 // Other functions
 
+function displayConf(conftext, yes, no) {
+  id('monsterdata').style.display = 'none'
+  id('playerdata').style.display = 'none'
+  id('spells').style.display = 'none'
+  id('monster').style.display = 'none'
+  id('conftext').innerHTML = conftext
+  if(no === 'disabled') {
+    id('no').style.display = 'none'
+  }
+  id('yes').innerHTML = '!&nbsp&nbsp'+yes
+}
 
 function log(targ, cont) {
   if(targ == 'monster') {
@@ -139,6 +154,10 @@ function log(targ, cont) {
     document.getElementById('playerlog').innerHTML = cont
   }
   clearLog(targ)
+}
+
+function id(targ) {
+  return document.getElementById(targ)
 }
 
 
