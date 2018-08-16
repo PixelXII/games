@@ -178,8 +178,9 @@ function nextBattle(tim) {
   if(tim === false) {
     id('confirmation').style.display = 'block'
     id('no').style.display = 'none'
+    id('playerlog').innerHTML = ""
+    id('monsterlog').innerHTML = ""
     id('spells').style.display = 'none'
-    id('monster').style.display = 'none'
     id('monsterdata').style.display = 'none'
     id('playerdata').style.display = 'none'
     id('yes').addEventListener('click', function() {
@@ -198,8 +199,9 @@ function nextBattle(tim) {
     setTimeout(function() {
       id('confirmation').style.display = 'block'
       id('no').style.display = 'none'
+      id('playerlog').innerHTML = ""
+      id('monsterlog').innerHTML = ""
       id('spells').style.display = 'none'
-      id('monster').style.display = 'none'
       id('playerlog').style.display = 'none'
       id('monsterlog').style.display = 'none'
       id("monsterdata").style.display = 'none'
