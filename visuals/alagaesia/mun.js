@@ -13,6 +13,7 @@ function Weapon(type, name, damage) {
 }
 
 // declaring weapons
+
 var sword = 'sword'
 var mace = 'mace'
 var axe = 'axe'
@@ -33,9 +34,17 @@ var orichalcumSpear = new Weapon(spear, 'Orichalcum Spear', 10)
 
 var weapons = [ironSword, steelSword, adamantineSword, ironMace, steelMace, ebonyMace, woodAxe, ironAxe, steelAxe, ironSpear, steelSpear, orichalcumSpear]
 
-player.inventory = [ironSword]
+Weapon.prototype.use = function() {
+  monster.health -= this.damage
+  log('player', "You use the " + this.name + " against the " + monster.name + "!")
+}
 
-
+Weapon.prototype.monsterUse = function() {
+  player.health -= this.damage
+  log('monster', "The " + monster.name + " hits you with the " + this.name "!")
+}
+  
+  
 // functions
 
 function randomWeapon() {
@@ -43,9 +52,11 @@ function randomWeapon() {
 }
 
 
-// Monster's inventory
+// Setting Inventories
 
-monster.inventory = [randomWeapon()]
+monster.inventory = randomWeapon()
+
+player.inventory = [ironSword]
 
 
 
