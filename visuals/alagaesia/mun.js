@@ -133,6 +133,20 @@ Spell.prototype.cast = function() {  // casts spell
   }
 }
 
+function Spell(name, damage) {  // Spell constructor function
+  this.name = name
+  this.damage = damage
+}
+
+function special(name, callback) {
+  this.name = name
+  this.callback = callback
+}
+
+special.prototype.cb = function() {
+  this.callback()
+}
+
   
 // functions
 
