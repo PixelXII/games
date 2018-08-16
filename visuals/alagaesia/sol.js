@@ -114,6 +114,63 @@ function nextBattle() {
         cm()
       }, null)
       player.exp += monster.exp
+      if(player.exp >= 30) {
+        player.levelUp()
+      } else if(player.exp >= 60) {
+        player.levelUp()
+      } else if(player.exp >= 90) {
+        player.levelUp()
+      } else if(player.exp >= 120) {
+        player.levelUp()
+      } else if(player.exp >= 150) {
+        player.levelUp()
+      } else if(player.exp >= 180) {
+        player.levelUp()
+      } else if(player.exp >= 220) {
+        player.levelUp()
+      } else if(player.exp >= 250) {
+        player.levelUp()
+      } else if(player.exp >= 280) {
+        player.levelUp()
+      } else if(player.exp >= 320) {
+        player.levelUp()
+      } else if(player.exp >= 350) {
+        player.levelUp()
+      } else if(player.exp >= 380) {
+        player.levelUp()
+      } else if(player.exp >= 400) {
+        player.levelUp()
+      } else if(player.exp >= 450) {
+        player.levelUp()
+      } else if(player.exp >= 480) {
+        player.levelUp()
+      } else if(player.exp >= 520) {
+        player.levelUp()
+      } else if(player.exp >= 550) {
+        player.levelUp()
+      } else if(player.exp >= 600) {
+        player.levelUp()
+      } else if(player.exp >= 625) {
+        player.levelUp()
+      } else if(player.exp >= 700) {
+        player.levelUp()
+      } else if(player.exp >= 775) {
+        player.levelUp()
+      } else if(player.exp >= 800) {
+        player.levelUp()
+      } else if(player.exp >= 850) {
+        player.levelUp()
+      } else if(player.exp >= 900) {
+        player.levelUp()
+      } else if(player.exp >= 1000) {
+        id('playerlog').style.fontSize = '96'
+        id('monsterlog').style.display = 'none'
+        id('monsterdata').style.display = 'none'
+        id('playerdata').style.display = 'none'
+        id('spells').style.dislplay = 'none'
+        id('monster').style.display = 'none'
+        displayConf('that\'s what i call dedication', 'RELOAD', function() { location.reload() }, null)
+      }
     }, 5000)
 }
 
