@@ -23,6 +23,7 @@ function firstLoad() {
 function enter() {
   id('startup').style.display = 'none'
   id('main').style.display = 'block'
+  id('playerlabel').innerHTML = playername + ':&nbsp';
 }
 
 firstLoad()
