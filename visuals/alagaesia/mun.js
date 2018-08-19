@@ -164,12 +164,14 @@ if(monster.inventory === undefined) {
 
 player.inventory = [ironSword]
 
+display(player.inventory[player.inventory.length-1])
+
 
 // Displaying inventory
-function display() {
+function display(weapon) {
     var p = document.createElement('td')
     id('weapons-inventory').appendChild(p)
-    p.innerHTML = "<img class='spell' src='images/"+player.inventory[player.inventory.length-1].type+".png'/>"
+    p.innerHTML = "<img class='spell' src='images/"+weapon.type+".png' onclick='"+weapon+".use()'/>"
 }
 
 // testing
