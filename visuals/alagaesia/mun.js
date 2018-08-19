@@ -111,7 +111,7 @@ Spell.prototype.castByMonster = function() {  // enemy casts specified spell
 Spell.prototype.cast = function() {  // casts spell
   let cost = 3
   if(player.mana < cost) {
-    log('player', localStorage.name+' doesn't have enough mana to cast ' + this.name + '.')
+    log('player', localStorage.name+' doesn\'t have enough mana to cast ' + this.name + '.')
     clearLog('player')
   } else {
     let d = this.damage
