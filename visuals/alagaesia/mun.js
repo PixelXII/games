@@ -167,16 +167,17 @@ player.inventory = [ironSword]
 
 
 // Displaying inventory
-function display(thing) {
-    var p = document.createElement('td')
-    id('weapons-inventory').appendChild(p)
-    p.innerHTML = "<img class='spell' src='images/"+thing.type+".png'/>"
-    p.addEventListener('click', function() {
-        thing.use()
-    });
+function inventory() {
+    id('weapons-inventory').innerHTML = ''
+    player.inventory.forEach(function(thing) {
+        var p = document.createElement('td')
+        id('weapons-inventory').appendChild(p)
+        p.innerHTML = "<img class='spell' src='images/"+thing.type+".png'/>"
+        p.addEventListener('click', function() {
+            thing.use()
+        });
+    })
 }
 
 // testing
-
-display(player.inventory[player.inventory.length-1])
 
