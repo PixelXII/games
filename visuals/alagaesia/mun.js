@@ -169,7 +169,7 @@ player.inventory = [ironSword]
 function display() {
     var p = document.createElement('td')
     id('weapons-inventory').appendChild(p)
-    p.innerHTML = "<img src='images/"+player.inventory[player.inventory.length-1].type+".png'/>"
+    p.innerHTML = "<img class='spell' src='images/"+player.inventory[player.inventory.length-1].type+".png'/>"
 }
 
 // testing
