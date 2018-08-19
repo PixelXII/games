@@ -13,7 +13,9 @@ var player = {
   exp: 0,
   levelUp: function() {
     player.level++;
-    displayConf('You Leveled Up! <br> You\'re level ' + this.level + ' now!', 'O K', function() { nextBattle(false) }, 'disabled', null)
+    displayConf('You Leveled Up! <br> You\'re level ' + this.level + ' now!', 'O K', function() { 
+      nextBattle() 
+    }, 'disabled', null)
     clearInterval(displayhealth)
     player.toth = player.toth + Math.floor(0.20*player.toth)
     player.totm = player.totm + Math.floor(0.16*player.totm)
