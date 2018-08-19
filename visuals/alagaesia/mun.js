@@ -68,13 +68,14 @@ var hurricane = new Spell("Hurricane", 21)
 // special spells
 
 var resurrect = new special("Resurrect", function() {
-  player.health = player.toth
-  player.mana = Math.round(player.totm/2)
-  id('monster').style.display = 'block'
-  id('spells').style.display = 'block'
-  id('playerdata').style.display = 'block'
-  id('monsterdata').style.display = 'block'
-  id('confirmation').style.display = 'none'
+    player.health = player.toth
+    player.mana = Math.round(player.totm/2)
+    id('monster').style.display = 'block'
+    id('spells').style.display = 'block'
+    id('playerdata').style.display = 'block'
+    id('monsterdata').style.display = 'block'
+    id('weapons-inventory').style.display = 'block'
+    id('confirmation').style.display = 'none'
 })
   
 
