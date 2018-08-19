@@ -6,6 +6,7 @@
 
 <body oncontextmenu='return false;'>
   <br> <br>
+  <div id="main">
     <div id="monster" align='center'>
       <div id="mname" class="largetext"></div> <br> <br>
       <img id="opp" src="images/elf.png" height="75" width="75">
@@ -21,75 +22,76 @@
       <div id="monsterhealth" class="largetext" style="padding-left:10px; float:left;" title="HP/MP"></div>
     </div>
   
-  <br> <br>
-  <div id='spells' width="600" height="200" align="center">
     <br> <br>
-    <table>
-      <tr id="t1" style="display:none;">
-        <td>
-         <img class="spell lv1" src="images/fire.png" onclick="flames.cast()" title="Cast Flames">
-        </td>
-        <td>
-         <img class="spell lv1" src="images/iceblast.png" onclick="iceBlast.cast()" title="Cast Ice Blast">
-        </td>
-        <td>
-         <img class="spell lv1" src="images/fire.png" onclick="sparks.cast()" title="Cast Sparks">
-        </td>
-        <td>
-         <img class="spell lv1" src="images/fire.png" onclick="squirt.cast()" title="Cast Squirt">
-        </td>
-      </tr>
-      <tr id="t2" style="display:none;">
-        <td>
-         <img class="spell lv2" src="images/fire.png" onclick="firebolt.cast()" title="Cast Firebolt">
-        </td>
-        <td>
-         <img class="spell lv2" src="images/iceblast.png" onclick="freeze.cast()" title="Cast Freeze">
-        </td>
-        <td>
-         <img class="spell lv2" src="images/fire.png" onclick="lightningBolt.cast()" title="Cast Lightning Bolt">
-        </td>
-        <td>
-         <img class="spell lv2" src="images/fire.png" onclick="waterfall.cast()" title="Cast Waterfall">
-        </td>
-      </tr>
-      <tr id="t3" style="display:none;">
-        <td>
-         <img class="spell lv3" src="images/fire.png" onclick="inferno.cast()" title="Cast Inferno">
-        </td>
-        <td>
-         <img class="spell lv3" src="images/iceblast.png" onclick="blizzard.cast()" title="Cast Blizzard">
-        </td>
-        <td>
-         <img class="spell lv3" src="images/fire.png" onclick="electricStorm.cast()" title="Cast Electric Storm">
-        </td>
-        <td>
-         <img class="spell lv3" src="images/fire.png" onclick="hurricane.cast()" title="Cast Hurricane">
-        </td>
-      </tr>
-    </table>
-  </div>
+    <div id='spells' width="600" height="200" align="center">
+      <br> <br>
+      <table>
+        <tr id="t1" style="display:none;">
+          <td>
+          <img class="spell lv1" src="images/fire.png" onclick="flames.cast()" title="Cast Flames">
+          </td>
+          <td>
+          <img class="spell lv1" src="images/iceblast.png" onclick="iceBlast.cast()" title="Cast Ice Blast">
+          </td>
+          <td>
+          <img class="spell lv1" src="images/fire.png" onclick="sparks.cast()" title="Cast Sparks">
+          </td>
+          <td>
+          <img class="spell lv1" src="images/fire.png" onclick="squirt.cast()" title="Cast Squirt">
+          </td>
+        </tr>
+        <tr id="t2" style="display:none;">
+          <td>
+          <img class="spell lv2" src="images/fire.png" onclick="firebolt.cast()" title="Cast Firebolt">
+          </td>
+          <td>
+          <img class="spell lv2" src="images/iceblast.png" onclick="freeze.cast()" title="Cast Freeze">
+          </td>
+          <td>
+          <img class="spell lv2" src="images/fire.png" onclick="lightningBolt.cast()" title="Cast Lightning Bolt">
+          </td>
+          <td>
+          <img class="spell lv2" src="images/fire.png" onclick="waterfall.cast()" title="Cast Waterfall">
+          </td>
+        </tr>
+        <tr id="t3" style="display:none;">
+          <td>
+          <img class="spell lv3" src="images/fire.png" onclick="inferno.cast()" title="Cast Inferno">
+          </td>
+          <td>
+          <img class="spell lv3" src="images/iceblast.png" onclick="blizzard.cast()" title="Cast Blizzard">
+          </td>
+          <td>
+          <img class="spell lv3" src="images/fire.png" onclick="electricStorm.cast()" title="Cast Electric Storm">
+          </td>
+          <td>
+          <img class="spell lv3" src="images/fire.png" onclick="hurricane.cast()" title="Cast Hurricane">
+          </td>
+        </tr>
+      </table>
+    </div>
   
-  <br> <br>
-  
-  <div id='weapons' width="600" height="200" align="center">
     <br> <br>
-    <table>
-      <tr id="weapons-inventory"></tr>
-    </table>
-  </div>
   
-  <br> <br>
+    <div id='weapons' width="600" height="200" align="center">
+      <br> <br>
+      <table>
+        <tr id="weapons-inventory"></tr>
+      </table>
+    </div>
+  
+    <br> <br>
     
-  <div id="logs">
-    <div id="monsterlog" class="mediumtext" style="padding-left:10px; float:left; top:250px;"></div>
-    <div id="playerlog" class="mediumtext" style="padding-right:10px; float:right; top:250px;"></div>
-  </div>  
+    <div id="logs">
+      <div id="monsterlog" class="mediumtext" style="padding-left:10px; float:left; top:250px;"></div>
+      <div id="playerlog" class="mediumtext" style="padding-right:10px; float:right; top:250px;"></div>
+    </div>
 
-  <div id="confirmation" align="center" style="display:none;">
-    <div id="conftext"></div> <br>
-    <div id="yes" class="button"> ! &nbspY E S </div> <br>
-    <div id="no" class="button"> ! &nbspN O </div>
+    <div id="confirmation" align="center" style="display:none;">
+      <div id="conftext"></div> <br>
+      <div id="yes" class="button"> ! &nbspY E S </div> <br>
+      <div id="no" class="button"> ! &nbspN O </div>
+    </div>
   </div>
     
   
