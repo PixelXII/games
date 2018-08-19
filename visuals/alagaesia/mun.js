@@ -165,6 +165,14 @@ if(monster.inventory === undefined) {
 player.inventory = [ironSword]
 
 
+// Displaying inventory
+function display() {
+player.inventory.forEach(function(name) {
+    var p = document.createElement('td')
+    id('weapons-inventory').appendChild(p)
+    p.innerHTML = "<img src='images/"+name.type+".png'/>"
+});
+}
 
 // testing
 
