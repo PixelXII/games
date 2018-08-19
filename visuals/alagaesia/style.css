@@ -52,15 +52,17 @@ td {
   margin:10px;
 }
 
-input {
+/* Classes */
+
+.input {
   border:2px solid #90a4ae;
   border-radius:2px;
   padding:4px;
-  width:75px;
-  height:24px;
+  width:150px;
+  height:30px;
+  outline:none;
 }
 
-/* Classes */
 
 .spell {
   width:75;
