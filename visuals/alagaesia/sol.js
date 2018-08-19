@@ -1,13 +1,13 @@
 // Variables & functions
 
-var monster, monstername, monstertype;
+var monster, monstername, monstertype, player;
 var enemies = ['Piranha', 'Shark', 'Mutant Turtle', 'Pirate', 'Pirate Captain', 'Fire Atronach', 'Firebeetle', 'Flametongue', 'Dragon', 'Elf', 'Spriggan', 'Demented Flower', 'Dwarf', 'Dwarf King', 'Rockmouse', 'Storm Atronach', 'Air Elemental', 'Cloud Elf', 'Sunbird']
 var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 id('playerlabel').innerHTML = playername + ':&nbsp';
 
 // Player
 
-var player = {
+player = {
   level: 1,
   health: 30,
   mana: 30,
