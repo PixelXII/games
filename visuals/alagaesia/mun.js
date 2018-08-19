@@ -171,7 +171,10 @@ display(ironSword)
 function display(thing) {
     var p = document.createElement('td')
     id('weapons-inventory').appendChild(p)
-    p.innerHTML = "<img class='spell' src='images/"+thing.type+".png' onclick='"+thing.use()+"'/>"
+    p.innerHTML = "<img class='spell' src='images/"+thing.type+".png'/>"
+    p.addEventListener('click', function() {
+        thing.use()
+    });
 }
 
 // testing
