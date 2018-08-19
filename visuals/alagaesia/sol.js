@@ -26,6 +26,7 @@ var player = {
     clearInterval(regen)
     document.getElementById('playerdata').style.display = 'none'
     document.getElementById('monsterdata').style.display = 'none'
+    id('weapons-inventory').style.display = 'none'
     if(player.mana >= 15) {
       displayConf("You died! <br> You can cast Resurrect for " + Math.round(player.totm/2) + " mana.", "O K", function() {
         resurrect.cb()
@@ -56,6 +57,7 @@ function displayConf(conftext, yes, ycallback, no, ncallback) {
   id('monsterdata').style.display = 'none'
   id('playerdata').style.display = 'none'
   id('spells').style.display = 'none'
+  id('weapons-inventory').style.display = 'none'
   id('monster').style.display = 'none'
   id('conftext').innerHTML = conftext
   if(no === 'disabled') {
@@ -97,6 +99,7 @@ function nextBattle() {
       id('spells').style.display = 'none'
       id('playerlog').style.display = 'none'
       id('monsterlog').style.display = 'none'
+      id('weapons-inventory').style.display = 'none'
       id("monsterdata").style.display = 'none'
       id("playerdata").style.display = 'none'
       var old = id('yes')
@@ -105,6 +108,7 @@ function nextBattle() {
       displayConf('You killed the ' + monster.name + "! <br> <br> You gained " + monster.exp + " XP from it", 'O K', function() {
         id('confirmation').style.display = 'none'
         id('no').style.display = 'block'
+        id('weapons-inventory').style.display = 'block'
         id('monsterdata').style.display = 'block'
         id('playerdata').style.display = 'block'
         id('spells').style.display = 'block'
