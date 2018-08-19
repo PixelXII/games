@@ -1,6 +1,9 @@
+// Variables & functions
+
 var monster, monstername, monstertype;
 var enemies = ['Piranha', 'Shark', 'Mutant Turtle', 'Pirate', 'Pirate Captain', 'Fire Atronach', 'Firebeetle', 'Flametongue', 'Dragon', 'Elf', 'Spriggan', 'Demented Flower', 'Dwarf', 'Dwarf King', 'Rockmouse', 'Storm Atronach', 'Air Elemental', 'Cloud Elf', 'Sunbird']
 var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+id('playerlabel').innerHTML = playername + ':&nbsp';
 
 // Player
 
@@ -13,7 +16,7 @@ var player = {
   exp: 0,
   levelUp: function() {
     player.level++;
-    displayConf(localStorage.name + ' Leveled Up! <br> ' + localStorage.name + ' is level ' + this.level + ' now!', 'O K', function() { 
+    displayConf(playername + ' Leveled Up! <br> ' + playername + ' is level ' + this.level + ' now!', 'O K', function() { 
       nextBattle() 
     }, 'disabled', null)
     clearInterval(displayhealth)
@@ -28,7 +31,7 @@ var player = {
     document.getElementById('monsterdata').style.display = 'none'
     id('weapons-inventory').style.display = 'none'
     if(player.mana >= 15) {
-      displayConf(localStorage.name + " died! <br> They can cast Resurrect for " + Math.round(player.totm/2) + " mana.", "O K", function() {
+      displayConf(playername + " died! <br> They can cast Resurrect for " + Math.round(player.totm/2) + " mana.", "O K", function() {
         resurrect.cb()
       }, "N O", function() {
         location.reload()
@@ -38,7 +41,7 @@ var player = {
       document.getElementById('yes').addEventListener('click', function() {
         location.reload()
       })
-      displayConf(localStorage.name + " died! <br> <br> Resurrect costs 15 mana and they only have " + player.mana + ".", "O K", function() {
+      displayConf(playername + " died! <br> <br> Resurrect costs 15 mana and they only have " + player.mana + ".", "O K", function() {
         location.reload()
       }, null)
     }
@@ -105,7 +108,7 @@ function nextBattle() {
       var old = id('yes')
       var newm = old.cloneNode(true);
       old.parentNode.replaceChild(newm, old);
-      displayConf('You killed the ' + monster.name + "! <br> <br> "+localStorage.name+" gained " + monster.exp + " XP from it", 'O K', function() {
+      displayConf('You killed the ' + monster.name + "! <br> <br> "+playername+" gained " + monster.exp + " XP from it", 'O K', function() {
         id('confirmation').style.display = 'none'
         id('no').style.display = 'block'
         id('weapons-inventory').style.display = 'block'
