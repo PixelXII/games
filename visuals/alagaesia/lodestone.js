@@ -11,7 +11,8 @@ function firstLoad() {
   });
   id('playername').addEventListener('keypress', function(e) {
     if(e.keyCode === 13) {
-      playername = id('playername').value
+      playername = id('playername').value'
+      localStorage.name = playername
       id('playername').value = ''
       enter()
     }
@@ -20,7 +21,7 @@ function firstLoad() {
 
 function enter() {
   id('startup').style.display = 'none'
-  id('main').style.display = 'none'
+  id('main').style.display = 'block'
 }
 
 firstLoad()
