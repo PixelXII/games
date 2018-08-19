@@ -40,12 +40,12 @@ var weapons = [ironSword, steelSword, adamantineSword, ironMace, steelMace, ebon
 
 Weapon.prototype.use = function() {
   monster.health -= this.damage
-  log('player', "You use the " + this.name + " against the " + monster.name + "!")
+  log('player', localStorage.name + " uses the " + this.name + " against the " + monster.name + "!")
 }
 
 Weapon.prototype.monsterUse = function() {
   player.health -= this.damage
-  log('monster', "The " + monster.name + " hits you with the " + this.name + "!")
+  log('monster', "The " + monster.name + " hits " + localStorage.name + " with the " + this.name + "!")
 }
   
 
@@ -111,7 +111,7 @@ Spell.prototype.castByMonster = function() {  // enemy casts specified spell
 Spell.prototype.cast = function() {  // casts spell
   let cost = 3
   if(player.mana < cost) {
-    log('player', 'You don\'t have enough mana to cast ' + this.name + '.')
+    log('player', localStorage.name+' doesn't have enough mana to cast ' + this.name + '.')
     clearLog('player')
   } else {
     let d = this.damage
@@ -127,7 +127,7 @@ Spell.prototype.cast = function() {  // casts spell
       monster.health -= d
     }
     player.mana -= Math.round(cost/2)
-    log('player', 'You cast ' + this.name + ".")
+    log('player', localStorage.name + ' cast ' + this.name + ".")
     setTimeout(function() {
       randomSpell().castByMonster()
     }, Math.round(Math.random()*5600))
