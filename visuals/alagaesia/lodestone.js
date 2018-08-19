@@ -1,4 +1,5 @@
 var playername;
+var playerdata = {}
 
 function firstLoad() {
   var div = document.createElement('div')
@@ -12,8 +13,8 @@ function firstLoad() {
   id('playername').addEventListener('keypress', function(e) {
     if(e.keyCode === 13) {
       playername = id('playername').value
-      localStorage.name = playername
       id('playername').value = ''
+      playerdata.name = playername
       enter()
     }
   });
