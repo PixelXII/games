@@ -13,7 +13,7 @@ var player = {
   exp: 0,
   levelUp: function() {
     player.level++;
-    displayConf('You Leveled Up! <br> You\'re level ' + this.level + ' now!', 'O K', function() { 
+    displayConf(localStorage.name + ' Leveled Up! <br> ' + localStorage.name + ' is level ' + this.level + ' now!', 'O K', function() { 
       nextBattle() 
     }, 'disabled', null)
     clearInterval(displayhealth)
@@ -28,7 +28,7 @@ var player = {
     document.getElementById('monsterdata').style.display = 'none'
     id('weapons-inventory').style.display = 'none'
     if(player.mana >= 15) {
-      displayConf("You died! <br> You can cast Resurrect for " + Math.round(player.totm/2) + " mana.", "O K", function() {
+      displayConf(localStorage.name + " died! <br> They can cast Resurrect for " + Math.round(player.totm/2) + " mana.", "O K", function() {
         resurrect.cb()
       }, "N O", function() {
         location.reload()
@@ -38,7 +38,7 @@ var player = {
       document.getElementById('yes').addEventListener('click', function() {
         location.reload()
       })
-      displayConf("You died! <br> <br> Resurrect costs 15 mana and you only have " + player.mana + ".", "O K", function() {
+      displayConf(localStorage.name + " died! <br> <br> Resurrect costs 15 mana and they only have " + player.mana + ".", "O K", function() {
         location.reload()
       }, null)
     }
@@ -105,7 +105,7 @@ function nextBattle() {
       var old = id('yes')
       var newm = old.cloneNode(true);
       old.parentNode.replaceChild(newm, old);
-      displayConf('You killed the ' + monster.name + "! <br> <br> You gained " + monster.exp + " XP from it", 'O K', function() {
+      displayConf('You killed the ' + monster.name + "! <br> <br> "+localStorage.name+" gained " + monster.exp + " XP from it", 'O K', function() {
         id('confirmation').style.display = 'none'
         id('no').style.display = 'block'
         id('weapons-inventory').style.display = 'block'
@@ -312,6 +312,3 @@ leveledspells = setInterval(function() {
     document.getElementById('t3').style.display = 'block'
   }
 }, 10)
-
-
-
