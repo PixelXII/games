@@ -59,7 +59,7 @@ function displayConf(conftext, yes, ycallback, no, ncallback) {
   if(no === 'disabled') {
     id('no').style.display = 'none'
   }
-  id('yes').innerHTML = '!&nbsp&nbsp'+yes
+  id('yes').innerHTML = '!&nbsp'+yes
   var old = document.getElementById("yes");
   var newm = old.cloneNode(true);
   old.parentNode.replaceChild(newm, old);
