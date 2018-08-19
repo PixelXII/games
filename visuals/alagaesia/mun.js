@@ -168,10 +168,10 @@ display(ironSword)
 
 
 // Displaying inventory
-function display(weapon) {
+function display(thing) {
     var p = document.createElement('td')
     id('weapons-inventory').appendChild(p)
-    p.innerHTML = "<img class='spell' src='images/"+weapon.type+".png' onclick='"+weapon.use()+"'/>"
+    p.innerHTML = "<img class='spell' src='images/"+thing.type+".png' onclick='"+thing.use()+"'/>"
 }
 
 // testing
