@@ -164,7 +164,7 @@ if(monster.inventory === undefined) {
 
 player.inventory = [ironSword]
 
-display(player.inventory[player.inventory.length-1])
+display(ironSword)
 
 
 // Displaying inventory
