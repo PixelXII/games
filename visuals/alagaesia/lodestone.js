@@ -14,6 +14,9 @@ function firstLoad() {
       id('warn').style.color = 'red'
       id('warn').innerHTML = 'Please choose a longer name'
     }
+    if(playername.includes('>') || playername.includes('<')) {
+      id('warn').innerHTML = 'Please choose a different name'
+    }
     playerdata.name = playername
     enter()
   });
