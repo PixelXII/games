@@ -233,24 +233,24 @@ var MaHe = setInterval(function() {
   if(player.mana > player.totm) {
     player.mana = player.totm
   }
-}, 5)
-
-var died = setInterval(function() {
-  if(player.health <= 0) {
-    player.die()
-  }
 }, 10)
 
-var monsterdied = setInterval(function() {
-  if(monster.health <= 0) {
+var died = setInterval(function() {
+  if(player.health === 0) {
+    player.die()
+  }
+  if(monster.health === 0) {
     monster.health = 1
     id('monsterhealth').innerHTML = '0/'+monster.mana
+    clearInterval(displayHealth)
     clearInterval(regen)
+    id('monsterdata').style.display = 'none'
+    id('playerdata').style.display = 'none'
     id('spells').style.display = 'none'
     clearLog(false)
-    nextBattle(false)
+    nextBattle()
   }
-}, 5)
+}, 50)
 
 var regen;
 function startRegen() {  // regenerates a certain percentage of mana & health per second
