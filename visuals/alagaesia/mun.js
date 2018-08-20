@@ -39,8 +39,11 @@ var orichalcumSpear = new Weapon(spear, 'Orichalcum Spear', 10)
 var weapons = [ironSword, steelSword, adamantineSword, ironMace, steelMace, ebonyMace, woodAxe, ironAxe, steelAxe, ironSpear, steelSpear, orichalcumSpear]
 
 Weapon.prototype.use = function() {
-  monster.health -= this.damage
-  log('player', playername + " uses the " + this.name + " against the " + monster.name + "!")
+    monster.health -= this.damage
+    log('player', playername + " uses the " + this.name + " against the " + monster.name + "!")
+    setTimeout(function() {
+        monster.inventory.monsterUse()
+    }, Math.random()*4896)
 }
 
 Weapon.prototype.monsterUse = function() {
@@ -124,7 +127,7 @@ Spell.prototype.cast = function() {  // casts spell
     let d = this.damage
     let n = this.name
     player.mana = player.mana - Math.round(this.damage/2)
-    if(monster.health <= 0) {
+    /* if(monster.health <= 0) {
       player.exp = player.exp + monster.exp
       if(player.exp >= Math.ceil(8.7*player.level)) {
         player.levelUp()
@@ -132,7 +135,7 @@ Spell.prototype.cast = function() {  // casts spell
       nextBattle()
     } else {
       monster.health -= d
-    }
+    } */
     player.mana -= Math.round(cost/2)
     log('player', playername + ' cast ' + this.name + ".")
       if(Math.round(Math.random()*10) < 8) {
