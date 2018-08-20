@@ -12,7 +12,7 @@ function progressBar() {
         clearInterval(id)
         document.body.style.backgroundImage = 'url(images/cobble.png)'
         firstLoad()
-        id('progress-shell').outerHTML = ""
+        document.getElementById('progress-shell').outerHTML = ""
       } else {
         width++; 
         elem.style.width = width + '%'; 
