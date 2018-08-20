@@ -60,6 +60,7 @@ function process() {
     id('warn').innerHTML = 'Please choose a different name'
   }
   playerdata.name = playername
+  return playername
 }
 
 progressBar()
