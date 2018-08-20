@@ -5,12 +5,12 @@ function firstLoad() {
   var div = document.createElement('div')
   document.body.appendChild(div)
   div.id = 'startup'
-  div.innerHTML = "<div align='center'> <br> <img src='images/logo.png'/> <br> <br> <br> <div class='title' class='largetext'>Spellfyre</div> <br> <br> <legend>What is your name?</legend> <br> <input class='input' id='playername' type='text'> <br> <legend id='warn'></legend> <br> <br> <div id='enter' class='button' style='background-color:#3f51b5; width:100px;'>!&nbsp ENTER</div><br>"
+  div.innerHTML = "<div align='center'> <br> <img src='images/logo.png'/> <br> <br> <br> <div class='title' style='font-size:36px;'>Spellfyre</div> <br> <br> <legend>What is your name?</legend> <br> <input class='input' id='playername' type='text'> <br> <legend id='warn'></legend> <br> <br> <div id='enter' class='button' style='background-color:#3f51b5; width:100px;'>!&nbsp ENTER</div><br>"
   div.style.display = 'none'
   var first = document.createElement('div')
   document.body.appendChild(first)
   first.id = 'bstartup'
-  first.innerHTML = "<div align='center'> <br> <img src='images/logo.png'/> <br> <br> <br> <div class='title' class='largetext'>Spellfyre</div> <br> <br> <div class='button' id='play'>! &nbsp PLAY</div> </div>"
+  first.innerHTML = "<div align='center'> <br> <img src='images/logo.png'/> <br> <br> <br> <div class='title' style='font-size:36px;'>Spellfyre</div> <br> <br> <div class='button' id='play'>! &nbsp PLAY</div> </div>"
   id('play').addEventListener('click', function() {
     id('bstartup').style.display = 'none'
     id('startup').style.display = 'block'
