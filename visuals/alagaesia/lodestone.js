@@ -31,7 +31,6 @@ function displayFirst() {
     id('bstartup').style.display = 'none'
     id('startup').style.display = 'block'
   });
-  first.style.display = 'none'
 }
 
 function firstLoad() {
