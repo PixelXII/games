@@ -1,6 +1,23 @@
 var playername;
 var playerdata = {}
 
+function progressBar() {
+  function move() {
+    var elem = document.getElementById("progress-main"); 
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+          clearInterval(id);
+        } else {
+          width++; 
+          elem.style.width = width + '%'; 
+        }
+    }
+  }
+  move()
+}
+
 function displayFirst() {
   var first = document.createElement('div')
   document.body.appendChild(first)
@@ -10,6 +27,8 @@ function displayFirst() {
     id('bstartup').style.display = 'none'
     id('startup').style.display = 'block'
   });
+  first.style.display = 'none'
+  progressBar()
 }
 
 function firstLoad() {
