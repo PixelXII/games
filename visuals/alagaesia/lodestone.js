@@ -80,5 +80,6 @@ firstLoad()
 var cName = setInterval(function() {
   if(playerdata.name != undefined) {
     id('main').style.display = 'block'
+    id('startup').style.display = 'none'
   }
 }, 10)
