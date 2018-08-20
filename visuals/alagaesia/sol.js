@@ -205,6 +205,8 @@ function fromImg(img) {  // Gets image name from src, excluding the extension
 
 function cm() {  // creates monster with random stats generated from name
   monstername = fromImg(document.getElementById('opp'))
+  startRegen()
+  dhp()
   monster = {
     name: monstername.replace(/^\w/, c => c.toUpperCase()),
     health: Math.ceil(alph.indexOf(monstername.charAt(0)) * alph.indexOf(monstername[Math.random()*monstername.length]))+31,
