@@ -10,7 +10,7 @@ function progressBar() {
     function frame() {
       if (width >= 100) {
         clearInterval(id)
-        background-image:url(images/cobble.png);
+        document.body.style.backgroundImage = 'url(images/cobble.png)'
         displayFirst()
       } else {
         width++; 
