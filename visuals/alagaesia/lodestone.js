@@ -12,6 +12,7 @@ function progressBar() {
         clearInterval(id)
         document.body.style.backgroundImage = 'url(images/cobble.png)'
         firstLoad()
+        document.getElementById('bstartup').style.display = 'block'
         document.getElementById('progress-shell').outerHTML = ""
       } else {
         width++; 
@@ -31,6 +32,7 @@ function displayFirst() {
     id('bstartup').style.display = 'none'
     id('startup').style.display = 'block'
   });
+  first.style.display = 'none'
 }
 
 function firstLoad() {
