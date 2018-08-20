@@ -128,9 +128,14 @@ Spell.prototype.cast = function() {  // casts spell
     }
     player.mana -= Math.round(cost/2)
     log('player', playername + ' cast ' + this.name + ".")
-    setTimeout(function() {
-      randomSpell().castByMonster()
-    }, Math.round(Math.random()*5600))
+      if(monster.health > 2) {
+        setTimeout(function() {
+            randomSpell().castByMonster()
+        }, Math.round(Math.random()*5600))
+      } else {
+          log('monster', 'The ' + monstername + ' is too tired to cast ' + randomSpell().name)
+          clearLog('monster')
+      }
   }
 }
 
