@@ -108,8 +108,10 @@ Spell.prototype.castByMonster = function() {  // enemy casts specified spell
         log('monster', 'The ' + monstername + " does not have enough mana to cast " + this.name + ".")
     }
   } else {
-      log('monster', 'The ' + monstername + ' dodged your attack.')
-      clearLog('monster')
+      id('evade').innerText = 'The ' + monstername + ' dodged your attack.'
+      setTimeout(function() {
+          id('evade').innerText = ""
+      }, 4000)
   }
 }
 
@@ -143,8 +145,10 @@ Spell.prototype.cast = function() {  // casts spell
             clearLog('monster')
         }
       } else {
-          log('player', 'You evaded the ' + monstername + "'s attack.")
-          clearLog('player')
+          id('evade').innerText = playerdata.name + " evaded the " + monstername + "'s attack."
+          setTimeout(function() {
+              id('evade').innerText = ""
+          }, 4000)
       }
   }
 }
