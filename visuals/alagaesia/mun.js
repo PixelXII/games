@@ -179,5 +179,7 @@ function inventory() {
     })
 }
 
+inventory()
+
 // testing
 
