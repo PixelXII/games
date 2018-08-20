@@ -94,17 +94,22 @@ function randomSpell() {  // returns random spell based on player's level
 
 Spell.prototype.castByMonster = function() {  // enemy casts specified spell
   let cost = 3
-  if(monster.mana >= cost) {
-    player.health -= this.damage
-    monster.mana -= Math.round(cost/2)
-    if(monstername.includes('%20')) {
-      log('monster', 'The ' + monstername.replace('%20', ' ') + ' cast ' + this.name + '!')
+  if(Math.round(Math.random()*10 < 9)) {
+    if(monster.mana >= cost) {
+        player.health -= this.damage
+        monster.mana -= Math.round(cost/2)
+        if(monstername.includes('%20')) {
+            log('monster', 'The ' + monstername.replace('%20', ' ') + ' cast ' + this.name + '!')
+        } else {
+            log('monster', 'The ' + monstername + ' cast ' + this.name + '!')
+        }
+        document.getElementById('spells').style.display = 'block'
     } else {
-      log('monster', 'The ' + monstername + ' cast ' + this.name + '!')
+        log('monster', 'The ' + monstername + " does not have enough mana to cast " + this.name + ".")
     }
-    document.getElementById('spells').style.display = 'block'
   } else {
-    log('monster', 'The ' + monstername + " does not have enough mana to cast " + this.name + ".")
+      log('monster', 'The ' + monstername + ' dodged your attack.')
+      clearLog('monster')
   }
 }
 
@@ -128,13 +133,18 @@ Spell.prototype.cast = function() {  // casts spell
     }
     player.mana -= Math.round(cost/2)
     log('player', playername + ' cast ' + this.name + ".")
-      if(monster.health > 2) {
-        setTimeout(function() {
-            randomSpell().castByMonster()
-        }, Math.round(Math.random()*5600))
+      if(Math.round(Math.random()*10) < 8) {
+        if(monster.health > 2) {
+            setTimeout(function() {
+                randomSpell().castByMonster()
+            }, Math.round(Math.random()*5600))
+        } else {
+            log('monster', 'The ' + monstername + ' is too tired to cast ' + randomSpell().name)
+            clearLog('monster')
+        }
       } else {
-          log('monster', 'The ' + monstername + ' is too tired to cast ' + randomSpell().name)
-          clearLog('monster')
+          log('player', 'You evaded the ' + monstername + "'s attack.")
+          clearLog('player')
       }
   }
 }
