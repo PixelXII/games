@@ -127,7 +127,7 @@ Spell.prototype.cast = function() {  // casts spell
     let d = this.damage
     let n = this.name
     player.mana = player.mana - Math.round(this.damage/2)
-    /* if(monster.health <= 0) {
+    if(monster.health <= 0) {
       player.exp = player.exp + monster.exp
       if(player.exp >= Math.ceil(8.7*player.level)) {
         player.levelUp()
@@ -135,7 +135,7 @@ Spell.prototype.cast = function() {  // casts spell
       nextBattle()
     } else {
       monster.health -= d
-    } */
+    }
     player.mana -= Math.round(cost/2)
     log('player', playername + ' cast ' + this.name + ".")
       if(Math.round(Math.random()*10) < 8) {
