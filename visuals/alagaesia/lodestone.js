@@ -2,17 +2,20 @@ var playername;
 var playerdata = {}
 
 function progressBar() {
+  document.body.style.backgroundColor = 'white'
   function move() {
     var elem = document.getElementById("progress-main"); 
     var width = 1;
     var id = setInterval(frame, 10);
     function frame() {
       if (width >= 100) {
-          clearInterval(id);
-        } else {
-          width++; 
-          elem.style.width = width + '%'; 
-        }
+        clearInterval(id)
+        background-image:url(images/cobble.png);
+        displayFirst()
+      } else {
+        width++; 
+        elem.style.width = width + '%'; 
+      }
     }
   }
   move()
