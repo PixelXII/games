@@ -76,3 +76,9 @@ function enter() {
 }
 
 firstLoad()
+
+var cName = setInterval(function() {
+  if(playerdata.name != undefined) {
+    id('main').style.display = 'block'
+  }
+}, 10)
