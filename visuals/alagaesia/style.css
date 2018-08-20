@@ -78,6 +78,10 @@ input {
   height:70px;
 }
 
+#title {
+  font-family:'Uncial Antiqua';
+}
+
 .button {
   height:15px;
   width:60px;
@@ -95,8 +99,4 @@ input {
 
 #no {
   background-color:#f44336;
-}
-
-#title {
-  font-family:'Uncial Antiqua';
 }
