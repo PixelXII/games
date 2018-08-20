@@ -59,6 +59,9 @@ function process() {
   }
   playerdata.name = playername
   return playername
+  document.getElementById('main').style.display = 'block'
+  document.getElementById('startup').style.display = 'none'
+  document.getElementById('bstartup').style.display = 'none'
 }
 
 progressBar()
