@@ -14,6 +14,7 @@ function progressBar() {
         firstLoad()
         document.getElementById('bstartup').style.display = 'block'
         document.getElementById('progress-shell').outerHTML = ""
+        document.getElementById('loading').outerHTML = ""
       } else {
         width++; 
         elem.style.width = width + '%'; 
