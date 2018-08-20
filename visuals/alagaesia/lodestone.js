@@ -10,7 +10,7 @@ function firstLoad() {
   var first = document.createElement('div')
   document.body.appendChild(first)
   first.id = 'bstartup'
-  first.innerHTML = "<div align='center'> <br> <img src='images/logo.png'/> <br> <br> <br> <div class='title' style='font-size:36px;'>Spellfyre</div> <br> <br> <div class='button' id='play' style='background-color:#42a5f5;'>! &nbsp PLAY</div> </div>"
+  first.innerHTML = "<div align='center'> <br> <img src='images/logo.png'/> <br> <br> <br> <div class='title' style='font-size:36px;'>Spellfyre</div> <br> <br> <div class='button' id='play' style='background-color:#42a5f5;'>! &nbspPLAY</div> </div>"
   id('play').addEventListener('click', function() {
     id('bstartup').style.display = 'none'
     id('startup').style.display = 'block'
