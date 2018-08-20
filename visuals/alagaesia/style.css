@@ -101,3 +101,13 @@ input {
 #no {
   background-color:#f44336;
 }
+
+#progress-shell {
+  width:100%;
+  background-color:grey;
+}
+
+#progress-main {
+  width:1%;
+  background-color:black;
+}
