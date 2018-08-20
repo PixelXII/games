@@ -6,7 +6,7 @@ function progressBar() {
   function move() {
     var elem = document.getElementById("progress-main"); 
     var width = 1;
-    var id = setInterval(frame, 10);
+    var id = setInterval(frame, 100);
     function frame() {
       if (width >= 100) {
         clearInterval(id)
