@@ -11,7 +11,8 @@ function progressBar() {
       if (width >= 100) {
         clearInterval(id)
         document.body.style.backgroundImage = 'url(images/cobble.png)'
-        displayFirst()
+        firstLoad()
+        id('progress-shell').outerHTML = ""
       } else {
         width++; 
         elem.style.width = width + '%'; 
@@ -31,7 +32,6 @@ function displayFirst() {
     id('startup').style.display = 'block'
   });
   first.style.display = 'none'
-  progressBar()
 }
 
 function firstLoad() {
