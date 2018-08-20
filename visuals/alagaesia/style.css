@@ -105,9 +105,11 @@ input {
 #progress-shell {
   width:100%;
   background-color:grey;
+  border-radius:4px;
 }
 
 #progress-main {
   width:1%;
   background-color:black;
+  border-radius:4px;
 }
