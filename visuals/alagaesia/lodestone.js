@@ -70,6 +70,7 @@ function firstLoad() {
   });
 }
 
+progressBar()
 function enter() {
   id('startup').style.display = 'none'
   id('main').style.display = 'block'
