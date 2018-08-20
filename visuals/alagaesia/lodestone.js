@@ -15,6 +15,12 @@ function progressBar() {
         document.getElementById('bstartup').style.display = 'block'
         document.getElementById('progress-shell').outerHTML = ""
         document.getElementById('loading').outerHTML = ""
+        document.getElementById('enter').addEventListener('click', process)
+        document.getElementById('playername').addEventListener('keypress', function(e) {
+          if(e.keyCode === 13) {
+            process()
+          }
+        });
       } else {
         width++; 
         elem.style.width = width + '%'; 
@@ -63,11 +69,3 @@ function enter() {
 }
 
 firstLoad()
-id('enter').addEventListener('click', function() {
-  process()
-});
-id('playername').addEventListener('keypress', function(e) {
-  if(e.keyCode === 13) {
-    process()
-  }
-});
