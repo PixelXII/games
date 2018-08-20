@@ -45,30 +45,21 @@ function firstLoad() {
   displayFirst()
   id('main').style.display = 'none'
   id('enter').addEventListener('click', function() {
-    playername = id('playername').value
-    id('playername').value = ''
-    if(playername === '' || playername.length <= 2) {
-      id('warn').style.color = 'red'
-      id('warn').innerHTML = 'Please choose a longer name'
-    }
-    if(playername.includes('>') || playername.includes('<')) {
-      id('warn').innerHTML = 'Please choose a different name'
-    }
-    playerdata.name = playername
-    enter()
+    process()
   });
   id('playername').addEventListener('keypress', function(e) {
     if(e.keyCode === 13) {
-      playername = id('playername').value
-      id('playername').value = ''
-      if(playername === '' || playername.length <= 2) {
-        id('warn').style.color = 'red'
-        id('warn').innerHTML = 'Please choose a longer name'
-      }
-      playerdata.name = playername
-      enter()
+      process()
     }
   });
+}
+
+function process() {
+  playername = id('playername').value
+  if(playername.includes('>') || playername.includes('<')) {
+    id('warn').innerHTML = 'Please choose a different name'
+  }
+  playerdata.name = playername
 }
 
 progressBar()
