@@ -44,14 +44,6 @@ function firstLoad() {
   div.style.display = 'none'
   displayFirst()
   id('main').style.display = 'none'
-  id('enter').addEventListener('click', function() {
-    process()
-  });
-  id('playername').addEventListener('keypress', function(e) {
-    if(e.keyCode === 13) {
-      process()
-    }
-  });
 }
 
 function process() {
@@ -71,3 +63,11 @@ function enter() {
 }
 
 firstLoad()
+id('enter').addEventListener('click', function() {
+  process()
+});
+id('playername').addEventListener('keypress', function(e) {
+  if(e.keyCode === 13) {
+    process()
+  }
+});
