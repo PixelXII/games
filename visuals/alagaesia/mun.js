@@ -6,7 +6,7 @@
 
 player.inventory = []
 
-monster.inventory = []
+monster.inventory;
 
 // constructors
 
@@ -128,7 +128,7 @@ Spell.prototype.cast = function() {  // casts spell
     let n = this.name
     player.mana = player.mana - Math.round(this.damage/2)
     if(monster.health <= 0) {
-      player.exp = player.exp + monster.exp
+      player.exp += monster.exp
       if(player.exp >= Math.ceil(8.7*player.level)) {
         player.levelUp()
       }
@@ -181,6 +181,7 @@ function randomWeapon() {
 // Setting Inventories
 
 monster.inventory = randomWeapon()
+
 if(monster.inventory === undefined) {
     monster.inventory = ironAxe
 }
