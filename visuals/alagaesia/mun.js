@@ -4,8 +4,6 @@
 
 */
 
-id('playerlabel').innerText = playerdata.name + ":"
-
 player.inventory = []
 
 monster.inventory = []
