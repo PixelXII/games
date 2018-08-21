@@ -13,17 +13,6 @@ player = {
   toth: 30,
   totm: 30,
   exp: 0,
-  levelUp: function() {
-    player.level++;
-    displayConf(playername + ' Leveled Up! <br> ' + playername + ' is level ' + this.level + ' now!', 'O K', function() { 
-      nextBattle() 
-    }, 'disabled', null)
-    clearInterval(displayhealth)
-    player.toth = player.toth + Math.floor(0.20*player.toth)
-    player.totm = player.totm + Math.floor(0.16*player.totm)
-    player.health = player.toth
-    player.mana = player.totm
-  },
   die: function() {
     clearInterval(regen)
     document.getElementById('playerdata').style.display = 'none'
