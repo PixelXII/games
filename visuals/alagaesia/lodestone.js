@@ -1,6 +1,10 @@
 var playername;
 var playerdata = {}
 
+var setName = setInterval(function() {
+  id('playerlabel').innerText = playerdata.name + ":"
+}, 100)
+
 function progressBar() {
   document.body.style.backgroundColor = 'white'
   function move() {
@@ -17,12 +21,10 @@ function progressBar() {
         document.getElementById('loading').outerHTML = ""
         document.getElementById('enter').addEventListener('click', function() {
           process()
-          id('playerlabel').innerText = playerdata.name + ":"
         });
         document.getElementById('playername').addEventListener('keypress', function(e) {
           if(e.keyCode === 13) {
             process()
-            id('playerlabel').innerText = playerdata.name + ":"
           }
         });
       } else {
@@ -66,6 +68,7 @@ function process() {
   document.getElementById('main').style.display = 'block'
   document.getElementById('startup').style.display = 'none'
   document.getElementById('bstartup').style.display = 'none'
+  clearInterval(setName)
 }
 
 progressBar()
