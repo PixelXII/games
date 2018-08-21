@@ -129,9 +129,6 @@ Spell.prototype.cast = function() {  // casts spell
     player.mana = player.mana - Math.round(this.damage/2)
     if(monster.health <= 0) {
       player.exp += monster.exp
-      if(player.exp >= Math.ceil(8.7*player.level)) {
-        player.levelUp()
-      }
       nextBattle()
     } else {
       monster.health -= d
