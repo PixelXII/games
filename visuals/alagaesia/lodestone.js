@@ -17,12 +17,12 @@ function progressBar() {
         document.getElementById('loading').outerHTML = ""
         document.getElementById('enter').addEventListener('click', function() {
           process()
-          console.log('it worked')
+          id('playerlabel').innerText = playerdata.name + ":"
         });
         document.getElementById('playername').addEventListener('keypress', function(e) {
           if(e.keyCode === 13) {
             process()
-            console.log('it passes')
+            id('playerlabel').innerText = playerdata.name + ":"
           }
         });
       } else {
