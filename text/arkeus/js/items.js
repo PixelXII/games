@@ -11,3 +11,4 @@ var HealingPotion = new Item('healing potion', 'A potion of healing. The label s
 var Ale = new Item('ale', 'It\'s classic ale.', 20, true, function() { Player.hp += 10; })
 var Beer = new Item('beer', 'It\'s classic beer.', 25, true, function() { Player.hp += 15; })
 var Wine = new Item('wine', 'It\'s your average wine.', 50, true, function() { Player.hp += 25})
+var Tankard = new Item('wine', 'It smells awful.', 0, false, function() {})
