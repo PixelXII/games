@@ -66,11 +66,11 @@ var barties = function(val) {
 }
 
 var bBar = function(val) {
-     Game.location.items = []
+     Game.location.items = [Tankard]
      var Jasper = new Person('Jasper', function() {
+          document.getElementById('ie').disabled = true
           consul.dialogue('Jasper says: "Are you here to help me?"')
           setTimeout(function() {
-               document.getElementById('ie').disabled = true
                consul.dialogue('Jasper says: "Some damn critters are eating my crops. I live just towards town and across the river."')
                setTimeout(function() {
                     consul.dialogue('Jasper says: "I need someone to kill the creatures for me. I can\'t do it myself."')
@@ -85,6 +85,7 @@ var bBar = function(val) {
                          jaspersFarm.initiate()
                          setTimeout(function() {
                               document.getElementById('ie').disabled = false
+                              document.getElementById('ie').focus()
                               consul.dialogue('Jasper says: "Thank you for doing this."')
                               Jasper.dialogue = function() {
                                    consul.dialogue('Jasper says: "Thank you for doing this."')
@@ -95,7 +96,7 @@ var bBar = function(val) {
           }, 5500)
      })
      Game.location.person = Jasper
-     Game.lookForward = 'In front of you is the bar and the man sitting at it.'
+     Game.lookForward = 'In front of you is the bar and the man sitting at it. His name is Jasper.'
      Game.lookLeft = 'To your left is a small cluster of tables. It looks like there was a drinking competition recently, as there are plenty of stains on the floor, and not just from ale.'
      Game.lookRight = 'To your right is the wall of the inn.'
      Game.lookBack = 'Behind you is the lobby where Bartie sells his wares.'
