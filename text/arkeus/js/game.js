@@ -53,7 +53,7 @@ Quest.prototype.initiate = function() {
      Player.quests.push(this)
      consul.log(Game.placeholder)
      consul.dialogue('You initiated the quest "'+this.name+'".')
-     consul.info('You must ' + this.desc)
+     consul.info(this.desc)
 }
 Quest.prototype.resolve = function() {
      Player.quests.splice(Player.quests.indexOf(this), 1)
@@ -75,11 +75,12 @@ function Item(name, desc, value, edible, buffs = undefined) {
     } else {
          this.value = value
     }
-    if(this.edible == undefined) {
+    this.edible = edible
+    /* if(this.edible === undefined) {
          this.edible = false;
     } else {
          this.edible = edible
-    }
+    } */
 }
 Item.prototype.eat = function() {
     if(this.edible === false) {
@@ -244,7 +245,10 @@ Game.look = function(e) {
 }
 
 Game.health = function() {
-     consul.info('You have '+Player.hp+' out of '+Player.maxhp)
+     if(Player.hp > Player.maxhp) {
+          Player.hp = Player.maxhp
+     }
+     consul.info('You have '+Player.hp+' health out of '+Player.maxhp)
 }
 
 Game.move = function(e) {
@@ -295,8 +299,7 @@ Game.currentWeapon = function() {
 Game.quickheal = function() {
      consul.info('You rub some dirt on your wounds and get over it.')
      const oldhp = Player.hp
-     Player.hp += Math.ceil(Player.hp * 0.23)
-     console.log(Math.ceil(Player.hp * 0.23))
+     Player.hp += 1
      if(oldhp > Player.maxhp) {
           Player.hp = Player.maxhp
           consul.info('You already have ' + Player.maxhp + ' health.')
@@ -312,13 +315,10 @@ Game.quickheal = function() {
      }
 }
 
-Game.consume = function(e) {
+Game.consume = function(e) { // pass string
      e = eval(capitalClean(e))
-     if(e === undefined) {
-          consul.error('That is not an item.')
-     } else {
-          e.eat()
-     }
+     console.log(e)
+     e.eat()
 }
 
 Game.take = function(e) {
@@ -479,9 +479,12 @@ Game.talk = function(val) {
           return false;
      }
      if(person instanceof Person) {
-          if(val.toLowerCase() == person.name.toLowerCase())
-          consul.log(Game.placeholder)
-          person.dialogue.call()
+          if(val.toLowerCase() == person.name.toLowerCase()) {
+               consul.log(Game.placeholder)
+               person.dialogue.call()
+          } else {
+               consul.error('You don\'t see anyone named '+capitalize(val))
+          }
      } else {
           consul.log('That is not a person.')
      }
