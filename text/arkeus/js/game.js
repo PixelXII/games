@@ -38,12 +38,41 @@ function capitalClean(str) {
         return txt.charAt(0).toUpperCase() + txt.substr(1);
     }).replace(/\s/g, "")
 }
+function cleanUp(s) {
+    return s.toLowerCase().replace(/ /g, '-')
+}
 
-function Item(name, desc, value) {
+// Items
+
+function Item(name, desc, value, edible, buffs = undefined) {
     this.name = name
     this.desc = desc
-    this.value = value
+    this.edible = edible
+    if(buffs !== undefined) {
+         this.buffs = buffs
+    }
+    if(value === undefined) {
+         this.value = 0
+    } else {
+         this.value = value
+    }
 }
+Item.prototype.eat = function() {
+    if(this.edible === false) {
+        consul.error('The ' + this.name.toLowerCase() + ' is not edible.')
+        return false;
+    } else {
+        if(Player.inventory.includes(this)) {
+            consul.log('You consume the ' + this.name.toLowerCase())
+            Player.inventory.splice(Player.inventory.indexOf(this), 1)
+            this.buffs()
+        } else {
+            consul.error('You don\'t have a ' + this.name.toLowerCase() + ' to consume.')
+        }
+    }
+}
+
+// People
 
 function Person(name, sex, dialogue) {
     this.name = name
@@ -60,6 +89,74 @@ Person.prototype.talkto = function() {
     }
 }
 
+// Gold
+
+function Gold(amount) {
+    this.amount = amount
+    return this.amount
+}
+
+Gold.prototype.spend = function(amount) {
+     if(Player.gold.amount < amount) {
+          return false;
+     } else {
+          return this.amount
+     }
+}
+
+// Shops
+
+function Shop(name, shopkeeper, items, costs) {
+     this.name = name
+     this.shopkeeper = shopkeeper
+     this.items = items
+     this.costs = costs
+}
+
+Shop.prototype.open = function() {
+     let i = [], c = [], that = this, res;
+     this.items.forEach(function(e) {
+          i.push(e.name + ' -- $')
+          c.push(that.costs[that.items.indexOf(e)] + ', ')
+     })
+     i.forEach(function(e) {
+          res += e + c[i.indexOf(e)]
+     })
+     consul.info(this.shopkeeper + ' shows you their wares.')
+     consul.log(clean(res).replace(/, /g, "<br>"))
+}
+
+Shop.prototype.purchase = function(item) {
+     item = eval(capitalClean(item))
+     if(this.items.includes(item) === false) {
+          consul.error('The store does not have a '+item.name.toLowerCase())
+     } else {
+          if(Player.gold.spend(item.value) == false) {
+               consul.error('You don\'t have enough gold to buy the '+item.name)
+               return false;
+          } else {
+               Player.gold.amount -= this.costs[this.items.indexOf(item)]
+               consul.log('You purchase the '+item.name.toLowerCase()+' from '+this.shopkeeper+'\'s stock.')
+               Player.inventory.push(item)
+               this.items.splice(this.items.indexOf(item), 1)
+          }
+     }
+}
+
+Shop.prototype.sell = function(item) {
+     if(Player.inventory.includes(item) === false) {
+          consul.error('You don\'t have a '+item.name.toLowerCase()+' to sell.')
+     } else {
+          consul.log('You sell the '+item.name.toLowerCase()+' to '+this.shopkeeper)
+          Player.gold.amount += item.value
+          Player.inventory.splice(Player.inventory.indexOf(item), 1)
+          this.items.push(item)
+          this.costs.push(item.value)
+     }
+}
+
+// Custom consul commands
+
 consul.combat = function(e) {
     consul.log("combat :: " + e).style.color = '#ef6c00'
 }
@@ -72,9 +169,13 @@ consul.hp = function(e) {
     consul.info(e)
 }
 
-var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'items', 'equip', 'weapon', 'quickheal', 'help', 'skip tutorial', 'buy', 'sell', 'wares', 'balance']
+// Arrays
+
+var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'quickheal', 'help', 'skip tutorial', 'buy', 'sell', 'wares', 'balance']
 var mdirections = ['forward', 'back', 'left', 'right']
 var ldirections = ['forward', 'back', 'left', 'right', 'up', 'down']
+
+// Main game object
 
 var Game = {
      shops: {},
@@ -84,6 +185,8 @@ var Game = {
      },
      placeholder: '_______________________'
 };
+
+// Game functions
 
 Game.look = function(e) {
     if(e === undefined) {
@@ -173,12 +276,21 @@ Game.quickheal = function() {
      }
 }
 
+Game.consume = function(e) {
+     e = eval(capitalClean(e))
+     if(e === undefined) {
+          consul.error('That is not an item.')
+     } else {
+          e.eat()
+     }
+}
+
 Game.take = function(e) {
     e = eval(capitalClean(e))
     if(Game.location.items.includes(e)) {
         items = Game.location.items
         consul.log("You take the " + e.name)
-        var item = eval(capitalClean(e.name) + ' = new Item("'+e.name+'", "'+e.desc+'", '+e.value+')')
+        var item = eval(capitalClean(e.name) + ' = new Item("'+e.name+'", "'+e.desc+'", '+e.value+', '+e.edible+', '+e.buffs+')')
         console.log(item)
         Game.location.items.splice(items.indexOf(e), 1)
         Player.inventory.push(item)
@@ -363,6 +475,8 @@ Game.auto = function(val) {
           Game.drop(rest(val))
      } else if(val === 'balance') {
           Game.balance()
+     } else if(first(val) == 'consume') {
+          Game.consume(rest(val))
      }
      if(Game.location.shop !== undefined || Game.location.shop !== null) {
           if(first(val) == 'wares') {
@@ -413,8 +527,8 @@ Game.help = function(cmd) {
             consul.emphasis('Usage: drop [item]')
             consul.hp('Removes item from your inventory.')
         } else if(cmd === 'eat') {
-            consul.emphasis('Usage: eat [item]')
-            consul.hp('You eat the item. Item should to be edible, otherwise you might die.')
+            consul.emphasis('Usage: consume [item]')
+            consul.hp('You consume the item. Item should to be edible, otherwise you might die.')
         } else if(cmd === 'inspect') {
             consul.emphasis('Usage: inspect [item]')
             consul.hp('You take a closer look at specified item.')
