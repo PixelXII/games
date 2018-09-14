@@ -42,12 +42,31 @@ function cleanUp(s) {
     return s.toLowerCase().replace(/ /g, '-')
 }
 
+// Quests
+
+function Quest(name, desc, reward) {
+     this.name = name
+     this.desc = desc
+     this.reward = reward
+}
+Quest.prototype.initiate = function() {
+     Player.quests.push(this)
+     consul.log(Game.placeholder)
+     consul.dialogue('You initiated the quest "'+this.name+'".')
+     consul.info('You must ' + this.desc)
+}
+Quest.prototype.resolve = function() {
+     Player.quests.splice(Player.quests.indexOf(this), 1)
+     consul.log(Game.placeholder)
+     consul.dialogue('You resolved the quest "'+this.name+'".')
+     this.reward()
+}
+
 // Items
 
 function Item(name, desc, value, edible, buffs = undefined) {
     this.name = name
     this.desc = desc
-    this.edible = edible
     if(buffs !== undefined) {
          this.buffs = buffs
     }
@@ -55,6 +74,11 @@ function Item(name, desc, value, edible, buffs = undefined) {
          this.value = 0
     } else {
          this.value = value
+    }
+    if(this.edible == undefined) {
+         this.edible = false;
+    } else {
+         this.edible = edible
     }
 }
 Item.prototype.eat = function() {
@@ -74,19 +98,9 @@ Item.prototype.eat = function() {
 
 // People
 
-function Person(name, sex, dialogue) {
+function Person(name, dialogue) {
     this.name = name
-    this.sex = sex
     this.dialogue = dialogue
-}
-
-Person.prototype.talkto = function() {
-    const j = Math.round(Math.random()*this.dialogue.length)
-    if(this.dialogue === undefined) {
-        consul.dialogue(this.dialogue[0])
-    } else {
-        consul.dialogue(this.dialogue[j])
-    }
 }
 
 // Gold
@@ -169,9 +183,13 @@ consul.hp = function(e) {
     consul.info(e)
 }
 
+consul.quest = function(e) {
+     consul.dialogue('NEW QUEST!  > ' + e)
+}
+
 // Arrays
 
-var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'quickheal', 'help', 'skip tutorial', 'buy', 'sell', 'wares', 'balance']
+var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'quickheal', 'help', 'health', 'journal', 'talk to', 'skip tutorial', 'buy', 'sell', 'wares', 'balance']
 var mdirections = ['forward', 'back', 'left', 'right']
 var ldirections = ['forward', 'back', 'left', 'right', 'up', 'down']
 
@@ -181,7 +199,8 @@ var Game = {
      shops: {},
      location: {
           items: [],
-          shop: undefined
+          shop: undefined,
+          person: undefined
      },
      placeholder: '_______________________'
 };
@@ -224,6 +243,10 @@ Game.look = function(e) {
     }
 }
 
+Game.health = function() {
+     consul.info('You have '+Player.hp+' out of '+Player.maxhp)
+}
+
 Game.move = function(e) {
     if(mdirections.includes(e) === false) {
         consul.error('You cannot move in that direction.')
@@ -252,8 +275,21 @@ Game.equip = function(e) { // Pass in only text, no eval beforehand
     }
 }
 
+Game.journal = function() {
+     consul.log(Game.placeholder)
+     consul.dialogue('Quests:')
+     if(Player.quests.length > 0) {
+          Player.quests.forEach(function(e) {
+               consul.info('"'+e.name+'"')
+          });
+     } else {
+          consul.info('You have no active quests.')
+     }
+     consul.log(Game.placeholder)
+}
+
 Game.currentWeapon = function() {
-     consul.info(Player.weapon.name.toLowerCase())
+     consul.info('Your current weapon is a '+Player.weapon.name.toLowerCase())
 }
 
 Game.quickheal = function() {
@@ -436,6 +472,21 @@ Game.items = function() {
     return false;
 }
 
+Game.talk = function(val) {
+     person = Game.location.person
+     if(person === undefined) {
+          consul.error('You don\'t see anyone around.')
+          return false;
+     }
+     if(person instanceof Person) {
+          if(val.toLowerCase() == person.name.toLowerCase())
+          consul.log(Game.placeholder)
+          person.dialogue.call()
+     } else {
+          consul.log('That is not a person.')
+     }
+}
+
 Game.balance = function() {
      if(Player.gold.amount < 0) {
           Player.gold.amount = 0;
@@ -477,6 +528,14 @@ Game.auto = function(val) {
           Game.balance()
      } else if(first(val) == 'consume') {
           Game.consume(rest(val))
+     } else if(val == 'journal') {
+          Game.journal()
+     } else if(first(val) == 'talk' && second(val) == 'to') {
+          if(Game.location.person !== null || Game.location.person !== undefined) {
+               Game.talk(third(val))
+          } else {
+               consul.error('There is nobody here.')
+          }
      }
      if(Game.location.shop !== undefined || Game.location.shop !== null) {
           if(first(val) == 'wares') {
@@ -500,7 +559,7 @@ Game.help = function(cmd) {
         commands.forEach(function(e) {
             if(e !== 'skip tutorial') {
                  if(e === 'buy') {
-                      consul.header('Shop commands: ')
+                      consul.header('<br>Shop commands: ')
                       consul.log(Game.placeholder)
                  }
                 consul.info(e)
@@ -543,6 +602,9 @@ Game.help = function(cmd) {
         } else if(cmd === 'quickheal') {
              consul.emphasis('Usage: quickheal')
              consul.info('Heals a small portion of your health.')
+        } else if(cmd === 'journal') {
+             consul.emphasis('Usage: journal')
+             consul.info('Displays your active quests.')
         } else if(cmd === 'weapon') {
              consul.emphasis('Usage: weapon')
              consul.info('Displays currently equipped weapon.')
@@ -558,6 +620,9 @@ Game.help = function(cmd) {
         } else if(cmd === 'balance') {
              consul.emphasis('Usage: balance')
              consul.info('Displays your balance in gold.')
+        } else if(cmd === 'talk to') {
+             consul.emphasis('Usage: talk to [person]')
+             consul.info('Starts a conversation with the nearest person.')
         }
     }
 }
