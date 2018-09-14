@@ -13,15 +13,20 @@ var Player = {
     maxhp: 50,
     weapon: SteelSword,
     inventory: [],
+    quests: [],
     inCombat: false,
     gold: new Gold(500)
+}
+
+function firstandsecond(v) {
+     return v.split(' ')[0] + ' ' + v.split(' ')[1]
 }
 
 // main handler
 
 function parse(val) {
         val = clean(val)
-        if(commands.includes(first(val)) || val == 'skip tutorial') {
+        if(commands.includes(first(val)) || val == 'skip tutorial' || firstandsecond(val) == 'talk to') {
             if(val.includes('help')) {
                 consul.log('> '+val)
                 Game.help(rest(val))
@@ -42,33 +47,27 @@ function parse(val) {
                  Game.currentWeapon()
                  return false;
             }
-        
+          consul.log('> '+val)
             if(Player.location === 'tutorial-start') {
-                consul.log('> '+val)
                 tutorialStart(val)
             } else if(Player.location === 'rockpile') {
-                consul.log('> '+val)
                 tutorialPile(val)
             } else if(Player.location === 'mine') {
-                consul.log('> '+val)
                 tutorialMine(val)
             } else if(Player.location === 'chamber') {
-                consul.log('> '+val)
                 tutorialChamber(val)
             } else if(Player.location === 'second-tunnel') {
-                consul.log('> '+val)
                 sTunnel(val)
             } else if(Player.location === 'shrine') {
-                consul.log('> '+val)
                 shrineTutorial(val)
             } else if(Player.location === 'nw-saeur') {
-                consul.log('> '+val)
                 nwS(val)
             } else if(Player.location == 'outskirts') {
-                 consul.log('> '+val)
                  outskirts(val)
             } else if(Player.location == 'barties') {
                  barties(val)
+            } else if(Player.location == 'barties-bar') {
+                 bBar(val)
             }
         } else {
             if(val !== '') {
