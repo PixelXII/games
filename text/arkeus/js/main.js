@@ -25,7 +25,7 @@ function firstandsecond(v) {
 // main handler
 
 function parse(val) {
-        val = clean(val)
+        val = clean(val.toLowerCase())
         if(commands.includes(first(val)) || val == 'skip tutorial' || firstandsecond(val) == 'talk to') {
             if(val.includes('help')) {
                 consul.log('> '+val)
