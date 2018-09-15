@@ -73,6 +73,8 @@ function parse(val) {
                  bInn(val)
             } else if(Player.location == 'barties-hall-end') {
                  hEnd(val)
+            } else if(Player.location == 'barties-room') {
+                 jRoom(val)
             }
         } else {
             if(val !== '') {
