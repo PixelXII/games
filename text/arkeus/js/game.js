@@ -76,11 +76,6 @@ function Item(name, desc, value, edible, buffs = undefined) {
          this.value = value
     }
     this.edible = edible
-    /* if(this.edible === undefined) {
-         this.edible = false;
-    } else {
-         this.edible = edible
-    } */
 }
 Item.prototype.eat = function() {
     if(this.edible === false) {
@@ -102,6 +97,40 @@ Item.prototype.eat = function() {
 function Person(name, dialogue) {
     this.name = name
     this.dialogue = dialogue
+}
+
+// Weapons
+
+function Weapon(type, name, damage, desc) {
+    this.damage = damage
+    this.desc = desc
+    this.name = name
+    this.type = type
+    return this
+}
+
+Weapon.prototype.use = function(target) {
+    let dmg = parseInt(Math.round((Math.random()*3)+this.damage))
+    if(dmg > target.hp) {
+        target.hp = 0;
+    } else {
+        target.hp -= dmg
+    }
+    if(target.hp < 0) {
+        target.hp = 0
+    }
+    consul.combat('You did ' + dmg + ' damage to the ' + target.name.toLowerCase())
+}
+
+Weapon.prototype.mUse = function(user) {
+    let dmg = parseInt(Math.round((Math.random()*3)+this.damage))
+    if(dmg > Player.hp) {
+        Player.health = 0
+    } else {
+        Player.hp -= dmg
+    }
+    consul.combat('The ' + user.name + ' did ' + dmg + ' damage.')
+    consul.hp('You have ' + Player.hp + ' health left.')
 }
 
 // Gold
@@ -206,6 +235,20 @@ var Game = {
      placeholder: '_______________________'
 };
 
+Game.reset = function() {
+     Game.moveRight = ''
+     Game.moveLeft = ''
+     Game.moveForward = ''
+     Game.moveBack = ''
+     Game.right = ''
+     Game.left = ''
+     Game.forward = ''
+     Game.back = ''
+     Game.location.items = []
+     Game.location.person = undefined
+     Game.location.shop = undefined
+}
+
 // Game functions
 
 Game.look = function(e) {
@@ -255,6 +298,9 @@ Game.move = function(e) {
     if(mdirections.includes(e) === false) {
         consul.error('You cannot move in that direction.')
         return false;
+    }
+    if(eval('Game.move'+capitalize(e)) === '') {
+         return false;
     }
     consul.log('_______________________')
     consul.log('You move ' + e)
