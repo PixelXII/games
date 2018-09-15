@@ -53,7 +53,7 @@ var barties = function(val) {
      Game.back = 'outskirts'
      Game.moveRight = 'You walk through the doorway and enter the bar area. There is one man at the bar, and he looks sad and worried about something.'
      Game.right = 'barties-bar'
-     Game.moveLeft = 'You trudge up the stairs to the guests\' rooms.'
+     Game.moveLeft = 'You trudge up the stairs to the guests\' rooms. <br> <br> You arrive in a long hallway with rooms on the left.'
      Game.left = 'barties-inn'
      var bartie = new Shop('Bartie\'s Food and Brew', 'Bartie', [HealingTea, Ale, Beer, Wine], [10, 10, 15, 20])
      Game.location.shop = bartie
@@ -109,3 +109,22 @@ var bBar = function(val) {
      Game.auto(val)
      
 }
+
+var bInn = function(val) {
+     Game.location.items = [Mug]
+     Game.moveBack = 'You descend back down the stairs and return to the main chamber.'
+     Game.back = 'barties'
+     Game.lookLeft = 'On your left is a door, leading to a guest\'s room.'
+     Game.lookRight = 'On your right is the wall of the hallway.'
+     Game.lookForward = 'Ahead the hallway continues for about 100 feet, then stops at a small wall with a painting on it.'
+     Game.lookBack = 'Behind you, the stairs lead down to the storefront.'
+     Game.lookDown = 'Below you are the floorboards of the hallway.'
+     Game.forward = 'barties-hall-end'
+     Game.moveForward = 'You walk down the hallway, the floorboards creaking under your feet.'
+     Game.right = Player.location
+     Game.left = Player.location
+     
+     Game.auto(val)
+}
+
+var hEnd = function(val) {}
