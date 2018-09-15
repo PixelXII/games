@@ -1,5 +1,6 @@
 var ie = document.getElementById('ie')
 var nwS = function(val) {
+     Game.reset()
     Game.lookForward = 'Ahead of you is a road leading to a small village.'
     Game.lookBack = 'Behind you is the tunnel entrance, now sealed over with a strong iron grate.'
     Game.lookRight = 'To your right is a massive oak tree. It looks like it\'s hundreds of years old.'
@@ -21,6 +22,7 @@ var nwS = function(val) {
 }
 
 var outskirts = function(val) {
+     Game.reset()
      Game.lookForward = 'Ahead of you is a small town. There is a sign on the side of the road, telling you that the name of the town is Rivergate.'
      Game.lookBack = 'Behind you is the top of the staircase.'
      Game.lookRight = 'To your right is a small inn. It\'s called "Bartie\'s Food and Brew"'
@@ -42,9 +44,9 @@ var outskirts = function(val) {
 }
 
 var barties = function(val) {
-     Game.location.items = []
+     Game.reset()
      Game.lookForward = 'In front of you, a small shopkeeper takes care of the store.'
-     Game.lookBack = 'Behind you, the door swings shut.'
+     Game.lookBack = 'Behind you, the door gently rocks on its hinges.'
      Game.lookRight = 'On your right, a doorway opens to a room with many tables and a bar.'
      Game.lookLeft = 'To your left is a small stairway leading up to the second story, where the inn\'s guests sleep.'
      Game.lookDown = 'Below you are the floorboards of Bartie\'s Food and Brew. They are smooothed with use, and you can see stains and dropped trinkets between the cracks.'
@@ -59,13 +61,10 @@ var barties = function(val) {
      Game.location.shop = bartie
      
      Game.auto(val)
-     barties = function(val) {
-          Game.lookBack = 'The door to the road outside is closed.'
-          Game.auto(val)
-     }
 }
 
 var bBar = function(val) {
+     Game.reset()
      Game.location.items = [Tankard]
      var Jasper = new Person('Jasper', function() {
           document.getElementById('ie').disabled = true
@@ -111,6 +110,7 @@ var bBar = function(val) {
 }
 
 var bInn = function(val) {
+     Game.reset()
      Game.location.items = [Mug]
      Game.moveBack = 'You descend back down the stairs and return to the main chamber.'
      Game.back = 'barties'
@@ -127,4 +127,79 @@ var bInn = function(val) {
      Game.auto(val)
 }
 
-var hEnd = function(val) {}
+var hEnd = function(val) {
+     Game.reset()
+     Game.moveBack = 'You move back towards the stairs.'
+     Game.back = 'barties-inn'
+     Game.moveLeft = 'You step inside the room.'
+     Game.left = 'barties-room'
+     Game.right = 'barties-hall-end'
+     Game.forward = Game.right
+     
+     Game.lookRight = 'On your right is a small window. You can hear the roaring of the river from inside the hallway.'
+     Game.lookLeft = 'On your left is an open door that leads to a guest room. There is no one inside.'
+     Game.lookForward = 'On the wall is a painting. You\'ve seen it before, but it doesn\'t ring any bells.'
+     Game.lookBack = 'Behind you is the beginning of the hallway, at the top of the stairs.'
+     Game.auto(val)
+}
+
+var jRoom = function(val) {
+     var lo = Player.location
+     Game.location.items = [Pickaxe, HealingTea, Tankard, Ale]
+     Game.moveBack = 'You slowly back out of the room.'
+     Game.back = 'barties-hall-end'
+     Game.moveForward = lo
+     Game.moveRight = lo
+     Game.moveLeft = lo
+     Game.lookLeft = 'On your left is a small bed.'
+     Game.lookRight = 'To your right is a desk and a small nightstand. There is an empty tankard on the desk, and a full one right next to it.'
+     Game.lookForward = 'Ahead is the far wall of the room.'
+     Game.lookBack = 'Behind you is the small window in the hallway.'
+     Game.auto(val)
+     jRoom = function(val) {
+          var lo = Player.location
+          Game.location.items = [Pickaxe, HealingTea, Tankard, Ale]
+          Game.moveBack = 'You slowly back out of the room.'
+          Game.back = 'barties-hall-end'
+          Game.moveForward = lo
+          Game.moveRight = lo
+          Game.moveLeft = lo
+          Game.lookLeft = 'On your left is a small bed.'
+          Game.lookRight = 'To your right is a desk and a small nightstand. There is an empty tankard on the desk, and a full one right next to it.'
+          Game.lookForward = 'Ahead is the far wall of the room.'
+          Game.lookBack = 'Behind you is the small window in the hallway.'
+          Game.auto(val)
+          jRoom = function(val) {
+               var lo = Player.location
+               Game.location.items = [Pickaxe, HealingTea, Tankard, Ale]
+               Game.moveBack = 'You slowly back out of the room.'
+               Game.back = 'barties-hall-end'
+               Game.moveForward = lo
+               Game.moveRight = lo
+               Game.moveLeft = lo
+               Game.lookLeft = 'On your left is a small bed.'
+               Game.lookRight = 'To your right is a desk and a small nightstand. There is an empty tankard on the desk, and a full one right next to it.'
+               Game.lookForward = 'Ahead is the far wall of the room.'
+               Game.lookBack = 'Behind you is the small window in the hallway.'
+               Game.auto(val)
+               jRoom = function() {
+                    document.getElementById('ie').disabled = true
+                    consul.info('Jasper enters the room.')
+                    consul.dialogue('Jasper says: "What are you doing in my room?"')
+                    setTimeout(function() {
+                         consul.dialogue('Jasper says: "Sneaking around... I don\'t like it."')
+                         setTimeout(function() {
+                              consul.info('Jasper has left the room.')
+                              document.getElementById('ie').disabled = false
+                              document.getElementById('ie').focus()
+                         }, 5600)
+                    }, (Math.random()*5500)+1500)
+               }
+          }
+     }
+}
+
+
+
+
+
