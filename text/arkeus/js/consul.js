@@ -89,7 +89,8 @@ var consul = {
             p.style.position = 'sticky'
             p.style.backgroundColor = this.background
             p.style.top = '0'
-            p.innerText = e
+            p.innerHTML = e
+            return p
         }
     },
     input: function(callback) {
