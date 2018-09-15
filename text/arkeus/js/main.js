@@ -1,7 +1,7 @@
 // global
 
 var consuul = consul.create(new Element('div', document.body), '650', 'calc(100%-30)', 'black', '#0097a7', '#1565c0', '#ffffff')
-consul.title('Arkeus')
+var ti = consuul.title(`<img src="assets/ark.png" width='20' height='20' style="padding-right:6px;">Arkeus`).innerHTML 
 var inputstyle = consul.input(parse, true)
 inputstyle.id = 'ie'
 inputstyle.style.width = 1000
@@ -69,6 +69,10 @@ function parse(val) {
                  barties(val)
             } else if(Player.location == 'barties-bar') {
                  bBar(val)
+            } else if(Player.location == 'barties-inn') {
+                 bInn(val)
+            } else if(Player.location == 'barties-hall-end') {
+                 hEnd(val)
             }
         } else {
             if(val !== '') {
