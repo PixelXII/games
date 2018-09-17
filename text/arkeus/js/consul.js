@@ -85,10 +85,14 @@ var consul = {
             p.style.padding = '0'
             p.style.paddingBottom = '4px'
             p.style.paddingTop = '6px'
-            p.style.borderBottom = '4px solid ' + this.styleColor
+            p.style.border = '4px double ' + this.styleColor
+            p.style.borderRight = '4px solid ' + this.styleColor
+            p.style.borderTop = null
             p.style.position = 'sticky'
             p.style.backgroundColor = this.background
             p.style.top = '0'
+            p.style.opacity = '0.75'
+            p.style.boxShadow = '-1.5px 1px 2px ' + this.accentColor
             p.innerHTML = e
             return p
         }
