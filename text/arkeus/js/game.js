@@ -223,7 +223,7 @@ consul.quest = function(e) {
 
 // Arrays
 
-var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'quickheal', 'help', 'health', 'journal', 'talk to', 'skip tutorial', 'buy', 'sell', 'wares', 'balance']
+var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'help', 'health', 'journal', 'talk to', 'skip tutorial', 'buy', 'sell', 'wares', 'balance']
 var mdirections = ['forward', 'back', 'left', 'right']
 var ldirections = ['forward', 'back', 'left', 'right', 'up', 'down']
 
@@ -454,6 +454,7 @@ Game.inventory = function() {
 
 
 Game.combat = function(opp, input) {
+     sounds.equip.play()
     if(opp.dead === true) {
         return false;
     } else {
@@ -656,9 +657,6 @@ Game.help = function(cmd) {
         } else if(cmd === 'equip') {
              consul.emphasis('Usage: equip [weapon]')
              consul.info('Weapon must be in your inentory. Sends old weapon to your inventory.')
-        } else if(cmd === 'quickheal') {
-             consul.emphasis('Usage: quickheal')
-             consul.info('Heals a small portion of your health.')
         } else if(cmd === 'journal') {
              consul.emphasis('Usage: journal')
              consul.info('Displays your active quests.')
