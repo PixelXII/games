@@ -24,7 +24,7 @@ var nwS = function(val) {
 var outskirts = function(val) {
      Game.reset()
      Game.lookForward = 'Ahead of you is a small town. There is a sign on the side of the road, telling you that the name of the town is Rivergate.'
-     Game.lookBack = 'Behind you is the top of the staircase.'
+     Game.lookBack = 'Behind you is the iron grate.'
      Game.lookRight = 'To your right is a small inn. It\'s called "Bartie\'s Food and Brew"'
      Game.lookLeft = 'On your left is the river.'
      Game.moveBack = 'You move back to the top of the stairs.'
@@ -39,6 +39,18 @@ var outskirts = function(val) {
      Game.location.items = [Stick, Rock, Acorn, Stick, Acorn, Pickaxe]
      Game.auto(val)
      outskirts = function(val) {
+          Game.lookForward = 'Ahead of you is a small town. There is a sign on the side of the road, telling you that the name of the town is Rivergate.'
+          Game.lookBack = 'Behind you is the iron grate.'
+          Game.lookRight = 'To your right is a small inn. It\'s called "Bartie\'s Food and Brew"'
+          Game.lookLeft = 'On your left is the river.'
+          Game.moveBack = 'You move back to the top of the stairs.'
+          Game.back = 'nw-saeur'
+          Game.moveLeft = 'You cannot step into the river.'
+          Game.left = 'outskirts'
+          Game.moveRight = 'You step up to the inn and enter.'
+          Game.right = 'barties'
+          Game.moveForward = 'You walk into town.'
+          Game.forward = 'rivergate'
           Game.auto(val)
      }
 }
@@ -59,6 +71,7 @@ var barties = function(val) {
      Game.left = 'barties-inn'
      var bartie = new Shop('Bartie\'s Food and Brew', 'Bartie', [HealingTea, Ale, Beer, Wine], [10, 10, 15, 20])
      Game.location.shop = bartie
+     
      
      Game.auto(val)
 }
@@ -197,14 +210,12 @@ var jRoom = function(val) {
                               consul.info('Jasper has left the room.')
                               document.getElementById('ie').disabled = false
                               document.getElementById('ie').focus()
+                              jRoom = function(val) {
+                                   consul.dialogue('You probably shouldn\'t.')
+                              }
                          }, 5600)
                     }, (Math.random()*5500)+1500)
                }
           }
      }
 }
-
-
-
-
-
