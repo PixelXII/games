@@ -50,6 +50,7 @@
   var gold = new Gold(goldamount)
   ````
   
+  
   ### NPC-Owned Shops
   
   ````javascript
