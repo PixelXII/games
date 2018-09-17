@@ -172,10 +172,14 @@ Shop.prototype.open = function() {
 
 Shop.prototype.purchase = function(item) {
      item = eval(capitalClean(item))
+     if(item === undefined) {
+          consul.error('That is not an item.')
+          return false;
+     }
      if(this.items.includes(item) === false) {
           consul.error('The store does not have a '+item.name.toLowerCase())
      } else {
-          if(Player.gold.spend(item.value) == false) {
+          if(Player.gold.spend(item.value) === false) {
                consul.error('You don\'t have enough gold to buy the '+item.name)
                return false;
           } else {
@@ -312,6 +316,7 @@ Game.move = function(e) {
 Game.equip = function(e) { // Pass in only text, no eval beforehand
     e = eval(capitalClean(e))
     var inv = Player.inventory
+    sounds.equip.play()
     if(e.type === undefined) {
          return false;
     }
@@ -364,6 +369,7 @@ Game.quickheal = function() {
 Game.consume = function(e) { // pass string
      e = eval(capitalClean(e))
      console.log(e)
+     sounds.consume.play()
      e.eat()
 }
 
@@ -585,6 +591,8 @@ Game.auto = function(val) {
           } else {
                consul.error('There is nobody here.')
           }
+     } else if(first(val) == 'health') {
+          Game.health()
      }
      if(Game.location.shop !== undefined || Game.location.shop !== null) {
           if(first(val) == 'wares') {
