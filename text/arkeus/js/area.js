@@ -144,6 +144,7 @@ var hEnd = function(val) {
 }
 
 var jRoom = function(val) {
+     Game.reset()
      var lo = Player.location
      Game.location.items = [Pickaxe, HealingTea, Tankard, Ale]
      Game.moveBack = 'You slowly back out of the room.'
@@ -182,7 +183,11 @@ var jRoom = function(val) {
                Game.lookForward = 'Ahead is the far wall of the room.'
                Game.lookBack = 'Behind you is the small window in the hallway.'
                Game.auto(val)
-               jRoom = function() {
+               jRoom = function(val) {
+                    if(val === 'move back') {
+                         Game.auto(val)
+                         return false;
+                    }
                     document.getElementById('ie').disabled = true
                     consul.info('Jasper enters the room.')
                     consul.dialogue('Jasper says: "What are you doing in my room?"')
