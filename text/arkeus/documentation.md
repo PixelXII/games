@@ -49,3 +49,12 @@
   ````javascript
   var gold = new Gold(goldamount)
   ````
+  
+  ### NPC-Owned Shops
+  
+  ````javascript
+  var shop = new Shop('shopname', 'shopkeepersname', [Item, Item], [item1price, item2price])
+  var bar = new Shop('bar', 'bartender', [Beer, Ale, Wine], [15, 25, 40])
+  ````
+  
+  Shop.items (````[Beer, Ale, Wine]````) has the corresponding prices in Shop.costs (````[15, 25, 40]````).
