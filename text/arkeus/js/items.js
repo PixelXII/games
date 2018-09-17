@@ -33,6 +33,6 @@ var SteelSpear = new Weapon(spear, 'Steel Spear', 13, 'A simple steel spear.')
 var OrichalcumSpear = new Weapon(spear, 'Orichalcum Spear', 15, 'The orichalcum in the spear gives off a light without color.')
 
 var CleodianDagger = new Weapon('dagger', 'Cleodian Dagger', 20, 'Whoever wielded this dagger last must have had immense strength, as the dagger is very heavy.')
-var RoransHammer = new Weapon('hammer', 'Roran\'s Hammer', 19, 'The hammer looks like a blacksmith\'s hammer.')
+var Hammer = new Weapon('hammer', 'hammer', 19, 'The hammer looks like a blacksmith\'s hammer.')
 var NocriteKatana = new Weapon('katana', 'Nocrite Katana', 22, 'The katana gleams in the light of the sun, giving off a warm glow.')
 var StiraothsStaff = new Weapon(sword, "Stiraoth's Quarterstaff", 21, 'The previous owner of this staff was either very rich or had a lot of skill with woodcarving, because the staff has many intricate carvings. Some depict stories of battles, and others are just designs.')
