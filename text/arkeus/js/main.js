@@ -1,13 +1,15 @@
 // global
 
 var consuul = consul.create(new Element('div', document.body), '650', 'calc(100%-30)', 'black', '#0097a7', '#1565c0', '#ffffff')
-var ti = consuul.title(`<img src="assets/ark.png" width='20' height='20' style="padding-right:6px;">Arkeus`).innerHTML 
+var ti = consuul.title(`<img src="assets/ark.png" width='20' height='20' style="padding-right:6px;">Arkeus`)
+ti.style.borderBottomStyle = 'double'
 var inputstyle = consul.input(parse, true)
 inputstyle.id = 'ie'
 inputstyle.style.width = 1000
 consul.emphasis('You are in the tutorial. To skip the tutorial, type "skip tutorial"')
 consul.dialogue('If you\'re new to this game, or text games in general, you should complete the tutorial.')
 consul.log('First, try "look" or "look around"')
+document.body.style.height = null
 var Player = {
     location: 'tutorial-start',
     hp: 50,
