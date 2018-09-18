@@ -234,7 +234,8 @@ var Game = {
      location: {
           items: [],
           shop: undefined,
-          person: undefined
+          person: undefined,
+          opponent: undefined,
      },
      placeholder: '_______________________'
 };
@@ -248,6 +249,7 @@ Game.reset = function() {
      Game.left = ''
      Game.forward = ''
      Game.back = ''
+     Game.location.opponent = undefined
      Game.location.items = []
      Game.location.person = undefined
      Game.location.shop = undefined
@@ -310,7 +312,6 @@ Game.move = function(e) {
     consul.log('You move ' + e)
     consul.log(eval('this.move'+capitalize(e)));
     Player.location = eval('this.'+e.toLowerCase());
-    console.log(Player.location)
 }
 
 Game.equip = function(e) { // Pass in only text, no eval beforehand
@@ -453,7 +454,8 @@ Game.inventory = function() {
 
 
 
-Game.combat = function(opp, input) {
+Game.combat = function(input) {
+     var opp = Game.location.opponent
      sounds.equip.play()
     if(opp.dead === true) {
         return false;
@@ -576,6 +578,8 @@ Game.auto = function(val) {
           Game.look(second(val))
      } else if(first(val) == 'items') {
           Game.items()
+     } else if(val == 'attack') {
+          Game.combat(opponent)
      } else if(first(val) == 'take') {
           Game.take(rest(val))
      } else if(first(val) == 'drop') {
