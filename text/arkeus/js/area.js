@@ -1,4 +1,4 @@
-var ie = document.getElementById('ie')
+var opponent;
 var nwS = function(val) {
      Game.reset()
     Game.lookForward = 'Ahead of you is a road leading to a small village.'
@@ -49,8 +49,8 @@ var outskirts = function(val) {
           Game.left = 'outskirts'
           Game.moveRight = 'You step up to the inn and enter.'
           Game.right = 'barties'
-          Game.moveForward = 'You walk into town.'
-          Game.forward = 'rivergate'
+          Game.moveForward = 'You walk towards town.'
+          Game.forward = 'bridge'
           Game.auto(val)
      }
 }
@@ -217,5 +217,46 @@ var jRoom = function(val) {
                     }, (Math.random()*5500)+1500)
                }
           }
+     }
+}
+
+function junct(val) {
+     Game.reset()
+     Game.moveLeft = 'You cross the bridge to the other side.'
+     Game.left = 'jFarm'
+     Game.moveBack = 'You walk away from town, to the inn entrance.'
+     Game.back = 'outskirts'
+     Game.moveForward = 'You walk into town.'
+     Game.forward = 'rivergate-gate'
+     Game.moveRight = 'You cannot step over the wall.'
+     Game.right = 'bridge'
+     Game.lookRight = 'On your right is a small stone wall. It looks to be around 50 years old.'
+     Game.lookLeft = 'On your left is a small wooden bridge. You can see a hammer and a bag of nails nearby, hinting that it was repaired recently.'
+     Game.lookDown = 'Below you, a stone road becomes the prevalent feature of the ground. You can see ruts and gaps in the road where carriages and chariots\' wheels have made their mark.'
+     Game.lookBack = 'Behind you is the front yard of the inn.'
+     Game.lookForward = 'In front of you, the road continues for a short distance, then passes the gates of town and enters Rivergate.'
+     
+     Game.auto(val)
+}
+
+var jFarm = function(val) {
+     Game.location.items = [Rock, Pickaxe]
+     Game.location.opponent = {
+          hp:50,
+          name: 'Raccoon',
+          weapon: Claws
+     }
+     Game.lookForward = 'In front of you is a dilapidated barn.'
+     Game.lookRight = 'To your right is a field of unidentifiable vegetables.'
+     Game.lookLeft = 'On your left is a large open space. A wall separates it from the farm, and it doesn\'t seem to be part of the farm.'
+     Game.lookBack = 'Behind you is the small bridge you crossed over.'
+     Game.moveBack = 'You cross over the bridge, back to the road to town.'
+     Game.moveForward = 'The door to the barn is locked.'
+     Game.moveLeft = ''
+     
+     Game.auto(val)
+     
+     jFarm = function(val) {
+          
      }
 }
