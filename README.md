@@ -1,5 +1,5 @@
 # Text - Based Adventures
 
-['Text'](https://pixelxii.github.io/text) is a repository for text-based games, such as [Zork](http://www.zorkonline.net).
+pixelxii/Games is a repo for games, both text-based and DOM-based.
 
-
+Licensed under the ````MIT License````.
