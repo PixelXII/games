@@ -32,6 +32,8 @@ var IronSpear = new Weapon(spear, 'Iron Spear', 11, 'A simple iron spear.')
 var SteelSpear = new Weapon(spear, 'Steel Spear', 13, 'A simple steel spear.')
 var OrichalcumSpear = new Weapon(spear, 'Orichalcum Spear', 15, 'The orichalcum in the spear gives off a light without color.')
 
+var Claws = new Weapon('claws', 'claws', 3, 'They\'re an animal\'s claws.')
+
 var CleodianDagger = new Weapon('dagger', 'Cleodian Dagger', 20, 'Whoever wielded this dagger last must have had immense strength, as the dagger is very heavy.')
 var Hammer = new Weapon('hammer', 'hammer', 19, 'The hammer looks like a blacksmith\'s hammer.')
 var NocriteKatana = new Weapon('katana', 'Nocrite Katana', 22, 'The katana gleams in the light of the sun, giving off a warm glow.')
