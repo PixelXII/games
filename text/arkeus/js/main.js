@@ -85,7 +85,9 @@ function parse(val) {
                  jFarm(val)
             } else if(Player.location == 'jFarm-field') {
                  jField(val)
-            } //else if(Player.location == '')
+            } else if(Player.location == 'jFarm-hole') {
+                 jFarmhole(val)
+            }
         } else {
             if(val !== '') {
                 consul.error('"'+val + '"'+' is not a command. Type "help" for a list of commands.')
