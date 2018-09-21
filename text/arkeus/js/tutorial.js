@@ -94,7 +94,7 @@ function tutorialMine(val) {
 }
 
 var tutorialChamber = function(val) {
-    opponent = {
+    Game.location.opponent = {
         name: 'Miner',
         hp:Player.hp,
         weapon: IronSword,
@@ -102,16 +102,16 @@ var tutorialChamber = function(val) {
     }
     if(first(val) === 'attack') {
         Player.inCombat === true
-        Game.combat(opponent, document.getElementById('ie'))
+        Game.combat(document.getElementById('ie'))
     } else {
         consul.log("'attack' to continue the tutorial")
     }
     tutorialChamber = function(val) {
         if(val == 'attack') {
             Player.inCombat === true;
-            Game.combat(opponent, document.getElementById('ie'))
+            Game.combat(document.getElementById('ie'))
         } else if(first(val) === 'move') {
-            if(opponent.dead === true) {
+            if(Game.location.opponent.dead === true) {
                 Game.moveForward = 'You step over the miner\'s body and make your way to the tunnel on the far side of the chamber. <br> <br> Here, you should do "items", then "take stone" to continue.'
             } else {
                 Game.moveForward = 'You dodge his blow and quickly run off to the other tunnel entrance. He trips over the log he was sitting on and knocks himself out. <br> <br> Here, you should do "items", then "take stone" to continue.'
@@ -133,7 +133,7 @@ var tutorialChamber = function(val) {
 
 var sTunnel = function(val) {
     Game.location.items = [Stone]
-    if(opponent.dead === true) {
+    if(Game.location.opponent.dead === true) {
         Game.lookBack = 'Behind you is the cavern where the old miner\'s body lies.'
     } else {
         Game.lookBack = 'Behind you is the cavern where the miner lies unconscious.'
