@@ -13,6 +13,8 @@ var Beer = new Item('beer', 'It\'s classic beer.', 25, true, function() { Player
 var Wine = new Item('wine', 'It\'s your average wine.', 50, true, function() { Player.hp += 25; Game.health(); })
 var Tankard = new Item('wine', 'It smells awful.', 0, false, function() {})
 var Mug = new Item('mug', 'It smells like beer.', 0, false, function() {})
+var Carrot = new Item('carrot', 'It smells like fresh soil.', 8, true, function() {})
+var Potato = new Item('potato', 'It\'s a fresh red potato.', 10, true, function() {})
 
 var sword = 'sword'
 var mace = 'mace'
@@ -32,7 +34,8 @@ var IronSpear = new Weapon(spear, 'Iron Spear', 11, 'A simple iron spear.')
 var SteelSpear = new Weapon(spear, 'Steel Spear', 13, 'A simple steel spear.')
 var OrichalcumSpear = new Weapon(spear, 'Orichalcum Spear', 15, 'The orichalcum in the spear gives off a light without color.')
 
-var Claws = new Weapon('claws', 'claws', 3, 'They\'re an animal\'s claws.')
+var Claws = new Weapon('natural', 'claws', 3, 'They\'re an animal\'s claws.')
+var LargeClaws = new Weapon('natural', 'large claws', 5, 'They\'re large animal claws.')
 
 var CleodianDagger = new Weapon('dagger', 'Cleodian Dagger', 20, 'Whoever wielded this dagger last must have had immense strength, as the dagger is very heavy.')
 var Hammer = new Weapon('hammer', 'hammer', 19, 'The hammer looks like a blacksmith\'s hammer.')
