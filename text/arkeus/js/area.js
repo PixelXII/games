@@ -328,7 +328,7 @@ var jField = function(val) {
      }
 }
 
-var jFarm-hole = function(val) {
+var jFarmhole = function(val) {
      Game.reset()
      Game.lookLeft = 'On your left is an open expanse of field and a small stone wall on the edge.'
      Game.lookRight = 'On your right is a small stone wall.'
