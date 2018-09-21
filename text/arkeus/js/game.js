@@ -183,6 +183,7 @@ Shop.prototype.purchase = function(item) {
                consul.error('You don\'t have enough gold to buy the '+item.name)
                return false;
           } else {
+               sounds.coin.play()
                Player.gold.amount -= this.costs[this.items.indexOf(item)]
                consul.log('You purchase the '+item.name.toLowerCase()+' from '+this.shopkeeper+'\'s stock.')
                Player.inventory.push(item)
@@ -195,6 +196,7 @@ Shop.prototype.sell = function(item) {
      if(Player.inventory.includes(item) === false) {
           consul.error('You don\'t have a '+item.name.toLowerCase()+' to sell.')
      } else {
+          sounds.coin.play()
           consul.log('You sell the '+item.name.toLowerCase()+' to '+this.shopkeeper)
           Player.gold.amount += item.value
           Player.inventory.splice(Player.inventory.indexOf(item), 1)
@@ -237,18 +239,36 @@ var Game = {
           person: undefined,
           opponent: undefined,
      },
-     placeholder: '_______________________'
+     placeholder: '_______________________',
+     combatElement: undefined,
+     muted: false
 };
+
+Game.mute = function() {
+     sounds.coin.volume = 0;
+     sounds.atk.volume = 0;
+     sounds.consume.volume = 0;
+     sounds.equip.volume = 0;
+     Game.muted = true
+}
+
+Game.unmute = function() {
+     sounds.coin.volume = 1
+     sounds.atk.volume = 1
+     sounds.consume.volume = 1
+     sounds.equip.volume = 1
+     Game.muted = false
+}
 
 Game.reset = function() {
      Game.moveRight = ''
      Game.moveLeft = ''
      Game.moveForward = ''
      Game.moveBack = ''
-     Game.right = ''
-     Game.left = ''
-     Game.forward = ''
-     Game.back = ''
+     Game.right = Player.location
+     Game.left = Player.location
+     Game.forward = Player.location
+     Game.back = Player.location
      Game.location.opponent = undefined
      Game.location.items = []
      Game.location.person = undefined
@@ -400,7 +420,6 @@ Game.shops.open = function() {
 }
 
 Game.shops.purchase = function(item) {
-     console.log(item)
      var s = Game.location.shop
      if(s !== undefined) {
           s.purchase(item)
@@ -412,7 +431,6 @@ Game.shops.purchase = function(item) {
 
 Game.shops.sell = function(item) {
      item = eval(capitalClean(item))
-     console.log(item)
      var s = Game.location.shop
      if(s !== undefined) {
           s.sell(item)
@@ -456,21 +474,30 @@ Game.inventory = function() {
 
 Game.combat = function(input) {
      var opp = Game.location.opponent
-     sounds.equip.play()
+     var g = Game.combatElement
+     if(opp === undefined) {
+          consul.error('There is nothing to fight here.')
+          Player.inCombat = false;
+          return false;
+     }
     if(opp.dead === true) {
         return false;
     } else {
     Player.weapon.use(opp)
         if(opp.hp <= 0) {
             opp.hp = 0;
+            sounds.atk.play()
             Player.inCombat = false;
             opp.dead = true
             input.disabled = false
             input.focus()
             consul.hp('You killed the ' + opp.name.toLowerCase())
-            Game.location.items.push(opp.weapon)
+            if(opp.weapon.type !== 'natural') {
+               Game.location.items.push(opp.weapon)
+            }
             return false;
         } else {
+             sounds.atk.play()
             input.disabled = true
             consul.hp('The '+ opp.name.toLowerCase() + ' has ' + opp.hp + ' health left.')
         }
@@ -493,6 +520,27 @@ Game.combat = function(input) {
             input.focus()
         }, Math.random()*3400+840)
     }
+}
+
+Game.monsterCombat = function() {
+     opp = Game.location.opponent
+     if(opp === undefined) {
+          return false;
+     }
+     if(opp.hp !== 0) {
+          opp.weapon.mUse(opp)
+     } else {
+          if(Player.hp <= 0) {
+               Player.hp = 0
+               consul.log(Game.placeholder)
+               consul.error('YOU DIED')
+               input.disabled = false
+               input.focus()
+               Player.inCombat = false
+          } else {
+               consul.hp('You have ' + Player.hp + ' health left.')
+          }
+     }
 }
 
 Game.items = function() {
@@ -571,41 +619,56 @@ Game.inspect = function(cmd) {
     }
 }
 
-Game.auto = function(val) {
-     if(first(val) == 'move') {
-          Game.move(second(val))
-     } else if(first(val) == 'look') {
-          Game.look(second(val))
-     } else if(first(val) == 'items') {
-          Game.items()
-     } else if(val == 'attack') {
-          Game.combat(opponent)
-     } else if(first(val) == 'take') {
-          Game.take(rest(val))
-     } else if(first(val) == 'drop') {
-          Game.drop(rest(val))
-     } else if(val === 'balance') {
-          Game.balance()
-     } else if(first(val) == 'consume') {
-          Game.consume(rest(val))
-     } else if(val == 'journal') {
-          Game.journal()
-     } else if(first(val) == 'talk' && second(val) == 'to') {
-          if(Game.location.person !== null || Game.location.person !== undefined) {
-               Game.talk(third(val))
-          } else {
-               consul.error('There is nobody here.')
+Game.parse = function(val) {
+          if(first(val) == 'move') {
+               Game.move(second(val))
+          } else if(first(val) == 'look') {
+               Game.look(second(val))
+          } else if(first(val) == 'items') {
+               Game.items()
+          } else if(val == 'attack') {
+               Player.inCombat = true
+               Game.combat(Game.combatElement)
+          } else if(first(val) == 'take') {
+               Game.take(rest(val))
+          } else if(first(val) == 'drop') {
+               Game.drop(rest(val))
+          } else if(val === 'balance') {
+               Game.balance()
+          } else if(first(val) == 'consume') {
+               Game.consume(rest(val))
+          } else if(val == 'journal') {
+               Game.journal()
+          } else if(first(val) == 'talk' && second(val) == 'to') {
+               if(Game.location.person !== null || Game.location.person !== undefined) {
+                    Game.talk(third(val))
+               } else {
+                    consul.error('There is nobody here.')
+               }
+          } else if(first(val) == 'health') {
+               Game.health()
           }
-     } else if(first(val) == 'health') {
-          Game.health()
-     }
-     if(Game.location.shop !== undefined || Game.location.shop !== null) {
-          if(first(val) == 'wares') {
-               Game.shops.open()
-          } else if(first(val) == 'sell') {
-               Game.shops.sell(rest(val))
-          } else if(first(val) == 'buy') {
-               Game.shops.purchase(rest(val))
+          if(Game.location.shop !== undefined || Game.location.shop !== null) {
+               if(first(val) == 'wares') {
+                    Game.shops.open()
+               } else if(first(val) == 'sell') {
+                    Game.shops.sell(rest(val))
+               } else if(first(val) == 'buy') {
+                    Game.shops.purchase(rest(val))
+               }
+          }
+}
+
+Game.auto = function(val) {
+     if(Player.inCombat === false || val === 'attack') {
+          Game.parse(val)
+     } else {
+          if(first(val) == 'move') {
+               consul.error('You cannot retreat from this battle.')
+          } else {
+               Game.parse(val)
+               consul.log(Game.placeholder)
+               Game.monsterCombat()
           }
      }
 }
