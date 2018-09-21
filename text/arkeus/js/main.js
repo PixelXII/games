@@ -5,7 +5,7 @@ var ti = consuul.title(`<img src="assets/ark.png" width='20' height='20' style="
 ti.style.borderBottomStyle = 'double'
 var inputstyle = consul.input(parse, true)
 inputstyle.id = 'ie'
-inputstyle.style.width = 1000
+inputstyle.style.width = '100%'
 consul.emphasis('You are in the tutorial. To skip the tutorial, type "skip tutorial"')
 consul.dialogue('If you\'re new to this game, or text games in general, you should complete the tutorial.')
 consul.log('First, try "look" or "look around"')
@@ -20,6 +20,8 @@ var Player = {
     inCombat: false,
     gold: new Gold(500)
 }
+
+Game.combatElement = document.getElementById('ie')
 
 function firstandsecond(v) {
      return v.split(' ')[0] + ' ' + v.split(' ')[1]
@@ -77,7 +79,13 @@ function parse(val) {
                  hEnd(val)
             } else if(Player.location == 'barties-room') {
                  jRoom(val)
-            }
+            } else if(Player.location == 'bridge') {
+                 junct(val)
+            } else if(Player.location == 'jFarm') {
+                 jFarm(val)
+            } else if(Player.location == 'jFarm-field') {
+                 jField(val)
+            } //else if(Player.location == '')
         } else {
             if(val !== '') {
                 consul.error('"'+val + '"'+' is not a command. Type "help" for a list of commands.')
