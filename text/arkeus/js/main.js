@@ -26,10 +26,22 @@ Game.combatElement = document.getElementById('ie')
 function firstandsecond(v) {
      return v.split(' ')[0] + ' ' + v.split(' ')[1]
 }
+consul.special = function(v) {
+     a = consul.log(v)
+     a.style.textShadow = '3px 2px 0px purple'
+     a.style.color = 'pink'
+}
 
 // main handler
 
 function parse(val) {
+     if(val.includes('ree')) {
+                 consul.special("BATTLE CRY")
+                 setTimeout(() => {
+                      consul.special("REEEEEEEEEEEEEEEEEE")
+                 }, 4000)
+                 return false;
+            }
         val = clean(val.toLowerCase())
         if(commands.includes(first(val)) || val == 'skip tutorial' || firstandsecond(val) == 'talk to') {
             if(val.includes('help')) {
