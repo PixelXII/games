@@ -92,6 +92,51 @@ Item.prototype.eat = function() {
     }
 }
 
+// Containers
+
+function Container(name, contents) {
+     this.name = name
+     this.contents = contents
+     this.contentString = ''
+     this.contents.forEach((e) => {
+          if(this.contents.indexOf(e) == this.contents.length-1) {
+               this.contentString += "and " + e.name.toLowerCase()
+          } else {
+               this.contentString += e.name + ', '
+          }
+     })
+}
+
+Container.prototype.lookInside = function() {
+     if(Game.location.items.includes(this) === false) {
+          consul.error("There is no " + this.name + " to look inside.")
+          return false;
+     } else {
+          consul.log(Game.placeholder)
+          consul.emphasis('You look inside the ' + this.name)
+          consul.info('You find ' + this.contentString)
+     }
+}
+
+Container.prototype.loot = function() {
+     if(Game.location.items.includes(this) === false) {
+          consul.error("There is no " + this.name + " to loot.")
+          return false;
+     } else {
+          this.contents.forEach((e) => {
+               Player.inventory.push(e)
+          })
+          var items = Game.location.items
+          items = items.splice(items.indexOf(this), 1)
+          consul.log(Game.placeholder)
+          consul.info('You take everything in the ' + this.name)
+     }
+}
+
+function WeaponAndGoldCrate() {
+     this.object = new Container('crate', [randomWeapon('normal'), new Gold(Math.floor(Math.random()*100))])
+}
+
 // People
 
 function Person(name, dialogue) {
@@ -137,6 +182,7 @@ Weapon.prototype.mUse = function(user) {
 
 function Gold(amount) {
     this.amount = amount
+    this.name = 'gold'
     return this.amount
 }
 
@@ -225,7 +271,7 @@ consul.quest = function(e) {
 
 // Arrays
 
-var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'help', 'health', 'journal', 'talk to', 'skip tutorial', 'buy', 'sell', 'wares', 'balance']
+var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'help', 'health', 'journal', 'talk to', 'loot', 'skip tutorial', 'buy', 'sell', 'wares', 'balance']
 var mdirections = ['forward', 'back', 'left', 'right']
 var ldirections = ['forward', 'back', 'left', 'right', 'up', 'down']
 
@@ -233,6 +279,7 @@ var ldirections = ['forward', 'back', 'left', 'right', 'up', 'down']
 
 var Game = {
      shops: {},
+     containers: {},
      location: {
           items: [],
           shop: undefined,
@@ -278,6 +325,12 @@ Game.reset = function() {
 // Game functions
 
 Game.look = function(e) {
+     if(second(e) == 'inside') {
+          Game.containers.lookInside(third(e))
+          return false;
+     } else {
+          e = second(e)
+     }
     if(e === undefined) {
         e = 'around'
     } else {
@@ -351,6 +404,11 @@ Game.equip = function(e) { // Pass in only text, no eval beforehand
     }
 }
 
+Game.containers.lookInside = function(e) {
+     e = eval(capitalClean(e))
+     e.lookInside()
+}
+
 Game.journal = function() {
      consul.log(Game.placeholder)
      consul.dialogue('Quests:')
@@ -397,6 +455,10 @@ Game.consume = function(e) { // pass string
 Game.take = function(e) {
     e = eval(capitalClean(e))
     if(Game.location.items.includes(e)) {
+        if(e instanceof Container) {
+             e.loot()
+             return false;
+        }
         items = Game.location.items
         consul.log("You take the " + e.name)
         var item = eval(capitalClean(e.name) + ' = new Item("'+e.name+'", "'+e.desc+'", '+e.value+', '+e.edible+', '+e.buffs+')')
@@ -494,6 +556,10 @@ Game.combat = function(input) {
             consul.hp('You killed the ' + opp.name.toLowerCase())
             if(opp.weapon.type !== 'natural') {
                Game.location.items.push(opp.weapon)
+               eval('var ' + capitalClean(opp.name) + ' = new Container('+opp.name+"'s body"+', ['+new Gold(Math.round(Math.random()*opp.hp*0.8))+', '+opp.weapon+'])')
+            }
+            if(opp.weapon.type === 'natural') {
+               eval('var ' + capitalClean(opp.name) + ' = new Container("one", [Acorn])')
             }
             return false;
         } else {
@@ -575,6 +641,12 @@ Game.items = function() {
     return false;
 }
 
+Game.containers.loot = function(e) {
+     e = eval(capitalClean(e))
+     console.log(e)
+     e.loot()
+}
+
 Game.talk = function(val) {
      person = Game.location.person
      if(person === undefined) {
@@ -623,7 +695,7 @@ Game.parse = function(val) {
           if(first(val) == 'move') {
                Game.move(second(val))
           } else if(first(val) == 'look') {
-               Game.look(second(val))
+               Game.look(val)
           } else if(first(val) == 'items') {
                Game.items()
           } else if(val == 'attack') {
@@ -647,6 +719,10 @@ Game.parse = function(val) {
                }
           } else if(first(val) == 'health') {
                Game.health()
+          } else if(first(val) == 'loot') {
+               Game.containers.loot(rest(val))
+          } else if(first(val) == 'look' && second(val) == 'inside') {
+               
           }
           if(Game.location.shop !== undefined || Game.location.shop !== null) {
                if(first(val) == 'wares') {
