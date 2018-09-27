@@ -40,4 +40,20 @@ var LargeClaws = new Weapon('natural', 'large claws', 5, 'They\'re large animal 
 var CleodianDagger = new Weapon('dagger', 'Cleodian Dagger', 20, 'Whoever wielded this dagger last must have had immense strength, as the dagger is very heavy.')
 var Hammer = new Weapon('hammer', 'hammer', 19, 'The hammer looks like a blacksmith\'s hammer.')
 var NocriteKatana = new Weapon('katana', 'Nocrite Katana', 22, 'The katana gleams in the light of the sun, giving off a warm glow.')
-var StiraothsStaff = new Weapon(sword, "Stiraoth's Quarterstaff", 21, 'The previous owner of this staff was either very rich or had a lot of skill with woodcarving, because the staff has many intricate carvings. Some depict stories of battles, and others are just designs.')
+var StiraothsStaff = new Weapon(sword, "Stiraoth's Staff", 21, 'The previous owner of this staff was either very rich or had a lot of skill with woodcarving, because the staff has many intricate carvings. Some depict stories of battles, and others are just designs.')
+
+const weapons = [IronSword, SteelSword, AdamantineSword, IronMace, SteelMace, EbonyMace, WoodAxe, IronAxe, SteelAxe, IronSpear, SteelSpear, OrichalcumSpear, CleodianDagger, Hammer, NocriteKatana, StiraothsStaff]
+const normalWeapons = [IronSword, SteelSword, AdamantineSword, IronMace, SteelMace, EbonyMace, WoodAxe, IronAxe, SteelAxe, IronSpear, SteelSpear, OrichalcumSpear]
+const specialWeapons = [CleodianDagger, Hammer, NocriteKatana, StiraothsStaff]
+
+function randomWeapon(e) {
+     if(e === 'special') {
+          return specialWeapons[Math.floor(Math.random()*specialWeapons.length)]
+     } else if(e === 'normal') {
+          return normalWeapons[Math.floor(Math.random()*normalWeapons.length)]
+     } else {
+          return weapons[Math.floor(Math.random()*weapons.length)]
+     }
+}
+
+var Box = new Container('box', [HealingPotion, Ale])
