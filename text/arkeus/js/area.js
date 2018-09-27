@@ -294,7 +294,7 @@ var jField = function(val) {
      Game.reset()
      Game.location.items = [Carrot, Carrot, Potato]
      Game.location.opponent = {
-          name: 'Large Raccoon',
+          name: 'large raccoon',
           hp: 50,
           weapon: LargeClaws,
           dead: false
@@ -334,5 +334,53 @@ var jFarmhole = function(val) {
      Game.lookRight = 'On your right is a small stone wall.'
      Game.lookForward = 'In front of you is a large hole in the ground.'
      Game.lookDown = 'Below you, the soft soil of the farm transitions to hard, dry dirt as it nears the entrance to the hole.'
-     Game.moveForward = 'You drop down into to the hole and begin crawling along the floor of the tunnel.'
+     Game.moveForward = 'You drop down into to the hole and begin crawling along the floor of the tunnel. <br> <br> Eventually you come to a small cavern with 2 raccoons.'
+     Game.forward = 'jFarm-nest'
+     Game.moveBack = 'You slowly back away from the tunnel and go back towards the bridge.'
+     Game.back = 'jFarm-field'
+     Game.auto(val)
+}
+
+var jFarmnest = function(val) {
+     Game.reset()
+     Game.location.opponent = {
+          name: 'small raccoon',
+          hp:35,
+          weapon: Claws,
+          dead: false
+     }
+     Player.inCombat = true;
+     Game.lookLeft = 'To your left is the wall of the cavern.'
+     Game.lookRight = 'On your right is the wall of the chamber.'
+     Game.lookUp = 'Looking up, you can see many small roots poking through the roof of the chamber.'
+     if(Player.quests.includes(jaspersFarm)) {
+          Game.lookDown = 'Under your feet are the bones of many small animals and the crops that the raccoons were eating.'
+     } else {
+          Game.lookDown = 'Under your feet are many bones of small animals.'
+     }
+     Game.lookBack = 'You look behind you and see a small pinprick of light, where the tunnel opens up onto the farm.'
+     Game.lookForward = 'Ahead of you is a wall of rock.'
+     Game.auto(val)
+     jFarmnest = function(val) {
+          Game.lookLeft = 'To your left is the wall of the cavern.'
+          Game.lookRight = 'On your right is the wall of the chamber.'
+          Game.lookUp = 'Looking up, you can see many small roots poking through the roof of the chamber.'
+          if(Player.quests.includes(jaspersFarm)) {
+               Game.lookDown = 'Under your feet are the bones of many small animals and the crops that the raccoons were eating.'
+          } else {
+               Game.lookDown = 'Under your feet are many bones of small animals.'
+          }
+          Game.lookBack = 'You look behind you and see a small pinprick of light, where the tunnel opens up onto the farm.'
+          Game.lookForward = 'Ahead of you is a wall of rock.'
+          
+          if(Game.location.opponent.dead === true) {
+               Game.location.opponent = {
+                    name: 'large raccoon',
+                    hp:55,
+                    weapon: LargeClaws,
+                    dead: false
+               }
+          }
+          Game.auto(val)
+     }
 }
