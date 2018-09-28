@@ -57,3 +57,12 @@ function randomWeapon(e) {
 }
 
 var Box = new Container('box', [HealingPotion, Ale])
+
+var Crate = new Container('crate', [SteelSword, new Gold(Math.round(Math.random()*100))]), Box, Body;
+Game.containers.define = setInterval(() => {
+     Crate.contents[1].amount = Math.round(Math.random()*100)
+}, 20000)
+
+function WeaponAndGoldCrate() {
+     this.object = new Container('crate', [randomWeapon('normal'), new Gold(Math.floor(Math.random()*100))])
+}
