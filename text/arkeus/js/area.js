@@ -1,6 +1,7 @@
 var opponent;
 var nwS = function(val) {
      Game.reset()
+     var Crate = new Container('crate', [SteelSword, new Gold(Math.round(Math.random()*100))])
     Game.lookForward = 'Ahead of you is a road leading to a small village.'
     Game.lookBack = 'Behind you is the tunnel entrance, now sealed over with a strong iron grate.'
     Game.lookRight = 'To your right is a massive oak tree. It looks like it\'s hundreds of years old.'
@@ -14,6 +15,7 @@ var nwS = function(val) {
     Game.left = 'nw-saeur'
     Game.right = 'nw-saeur'
     Game.location.items = [Stick, Rock, Acorn]
+    Game.location.items.push(Crate)
     
     Game.auto(val)
     nwS = function(val) {
