@@ -108,21 +108,18 @@ function Container(name, contents) {
 }
 
 Container.prototype.lookInside = function() {
-     if(Game.location.items.includes(this) === false) {
-          consul.error("There is no " + this.name + " to look inside.")
-          return false;
-     } else {
+     if(Game.location.items.includes(this)) {
           consul.log(Game.placeholder)
           consul.emphasis('You look inside the ' + this.name)
           consul.info('You find ' + this.contentString)
+     } else {
+          consul.error("There is no " + this.name + " to look inside.")
+          return false;
      }
 }
 
 Container.prototype.loot = function() {
-     if(Game.location.items.includes(this) === false) {
-          consul.error("There is no " + this.name + " to loot.")
-          return false;
-     } else {
+     if(Game.location.items.includes(this)) {
           this.contents.forEach((e) => {
                Player.inventory.push(e)
           })
@@ -130,11 +127,10 @@ Container.prototype.loot = function() {
           items = items.splice(items.indexOf(this), 1)
           consul.log(Game.placeholder)
           consul.info('You take everything in the ' + this.name)
+     } else {
+          consul.error("There is no " + this.name + " to loot.")
+          return false;
      }
-}
-
-function WeaponAndGoldCrate() {
-     this.object = new Container('crate', [randomWeapon('normal'), new Gold(Math.floor(Math.random()*100))])
 }
 
 // People
@@ -284,7 +280,7 @@ var Game = {
           items: [],
           shop: undefined,
           person: undefined,
-          opponent: undefined,
+          opponent: undefined
      },
      placeholder: '_______________________',
      combatElement: undefined,
@@ -402,11 +398,6 @@ Game.equip = function(e) { // Pass in only text, no eval beforehand
     } else {
          consul.error('You don\'t have a '+e.name.toLowerCase())
     }
-}
-
-Game.containers.lookInside = function(e) {
-     e = eval(capitalClean(e))
-     e.lookInside()
 }
 
 Game.journal = function() {
@@ -612,19 +603,27 @@ Game.monsterCombat = function() {
 Game.items = function() {
     if(Game.location.items instanceof Array) {
         if(Game.location.items.length > 0) {
-            var i;
+            var i = '', a = '';
             Game.location.items.forEach(function(k) {
-                if(k.dropped === true) {
-                     if(k.name[0] == 'a' || k.name[0] == 'e' || k.name[0] == 'i' || k.name[0] == 'o' || k.name[0] == 'u') {
-                          i += 'an '+k.name.toLowerCase().replace('undefined', '') + ' (dropped), '
-                     } else {
-                         i += 'a '+k.name.toLowerCase().replace('undefined', '') + ' (dropped), '
-                     }
+                 if(k instanceof Container) {
+                      if(k.name[0] == 'a' || k.name[0] == 'e' || k.name[0] == 'i' || k.name[0] == 'o' || k.name[0] == 'u') {
+                           a += 'an ' + k.name + ', '
+                      } else {
+                         a += 'a '+k.name + ', '
+                      }
                 } else {
-                    if(k.name[0] == 'a' || k.name[0] == 'e' || k.name[0] == 'i' || k.name[0] == 'o' || k.name[0] == 'u') {
-                         i += 'an '+k.name.toLowerCase().replace('undefined', '') + ', '
+                    if(k.dropped === true) {
+                         if(k.name[0] == 'a' || k.name[0] == 'e' || k.name[0] == 'i' || k.name[0] == 'o' || k.name[0] == 'u') {
+                              i += 'an '+k.name.toLowerCase().replace('undefined', '') + ' (dropped), '
+                         } else {
+                              i += 'a '+k.name.toLowerCase().replace('undefined', '') + ' (dropped), '
+                         }
                     } else {
-                         i += 'a '+k.name.toLowerCase().replace('undefined', '') + ', '
+                         if(k.name[0] == 'a' || k.name[0] == 'e' || k.name[0] == 'i' || k.name[0] == 'o' || k.name[0] == 'u') {
+                              i += 'an '+k.name.toLowerCase().replace('undefined', '') + ', '
+                         } else {
+                              i += 'a '+k.name.toLowerCase().replace('undefined', '') + ', '
+                         }
                     }
                 }
             })
@@ -632,6 +631,7 @@ Game.items = function() {
             consul.emphasis('You scrounge the area.')
             consul.info('You find: ')
             consul.info(clean(i))
+            consul.info(a)
         } else {
             consul.log(Game.placeholder)
             consul.emphasis('You scrounge the area.')
@@ -645,6 +645,12 @@ Game.containers.loot = function(e) {
      e = eval(capitalClean(e))
      console.log(e)
      e.loot()
+}
+
+Game.containers.lookInside = function(e) {
+     e = eval(capitalClean(e))
+     console.log(e)
+     e.lookInside()
 }
 
 Game.talk = function(val) {
