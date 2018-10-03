@@ -35,13 +35,26 @@ consul.special = function(v) {
 // main handler
 
 function parse(val) {
-     if(val.includes('ree')) {
+     if(val.toLowerCase().includes('ree')) {
                  consul.special("BATTLE CRY")
                  setTimeout(() => {
                       consul.special("REEEEEEEEEEEEEEEEEE")
-                 }, 4000)
+                 }, 24000)
                  return false;
             }
+     if(val.toLowerCase().includes('pikachu')) {
+          consul.special('PIKACHU GO')
+          if(Player.inCombat) {
+               Game.location.opponent.hp -= 50
+               if(Game.location.opponent.hp < 0) {
+                    Game.location.opponent.hp = 0;
+                    Player.inCombat = false
+                    Game.location.opponent.dead = true;
+                    consul.info('The ' + Game.location.opponent.name + ' is dead.')
+               }
+          }
+          return false;
+     }
         val = clean(val.toLowerCase())
         if(commands.includes(first(val)) || val == 'skip tutorial' || firstandsecond(val) == 'talk to') {
             if(val.includes('help')) {
@@ -56,9 +69,6 @@ function parse(val) {
                 return false;
             } else if(first(val) == 'equip') {
                  Game.equip(rest(val))
-                 return false;
-            } else if(first(val) == 'quickheal') {
-                 Game.quickheal()
                  return false;
             } else if(first(val) == 'weapon') {
                  Game.currentWeapon()
@@ -99,6 +109,8 @@ function parse(val) {
                  jField(val)
             } else if(Player.location == 'jFarm-hole') {
                  jFarmhole(val)
+            } else if(Player.location == 'jFarm-nest') {
+                 jFarmnest(val)
             }
         } else {
             if(val !== '') {
