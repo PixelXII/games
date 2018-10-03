@@ -6,11 +6,6 @@ var Gold;
 var Stone = new Item('stone', 'It shimmers with an ethereal light.', 10)
 var Branch = new Item('branch', 'It fell off a tree.')
 
-var HealingTea = new Item('healing tea', 'A warm tea. You are not sure what it is made of.', 10, true, function() { Player.hp += 5; Game.health();})
-var HealingPotion = new Item('healing potion', 'A potion of healing. The label says: "You don\'t want to know what\'s in it.', 25, true, function() { Player.hp += 12; Game.health();})
-var Ale = new Item('ale', 'It\'s classic ale.', 20, true, function() { Player.hp += 10; Game.health(); })
-var Beer = new Item('beer', 'It\'s classic beer.', 25, true, function() { Player.hp += 15; Game.health(); })
-var Wine = new Item('wine', 'It\'s your average wine.', 50, true, function() { Player.hp += 25; Game.health(); })
 var Tankard = new Item('wine', 'It smells awful.', 0, false, function() {})
 var Mug = new Item('mug', 'It smells like beer.', 0, false, function() {})
 var Carrot = new Item('carrot', 'It smells like fresh soil.', 8, true, function() {})
@@ -54,15 +49,4 @@ function randomWeapon(e) {
      } else {
           return weapons[Math.floor(Math.random()*weapons.length)]
      }
-}
-
-var Box = new Container('box', [HealingPotion, Ale])
-
-var Crate = new Container('crate', [SteelSword, new Gold(Math.round(Math.random()*100))]), Box, Body;
-Game.containers.define = setInterval(() => {
-     Crate.contents[1].amount = Math.round(Math.random()*100)
-}, 20000)
-
-function WeaponAndGoldCrate() {
-     this.object = new Container('crate', [randomWeapon('normal'), new Gold(Math.floor(Math.random()*100))])
 }
