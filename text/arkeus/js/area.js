@@ -1,7 +1,7 @@
-var opponent;
+var opponent, Mm;
 var nwS = function(val) {
      Game.reset()
-     var Crate = new Container('crate', [SteelSword, new Gold(Math.round(Math.random()*100))])
+     Crate = new Container('crate', [SteelSword, new Gold(Math.round(Math.random()*100))])
     Game.lookForward = 'Ahead of you is a road leading to a small village.'
     Game.lookBack = 'Behind you is the tunnel entrance, now sealed over with a strong iron grate.'
     Game.lookRight = 'To your right is a massive oak tree. It looks like it\'s hundreds of years old.'
@@ -15,8 +15,8 @@ var nwS = function(val) {
     Game.left = 'nw-saeur'
     Game.right = 'nw-saeur'
     Game.location.items = [Stick, Rock, Acorn]
-    Game.location.items.push(Crate)
-    
+    Game.location.containers.push(Crate)
+
     Game.auto(val)
     nwS = function(val) {
          Game.auto(val)
@@ -36,7 +36,7 @@ var outskirts = function(val) {
      Game.right = 'barties'
      Game.moveForward = 'You walk into town.'
      Game.forward = 'bridge'
-     
+
      Game.location.items = [Stick, Rock, Acorn, Stick, Acorn, Pickaxe]
      Game.auto(val)
      outskirts = function(val) {
@@ -72,8 +72,8 @@ var barties = function(val) {
      Game.left = 'barties-inn'
      var bartie = new Shop('Bartie\'s Food and Brew', 'Bartie', [HealingTea, Ale, Beer, Wine], [HealingTea.value, 25, Beer.value+10, Wine.value+5])
      Game.location.shop = bartie
-     
-     
+
+
      Game.auto(val)
 }
 var jaspersFarm = new Quest("Jasper's Damn Creatures", 'Jasper wants you to help him restore his farm by killing whatever creatures are eating his crops.', function() {
@@ -119,9 +119,9 @@ var bBar = function(val) {
      Game.forward = 'barties-bar'
      Game.left = Game.forward
      Game.right = Game.left
-     
+
      Game.auto(val)
-     
+
 }
 
 var bInn = function(val) {
@@ -138,7 +138,7 @@ var bInn = function(val) {
      Game.moveForward = 'You walk down the hallway, the floorboards creaking under your feet.'
      Game.right = Player.location
      Game.left = Player.location
-     
+
      Game.auto(val)
 }
 
@@ -150,7 +150,7 @@ var hEnd = function(val) {
      Game.left = 'barties-room'
      Game.right = 'barties-hall-end'
      Game.forward = Game.right
-     
+
      Game.lookRight = 'On your right is a small window. You can hear the roaring of the river from inside the hallway.'
      Game.lookLeft = 'On your left is an open door that leads to a guest room. There is no one inside.'
      Game.lookForward = 'On the wall is a painting. You\'ve seen it before, but it doesn\'t ring any bells.'
@@ -237,7 +237,7 @@ function junct(val) {
      Game.lookDown = 'Below you, a stone road becomes the prevalent feature of the ground. You can see ruts and gaps in the road where carriages and chariots\' wheels have made their mark.'
      Game.lookBack = 'Behind you is the front yard of the inn.'
      Game.lookForward = 'In front of you, the road continues for a short distance, then passes the gates of town and enters Rivergate.'
-     
+
      Game.auto(val)
 }
 
@@ -262,7 +262,7 @@ var jFarm = function(val) {
      Game.right = 'jFarm-field'
      Game.lookDown = 'Below you is the soft, rich soil of the farm.'
      Game.auto(val)
-     
+
      jFarm = function(val) {
           Game.lookForward = 'In front of you is a dilapidated barn.'
           Game.lookRight = 'To your right is a field of unidentifiable vegetables.'
@@ -287,6 +287,9 @@ var jFarm = function(val) {
                Game.moveLeft = 'The wall is too high to climb.'
                Game.moveRight = 'You carefully step through the rows of vegetables and find yourself face-to-face with a large raccoon.'
                Game.right = 'jFarm-field'
+               if(Game.location.opponent.dead === true && Player.quests.includes(jaspersFarm)) {
+                    jaspersFarm.dead++
+               }
                Game.auto(val)
           }
      }
@@ -315,6 +318,14 @@ var jField = function(val) {
           if(Game.location.opponent.dead === true && Player.quests.includes(jaspersFarm)) {
                jaspersFarm.dead++;
           }
+          Game.lookLeft = 'On your left is a large expanse of field.'
+          Game.lookRight = 'To your right is a small stone wall.'
+          Game.lookForward = 'In front of you is the open field. In the distance, you can see a the stone wall.'
+          Game.lookBack = 'Behind you is the farm entrance.'
+          Game.moveForward = 'You step through the rows of carrots and potatoes and find yourself in front of a large hole.'
+          Game.moveBack = 'You retreat back to the farm\'s entrance.'
+          Game.back = 'jFarm'
+          Game.forward = 'jFarm-hole'
           Game.auto(val)
           jField = function(val) {
                Game.lookLeft = 'On your left is a large expanse of field.'
@@ -346,8 +357,8 @@ var jFarmhole = function(val) {
 var jFarmnest = function(val) {
      Game.reset()
      Game.location.opponent = {
-          name: 'small raccoon',
-          hp:35,
+          name: 'large raccoon',
+          hp:60,
           weapon: Claws,
           dead: false
      }
@@ -356,7 +367,7 @@ var jFarmnest = function(val) {
      Game.lookRight = 'On your right is the wall of the chamber.'
      Game.lookUp = 'Looking up, you can see many small roots poking through the roof of the chamber.'
      if(Player.quests.includes(jaspersFarm)) {
-          Game.lookDown = 'Under your feet are the bones of many small animals and the crops that the raccoons were eating.'
+          Game.lookDown = 'Under your feet are the bones of many small animals and the crops that the raccoon was eating.'
      } else {
           Game.lookDown = 'Under your feet are many bones of small animals.'
      }
@@ -374,15 +385,25 @@ var jFarmnest = function(val) {
           }
           Game.lookBack = 'You look behind you and see a small pinprick of light, where the tunnel opens up onto the farm.'
           Game.lookForward = 'Ahead of you is a wall of rock.'
-          
-          if(Game.location.opponent.dead === true) {
-               Game.location.opponent = {
-                    name: 'large raccoon',
-                    hp:55,
-                    weapon: LargeClaws,
-                    dead: false
-               }
+          }
+          if(Game.location.opponent.dead && Player.quests.includes(jaspersFarm)) {
+               jaspersFarm.complete = true;
           }
           Game.auto(val)
-     }
+          jFarmnest = function(val) {
+               Game.lookLeft = 'To your left is the wall of the cavern.'
+               Game.lookRight = 'On your right is the wall of the chamber.'
+               Game.lookUp = 'Looking up, you can see many small roots poking through the roof of the chamber.'
+               if(Player.quests.includes(jaspersFarm)) {
+                    Game.lookDown = 'Under your feet are the bones of many small animals and the crops that the raccoons were eating.'
+               } else {
+                    Game.lookDown = 'Under your feet are many bones of small animals.'
+               }
+               Game.lookBack = 'You look behind you and see a small pinprick of light, where the tunnel opens up onto the farm.'
+               Game.lookForward = 'Ahead of you is a wall of rock.'
+               if(Game.location.opponent.dead && Player.quests.includes(jaspersFarm)) {
+                    jaspersFarm.complete = true;
+               }
+               Game.auto(val)
+          }
 }
