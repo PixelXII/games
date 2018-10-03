@@ -99,6 +99,7 @@ var tutorialChamber = function(val) {
         hp:Player.hp,
         weapon: IronSword,
         type: 'opponent',
+        dead: false
     }
     if(first(val) === 'attack') {
         Player.inCombat === true
@@ -122,7 +123,7 @@ var tutorialChamber = function(val) {
              if(val === 'items') {
                   return false;
              }
-            if(opponent.dead === true) {
+            if(Game.location. opponent.dead === true) {
                 consul.log('Move forward to continue the tutorial.')
             } else {
                 consul.log("'attack' to continue the tutorial")
@@ -133,6 +134,7 @@ var tutorialChamber = function(val) {
 
 var sTunnel = function(val) {
     Game.location.items = [Stone]
+    Game.location.containers = []
     if(Game.location.opponent.dead === true) {
         Game.lookBack = 'Behind you is the cavern where the old miner\'s body lies.'
     } else {
