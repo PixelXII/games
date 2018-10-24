@@ -10,11 +10,17 @@ var Tankard = new Item('wine', 'It smells awful.', 0, false, function() {})
 var Mug = new Item('mug', 'It smells like beer.', 0, false, function() {})
 var Carrot = new Item('carrot', 'It smells like fresh soil.', 8, true, function() {})
 var Potato = new Item('potato', 'It\'s a fresh red potato.', 10, true, function() {})
+var Dragonfruit = new Item('dragonfruit', 'A succulent red dragonfruit.', 20, true, function() { consul.special('You feel alert.'); Player.weapon.damage += 10; setTimeout(function() { Player.weapon.damage -= 10; }, 60000)})
+var PalmFruit = new Item('palm fruit', 'A juicy yellow palm fruit.', 15, true, function() {Player.health+=5;})
+var Apple = new Item('apple', 'An apple.', 8, true, function() {})
+var Pear = new Item('pear', 'A pear.', 9, true, function() {})
 
 var sword = 'sword'
 var mace = 'mace'
 var axe = 'axe'
 var spear = 'spear'
+
+var LargeStone = new Item('large stone', 'It shimmers and gleams as if it were not of this world.', 20, false, function() {})
 
 var IronSword = new Weapon(sword, 'Iron Sword', 13, 'A simple iron sword.')
 var SteelSword = new Weapon(sword, "Steel Sword", 15, 'A simple steel sword.')
@@ -28,6 +34,7 @@ var SteelAxe = new Weapon(axe, "Steel War Axe", 12, 'A simple steel war axe.')
 var IronSpear = new Weapon(spear, 'Iron Spear', 11, 'A simple iron spear.')
 var SteelSpear = new Weapon(spear, 'Steel Spear', 13, 'A simple steel spear.')
 var OrichalcumSpear = new Weapon(spear, 'Orichalcum Spear', 15, 'The orichalcum in the spear gives off a light without color.')
+var GoldenDagger = new Weapon('dagger', 'Golden Dagger', 16, 'It has dents and scratches in many places, but it still works like a dagger should.')
 
 var Claws = new Weapon('natural', 'claws', 3, 'They\'re an animal\'s claws.')
 var LargeClaws = new Weapon('natural', 'large claws', 5, 'They\'re large animal claws.')
