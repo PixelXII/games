@@ -1,18 +1,13 @@
-/*        
-          (c) Kai Wildberger, September 2018.  
-          Licensed under the MIT License. 
-          
+/*
+          (c) Kai Wildberger, October 2018.
+          Licensed under the MIT License.
+
 */
-
-
 
 function first(str) {
     return str.split(' ')[0]
 }
 function second(str) {
-    if(str.includes(' ') === false) {
-        return false;
-    }
     return str.split(' ')[1]
 }
 function third(str) {
@@ -22,7 +17,7 @@ function third(str) {
     return str.split(' ')[2]
 }
 function clean(str) {
-    return str.replace(/undefined/g, '')
+    return str
 }
 function capitalize(e, o = undefined) {
     e = e.split('')
@@ -106,13 +101,17 @@ function Container(name, contents) {
      this.name = name
      this.contents = contents
      this.contentString = ''
-     this.contents.forEach((e) => {
-          if(this.contents.indexOf(e) == this.contents.length-1) {
-               this.contentString += "and " + e.name.toLowerCase()
-          } else {
-               this.contentString += e.name + ', '
-          }
-     })
+     if(this.contents.length === 1) {
+          this.contentString = "the " + this.contents[0].name
+     } else {
+          this.contents.forEach((e) => {
+               if(this.contents.indexOf(e) == this.contents.length-1) {
+                    this.contentString += "and " + e.name.toLowerCase()
+               } else {
+                    this.contentString += e.name + ', '
+               }
+          })
+     }
 }
 
 Container.prototype.loot = function() {
@@ -196,6 +195,9 @@ function Shop(name, shopkeeper, items, costs) {
      this.shopkeeper = shopkeeper
      this.items = items
      this.costs = costs
+     if(!this.costs) {
+          throw new Error('The costs of items in shops must be defined and correspond to the items said shop.')
+     }
 }
 
 Shop.prototype.open = function() {
@@ -205,10 +207,11 @@ Shop.prototype.open = function() {
           c.push(that.costs[that.items.indexOf(e)] + ', ')
      })
      i.forEach(function(e) {
-          res += e + c[i.indexOf(e)]
+          y = e + c[i.indexOf(e)]
+          res += y
      })
      consul.info(this.shopkeeper + ' shows you their wares.')
-     consul.log(clean(res).replace(/, /g, "<br>"))
+     consul.log(clean(res).replace(/, /g, "<br>").replace(/undefined/g, ''))
 }
 
 Shop.prototype.purchase = function(item) {
@@ -249,7 +252,7 @@ Shop.prototype.sell = function(item) {
 // Custom consul commands
 
 consul.combat = function(e) {
-    consul.log("combat :: " + e).style.color = '#ef6c00'
+    consul.log(":: " + e).style.color = '#ef6c00'
 }
 
 consul.dialogue = function(e) {
@@ -266,7 +269,7 @@ consul.quest = function(e) {
 
 // Arrays
 
-var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'help', 'health', 'journal', 'talk to', 'loot', 'skip tutorial', 'buy', 'sell', 'wares', 'balance']
+var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'help', 'health', 'journal', 'talk', 'loot', 'skip tutorial', 'buy', 'sell', 'wares', 'balance']
 var mdirections = ['forward', 'back', 'left', 'right']
 var ldirections = ['forward', 'back', 'left', 'right', 'up', 'down']
 
@@ -314,10 +317,10 @@ Game.unmute = function() {
 }
 
 Game.reset = function() {
-     Game.moveRight = ''
-     Game.moveLeft = ''
-     Game.moveForward = ''
-     Game.moveBack = ''
+     Game.moveRight = 'You cannot move in that direction.'
+     Game.moveLeft = 'You cannot move in that direction.'
+     Game.moveForward = 'You cannot move in that direction.'
+     Game.moveBack = 'You cannot move in that direction.'
      Game.right = Player.location
      Game.left = Player.location
      Game.forward = Player.location
@@ -332,18 +335,14 @@ Game.reset = function() {
 // Game functions
 
 Game.look = function(e) {
-     if(second(e) == 'inside') {
-          Game.containers.lookInside(third(e))
+     if(!second(e)) {
+          consul.log(this.lookLeft)
+          consul.log(this.lookRight)
+          consul.log(this.lookForward)
+          consul.log(this.lookBack)
           return false;
-     } else {
-          e = second(e)
      }
-    if(e === undefined) {
-        e = 'around'
-    } else {
-        e = clean(e)
-    }
-    consul.log('_______________________')
+     e = second(e)
     if(e == 'left') {
         consul.log('You look '+e)
         consul.log(this.lookLeft)
@@ -362,14 +361,11 @@ Game.look = function(e) {
     } else if(e == 'back') {
         consul.log('You look '+e)
         consul.log(this.lookBack)
-    } else if(e == 'around' || e == false) {
-        consul.log(this.lookLeft)
-        consul.log(this.lookRight)
-        consul.log(this.lookForward)
-        consul.log(this.lookBack)
     } else {
-        consul.error('You cannot look in that direction.')
-        consul.error('usage: look <direction> (left, right, forward, back, up, down)')
+         if(second(e)) {
+              consul.error('You cannot look in that direction.')
+              consul.error('usage: look <direction> (left, right, forward, back, up, down)')
+         }
     }
 }
 
@@ -388,8 +384,6 @@ Game.move = function(e) {
     if(eval('Game.move'+capitalize(e)) === '') {
          return false;
     }
-    consul.log('_______________________')
-    consul.log('You move ' + e)
     consul.log(eval('this.move'+capitalize(e)));
     Player.location = eval('this.'+e.toLowerCase());
 }
@@ -397,17 +391,18 @@ Game.move = function(e) {
 Game.equip = function(e) { // Pass in only text, no eval beforehand
     e = eval(capitalClean(e))
     var inv = Player.inventory
-    sounds.equip.play()
-    if(e.type === undefined) {
-         return false;
-    }
-    if(inv.includes(e)) {
-         consul.info('You equip the '+e.name.toLowerCase()+'. The '+Player.weapon.name+' is in your inventory.')
-         inv.push(Player.weapon)
-         Player.weapon = e
-         inv.splice(inv.indexOf(e), 1)
+    if(e instanceof Weapon) {
+         if(inv.includes(e)) {
+              consul.info('You equip the '+e.name.toLowerCase()+'. The '+Player.weapon.name+' is in your inventory.')
+              inv.push(Player.weapon)
+              Player.weapon = e
+              inv.splice(inv.indexOf(e), 1)
+              sounds.equip.play()
+         } else {
+              consul.error('You don\'t have a '+e.name.toLowerCase())
+         }
     } else {
-         consul.error('You don\'t have a '+e.name.toLowerCase())
+         return false;
     }
 }
 
@@ -449,13 +444,17 @@ Game.quickheal = function() {
 
 Game.consume = function(e) { // pass string
      e = eval(capitalClean(e))
-     console.log(e)
      sounds.consume.play()
      e.eat()
 }
 
 Game.take = function(e) {
+     a = e
     e = eval(capitalClean(e))
+    if(!e) {
+         consul.error('You don\'t see a ' + a)
+         return false;
+    }
     if(Game.location.items.includes(e)) {
         if(e instanceof Container) {
              e.loot()
@@ -464,7 +463,6 @@ Game.take = function(e) {
         items = Game.location.items
         consul.log("You take the " + e.name)
         var item = eval(capitalClean(e.name) + ' = new Item("'+e.name+'", "'+e.desc+'", '+e.value+', '+e.edible+', '+e.buffs+')')
-        console.log(item)
         Game.location.items.splice(items.indexOf(e), 1)
         Player.inventory.push(item)
     } else {
@@ -591,8 +589,7 @@ Game.combat = function(input) {
                     Player.hp = 0
                     consul.log(Game.placeholder)
                     consul.error('YOU DIED')
-                    input.disabled = false
-                    input.focus()
+                    input.disabled = true
                     Player.inCombat = false
                 } else {
                     consul.hp('You have ' + Player.hp + ' health left.')
@@ -616,8 +613,7 @@ Game.monsterCombat = function() {
                Player.hp = 0
                consul.log(Game.placeholder)
                consul.error('YOU DIED')
-               input.disabled = false
-               input.focus()
+               input.disabled = true
                Player.inCombat = false
           } else {
                consul.hp('You have ' + Player.hp + ' health left.')
@@ -672,20 +668,17 @@ Game.items = function(e) {
 
 Game.containers.loot = function(e) {
      e = eval(capitalClean(e))
-     if(Game.location.opponent.dead === true) {
-          Game.location.body = e
-          console.log(e)
-          console.log(Game.location.body)
-          Game.location.body.loot()
+     if(Game.location.opponent) {
+          if(Game.location.opponent.dead === true) {
+               Game.location.body = e
+               console.log(Game.location.body)
+               Game.location.body.loot()
+          }
+          return false;
      } else {
           e.loot()
      }
 }
-
-// Game.containers.lookInside = function(e) {
-//      e = eval(capitalClean(e))
-//      e.lookInside()
-// }
 
 Game.talk = function(val) {
      person = Game.location.person
@@ -694,11 +687,12 @@ Game.talk = function(val) {
           return false;
      }
      if(person instanceof Person) {
-          if(val.toLowerCase() == person.name.toLowerCase()) {
-               consul.log(Game.placeholder)
+          consul.log(Game.placeholder)
+          if(typeof person.dialogue === 'function') {
                person.dialogue.call()
-          } else {
-               consul.error('You don\'t see anyone named '+capitalize(val))
+          } else if(person.dialogue instanceof Array) {
+               const a = Math.floor(Math.random()*person.dialogue.length)
+               consul.dialogue(person.name + ' says: "'+ person.dialogue[a] + '"')
           }
      } else {
           consul.log('That is not a person.')
@@ -717,7 +711,6 @@ Game.balance = function() {
 Game.inspect = function(cmd) {
     var q;
     cmd = eval(capitalClean(cmd))
-    console.log(cmd.desc)
     if(cmd instanceof Item === false) {
         consul.error('You cannot inspect that.')
         return false;
@@ -736,41 +729,70 @@ Game.parse = function(val) {
                Game.move(second(val))
           } else if(first(val) == 'look') {
                Game.look(val)
+               if(!second(val)) {
+                    Game.look('look around')
+               }
+               return false;
           } else if(first(val) == 'items') {
                Game.items()
+               return false;
+          } else if(val.includes('help')) {
+              Game.help(rest(val))
+              return false;
+          } else if(val == 'inventory') {
+              Game.inventory()
+              return false;
+          } else if(first(val) == 'inspect') {
+              Game.inspect(rest(val).replace(/undefined/g, ''))
+              return false;
+          } else if(first(val) == 'equip') {
+               Game.equip(rest(val))
+               return false;
+          } else if(first(val) == 'weapon') {
+               Game.currentWeapon()
+               return false;
           } else if(val == 'attack') {
                Player.inCombat = true
                Game.combat(Game.combatElement)
+               return false;
           } else if(first(val) == 'take') {
                Game.take(rest(val))
+               return false;
           } else if(first(val) == 'drop') {
                Game.drop(rest(val))
+               return false;
           } else if(val === 'balance') {
                Game.balance()
+               return false;
           } else if(first(val) == 'consume') {
                Game.consume(rest(val))
+               return false;
           } else if(val == 'journal') {
                Game.journal()
-          } else if(first(val) == 'talk' && second(val) == 'to') {
+               return false;
+          } else if(first(val) == 'talk') {
                if(Game.location.person !== null || Game.location.person !== undefined) {
-                    Game.talk(third(val))
+                    Game.talk(Game.location.person)
+                    return false;
                } else {
                     consul.error('There is nobody here.')
                }
           } else if(first(val) == 'health') {
                Game.health()
+               return false;
           } else if(first(val) == 'loot') {
                Game.containers.loot(rest(val))
-          } else if(first(val) == 'look' && second(val) == 'inside') {
-
-          }
-          if(Game.location.shop !== undefined || Game.location.shop !== null) {
+               return false;
+          } else if(Game.location.shop !== undefined || Game.location.shop !== null) {
                if(first(val) == 'wares') {
                     Game.shops.open()
+                    return false;
                } else if(first(val) == 'sell') {
                     Game.shops.sell(rest(val))
+                    return false;
                } else if(first(val) == 'buy') {
                     Game.shops.purchase(rest(val))
+                    return false;
                }
           }
 }
@@ -839,7 +861,7 @@ Game.help = function(cmd) {
             consul.hp('....really?')
         } else if(cmd === 'equip') {
              consul.emphasis('Usage: equip [weapon]')
-             consul.info('Weapon must be in your inentory. Sends old weapon to your inventory.')
+             consul.info('Weapon must be in your inventory. Sends old weapon to your inventory.')
         } else if(cmd === 'journal') {
              consul.emphasis('Usage: journal')
              consul.info('Displays all active quests.')
