@@ -145,6 +145,7 @@ function Weapon(type, name, damage, desc) {
     this.desc = desc
     this.name = name
     this.type = type
+    this.value = Math.floor(this.damage*1.5)
     return this
 }
 
@@ -210,7 +211,7 @@ Shop.prototype.open = function() {
           y = e + c[i.indexOf(e)]
           res += y
      })
-     consul.info(this.shopkeeper + ' shows you their wares.')
+     consul.info(`${capitalize(this.shopkeeper)} shows you their wares.`)
      consul.log(clean(res).replace(/, /g, "<br>").replace(/undefined/g, ''))
 }
 
@@ -241,6 +242,7 @@ Shop.prototype.sell = function(item) {
           consul.error('You don\'t have a '+item.name.toLowerCase()+' to sell.')
      } else {
           sounds.coin.play()
+          console.log(item)
           consul.log('You sell the '+item.name.toLowerCase()+' to '+this.shopkeeper)
           Player.gold.amount += item.value
           Player.inventory.splice(Player.inventory.indexOf(item), 1)
@@ -456,13 +458,21 @@ Game.take = function(e) {
          return false;
     }
     if(Game.location.items.includes(e)) {
+         items = Game.location.items
         if(e instanceof Container) {
              e.loot()
              return false;
         }
-        items = Game.location.items
         consul.log("You take the " + e.name)
-        var item = eval(capitalClean(e.name) + ' = new Item("'+e.name+'", "'+e.desc+'", '+e.value+', '+e.edible+', '+e.buffs+')')
+        var item;
+        if(e instanceof Weapon) {
+             item = eval(`${capitalClean(e.name)} = new Weapon("${e.type}", "${e.name}", ${e.damage}, "${e.desc}")`)
+             console.log(item)
+        }
+        if(e instanceof Item) {
+             var item = eval(capitalClean(e.name) + ' = new Item("'+e.name+'", "'+e.desc+'", '+e.value+', '+e.edible+', '+e.buffs+')')
+             console.log(item)
+        }
         Game.location.items.splice(items.indexOf(e), 1)
         Player.inventory.push(item)
     } else {
