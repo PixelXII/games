@@ -45,8 +45,6 @@ function cleanUp(s) {
     return s.toLowerCase().replace(/ /g, '-')
 }
 
-// Quests
-
 function Quest(name, desc, reward) {
      this.name = name
      this.desc = desc
@@ -55,17 +53,15 @@ function Quest(name, desc, reward) {
 Quest.prototype.initiate = function() {
      Player.quests.push(this)
      consul.log(Game.placeholder)
-     consul.dialogue('You initiated the quest "'+this.name+'".')
+     consul.dialogue(`You initiated the quest "${this.name}".`)
      consul.info(this.desc)
 }
 Quest.prototype.resolve = function() {
      Player.quests.splice(Player.quests.indexOf(this), 1)
      consul.log(Game.placeholder)
-     consul.dialogue('You resolved the quest "'+this.name+'".')
+     consul.dialogue(`You resolved the quest "${this.name}".`)
      this.reward()
 }
-
-// Items
 
 function Item(name, desc, value, edible, buffs = undefined) {
     this.name = name
@@ -82,7 +78,7 @@ function Item(name, desc, value, edible, buffs = undefined) {
 }
 Item.prototype.eat = function() {
     if(this.edible === false) {
-        consul.error('The ' + this.name.toLowerCase() + ' is not edible.')
+        consul.error(`The ${this.name.toLowerCase()} is not edible.`)
         return false;
     } else {
         if(Player.inventory.includes(this)) {
@@ -90,23 +86,21 @@ Item.prototype.eat = function() {
             Player.inventory.splice(Player.inventory.indexOf(this), 1)
             this.buffs()
         } else {
-            consul.error('You don\'t have a ' + this.name.toLowerCase() + ' to consume.')
+            consul.error(`You don't have a ${this.name.toLowerCase()} to consume.`)
         }
     }
 }
-
-// Containers
 
 function Container(name, contents) {
      this.name = name
      this.contents = contents
      this.contentString = ''
      if(this.contents.length === 1) {
-          this.contentString = "the " + this.contents[0].name
+          this.contentString = `the ${this.contents[0].name}`
      } else {
           this.contents.forEach((e) => {
                if(this.contents.indexOf(e) == this.contents.length-1) {
-                    this.contentString += "and " + e.name.toLowerCase()
+                    this.contentString += `and ${e.name.toLowerCase()}`
                } else {
                     this.contentString += e.name + ', '
                }
@@ -127,18 +121,14 @@ Container.prototype.loot = function() {
           Game.location.containers.splice(Game.location.containers.indexOf(this), 1)
           return Game.location.containers
      } else {
-          consul.error('There is no ' + this.name + ' here to loot.')
+          consul.error(`There is no ${this.name} here to loot.`)
      }
 }
-
-// People
 
 function Person(name, dialogue) {
     this.name = name
     this.dialogue = dialogue
 }
-
-// Weapons
 
 function Weapon(type, name, damage, desc) {
     this.damage = damage
@@ -159,7 +149,7 @@ Weapon.prototype.use = function(target) {
     if(target.hp < 0) {
         target.hp = 0
     }
-    consul.combat('You did ' + dmg + ' damage to the ' + target.name.toLowerCase())
+    consul.combat(`You did ${dmg} damage to the ${target.name.toLowerCase()}`)
 }
 
 Weapon.prototype.mUse = function(user) {
@@ -169,11 +159,9 @@ Weapon.prototype.mUse = function(user) {
     } else {
         Player.hp -= dmg
     }
-    consul.combat('The ' + user.name + ' did ' + dmg + ' damage.')
-    consul.hp('You have ' + Player.hp + ' health left.')
+    consul.combat(`The ${user.name} did ${dmg} damage.`)
+    consul.hp(`You have ${Player.hp} health left.`)
 }
-
-// Gold
 
 function Gold(amount) {
     this.amount = amount
@@ -189,8 +177,6 @@ Gold.prototype.spend = function(amount) {
      }
 }
 
-// Shops
-
 function Shop(name, shopkeeper, items, costs) {
      this.name = name
      this.shopkeeper = shopkeeper
@@ -204,7 +190,7 @@ function Shop(name, shopkeeper, items, costs) {
 Shop.prototype.open = function() {
      let i = [], c = [], that = this, res;
      this.items.forEach(function(e) {
-          i.push(e.name + ' -- $')
+          i.push(`${e.name} -- $`)
           c.push(that.costs[that.items.indexOf(e)] + ', ')
      })
      i.forEach(function(e) {
@@ -222,15 +208,15 @@ Shop.prototype.purchase = function(item) {
           return false;
      }
      if(this.items.includes(item) === false) {
-          consul.error('The store does not have a '+item.name.toLowerCase())
+          consul.error(`The store does not have a ${item.name.toLowerCase()}`)
      } else {
           if(Player.gold.spend(item.value) === false) {
-               consul.error('You don\'t have enough gold to buy the '+item.name)
+               consul.error(`You don't have enough gold to buy the ${item.name}`)
                return false;
           } else {
                sounds.coin.play()
                Player.gold.amount -= this.costs[this.items.indexOf(item)]
-               consul.log('You purchase the '+item.name.toLowerCase()+' from '+this.shopkeeper+'\'s stock.')
+               consul.log(`You purchase the ${item.name.toLowerCase()} from ${this.shopkeeper}'s stock.`)
                Player.inventory.push(item)
                this.items.splice(this.items.indexOf(item), 1)
           }
@@ -239,19 +225,17 @@ Shop.prototype.purchase = function(item) {
 
 Shop.prototype.sell = function(item) {
      if(Player.inventory.includes(item) === false) {
-          consul.error('You don\'t have a '+item.name.toLowerCase()+' to sell.')
+          consul.error(`You don't have a ${item.name.toLowerCase()} to sell.`)
      } else {
           sounds.coin.play()
           console.log(item)
-          consul.log('You sell the '+item.name.toLowerCase()+' to '+this.shopkeeper)
+          consul.log(`You sell the ${item.name.toLowerCase()} to ${this.shopkeeper}`)
           Player.gold.amount += item.value
           Player.inventory.splice(Player.inventory.indexOf(item), 1)
           this.items.push(item)
           this.costs.push(item.value)
      }
 }
-
-// Custom consul commands
 
 consul.combat = function(e) {
     consul.log(":: " + e).style.color = '#ef6c00'
@@ -266,16 +250,12 @@ consul.hp = function(e) {
 }
 
 consul.quest = function(e) {
-     consul.dialogue('NEW QUEST!  > ' + e)
+     consul.dialogue(`NEW QUEST!  > ${e}`)
 }
-
-// Arrays
 
 var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'help', 'health', 'journal', 'talk', 'loot', 'skip tutorial', 'buy', 'sell', 'wares', 'balance']
 var mdirections = ['forward', 'back', 'left', 'right']
 var ldirections = ['forward', 'back', 'left', 'right', 'up', 'down']
-
-// global
 
 var HealingTea = new Item('healing tea', 'A warm tea. You are not sure what it is made of.', 10, true, function() { Player.hp += 5; Game.health();})
 var HealingPotion = new Item('healing potion', 'A potion of healing. The label says: "You don\'t want to know what\'s in it.', 25, true, function() { Player.hp += 12; Game.health();})
@@ -283,8 +263,6 @@ var Ale = new Item('ale', 'It\'s classic ale.', 20, true, function() { Player.hp
 var Beer = new Item('beer', 'It\'s classic beer.', 25, true, function() { Player.hp += 15; Game.health(); })
 var Wine = new Item('wine', 'It\'s your average wine.', 50, true, function() { Player.hp += 25; Game.health(); })
 var Body;
-
-// Main game object
 
 var Game = {
      shops: {},
@@ -299,7 +277,9 @@ var Game = {
      },
      placeholder: '_______________________',
      combatElement: undefined,
-     muted: false
+     muted: false,
+     localSave: false,
+     mainHandler: undefined
 };
 
 Game.mute = function() {
@@ -334,8 +314,6 @@ Game.reset = function() {
      Game.location.shop = undefined
 }
 
-// Game functions
-
 Game.look = function(e) {
      if(!second(e)) {
           consul.log(this.lookLeft)
@@ -346,22 +324,22 @@ Game.look = function(e) {
      }
      e = second(e)
     if(e == 'left') {
-        consul.log('You look '+e)
+        consul.log(`You look ${e}`)
         consul.log(this.lookLeft)
     } else if(e == 'right') {
-        consul.log('You look '+e)
+        consul.log(`You look ${e}`)
         consul.log(this.lookRight)
     } else if(e == 'down') {
-        consul.log('You look '+e)
+        consul.log(`You look ${e}`)
         consul.log(this.lookDown)
     } else if(e == 'up') {
-        consul.log('You look '+e)
+        consul.log(`You look ${e}`)
         consul.log(this.lookUp)
     } else if(e == 'forward') {
-        consul.log('You look '+e)
+        consul.log(`You look ${e}`)
         consul.log(this.lookForward)
     } else if(e == 'back') {
-        consul.log('You look '+e)
+        consul.log(`You look ${e}`)
         consul.log(this.lookBack)
     } else {
          if(second(e)) {
@@ -375,7 +353,7 @@ Game.health = function() {
      if(Player.hp > Player.maxhp) {
           Player.hp = Player.maxhp
      }
-     consul.info('You have '+Player.hp+' health out of '+Player.maxhp)
+     consul.info(`You have ${Player.hp} health out of ${Player.maxhp}`)
 }
 
 Game.move = function(e) {
@@ -386,22 +364,22 @@ Game.move = function(e) {
     if(eval('Game.move'+capitalize(e)) === '') {
          return false;
     }
-    consul.log(eval('this.move'+capitalize(e)));
-    Player.location = eval('this.'+e.toLowerCase());
+    consul.log(eval(`this.move${capitalize(e)}`));
+    Player.location = eval(`this.${e.toLowerCase()}`);
 }
 
-Game.equip = function(e) { // Pass in only text, no eval beforehand
+Game.equip = function(e) {
     e = eval(capitalClean(e))
     var inv = Player.inventory
     if(e instanceof Weapon) {
          if(inv.includes(e)) {
-              consul.info('You equip the '+e.name.toLowerCase()+'. The '+Player.weapon.name+' is in your inventory.')
+              consul.info(`You equip the ${e.name.toLowerCase()}. The ${Player.weapon.name} is in your inventory.`)
               inv.push(Player.weapon)
               Player.weapon = e
               inv.splice(inv.indexOf(e), 1)
               sounds.equip.play()
          } else {
-              consul.error('You don\'t have a '+e.name.toLowerCase())
+              consul.error(`You don't have a ${e.name.toLowerCase()}`)
          }
     } else {
          return false;
@@ -422,29 +400,10 @@ Game.journal = function() {
 }
 
 Game.currentWeapon = function() {
-     consul.info('Your current weapon is a '+Player.weapon.name.toLowerCase())
+     consul.info(`Your current weapon is a ${Player.weapon.name.toLowerCase()}`)
 }
 
-Game.quickheal = function() {
-     consul.info('You rub some dirt on your wounds and get over it.')
-     const oldhp = Player.hp
-     Player.hp += 1
-     if(oldhp > Player.maxhp) {
-          Player.hp = Player.maxhp
-          consul.info('You already have ' + Player.maxhp + ' health.')
-          return false;
-     } else {
-          if(Player.hp > Player.maxhp) {
-               Player.hp = Player.maxhp
-               consul.info('You have '+Player.hp+' health out of '+Player.maxhp+'.')
-               return false;
-          } else {
-               consul.info('You have '+Player.hp+' health out of '+Player.maxhp+'.')
-          }
-     }
-}
-
-Game.consume = function(e) { // pass string
+Game.consume = function(e) {
      e = eval(capitalClean(e))
      sounds.consume.play()
      e.eat()
@@ -454,7 +413,7 @@ Game.take = function(e) {
      a = e
     e = eval(capitalClean(e))
     if(!e) {
-         consul.error('You don\'t see a ' + a)
+         consul.error(`You don't see a ${a}`)
          return false;
     }
     if(Game.location.items.includes(e)) {
@@ -463,20 +422,18 @@ Game.take = function(e) {
              e.loot()
              return false;
         }
-        consul.log("You take the " + e.name)
+        consul.log(`You take the ${e.name}.`)
         var item;
         if(e instanceof Weapon) {
              item = eval(`${capitalClean(e.name)} = new Weapon("${e.type}", "${e.name}", ${e.damage}, "${e.desc}")`)
-             console.log(item)
         }
         if(e instanceof Item) {
-             var item = eval(capitalClean(e.name) + ' = new Item("'+e.name+'", "'+e.desc+'", '+e.value+', '+e.edible+', '+e.buffs+')')
-             console.log(item)
+             var item = eval(`${capitalClean(e.name)} = new Item("${e.name}", "${e.desc}", ${e.value}, ${e.edible}, ${e.buffs})`);
         }
         Game.location.items.splice(items.indexOf(e), 1)
         Player.inventory.push(item)
     } else {
-        consul.error('You don\'t see a ' + e.name)
+        consul.error(`You don't see a ${e.name}`)
         return false;
     }
 }
@@ -512,15 +469,15 @@ Game.shops.sell = function(item) {
      }
 }
 
-Game.drop = function(e) { // e instanceof Item
+Game.drop = function(e) {
     e = eval(capitalClean(e))
     if(Player.inventory.includes(e)) {
         Game.location.items.push(e)
         e.dropped = true
         Player.inventory.splice(Player.inventory.indexOf(e), 1)
-        consul.info('You drop the ' + e.name + ' on the ground.')
+        consul.info(`You drop the ${e.name} on the ground.`)
     } else {
-        consul.error('You don\'t have a ' + e.name)
+        consul.error(`You don't have a ${e.name}.`)
     }
 }
 
@@ -567,21 +524,21 @@ Game.combat = function(input) {
             if(opp.weapon.type !== 'natural') {
                  const j = Math.floor(Math.random()*100);
                  if(j === 49) {
-                      Body = new Container(opp.name + ' body', [opp.weapon, HealingPotion, Wine, new Gold(83)])
+                      Body = new Container(`${opp.name} body`, [opp.weapon, HealingPotion, Wine, new Gold(83)])
                  } else if(j > 75) {
-                      Body = new Container(opp.name + ' body', [opp.weapon, HealingTea, new Gold(j + 15)])
+                      Body = new Container(`${opp.name} body`, [opp.weapon, HealingTea, new Gold(j + 15)])
                  } else {
-                      Body = new Container(opp.name + ' body', [opp.weapon, Ale, new Gold(j + 20)])
+                      Body = new Container(`${opp.name} body`, [opp.weapon, Ale, new Gold(j + 20)])
                  }
             } else {
                  if(opp.hp < 50) {
                       if(Math.floor(Math.random()*10) >= 5) {
-                         Body = new Container(opp.name + ' body', [HealingTea, new Gold(Math.round(opp.hp*0.75)+20)])
+                         Body = new Container(`${opp.name} body`, [HealingTea, new Gold(Math.round(opp.hp*0.75)+20)])
                       } else {
-                           Body = new Container(opp.name + ' body', [HealingPotion, new Gold(Math.round(opp.hp*0.8)+15)])
+                           Body = new Container(`${opp.name} body`, [HealingPotion, new Gold(Math.round(opp.hp*0.8)+15)])
                       }
                  } else {
-                      Body = new Container(opp.name + ' body', [Wine, new Gold(Math.round(opp.hp + opp.hp/4)+25)])
+                      Body = new Container(`${opp.name} body`, [Wine, new Gold(Math.round(opp.hp + opp.hp/4)+25)])
                  }
             }
             Game.location.containers.push(Body)
@@ -589,7 +546,7 @@ Game.combat = function(input) {
         } else {
              sounds.atk.play()
             input.disabled = true
-            consul.hp('The '+ opp.name.toLowerCase() + ' has ' + opp.hp + ' health left.')
+            consul.hp(`The ${opp.name.toLowerCase()} has ${opp.hp} health left.`)
         }
         setTimeout(function() {
             if(opp.hp !== 0) {
@@ -602,7 +559,7 @@ Game.combat = function(input) {
                     input.disabled = true
                     Player.inCombat = false
                 } else {
-                    consul.hp('You have ' + Player.hp + ' health left.')
+                    consul.hp(`You have ${Player.hp} health left.`)
                 }
             }
             input.disabled = false
@@ -626,7 +583,7 @@ Game.monsterCombat = function() {
                input.disabled = true
                Player.inCombat = false
           } else {
-               consul.hp('You have ' + Player.hp + ' health left.')
+               consul.hp(`You have ${Player.hp} health left.`)
           }
      }
 }
@@ -693,7 +650,7 @@ Game.containers.loot = function(e) {
 Game.talk = function(val) {
      person = Game.location.person
      if(person === undefined) {
-          consul.error('You don\'t see anyone around.')
+          consul.error(`You don't see anyone around.`)
           return false;
      }
      if(person instanceof Person) {
@@ -714,7 +671,7 @@ Game.balance = function() {
           Player.gold.amount = 0;
           consul.info('You have no gold.')
      } else {
-          consul.info('You have G '+Player.gold.amount)
+          consul.info(`You have G ${Player.gold.amount}`)
      }
 }
 
@@ -729,7 +686,7 @@ Game.inspect = function(cmd) {
             q = cmd.desc
         }
         consul.log(Game.placeholder)
-        consul.emphasis('You inspect the ' + cmd.name)
+        consul.emphasis(`You inspect the ${cmd.name}`)
         consul.info(q)
     }
 }
@@ -823,7 +780,7 @@ Game.auto = function(val) {
 
 Game.help = function(cmd) {
     if(commands.includes(cmd) === false && cmd !== undefined) {
-        consul.error('"'+cmd + '" is not a command. We cannot help you.')
+        consul.error(`"${cmd}" is not a command. We cannot help you.`)
         return false;
     }
     if(cmd === undefined || cmd === 'commands') {
@@ -902,3 +859,19 @@ Game.help = function(cmd) {
         }
     }
 }
+
+window.addEventListener("load", function() {
+     if(Game.localSave) {
+          if(localStorage.arkeus_save) {
+               Player = JSON.parse(localStorage.arkeus_save)
+               consul.clear()
+               consul.special('You have loaded your save and gone back to the location you were at.')
+               consul.log(Game.placeholder)
+               consul.inputCallback('look')
+          }
+          setInterval(function() {
+               localStorage.arkeus_save = JSON.stringify(Player)
+          }, 1000)
+          localStorage.arkeus_save = JSON.stringify(Player)
+     }
+})
