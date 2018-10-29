@@ -708,6 +708,7 @@ Game.parse = function(val) {
                Game.items()
                return false;
           } else if(val === 'reset') {
+               consul.clear()
                localStorage.clear()
                location.reload()
           } else if(val.includes('help')) {
@@ -873,6 +874,9 @@ Game.help = function(cmd) {
         } else if(cmd === 'loot') {
              consul.emphasis('Usage: loot [container]')
              consul.info('Loots the specified container. <br><br>  &nbsp&nbsp&nbsp&nbsp After an opponent dies in combat, it will drop its items and random loot in its body, and &nbsp&nbsp&nbsp&nbsp&nbspthen you can "loot body".')
+        } else if(cmd === 'reset') {
+             consul.emphasis('Usage: reset')
+             consul.info('Resets the your game, back to the beginning.')
         }
     }
 }
@@ -888,7 +892,7 @@ window.addEventListener("load", function() {
                     Player.inventory.push(j)
                })
                Player.gold = Game.parseItem(Player.gold)
-               consul.special('You have loaded your save and gone back to the location you were at.')
+               consul.special('You have loaded your previous game.')
                consul.inputCallback('look')
           }
           setInterval(function() {
