@@ -257,7 +257,7 @@ consul.quest = function(e) {
      consul.dialogue(`NEW QUEST!  > ${e}`)
 }
 
-var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'help', 'health', 'journal', 'talk', 'loot', 'skip tutorial', 'buy', 'sell', 'wares', 'balance']
+var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'help', 'health', 'journal', 'talk', 'loot', 'skip tutorial', 'buy', 'sell', 'wares', 'balance', 'reset']
 var mdirections = ['forward', 'back', 'left', 'right']
 var ldirections = ['forward', 'back', 'left', 'right', 'up', 'down']
 
@@ -707,6 +707,9 @@ Game.parse = function(val) {
           } else if(first(val) == 'items') {
                Game.items()
                return false;
+          } else if(val === 'reset') {
+               localStorage.clear()
+               location.reload()
           } else if(val.includes('help')) {
               Game.help(rest(val))
               return false;
@@ -785,8 +788,10 @@ Game.auto = function(val) {
 Game.parseItem = function(e) {
      if(e.id === 'item') {
           return eval(`${capitalClean(e.name)} = new Item("${e.name}", "${e.desc}", ${e.value}, ${e.edible}, ${e.buffs})`)
-     } else if(e.id = 'weapon') {
+     } else if(e.id === 'weapon') {
           return eval(`${capitalClean(e.name)} = new Weapon("${e.type}", "${e.name}", ${e.damage}, "${e.desc}")`)
+     } else if(e.id === 'gold') {
+          return eval(`new Gold(${e.amount})`)
      }
 }
 
@@ -882,6 +887,7 @@ window.addEventListener("load", function() {
                     Player.inventory.splice(Player.inventory.indexOf(this), 1)
                     Player.inventory.push(j)
                })
+               Player.gold = Game.parseItem(Player.gold)
                consul.special('You have loaded your save and gone back to the location you were at.')
                consul.inputCallback('look')
           }
