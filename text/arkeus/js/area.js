@@ -131,7 +131,7 @@ var Rivergate = {
      inn: function(val) {
           Game.reset()
           Game.location.shop = new Shop('inn', 'Horadric', [Ale, Wine, HealingTea, HealingPotion], [15, 20, 30, 40])
-          Game.location.person = new Person('Horadric', ['Want to buy something?', 'Are you buying, or just coming in to see a friend?', 'You from around here? <br><br> *Horadric shrugs and looks around* <br><br> My daughter, Aritran, is one of the only people around here who\'s friendly, besides me, of course.'])
+          Game.location.person = new Person('Horadric', ['Want to buy something?', 'Are you buying, or just coming in to see a friend?', 'You from around here? <br><br> *Horadric shrugs and looks around* <br><br> My daughter, Aritran, is one of the only people around here who\'s friendly. Besides me, of course.'])
           Game.lookLeft = `On your left is a large stack of barrels and buckets.`
           Game.lookRight = `On your right is a locked door with a sign on it, labelling it as the guest room stairway.`
           Game.lookBack = `Behind you is the door to the marketplace.`
