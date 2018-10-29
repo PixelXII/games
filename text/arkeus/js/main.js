@@ -13,6 +13,8 @@ document.getElementById('mute').addEventListener('click', () => {
           document.getElementById('mute').innerHTML = 'Unmute'
      }
 })
+document.body.style.padding = 0;
+document.body.style.margin = 0;
 var inputstyle = consul.input(main, true)
 inputstyle.id = 'ie'
 inputstyle.style.width = '100%'
