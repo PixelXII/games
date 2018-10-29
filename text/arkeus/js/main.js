@@ -13,10 +13,10 @@ document.getElementById('mute').addEventListener('click', () => {
           document.getElementById('mute').innerHTML = 'Unmute'
      }
 })
-ti.style.borderBottomStyle = 'double'
-var inputstyle = consul.input(parse, true)
+var inputstyle = consul.input(main, true)
 inputstyle.id = 'ie'
 inputstyle.style.width = '100%'
+ti.style.borderBottomStyle = 'double'
 document.querySelector('.consul-element').style.height = window.innerHeight - inputstyle.height - 110;
 window.onresize = function() {
      document.querySelector('.consul-element').style.height = window.innerHeight - inputstyle.height - 110;
@@ -36,6 +36,7 @@ var Player = {
 }
 
 Game.combatElement = document.getElementById('ie')
+Game.localSave = true;
 
 function firstandsecond(v) {
      return v.split(' ')[0] + ' ' + v.split(' ')[1]
@@ -48,7 +49,7 @@ consul.special = function(v) {
 
 // main handler
 
-function parse(val) {
+function main(val) {
      if(val.toLowerCase().includes('ree')) {
                  consul.special("BATTLE CRY")
                  setTimeout(() => {
@@ -93,6 +94,15 @@ function parse(val) {
                case 'rivergate.edge':
                     Rivergate.edge(val)
                     break;
+               case 'forest.begin-road':
+                    forest.beginning(val)
+                    break;
+               case 'rivergate.inn':
+                    Rivergate.inn(val)
+                    break;
+               default:
+                    consul.log(Game.placeholder)
+                    consul.special('You have reached a place that is undeveloped. <br> <br> There is no handler for this area, so you will have to start over.')
             }
         } else {
             if(val !== '') {
