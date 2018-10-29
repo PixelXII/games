@@ -75,6 +75,12 @@ var consul = {
             return false;
         }
     },
+    clear: function() {
+         var ms = Array.from(document.getElementsByClassName('consul-item'))
+         ms.forEach(function(e) {
+              e.outerHTML = ''
+         })
+    },
     title: function(e) {
         if(e === undefined) {
             throw new Error('consul title cannot be blank')
@@ -106,6 +112,7 @@ var consul = {
         } else {
             var p = new Element('input', this.element)
             this.container.appendChild(p)
+            this.inputCallback = callback
             p.type = 'text'
             p.autofocus = 'true'
             p.style.padding = '2px'
