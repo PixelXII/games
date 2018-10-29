@@ -66,6 +66,7 @@ Quest.prototype.resolve = function() {
 function Item(name, desc, value, edible, buffs = undefined) {
     this.name = name
     this.desc = desc
+    this.id = 'item'
     if(buffs !== undefined) {
          this.buffs = buffs
     }
@@ -93,6 +94,7 @@ Item.prototype.eat = function() {
 
 function Container(name, contents) {
      this.name = name
+     this.id = 'container'
      this.contents = contents
      this.contentString = ''
      if(this.contents.length === 1) {
@@ -132,6 +134,7 @@ function Person(name, dialogue) {
 
 function Weapon(type, name, damage, desc) {
     this.damage = damage
+    this.id = 'weapon'
     this.desc = desc
     this.name = name
     this.type = type
@@ -165,6 +168,7 @@ Weapon.prototype.mUse = function(user) {
 
 function Gold(amount) {
     this.amount = amount
+    this.id = 'gold'
     this.name = 'gold'
     return this.amount
 }
@@ -778,6 +782,14 @@ Game.auto = function(val) {
      }
 }
 
+Game.parseItem = function(e) {
+     if(e.id === 'item') {
+          return eval(`${capitalClean(e.name)} = new Item("${e.name}", "${e.desc}", ${e.value}, ${e.edible}, ${e.buffs})`)
+     } else if(e.id = 'weapon') {
+          return eval(`${capitalClean(e.name)} = new Weapon("${e.type}", "${e.name}", ${e.damage}, "${e.desc}")`)
+     }
+}
+
 Game.help = function(cmd) {
     if(commands.includes(cmd) === false && cmd !== undefined) {
         consul.error(`"${cmd}" is not a command. We cannot help you.`)
@@ -865,13 +877,16 @@ window.addEventListener("load", function() {
           if(localStorage.arkeus_save) {
                Player = JSON.parse(localStorage.arkeus_save)
                consul.clear()
+               Player.inventory.forEach(function(e) {
+                    var j = Game.parseItem(e)
+                    Player.inventory.splice(Player.inventory.indexOf(this), 1)
+                    Player.inventory.push(j)
+               })
                consul.special('You have loaded your save and gone back to the location you were at.')
-               consul.log(Game.placeholder)
                consul.inputCallback('look')
           }
           setInterval(function() {
                localStorage.arkeus_save = JSON.stringify(Player)
-          }, 1000)
-          localStorage.arkeus_save = JSON.stringify(Player)
+          }, 5000)
      }
 })
