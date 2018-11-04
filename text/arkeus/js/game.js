@@ -257,7 +257,7 @@ consul.quest = function(e) {
      consul.dialogue(`NEW QUEST!  > ${e}`)
 }
 
-var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'help', 'health', 'journal', 'talk', 'loot', 'skip tutorial', 'buy', 'sell', 'wares', 'balance', 'reset']
+var commands = ['move', 'look', 'attack', 'take', 'inspect', 'drop', 'inventory', 'consume', 'items', 'equip', 'weapon', 'help', 'health', 'stats', 'journal', 'talk', 'loot', 'skip tutorial', 'buy', 'sell', 'wares', 'balance', 'reset']
 var mdirections = ['forward', 'back', 'left', 'right']
 var ldirections = ['forward', 'back', 'left', 'right', 'up', 'down']
 
@@ -283,7 +283,15 @@ var Game = {
      combatElement: undefined,
      muted: false,
      localSave: false,
-     mainHandler: undefined
+    init: undefined,
+};
+var Player = {
+    opponent: false,
+    previous: undefined,
+    inventory: [],
+    quests: [],
+    inCombat: false,
+    gold: new Gold(150)
 };
 
 Game.mute = function() {
@@ -368,6 +376,7 @@ Game.move = function(e) {
     if(eval('Game.move'+capitalize(e)) === '') {
          return false;
     }
+    Player.previous = Player.location
     consul.log(eval(`this.move${capitalize(e)}`));
     Player.location = eval(`this.${e.toLowerCase()}`);
 }
@@ -524,6 +533,7 @@ Game.combat = function(input) {
             opp.dead = true;
             input.disabled = false;
             input.focus();
+            Player.opponent = true
             consul.hp('You killed the ' + opp.name.toLowerCase());
             if(opp.weapon.type !== 'natural') {
                  const j = Math.floor(Math.random()*100);
@@ -562,6 +572,10 @@ Game.combat = function(input) {
                     consul.error('YOU DIED')
                     input.disabled = true
                     Player.inCombat = false
+                    setTimeout(function() {
+                         localStorage.clear()
+                         location.reload()
+                    }, 4000)
                 } else {
                     consul.hp(`You have ${Player.hp} health left.`)
                 }
@@ -663,7 +677,7 @@ Game.talk = function(val) {
                person.dialogue.call()
           } else if(person.dialogue instanceof Array) {
                const a = Math.floor(Math.random()*person.dialogue.length)
-               consul.dialogue(person.name + ' says: "'+ person.dialogue[a] + '"')
+               consul.dialogue(capitalize(person.name) + ' says: "'+ person.dialogue[a] + '"')
           }
      } else {
           consul.log('That is not a person.')
@@ -694,6 +708,33 @@ Game.inspect = function(cmd) {
         consul.info(q)
     }
 }
+Game.stats = function() {
+     consul.log(Game.placeholder)
+     consul.info(`health: ${Player.hp}`)
+     consul.info(`max health: ${Player.maxhp}`)
+     consul.info(`weapon: ${Player.weapon.name}`)
+     var i = '';
+     if(Player.inventory.length === 0) {
+          i = 'empty'
+     }
+     Player.inventory.forEach(function(e) {
+          if(Player.inventory.indexOf(e) === Player.inventory.length-1) {
+               i += e.name
+          } else {
+               i += `${e.name}, `
+          }
+     })
+     consul.info(`inventory: ${i}`)
+     var q = ''
+     if(Player.quests.length === 0) {
+          q = 'none'
+     } else {
+          Player.quests.forEach(function(e) {
+               q += `${e.name}, `
+          })
+     }
+     consul.info(`quests: ${q}`)
+}
 
 Game.parse = function(val) {
           if(first(val) == 'move') {
@@ -707,9 +748,11 @@ Game.parse = function(val) {
           } else if(first(val) == 'items') {
                Game.items()
                return false;
+          } else if(val === 'stats') {
+               Game.stats()
           } else if(val === 'reset') {
                consul.clear()
-               localStorage.clear()
+               localStorage.arkeus_save = null
                location.reload()
           } else if(val.includes('help')) {
               Game.help(rest(val))
@@ -877,6 +920,9 @@ Game.help = function(cmd) {
         } else if(cmd === 'reset') {
              consul.emphasis('Usage: reset')
              consul.info('Resets the your game, back to the beginning.')
+        } else if(cmd === 'stats') {
+             consul.emphasis('Usage: stats')
+             consul.info('Displays your HP, your maximum HP, current weapon, inventory, and active quests.')
         }
     }
 }
@@ -891,12 +937,26 @@ window.addEventListener("load", function() {
                     Player.inventory.splice(Player.inventory.indexOf(this), 1)
                     Player.inventory.push(j)
                })
-               Player.gold = Game.parseItem(Player.gold)
-               consul.special('You have loaded your previous game.')
-               consul.inputCallback('look')
+                Player.gold = Game.parseItem(Player.gold)
+                Player.weapon = Game.parseItem(Player.weapon)
+                Player.hp = Player.maxhp
+                consul.special('You have loaded your previous game.')
+                consul.inputCallback('look')
           }
           setInterval(function() {
                localStorage.arkeus_save = JSON.stringify(Player)
           }, 5000)
      }
+     setInterval(function() {
+          if(Player.hp <= 0) {
+               consul.clear()
+               consul.special('You died.')
+               setTimeout(function() {
+                    if(Game.localSave) {
+                         localStorage.clear()
+                    }
+                    location.reload()
+               }, 5000)
+          }
+     }, 10)
 })
