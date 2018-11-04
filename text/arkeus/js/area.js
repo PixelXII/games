@@ -155,6 +155,8 @@ var forest = {
           Game.moveForward = `You walk for a while, in the mist, and emerge on the other side in a bright, cheery landscape with mountains all around.`
           Game.forward = `valley.beginning`
           Game.moveLeft = 'You walk out on the trail and make your way through the trees.'
+         Game.moveBack = 'You walk back to the town.'
+         Game.back = 'rivergate.market'
           Game.left = `forest.hut`
           if(val == 'move left') {
                getId('ie').disabled = true
@@ -170,16 +172,153 @@ var forest = {
           Game.reset()
           Game.location.opponent = {
                name: `Raccoon`,
-               hp:40,
+               hp:20,
                weapon: Claws,
           }
           Player.inCombat = true
           Game.lookLeft = `On your left is a small table with some empty dishes on it.`
           Game.lookRight = `On your right is a fireplace.`
+          Game.lookBack = `Behin you is the door of the hut.`
           if(Game.location.opponent.dead) {
                Game.lookForward = `In front of you is the body of the ${Game.location.opponent.name.toLowerCase()}.`
           } else {
-               Game.lookForward = `In front of you is the raccoon.`
+               Game.lookForward = `In front of you is a raccoon.`
           }
+          Game.lookUp = environments.up.woodCeiling
+          Game.lookDown = environments.down.woodenFloor
+          Game.moveBack = `You walk back to the road.`
+          Game.back = 'forest.begin-road'
+          Game.auto(val)
+          forest.hut = function(val) {
+               Game.lookLeft = `On your left is a small table with some empty dishes on it.`
+               Game.lookRight = `On your right is a fireplace.`
+               Game.lookBack = `Behin you is the door of the hut.`
+               if(Game.location.opponent.dead) {
+                    Game.lookForward = `In front of you is the body of the ${Game.location.opponent.name.toLowerCase()}.`
+               } else {
+                    Game.lookForward = `In front of you is a raccoon.`
+               }
+               Game.lookUp = environments.up.woodCeiling
+               Game.lookDown = environments.down.woodenFloor
+               Game.moveBack = `You walk back to the road.`
+               Game.back = 'forest.begin-road'
+               Game.auto(val)
+          }
+     }
+}
+var gerrysQuest = new Quest(`Gerry's Favorite Herb Patch`, "You are going to help Gerry remove the ogre from his favorite herb patch.", function() {
+    Player.gold += 75
+    consul.info('Gerry will be happy that you removed the ogre from his favorite herb patch.')
+})
+var Gerry = new Person('the merchant', function() {
+    input.disabled = true
+    consul.dialogue(`Gerry says: "Hello, traveler! I have some herbs for sale, if you would like."`)
+    setTimeout(function() {
+        consul.dialogue(`"Y'know what? I'm having some issues with my favorite patch -- there's some ogre that thinks it's found a home."`)
+        setTimeout(function() {
+            consul.dialogue(`"And you could certainly deal with it, with that ${Player.weapon.name.toLowerCase()} hanging off your belt."`)
+            gerrysQuest.initiate()
+        }, 1500)
+    }, 3000)
+})
+
+// items -- name, desc, value, edible, buffs
+
+var Thyme = new Item('thyme', 'A little herb that grows in small shrubs.', 15, true, function() {Player.hp+=5})
+var Fireweed = new Item('fireweed', 'A small but powerful plant that grows on rocks in the sun.', 30, true, function() {Player.hp+=15})
+var AllHeal = new Item('all-heal', 'A very rare and potent healing herb, found in just a few locations.', 150, true, function() {Player.hp+=Math.floor(Player.maxhp/2)})
+var Aloe = new Item('aloe', 'A small succulent that can be found in most deserts, but also can be found in certain forests. It is most commonly used to increase one\'s strength in combat.', 75, true, function() {Player.weapon.damage+=5; setTimeout(function() {Player.weapon.damage-=5}, 10000)})
+var Athelas = new Item('Athelas', 'A very very rare vine that grows in only one location. Legend says that it can heal any wound or disease.', 300, true, function() {Player.hp=Player.maxhp})
+var Key = new Item('key', 'They key to the traveling merchant\'s lockbox.')
+
+var valley = {
+     beginning: function(val) {
+          Game.reset()
+          Game.lookLeft = 'On your left is a road leading off to a large lake. The lake shimmers and gleams in the sunlight, brightening the valley.'
+          Game.lookRight = 'On your right is an old abandoned shed. The shed is surrounded by old barrels and crates.'
+          Game.lookDown = environments.down.dirtroad
+          Game.lookUp = environments.up.clouds
+          Game.lookBack = 'Behind you is the forest of mist and the road leading to Rivergate.'
+          Game.lookForward = 'In front of you, the road continues on for a couple miles, then disappears behind a ridge.'
+          Game.moveLeft = "You take the left fork and make your way over to the lake."
+          Game.left = 'valley.lake'
+          Game.moveRight = "You take the right fork and cautiously approach the abandoned shed."
+          Game.right = 'valley.shed'
+          Game.moveBack = 'You walk up the road, into the forest of mist again.'
+          Game.back = 'forest.begin-road'
+          Game.moveForward = 'You decide to continue on the main road and start walking.'
+          Game.forward = 'valley.ridge'
+          Game.auto(val)
+         valley.beginning = function() {
+             Game.lookLeft = 'On your left is a road leading off to a large lake. The lake shimmers and gleams in the sunlight, brightening the valley.'
+              Game.lookRight = 'On your right is an old abandoned shed. The shed is surrounded by old barrels and crates.'
+              Game.lookDown = environments.down.dirtroad
+              Game.lookUp = environments.up.clouds
+              Game.lookBack = 'Behind you is the forest of mist and the road leading to Rivergate.'
+              Game.lookForward = 'In front of you, the road continues on for a couple miles, then disappears behind a ridge.'
+              Game.moveLeft = "You take the left fork and make your way over to the lake."
+              Game.left = 'valley.lake'
+              Game.moveRight = "You take the right fork and cautiously approach the abandoned shed."
+              Game.right = 'valley.shed'
+              Game.moveBack = 'You walk up the road, into the forest of mist again.'
+              Game.back = 'forest.begin-road'
+              Game.moveForward = 'You decide to continue on the main road and start walking.'
+              Game.forward = 'valley.ridge'
+              Game.auto(val)
+         }
+     },
+     lake: function(val) {
+          Game.reset()
+          Game.location.person = Gerry
+          Game.location.shop = new Shop('the merchant', 'the merchant', [Thyme, Fireweed, AllHeal, Aloe, Athelas, Key], [Thyme.value, Fireweed.value, AllHeal.value, Aloe.value, Athelas.value, 350])
+          Game.lookUp = environments.up.clouds
+          Game.lookDown = environments.down.newtrail
+          Game.lookRight = `On your right is a large lake. The trail skirts the lake and enters a small forest.`
+          Game.lookLeft = `On your left is a traveling merchant, sitting down with his supplies on his back.`
+          Game.lookBack = `Behind you is the fork where the trail that you're on now intersects with the main road out of town.`
+          Game.lookForward = 'In front of you, the trail leads straight into a small copse of trees.'
+          Game.moveBack = 'You turn around and head back to the main road.'
+          Game.back = 'valley.beginning'
+          Game.moveForward = 'You continue towards the lake on the small trail.'
+          Game.forward = 'valley.actualLake'
+          Game.auto(val)
+         valley.lake = function() {
+             Game.location.person = Gerry
+              Game.location.shop = new Shop('the merchant', 'the merchant', [Thyme, Fireweed, AllHeal, Aloe, Athelas, Key], [Thyme.value, Fireweed.value, AllHeal.value, Aloe.value, Athelas.value, 350])
+              Game.lookUp = environments.up.clouds
+              Game.lookDown = environments.down.newtrail
+              Game.lookRight = `On your right is a large lake. The trail skirts the lake and enters a small forest.`
+              Game.lookLeft = `On your left is a traveling merchant, sitting down with his supplies on his back.`
+              Game.lookBack = `Behind you is the fork where the trail that you're on now intersects with the main road out of town.`
+              Game.lookForward = 'In front of you, the trail leads straight into a small copse of trees.'
+              Game.moveBack = 'You turn around and head back to the main road.'
+              Game.back = 'valley.beginning'
+              Game.moveForward = 'You continue towards the lake on the small trail.'
+              Game.forward = 'valley.actualLake'
+              Game.auto(val)
+         }
+     },
+     actualLake: function(val) {
+          Game.reset()
+          Game.location.container = new Container('box', [Fireweed, Thyme, Aloe])
+          if(first(val) == 'loot') {
+               if(Player.inventory.includes(Key)) {
+                    Game.auto(val)
+                    return false;
+               } else {
+                    consul.error(`The box is locked.`)
+                    return false;
+               }
+          }
+          Game.lookRight = `On your right is the shore of the lake. The small waves from the lake lap up against the shore, creating a hypnotic sound.`
+          Game.lookForward = `In front of you, the forest gets bigger with every step.`
+          Game.lookBack = `Behind you is the stretch of trail that leads back to the road.`
+          Game.lookLeft = `On your left is a lockbox with a label on it, saying "This is property of Gerry." <br> You assume that Gerry is the name of the traveling merchant.`
+          if(first(val) === 'look' || (first(val) == 'look' && second(val) == 'left')) {
+               Gerry.name = 'Gerry'
+          }
+          Game.moveBack = `You walk back, away from the lake, to where the traveling merchant is sitting.`
+          Game.back = `valley.lake`
+          Game.auto(val)
      }
 }
