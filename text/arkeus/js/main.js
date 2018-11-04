@@ -24,18 +24,16 @@ window.onresize = function() {
      document.querySelector('.consul-element').style.height = window.innerHeight - inputstyle.height - 110;
      document.querySelector('.consul-element').style.width = window.innerWidth - 40;
 }
-consul.dialogue('You are standing on a small trail, just outside the village of Rivergate.')
-document.body.style.height = null
-var Player = {
-    location: 'north-rivergate',
-    hp: 50,
-    maxhp: 50,
-    weapon: SteelSword,
-    inventory: [],
-    quests: [],
-    inCombat: false,
-    gold: new Gold(150)
+Game.init = function() {
+    consul.dialogue('You are standing on a small trail, just outside the village of Rivergate.')
+    consul.log('The local save feature is enabled.').style.fontSize = '20px'
+    consul.log(`Please note that the local save feature cannot save in combat situatios.`).style.fontSize = '14px'
 }
+document.body.style.height = null
+Player.location = 'north-rivergate'
+Player.maxhp = 50
+Player.hp = Player.maxhp;
+Player.weapon = SteelSword
 
 Game.combatElement = document.getElementById('ie')
 Game.localSave = true;
@@ -50,15 +48,41 @@ consul.special = function(v) {
 }
 
 // main handler
+Player.previous = 'north-rivergate'
 
 function main(val) {
+     if(first(val) === '/dev') {
+          switch(second(val)) {
+               case 'loc':
+                    consul.info(Player.location)
+                    break;
+               case 'tp':
+                    Player.location = third(val)
+                    consul.special(`teleported to ${third(val)}`)
+                    break;
+              case 'version':
+                  consul.info(navigator.appVersion)
+                  break;
+          }
+          return false;
+     }
      if(val.toLowerCase().includes('ree')) {
                  consul.special("BATTLE CRY")
                  setTimeout(() => {
                       consul.special("REEEEEEEEEEEEEEEEEE")
                  }, 24000)
                  return false;
-            }
+     }
+     if(Player.hp <= 0) {
+          Game.combatElement.disabled = true
+          consul.log(Game.placeholder)
+          consul.clear()
+          consul.special(`You died.`)
+          setTimeout(function() {
+               localStorage.clear()
+               location.reload()
+          }, 4000)
+     }
      if(val.toLowerCase().includes('pikachu')) {
           consul.special('PIKACHU GO')
           if(Player.inCombat) {
@@ -81,6 +105,9 @@ function main(val) {
                case 'north-rivergate':
                     nRiver(val)
                     break;
+               case undefined:
+                    nRiver(val)    
+                    break;
                case 'rivergate.outskirts':
                     Rivergate.outskirts(val)
                     break;
@@ -102,9 +129,23 @@ function main(val) {
                case 'rivergate.inn':
                     Rivergate.inn(val)
                     break;
+               case 'forest.hut':
+                    forest.hut(val)
+                    break;
+               case 'valley.beginning':
+                    valley.beginning(val)
+                    break;
+               case 'valley.lake':
+                    valley.lake(val)
+                    break;
+               case 'valley.actualLake':
+                    valley.actualLake(val)
+                    break;
                default:
                     consul.log(Game.placeholder)
-                    consul.special('You have reached a place that is undeveloped. <br> <br> There is no handler for this area, so you will have to start over.')
+                    consul.special('You have reached a place that is undeveloped. <br> <br> There is no handler for this area, so you have been moved back to your previous location.')
+                    Player.location = Player.previous
+                    break;
             }
         } else {
             if(val !== '') {
