@@ -4,6 +4,23 @@
 
 */
 
+var Game = {
+     shops: {},
+     containers: {},
+     location: {
+          items: [],
+          containers: [],
+          shop: undefined,
+          person: undefined,
+          opponent: undefined,
+          body: undefined
+     },
+     placeholder: '_______________________',
+     combatElement: undefined,
+     muted: false,
+     localSave: false,
+    init: undefined,
+};
 function first(str) {
     return str.split(' ')[0]
 }
@@ -267,32 +284,6 @@ var Ale = new Item('ale', 'It\'s classic ale.', 20, true, function() { Player.hp
 var Beer = new Item('beer', 'It\'s classic beer.', 25, true, function() { Player.hp += 15; Game.health(); })
 var Wine = new Item('wine', 'It\'s your average wine.', 50, true, function() { Player.hp += 25; Game.health(); })
 var Body;
-
-var Game = {
-     shops: {},
-     containers: {},
-     location: {
-          items: [],
-          containers: [],
-          shop: undefined,
-          person: undefined,
-          opponent: undefined,
-          body: undefined
-     },
-     placeholder: '_______________________',
-     combatElement: undefined,
-     muted: false,
-     localSave: false,
-    init: undefined,
-};
-var Player = {
-    opponent: false,
-    previous: undefined,
-    inventory: [],
-    quests: [],
-    inCombat: false,
-    gold: new Gold(150)
-};
 
 Game.mute = function() {
      sounds.coin.volume = 0;
@@ -929,8 +920,10 @@ Game.help = function(cmd) {
 
 window.addEventListener("load", function() {
      if(Game.localSave) {
-          if(localStorage.arkeus_save) {
+          if(localStorage.arkeus_save !== "null") {
+              console.log(typeof localStorage.arkeus_save)
                Player = JSON.parse(localStorage.arkeus_save)
+              console.log(Player)
                consul.clear()
                Player.inventory.forEach(function(e) {
                     var j = Game.parseItem(e)
@@ -943,9 +936,6 @@ window.addEventListener("load", function() {
                 consul.special('You have loaded your previous game.')
                 consul.inputCallback('look')
           }
-          setInterval(function() {
-               localStorage.arkeus_save = JSON.stringify(Player)
-          }, 5000)
      }
      setInterval(function() {
           if(Player.hp <= 0) {
