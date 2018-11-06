@@ -13,6 +13,19 @@ document.getElementById('mute').addEventListener('click', () => {
           document.getElementById('mute').innerHTML = 'Unmute'
      }
 })
+var Player = {
+    opponent: false,
+    previous: undefined,
+    inventory: [],
+    hp: 50,
+    maxhp: 50,
+    location: 'north-rivergate',
+    quests: [],
+    weapon: SteelSword,
+    inCombat: false,
+    gold: new Gold(150)
+};
+console.log(Player)
 document.body.style.padding = 0;
 document.body.style.margin = 0;
 var inputstyle = consul.input(main, true)
@@ -29,11 +42,8 @@ Game.init = function() {
     consul.log('The local save feature is enabled.').style.fontSize = '20px'
     consul.log(`Please note that the local save feature cannot save in combat situatios.`).style.fontSize = '14px'
 }
+Game.init()
 document.body.style.height = null
-Player.location = 'north-rivergate'
-Player.maxhp = 50
-Player.hp = Player.maxhp;
-Player.weapon = SteelSword
 
 Game.combatElement = document.getElementById('ie')
 Game.localSave = true;
@@ -51,6 +61,7 @@ consul.special = function(v) {
 Player.previous = 'north-rivergate'
 
 function main(val) {
+    localStorage.arkeus_save = JSON.stringify(Player)
      if(first(val) === '/dev') {
           switch(second(val)) {
                case 'loc':
@@ -156,8 +167,8 @@ function main(val) {
 
 // intervals
 
-const health = setInterval(function() {
-     if(Player.hp > Player.maxhp) {
-          Player.hp = Player.maxhp
-     }
-}, 20)
+//const health = setInterval(function() {
+//     if(Player.hp > Player.maxhp) {
+//          Player.hp = Player.maxhp
+//     }
+//}, 20)
