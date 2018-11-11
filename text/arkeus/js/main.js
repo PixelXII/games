@@ -1,6 +1,6 @@
 // global
 var consuul = consul.create(new Element('div', document.body), '650', 'calc(100%-30)', 'black', '#0097a7', '#1565c0', '#ffffff')
-var ti = consuul.title(`<img alt="logo"src="assets/ark.png" width='20' height='20' style="padding-right:6px;">Arkeus<span style="font-size:18px; float:right; margin-right:8px; margin-top:4px;" class="setting" id="mute">Mute</span>`)
+var ti = consuul.title(`<img alt="logo"src="https://cdn.jsdelivr.net/gh/PixelXII/games@1.2.8/text/arkeus/assets/ark.png" width='20' height='20' style="padding-right:6px;">Arkeus<span style="font-size:18px; float:right; margin-right:8px; margin-top:4px;" class="setting" id="mute">Mute</span>`)
 var style = document.createElement('style')
 document.body.appendChild(style)
 style.innerHTML = `.setting {text-decoration:underline; cursor:pointer;} .setting:hover {text-decoration:none;}`
@@ -13,6 +13,14 @@ document.getElementById('mute').addEventListener('click', () => {
           document.getElementById('mute').innerHTML = 'Unmute'
      }
 })
+var questtest = {
+     name:'questtest',
+     desc:'questtest desc',
+     reward: function() {
+          console.warn('questtest reward')
+     },
+     id: 'quest'
+}
 var Player = {
     opponent: false,
     previous: undefined,
@@ -25,7 +33,6 @@ var Player = {
     inCombat: false,
     gold: new Gold(150)
 };
-console.log(Player)
 document.body.style.padding = 0;
 document.body.style.margin = 0;
 var inputstyle = consul.input(main, true)
@@ -40,7 +47,7 @@ window.onresize = function() {
 Game.init = function() {
     consul.dialogue('You are standing on a small trail, just outside the village of Rivergate.')
     consul.log('The local save feature is enabled.').style.fontSize = '20px'
-    consul.log(`Please note that the local save feature cannot save in combat situatios.`).style.fontSize = '14px'
+    consul.log(`Please note that it cannot save in combat situations.`).style.fontSize = '14px'
 }
 Game.init()
 document.body.style.height = null
@@ -61,6 +68,9 @@ consul.special = function(v) {
 Player.previous = 'north-rivergate'
 
 function main(val) {
+     Player.quests.forEach(function(e) {
+          e = questString(e)
+     })
     localStorage.arkeus_save = JSON.stringify(Player)
      if(first(val) === '/dev') {
           switch(second(val)) {
@@ -74,6 +84,17 @@ function main(val) {
               case 'version':
                   consul.info(navigator.appVersion)
                   break;
+               case 'push':
+                    Player.inventory.push(eval(capitalClean(third(val))))
+                    consul.info("pushed " + eval(capitalClean(third(val))+'.name'))
+                    break;
+               case 'hecc':
+                    consul.info(eval(third(val)))
+                    break;
+               case 'clear':
+                    localStorage.clear()
+                    consul.info('cleared')
+                    break;
           }
           return false;
      }
@@ -151,6 +172,18 @@ function main(val) {
                     break;
                case 'valley.actualLake':
                     valley.actualLake(val)
+                    break;
+               case 'valley.forest':
+                    valley.forest(val)
+                    break;
+               case 'valley.field':
+                    valley.field(val)
+                    break;
+               case 'valley.shed':
+                    valley.shed(val)
+                    break;
+               case 'valley.ridge':
+                    valley.ridge(val)
                     break;
                default:
                     consul.log(Game.placeholder)
