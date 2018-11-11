@@ -66,10 +66,14 @@ function Quest(name, desc, reward) {
      this.name = name
      this.desc = desc
      this.reward = reward
+     this.id = 'quest'
 }
+
 Quest.prototype.initiate = function() {
      Player.quests.push(this)
      consul.log(Game.placeholder)
+     Game.combatElement.disabled = false;
+     Game.combatElement.focus()
      consul.dialogue(`You initiated the quest "${this.name}".`)
      consul.info(this.desc)
 }
@@ -78,6 +82,19 @@ Quest.prototype.resolve = function() {
      consul.log(Game.placeholder)
      consul.dialogue(`You resolved the quest "${this.name}".`)
      this.reward()
+}
+
+function questString(quest) {
+     var a = {
+          name:quest.name,
+          ev:quest.ev,
+          reward:quest.reward,
+          id: 'quest',
+          initiate:quest.initiate,
+          resolve:quest.resolve
+     }
+     console.log(a)
+     return a;
 }
 
 function Item(name, desc, value, edible, buffs = undefined) {
@@ -827,6 +844,8 @@ Game.parseItem = function(e) {
           return eval(`${capitalClean(e.name)} = new Weapon("${e.type}", "${e.name}", ${e.damage}, "${e.desc}")`)
      } else if(e.id === 'gold') {
           return eval(`new Gold(${e.amount})`)
+     } else if(e.id === 'quest') {
+          return new Quest(e.name, e.desc, e.reward)
      }
 }
 
@@ -921,14 +940,17 @@ Game.help = function(cmd) {
 window.addEventListener("load", function() {
      if(Game.localSave) {
           if(localStorage.arkeus_save !== "null") {
-              console.log(typeof localStorage.arkeus_save)
                Player = JSON.parse(localStorage.arkeus_save)
-              console.log(Player)
                consul.clear()
                Player.inventory.forEach(function(e) {
                     var j = Game.parseItem(e)
                     Player.inventory.splice(Player.inventory.indexOf(this), 1)
                     Player.inventory.push(j)
+               })
+               Player.quests.forEach(function(e) {
+                    var j = Game.parseItem(e)
+                    Player.quests.splice(Player.quests.indexOf(this), 1)
+                    Player.quests.push(j)
                })
                 Player.gold = Game.parseItem(Player.gold)
                 Player.weapon = Game.parseItem(Player.weapon)
