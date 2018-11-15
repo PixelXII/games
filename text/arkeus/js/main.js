@@ -1,6 +1,6 @@
 // global
 var consuul = consul.create(new Element('div', document.body), '650', 'calc(100%-30)', 'black', '#0097a7', '#1565c0', '#ffffff')
-var ti = consuul.title(`<img alt="logo"src="https://cdn.jsdelivr.net/gh/PixelXII/games@1.2.8/text/arkeus/assets/ark.png" width='20' height='20' style="padding-right:6px;">Arkeus<span style="font-size:18px; float:right; margin-right:8px; margin-top:4px;" class="setting" id="mute">Mute</span>`)
+var ti = consuul.title(`<img alt="logo"src="https://cdn.jsdelivr.net/gh/PixelXII/games/text/arkeus/assets/ark.png" width='20' height='20' style="padding-right:6px;">Arkeus<span style="font-size:18px; float:right; margin-right:8px; margin-top:4px;" class="setting" id="mute">Mute</span>`)
 var style = document.createElement('style')
 document.body.appendChild(style)
 style.innerHTML = `.setting {text-decoration:underline; cursor:pointer;} .setting:hover {text-decoration:none;}`
@@ -198,10 +198,8 @@ function main(val) {
         }
 }
 
-// intervals
-
-//const health = setInterval(function() {
-//     if(Player.hp > Player.maxhp) {
-//          Player.hp = Player.maxhp
-//     }
-//}, 20)
+const health = setInterval(function() {
+    if(Player.hp > Player.maxhp) {
+         Player.hp = Player.maxhp
+    }
+}, 20)
