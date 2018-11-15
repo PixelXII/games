@@ -20,7 +20,32 @@ var Game = {
      muted: false,
      localSave: false,
     init: undefined,
+    day: true
 };
+var environments = {
+     down: {
+          cobblestone: 'The flagstones in the road below you are old and worn with use.',
+          forest: 'Below you are some old rotten leaves on the forest floor, and a salamander basks in the sunlight.',
+          dirtroad: 'The dirt in the road below you has been sliced by the carriage wheels, leaving deep ruts on both sides of the road.',
+          oldtrail: 'The small trail below you hasn\'t been walked on for a very long time, it seems. There\'s vines and annuals all over it, but the general direction of the trail remains clear.',
+          newtrail: 'The trail below you looks trimmed recently, and its wideness tells of many feet passing over daily.',
+          road: 'The road below you is covered with footprints of travelers.',
+          alley: 'The dank alley floor has puddles and piles of trash all over.',
+          woodenFloor: `Below you are the old wooden boards of the floor.`
+     },
+     up: {
+          birds: 'Above you, a flock of birds flies about aimlessly.',
+          alley: `Above the alley is a wooden pallet, blocking out most of the sky and preventing any smells from the alley getting into the open tavern window.`,
+          clouds: 'A few clouds drift lazily across the sky.',
+          cloudless: 'The sun shines, and there isn\'t a cloud in the sky.',
+          treeCanopy: 'The branches of the trees stretch out above you, partially blocking the sky from your view.',
+          woodCeiling: `Above, the wood in the ceiling has begun to rot and smell awful.`
+     }
+}
+var Environments = {
+     down: [environments.down.cobblestone, environments.down.newtrail, environments.down.road, environments.down.oldtrail, environments.down.forest, environments.down.dirtroad, environments.down.alley, environments.down.woodenFloor],
+     up: [environments.up.clouds, environments.up.treeCanopy, environments.up.cloudless, environments.up.birds, environments.up.alley, environments.up.woodCeiling]
+}
 function first(str) {
     return str.split(' ')[0]
 }
@@ -344,22 +369,16 @@ Game.look = function(e) {
      }
      e = second(e)
     if(e == 'left') {
-        consul.log(`You look ${e}`)
         consul.log(this.lookLeft)
     } else if(e == 'right') {
-        consul.log(`You look ${e}`)
         consul.log(this.lookRight)
     } else if(e == 'down') {
-        consul.log(`You look ${e}`)
         consul.log(this.lookDown)
     } else if(e == 'up') {
-        consul.log(`You look ${e}`)
         consul.log(this.lookUp)
     } else if(e == 'forward') {
-        consul.log(`You look ${e}`)
         consul.log(this.lookForward)
     } else if(e == 'back') {
-        consul.log(`You look ${e}`)
         consul.log(this.lookBack)
     } else {
          if(second(e)) {
@@ -936,6 +955,21 @@ Game.help = function(cmd) {
         }
     }
 }
+
+var dayCycle = setInterval(function() {
+     if(Game.day) {
+          Game.day = false;
+          consul.shadow('The sun begins to set...')
+          environments.down.forest = environments.down.forest.replace('sun', 'moon')
+          environments.up.cloudless = 'The moon shines, and there isn\'t a cloud in the sky.'
+     } else if(!Game.day) {
+          Game.day = true;
+          consul.shadow('The sun rises...')
+          environments.down.forest = environments.down.forest.replace('moon', 'sun')
+          environments.up.cloudless = 'The sun shines, and there isn\'t a cloud in the sky.'
+     }
+}, 300000)
+
 
 window.addEventListener("load", function() {
      if(Game.localSave) {
