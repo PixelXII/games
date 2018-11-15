@@ -1,23 +1,3 @@
-const environments = {
-     down: {
-          cobblestone: 'The flagstones in the road below you are old and worn with use.',
-          forest: 'Below you are some old rotten leaves on the forest floor, and a salamander basks in the sunlight.',
-          dirtroad: 'The dirt in the road below you has been sliced by the carriage wheels, leaving deep ruts on both sides of the road.',
-          oldtrail: 'The small trail below you hasn\'t been walked on for a very long time, it seems. There\'s vines and annuals all over it, but the general direction of the trail remains clear.',
-          newtrail: 'The trail below you looks trimmed recently, and its wideness tells of many feet passing over daily.',
-          road: 'The road below you is covered with footprints of travelers.',
-          alley: 'The dank alley floor has puddles and piles of trash all over.',
-          woodenFloor: `Below you are the old wooden boards of the floor.`
-     },
-     up: {
-          birds: 'Above you, a flock of birds flies about aimlessly.',
-          alley: `Above the alley is a wooden pallet, blocking out most of the sky and preventing any smells from the alley getting into the open tavern window.`,
-          clouds: 'A few clouds drift lazily across the sky.',
-          cloudless: 'The sun shines, and there isn\'t a cloud in the sky.',
-          treeCanopy: 'The branches of the trees stretch out above you, partially blocking the sky from your view.',
-          woodCeiling: `Above, the wood in the ceiling has begun to rot and smell awful.`
-     }
-}
 var input;
 window.onload = function() {
      input = document.getElementById('ie')
@@ -408,11 +388,26 @@ var valley = {
           Game.lookDown = environments.down.road
           Game.lookBack = 'Behind you, the valley stretches out. From your high viewpoint, you can see the village of Rivergate, the forest, and the lake.'
           Game.moveRight = 'You take the right fork, leading down and out of the valley.'
-          Game.moveLeft = 'You take the left fork, beginning the long trek up to the top.'
+          Game.moveLeft = 'You take the left fork, beginning the long trek up to the top.<br>'
           Game.right = 'farmland'
           Game.left = 'valley.mountainTop'
           Game.moveBack = 'You begin the hike back down the ridge, to the other fork by the lake.'
           Game.back = 'valley.beginning'
+          Game.auto(val)
+     },
+     moutainTop: function(val) {
+          Game.reset()
+          Game.lookRight = ""
+          Game.lookLeft = ""
+          Game.lookBack = ""
+          Game.lookForward = ""
+          Game.lookDown = environments.down.newtrail
+          Game.lookUp = environments.up.clouds
+          Game.moveForward = 'It would not be wise to go that way.'
+          Game.moveLeft = Game.moveForward
+          Game.moveRight = Game.moveLeft
+          Game.moveBack = 'You make your way back down the mountain and end up at the intersection at the ridge, again.'
+          Game.back = 'valley.ridge'
           Game.auto(val)
      }
 }
