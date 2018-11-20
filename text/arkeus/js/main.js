@@ -185,6 +185,15 @@ function main(val) {
                case 'valley.ridge':
                     valley.ridge(val)
                     break;
+                case 'valley.moutainTop':
+                    valley.mountainTop(val)
+                    break;
+                case 'acosa.farmland':
+                    acosa.farmland(val)
+                    break;
+                case 'acosa.mainRoad':
+                    acosa.mainRoad(val)
+                    break;
                default:
                     consul.log(Game.placeholder)
                     consul.special('You have reached a place that is undeveloped. <br> <br> There is no handler for this area, so you have been moved back to your previous location.')
@@ -198,8 +207,10 @@ function main(val) {
         }
 }
 
-const health = setInterval(function() {
-    if(Player.hp > Player.maxhp) {
-         Player.hp = Player.maxhp
-    }
-}, 20)
+// intervals
+
+//const health = setInterval(function() {
+//     if(Player.hp > Player.maxhp) {
+//          Player.hp = Player.maxhp
+//     }
+//}, 20)
