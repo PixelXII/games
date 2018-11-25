@@ -665,6 +665,8 @@ var valley = {
      }
 }
 
+var acosabankstorage = new Gold(0);
+
 var acosa = {
     farmland: function(val) {
         Game.reset()
@@ -702,9 +704,10 @@ var acosa = {
         Game.forward = 'acosa.gates'
         Game.moveBack = 'You walk back to the little farming house by the road.'
         Game.back = 'acosa.farmland'
+        Game.moveRight = 'i dont have enough time to do oars rest, i\'ll just do acosa for now.'
         Game.lookRight = 'On your right is a road that leads off to the horizon. The sign says it goes to Oar\'s Rest and beyond.'
         Game.lookBack = 'Behind you is the farming hut and past that, the mountains.'
-        Game.lookForward = 'In front of y   ou is the wide road leading to the main gates of Acosa.'
+        Game.lookForward = 'In front of you is the wide road leading to the main gates of Acosa.'
         Game.lookDown = environments.down.cobblestone
         Game.lookUp = environments.up.birds
         Game.auto(val)
@@ -715,6 +718,7 @@ var acosa = {
             } else {
                 Game.location.person = new Person('The traveler', ["May the stars watch over you, traveler.", "Good day to you."])
                 Game.lookLeft = 'On your left is a peculiar man, leaning against the signpost and swinging a hammer idly.'
+                Game.moveLeft = "Don't get too close or you'll get whacked with the hammer."
             }
             Game.lookRight = 'On your right is a road that leads off to the horizon. The sign says it goes to Oar\'s Rest and beyond.'
             Game.lookBack = 'Behind you is the farming hut and past that, the mountains.'
@@ -724,4 +728,174 @@ var acosa = {
             Game.auto(val)
         }
     },
+    cityGates: function(cmd) {
+        Game.reset()
+        Game.lookBack = 'Behind you is the intersection with the road that leads to Oar\'s Rest.'
+        Game.lookForward = 'In front of you are the city gates. There are some guards standing on the side, watching anyone who enters.'
+        Game.lookLeft = 'On your left, the flat farmland begins to transition into a rocky hill leading up to the wall of Acosa.'
+        Game.lookRight = 'On your right is a large rock, precariously balanced on the edge of another.'
+        Game.lookUp = environments.up.clouds
+        Game.lookDown = environments.down.cobblestone
+        Game.moveForward = 'You walk straight through the city gates.'
+        Game.forward = 'acosa.cityentrance'
+        if(cmd === 'move forward') {
+            getId('ie').disabled = true
+            consul.info('One of the guards steps forward and blocks your path.')
+            if(!Player.acosa) {
+                setTimeout(function() {
+                    consul.dialogue('The guard says: "Hello traveler. I\'ve seen travelers like you come through here before, then next I saw them they was locked up in the dungeons. You gonna cause any trouble?"')
+                    setTimeout(function() {
+                        consul.info('You shake your head.')
+                        setTimeout(function() {
+                            consul.info('The guard seems satisfied with your response and lets you in the city.')
+                            Player.location = 'acosa.cityentrance'
+                            Player.acosa = true
+                            getId('ie').disabled = false
+                        }, 2000)
+                    }, 1500)
+                }, 1500)
+            } else if(Player.acosa) {
+                setTimeout(function() {
+                    consul.dialogue('The guard says: "I think I\'ve seen you here before. I\'ll let you in. Just don\'t cause any trouble."')
+                    Player.location = 'acosa.cityentrance'
+                    Player.acosa = true
+                    getId('ie').disabled = false
+                }, 1000)
+            }
+            return false;
+        }
+        Game.moveBack = 'You walk back to the crossroads.'
+        Game.back = 'acosa.mainRoad'
+        Game.auto(cmd)
+        acosa.cityGates = function(val) {
+            Game.lookBack = 'Behind you is the intersection with the road that leads to Oar\'s Rest.'
+            Game.lookForward = 'In front of you are the city gates. There are some guards standing on the side, watching anyone who enters.'
+            Game.lookLeft = 'On your left, the flat farmland begins to transition into a rocky hill leading up to the wall of Acosa.'
+            Game.lookRight = 'On your right is a large rock, precariously balanced on the edge of another.'
+            Game.lookUp = environments.up.clouds
+            Game.lookDown = environments.down.cobblestone
+            Game.moveForward = 'You walk straight through the city gates.'
+            Game.forward = 'acosa.cityentrance'
+            if(cmd === 'move forward') {
+                getId('ie').disabled = true
+                consul.info('One of the guards steps forward and blocks your path.')
+                if(!Player.acosa) {
+                    setTimeout(function() {
+                        consul.dialogue('The guard says: "Hello traveler. I\'ve seen travelers like you come through here before, then next I saw them they was locked up in the dungeons. You gonna cause any trouble?"')
+                        setTimeout(function() {
+                            consul.info('You shake your head.')
+                            setTimeout(function() {
+                                consul.info('The guard seems satisfied with your response and lets you in the city.')
+                                Player.location = 'acosa.cityentrance'
+                                Player.acosa = true
+                                getId('ie').disabled = false
+                            }, 2000)
+                        }, 1500)
+                    }, 1500)
+                } else if(Player.acosa) {
+                    setTimeout(function() {
+                        consul.dialogue('The guard says: "I think I\'ve seen you here before. I\'ll let you in. Just don\'t cause any trouble."')
+                        Player.location = 'acosa.cityentrance'
+                        Player.acosa = true
+                        getId('ie').disabled = false
+                    }, 1000)
+                }
+                return false;
+            }
+            Game.moveBack = 'You walk back to the crossroads.'
+            Game.back = 'acosa.mainRoad'
+            Game.auto(cmd)
+        }
+    },
+    entrance: function(val) {
+        Game.reset()
+        Game.lookLeft = 'On your left is a large, rowdy tavern by the name of "The Bull and Bear".'
+        Game.lookRight = `On your right is a quaint little potions shop. An older woman stands behind the counter, smiling.`
+        Game.lookBack = 'Behind you are the city gates.'
+        Game.lookForward = 'In front of you is main road through Acosa. On the road, there is a bank, a general store, and an adventuring shop.'
+        Game.lookUp = environments.up.clouds
+        Game.lookDown = environments.down.city
+        Game.moveBack = 'You walk back through the gates to the outskirts of the city.'
+        Game.back = 'acosa.gates'
+        Game.moveLeft = 'You approach the tavern and enter.'
+        Game.left = 'acosa.tavern'
+        Game.moveRight = 'You walk over to the potions shop and assess the quality of the potions.'
+        Game.right = 'acosa.potions'
+        Game.moveForward = 'You continue down the main road, towards the bank.'
+        Game.forward = 'acosa.bank'
+        Game.auto(val)
+        acosa.entrance = function(val) {
+            Game.lookLeft = 'On your left is a large, rowdy tavern by the name of "The Bull and Bear".'
+            Game.lookRight = `On your right is a quaint little potions shop. An older woman stands behind the counter, smiling.`
+            Game.lookBack = 'Behind you are the city gates.'
+            Game.lookForward = 'In front of you is main road through Acosa. On the road, there is a bank, a general store, and an adventuring shop.'
+            Game.lookUp = environments.up.clouds
+            Game.lookDown = environments.down.city
+            Game.moveBack = 'You walk back through the gates to the outskirts of the city.'
+            Game.back = 'acosa.gates'
+            Game.moveLeft = 'You approach the tavern and enter.'
+            Game.left = 'acosa.tavern'
+            Game.moveRight = 'You walk over to the potions shop and assess the quality of the potions.'
+            Game.right = 'acosa.potions'
+            Game.moveForward = 'You continue down the main road, towards the bank.'
+            Game.forward = 'acosa.bank'
+            Game.auto(val)
+        }
+    },
+    tavern: function(val) {
+        Game.reset()
+        Game.location.person = new Person('The tavernkeep', ["Welcome to the Bull and Bear!", "What would you like to drink?", "What're you coming to Acosa for?", "We got wine and ale, and that's it, but we make it good!", "People come here from all around to take a sip of our beautiful beverages!", "Anything you want, just call me over."])
+        Game.location.shop = new Shop('The tavernkeep', 'the tavernkeep', [Ale, Wine], [Ale.value, Wine.value])
+        Game.lookLeft = 'On your left is a bar, packed with people.'
+        Game.lookRight = 'On your right is a large man, the tavernkeep.'
+        Game.lookForward = 'In front of you is the main room of the tavern, filled with tables.'
+        Game.lookDown = environments.down.woodenFloor
+        Game.lookUp = environments.up.woodCeiling
+        Game.lookBack = "Behind you is the door."
+        Game.moveBack = 'You walk back out the door.'
+        Game.back = 'acosa.cityentrance'
+        Game.auto(val)
+        acosa.tavern = function(val) {
+            Game.location.person = new Person('The tavernkeep', ["Welcome to the Bull and Bear!", "What would you like to drink?", "What're you coming to Acosa for?", "We got wine and ale, and that's it, but we make it good!", "People come here from all around to take a sip of our beautiful beverages!", "Anything you want, just call me over."])
+            Game.location.shop = new Shop('The tavernkeep', 'the tavernkeep', [Ale, Wine], [Ale.value, Wine.value])
+            Game.lookLeft = 'On your left is a bar, packed with people.'
+            Game.lookRight = 'On your right is a large man, the tavernkeep.'
+            Game.lookForward = 'In front of you is the main room of the tavern, filled with tables.'
+            Game.lookDown = environments.down.woodenFloor
+            Game.lookUp = environments.up.woodCeiling
+            Game.lookBack = "Behind you is the door."
+            Game.moveBack = 'You walk back out the door.'
+            Game.back = 'acosa.cityentrance'
+            Game.auto(val)
+        }
+    },
+    potions: function(val) {
+        Game.reset()
+        Game.location.shop = new Shop('The potion stand', 'the brewer', [HealingPotion, HealingTea, Stimulant], [15, 20, 50])
+        Game.lookForward = 'In front of you is the potion vendor.'
+        Game.lookBack = "Behind you is the main avenue running through the city."
+        Game.lookDown = environments.down.city
+        Game.lookUp = environments.up.clouds
+        Game.lookRight = "On your right is the outer wall of the city."
+        Game.lookLeft = 'On your left is the wall of a house.'
+        Game.moveBack = "You walk back to the main road."
+        Game.back = 'acosa.cityentrance'
+        Game.auto(val)
+        acosa.potions = function(val) {
+            Game.location.shop = new Shop('The potion stand', 'the brewer', [HealingPotion, HealingTea, Stimulant], [15, 20, 50])
+            Game.lookForward = 'In front of you is the potion vendor.'
+            Game.lookBack = "Behind you is the main avenue running through the city."
+            Game.lookDown = environments.down.city
+            Game.lookUp = environments.up.clouds
+            Game.lookRight = "On your right is the outer wall of the city."
+            Game.lookLeft = 'On your left is the wall of a house.'
+            Game.moveBack = "You walk back to the main road."
+            Game.back = 'acosa.cityentrance'
+            Game.auto(val)
+        }
+    },
+    bank: function(val) {
+        Game.reset()
+        Game.lookLeft = 'On your left is the bank.'
+    }
 }
