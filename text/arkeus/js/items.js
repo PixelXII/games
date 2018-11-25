@@ -8,6 +8,7 @@ var Branch = new Item('branch', 'It fell off a tree.', 0, false)
 
 var Tankard = new Item('wine', 'It smells awful.', 0, false, function() {})
 var Mug = new Item('mug', 'It smells like beer.', 0, false, function() {})
+var Stimulant = new Item('stimulant', 'Apparently, it makes you more alert and better in combat.', 100, true, function() { consul.special('You feel alert.'); Player.weapon.damage += 10; setTimeout(function() { Player.weapon.damage -= 10; }, 60000)})
 var Carrot = new Item('carrot', 'It smells like fresh soil.', 8, true, function() {})
 var Potato = new Item('potato', 'It\'s a fresh red potato.', 10, true, function() {})
 var Dragonfruit = new Item('dragonfruit', 'A succulent red dragonfruit.', 20, true, function() { consul.special('You feel alert.'); Player.weapon.damage += 10; setTimeout(function() { Player.weapon.damage -= 10; }, 60000)})
