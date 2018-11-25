@@ -1,5 +1,5 @@
 /*
-          (c) Kai Wildberger, October 2018.
+          (c) Kai Wildberger, November 2018.
           Licensed under the MIT License.
 
 */
@@ -31,7 +31,8 @@ var environments = {
           newtrail: 'The trail below you looks trimmed recently, and its wideness tells of many feet passing over daily.',
           road: 'The road below you is covered with footprints of travelers.',
           alley: 'The dank alley floor has puddles and piles of trash all over.',
-          woodenFloor: `Below you are the old wooden boards of the floor.`
+          woodenFloor: `Below you are the old wooden boards of the floor.`,
+         city: 'The flagstones in the road below are smooth from use and very dirty.'
      },
      up: {
           birds: 'Above you, a flock of birds flies about aimlessly.',
@@ -352,6 +353,8 @@ Game.reset = function() {
      Game.left = Player.location
      Game.forward = Player.location
      Game.back = Player.location
+    Game.lookDown = 'Below you is the ground.'
+    Game.lookUp = 'Above you is the sky.'
      Game.location.opponent = undefined
      Game.location.items = []
      Game.location.containers = []
@@ -968,6 +971,7 @@ var dayCycle = setInterval(function() {
           environments.down.forest = environments.down.forest.replace('moon', 'sun')
           environments.up.cloudless = 'The sun shines, and there isn\'t a cloud in the sky.'
      }
+    Player.day = Game.day
 }, 300000)
 
 
@@ -989,8 +993,16 @@ window.addEventListener("load", function() {
                 Player.gold = Game.parseItem(Player.gold)
                 Player.weapon = Game.parseItem(Player.weapon)
                 Player.hp = Player.maxhp
+              Game.day = Player.day
+              var i;
+              if(!Player.day) {
+                  i = 'moon'
+              } else {
+                  i = 'sun'
+              }
                 consul.special('You have loaded your previous game.')
                 consul.inputCallback('look')
+              consul.info(`The ${i} shines above.`)
           }
      }
      setInterval(function() {
