@@ -26,6 +26,7 @@ var Player = {
     previous: undefined,
     inventory: [],
     hp: 50,
+    day: true,
     maxhp: 50,
     location: 'north-rivergate',
     quests: [],
@@ -46,8 +47,7 @@ window.onresize = function() {
 }
 Game.init = function() {
     consul.dialogue('You are standing on a small trail, just outside the village of Rivergate.')
-    consul.log('The local save feature is enabled.').style.fontSize = '20px'
-    consul.log(`Please note that it cannot save in combat situations.`).style.fontSize = '14px'
+    consul.log('The game will save your progress locally, and clearing the cache will reset your game.')
 }
 Game.init()
 document.body.style.height = null
@@ -68,6 +68,10 @@ consul.special = function(v) {
 Player.previous = 'north-rivergate'
 
 function main(val) {
+    if(val.includes('cc')) {
+        consul.special('no u')
+        return false;
+    }
      Player.quests.forEach(function(e) {
           e = questString(e)
      })
@@ -88,7 +92,7 @@ function main(val) {
                     Player.inventory.push(eval(capitalClean(third(val))))
                     consul.info("pushed " + eval(capitalClean(third(val))+'.name'))
                     break;
-               case 'hecc':
+               case 'ev':
                     consul.info(eval(third(val)))
                     break;
                case 'clear':
@@ -194,6 +198,21 @@ function main(val) {
                 case 'acosa.mainRoad':
                     acosa.mainRoad(val)
                     break;
+                case 'acosa.gates':
+                    acosa.cityGates(val)
+                    break;
+                case 'acosa.cityentrance':
+                    acosa.entrance(val)
+                    break;
+                case 'acosa.tavern':
+                    acosa.tavern(val)
+                    break;
+                case 'acosa.potions':
+                    acosa.potions(val)
+                    break;
+                case 'acosa.bank':
+                    acosa.bank(val)
+                    break;
                default:
                     consul.log(Game.placeholder)
                     consul.special('You have reached a place that is undeveloped. <br> <br> There is no handler for this area, so you have been moved back to your previous location.')
@@ -206,11 +225,3 @@ function main(val) {
             }
         }
 }
-
-// intervals
-
-//const health = setInterval(function() {
-//     if(Player.hp > Player.maxhp) {
-//          Player.hp = Player.maxhp
-//     }
-//}, 20)
