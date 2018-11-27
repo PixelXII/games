@@ -775,6 +775,8 @@ var acosa = {
             Game.lookUp = environments.up.clouds
             Game.lookDown = environments.down.cobblestone
             Game.moveForward = 'You walk straight through the city gates.'
+            Game.moveBack = 'You walk back to the crossroads.'
+            Game.back = 'acosa.mainRoad'
             Game.forward = 'acosa.cityentrance'
             if(cmd === 'move forward') {
                 getId('ie').disabled = true
@@ -802,9 +804,7 @@ var acosa = {
                 }
                 return false;
             }
-            Game.moveBack = 'You walk back to the crossroads.'
-            Game.back = 'acosa.mainRoad'
-            Game.auto(cmd)
+            Game.auto(val)
         }
     },
     entrance: function(val) {
