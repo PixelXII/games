@@ -728,7 +728,7 @@ var acosa = {
             Game.auto(val)
         }
     },
-    cityGates: function(cmd) {
+    cityGates: function(val) {
         Game.reset()
         Game.lookBack = 'Behind you is the intersection with the road that leads to Oar\'s Rest.'
         Game.lookForward = 'In front of you are the city gates. There are some guards standing on the side, watching anyone who enters.'
@@ -738,7 +738,7 @@ var acosa = {
         Game.lookDown = environments.down.cobblestone
         Game.moveForward = 'You walk straight through the city gates.'
         Game.forward = 'acosa.cityentrance'
-        if(cmd === 'move forward') {
+        if(val === 'move forward') {
             getId('ie').disabled = true
             consul.info('One of the guards steps forward and blocks your path.')
             if(!Player.acosa) {
@@ -766,7 +766,7 @@ var acosa = {
         }
         Game.moveBack = 'You walk back to the crossroads.'
         Game.back = 'acosa.mainRoad'
-        Game.auto(cmd)
+        Game.auto(val)
         acosa.cityGates = function(val) {
             Game.lookBack = 'Behind you is the intersection with the road that leads to Oar\'s Rest.'
             Game.lookForward = 'In front of you are the city gates. There are some guards standing on the side, watching anyone who enters.'
@@ -778,7 +778,7 @@ var acosa = {
             Game.moveBack = 'You walk back to the crossroads.'
             Game.back = 'acosa.mainRoad'
             Game.forward = 'acosa.cityentrance'
-            if(cmd === 'move forward') {
+            if(val === 'move forward') {
                 getId('ie').disabled = true
                 consul.info('One of the guards steps forward and blocks your path.')
                 if(!Player.acosa) {
