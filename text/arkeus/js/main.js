@@ -68,10 +68,6 @@ consul.special = function(v) {
 Player.previous = 'north-rivergate'
 
 function main(val) {
-    if(val.includes('cc')) {
-        consul.special('no u')
-        return false;
-    }
      Player.quests.forEach(function(e) {
           e = questString(e)
      })
@@ -93,7 +89,11 @@ function main(val) {
                     consul.info("pushed " + eval(capitalClean(third(val))+'.name'))
                     break;
                case 'ev':
-                    consul.info(eval(third(val)))
+                    var a = eval(third(val))
+                    if(a instanceof Item || a instanceof Quest || a instanceof Shop || a instanceof Person || a instanceof Container || a instanceof Weapon) {
+                         a = JSON.stringify(a)
+                    }
+                    consul.info(a)
                     break;
                case 'clear':
                     localStorage.clear()
@@ -101,13 +101,6 @@ function main(val) {
                     break;
           }
           return false;
-     }
-     if(val.toLowerCase().includes('ree')) {
-                 consul.special("BATTLE CRY")
-                 setTimeout(() => {
-                      consul.special("REEEEEEEEEEEEEEEEEE")
-                 }, 24000)
-                 return false;
      }
      if(Player.hp <= 0) {
           Game.combatElement.disabled = true
@@ -118,19 +111,6 @@ function main(val) {
                localStorage.clear()
                location.reload()
           }, 4000)
-     }
-     if(val.toLowerCase().includes('pikachu')) {
-          consul.special('PIKACHU GO')
-          if(Player.inCombat) {
-               Game.location.opponent.hp -= 50
-               if(Game.location.opponent.hp < 0) {
-                    Game.location.opponent.hp = 0;
-                    Player.inCombat = false
-                    Game.location.opponent.dead = true;
-                    consul.info(`The ${Game.location.opponent.name} is dead.`)
-               }
-          }
-          return false;
      }
      a = val
         val = clean(val.toLowerCase())
