@@ -1,5 +1,5 @@
 /*
-          (c) Kai Wildberger, November 2018.
+          (c) Kai Wildberger, January 2019.
           Licensed under the MIT License.
 
 */
