@@ -290,9 +290,9 @@ game.look = function(action, rightMess, leftMess, behMess, foMess) {
 		} else {
 			return "I don't understand what you mean."
 		}
+	}
 	if(action == 'look' || action == 'Look' || action == 'look around' || action == 'Look around') {
 		printOut(rightMess + "<br>" + leftMess + "<br>" + behMess + '<br>' + foMess)
-		}
 	}
 }
 
