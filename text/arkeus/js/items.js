@@ -15,6 +15,7 @@ var Dragonfruit = new Item('dragonfruit', 'A succulent red dragonfruit.', 20, tr
 var PalmFruit = new Item('palm fruit', 'A juicy yellow palm fruit.', 15, true, function() {Player.hp+=5;})
 var Apple = new Item('apple', 'An apple.', 8, true, function() {})
 var Pear = new Item('pear', 'A pear.', 9, true, function() {})
+var Cock = new Item('dick', 'Your small, chode-lookin cock.', 10000, true, function() {});
 
 var sword = 'sword'
 var mace = 'mace'
