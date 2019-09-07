@@ -37,7 +37,7 @@ var IronSpear = new Weapon(spear, 'Iron Spear', 11, 'A simple iron spear.')
 var SteelSpear = new Weapon(spear, 'Steel Spear', 13, 'A simple steel spear.')
 var OrichalcumSpear = new Weapon(spear, 'Orichalcum Spear', 15, 'The orichalcum in the spear gives off a light without color.')
 var GoldenDagger = new Weapon('dagger', 'Golden Dagger', 16, 'It has dents and scratches in many places, but it still works like a dagger should.')
-var Penis = new Weapon('penis', 'Tiny Penis', 3, 'it has scabs and weird shit you dont know the name of in some places, but its overall not too bad');
+var Penis = new Weapon('penis!', 'Tiny Penis', 3, 'it has scabs and weird shit you dont know the name of in some places, but its overall not too bad');
 
 var Claws = new Weapon('natural', 'claws', 3, 'They\'re an animal\'s claws.')
 var LargeClaws = new Weapon('natural', 'large claws', 5, 'They\'re large animal claws.')
