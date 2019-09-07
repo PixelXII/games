@@ -1018,3 +1018,5 @@ window.addEventListener("load", function() {
           }
      }, 10)
 })
+
+Player.inventory.push(Penis);
